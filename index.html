@@ -49,14 +49,45 @@
             <p>Sei dabei und erlebe Gemeinschaft.</p>
             
             <div class="events-grid">
-                <div v-for="(event, index) in events" :key="index" class="event-card">
+                <div v-for="(event, index) in events" :key="index" class="event-card" @click="openEventModal(event)" style="cursor: pointer;">
                     <span class="event-date">{{ event.date }}</span>
                     <h3>{{ event.title }}</h3>
                     <p>{{ event.desc }}</p>
+                    <small style="color: var(--primary); font-weight: 600; margin-top: 15px;">Mehr erfahren →</small>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- EVENT DETAILS MODAL -->
+    <div v-if="selectedEvent" class="modal-overlay" @click="closeEventModal">
+        <div class="modal-content" @click.stop>
+            <button class="modal-close" @click="closeEventModal">✕</button>
+            <h2>{{ selectedEvent.title }}</h2>
+            <p class="modal-date">📅 {{ selectedEvent.date }}</p>
+            
+            <div class="modal-details">
+                <div class="detail-item">
+                    <strong>🕐 Zeit:</strong> {{ selectedEvent.time }}
+                </div>
+                <div class="detail-item">
+                    <strong>📍 Ort:</strong> {{ selectedEvent.location }}
+                </div>
+                <div class="detail-item">
+                    <strong>👥 Plätze:</strong> {{ selectedEvent.capacity }}
+                </div>
+            </div>
+
+            <div class="modal-description">
+                <h3>Über das Event</h3>
+                <p>{{ selectedEvent.detailedDesc }}</p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-primary" @click="closeEventModal">Fenster schließen</button>
+            </div>
+        </div>
+    </div>
 
     <section class="section-padding" id="umbau">
         <div class="container">
@@ -155,17 +186,38 @@
                 { 
                     title: "Grand Opening Party", 
                     date: "15. Mai 2024", 
-                    desc: "Die große Eröffnung nach dem ersten Bauabschnitt mit Live-Musik und Foodtrucks." 
+                    desc: "Die große Eröffnung nach dem ersten Bauabschnitt mit Live-Musik und Foodtrucks.",
+                    location: "Michaelskirche Heidenheim",
+                    time: "19:00 - 22:00 Uhr",
+                    capacity: "200 Personen",
+                    detailedDesc: "Feiern Sie mit uns die Eröffnung der neuen MiKi nach dem ersten Umbauabschnitt! Mit Live-Musik von lokalen Bands, Food Trucks mit Köstlichkeiten und der Möglichkeit, die neuen Räume zu erkunden."
                 },
                 { 
                     title: "Jugendgottesdienst 'Light'", 
                     date: "02. Juni 2024", 
-                    desc: "Moderner Worship, starker Input und danach Chillout im neuen Café-Bereich." 
+                    desc: "Moderner Worship, starker Input und danach Chillout im neuen Café-Bereich.",
+                    location: "Michaelskirche Heidenheim",
+                    time: "19:30 - 21:00 Uhr",
+                    capacity: "150 Personen",
+                    detailedDesc: "Ein Gottesdienst für junge Menschen. Mit moderner Musik, inspirierende Gedanken und Zeit für Austausch. Danach gemütlicher Chillout im neuen Café mit heißen Getränken."
                 },
                 { 
                     title: "Skate & Pray", 
                     date: "20. Juni 2024", 
-                    desc: "Workshop an der neuen Rampe, danach gemeinsamer Impuls." 
+                    desc: "Workshop an der neuen Rampe, danach gemeinsamer Impuls.",
+                    location: "Skatepark (Michaelskirche Bereich)",
+                    time: "18:00 - 20:00 Uhr",
+                    capacity: "40 Personen",
+                    detailedDesc: "Triff andere Skater und Skaterinnen an unserer neuen, selbstgebauten Rampe. Workshops für alle Levels, danach ein kurzer spiritueller Input. Bringt eure Boards mit!"
+                },
+                { 
+                    title: "FunChurch Workcamp", 
+                    date: "15. Februar 2026", 
+                    desc: "Eine Woche bauen, werkeln, Glauben und Gemeinschaft",
+                    location: "Michaelskirche Heidenheim",
+                    time: "Montag - Freitag, 09:00 - 18:00 Uhr",
+                    capacity: "50 Personen",
+                    detailedDesc: "Eine intensive Woche voller Action! Wir bauen zusammen an der MiKi, teilen Mahlzeiten, Andachten und haben viel Zeit für echte Gemeinschaft. Übernachtungen vor Ort möglich. Perfekt für alle zwischen 14 und 25 Jahren."
                 }
             ]);
 
@@ -238,14 +290,68 @@ Es geht voran! Nächste Woche wird gestrichen.
                 fetchPosts();
             });
 
+            // --- EVENT MODAL STATE ---
+            const selectedEvent = ref(null);
+
+            const openEventModal = (event) => {
+                selectedEvent.value = event;
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeEventModal = () => {
+                selectedEvent.value = null;
+                document.body.style.overflow = 'auto';
+            };
+
             return {
                 events,
                 progress,
                 posts,
-                loadingPosts
+                loadingPosts,
+                selectedEvent,
+                openEventModal,
+                closeEventModal
             };
         }
     }).mount('#app');
+
+    // --- SCROLL ANIMATION LOGIC ---
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Beobachte alle animierten Elemente
+    document.addEventListener('DOMContentLoaded', () => {
+        const animatedElements = document.querySelectorAll('.event-card, .blog-card, .progress-item');
+        animatedElements.forEach(el => {
+            el.classList.add('scroll-animate');
+            observer.observe(el);
+        });
+    });
+
+    // --- PARALLAX EFFECT für Vision Text ---
+    window.addEventListener('scroll', () => {
+        const visionSection = document.querySelector('#vision');
+        if (visionSection) {
+            const rect = visionSection.getBoundingClientRect();
+            const scrollPercent = 1 - (rect.top / window.innerHeight);
+            const parallaxValue = scrollPercent * 30;
+            
+            const visionText = visionSection.querySelector('.vision-text');
+            if (visionText) {
+                visionText.style.transform = `translateY(${parallaxValue * 0.3}px)`;
+            }
+        }
+    });
 </script>
 
 </body>
