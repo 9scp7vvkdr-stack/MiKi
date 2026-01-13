@@ -3,108 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiKi - Kirche neu erleben</title>
+    <meta name="description" content="MiKi Heidenheim - Kirche neu erleben. Ein Ort von Jugendlichen für Jugendliche. Events, Skatepark und Gemeinschaft.">
+    <meta property="og:title" content="MiKi - Kirche neu erleben">
+    <meta property="og:description" content="Komm vorbei in der Michaelskirche. Skate, Pray, Chill.">
+    <meta property="og:image" content="assets/P1.jpeg">
+    
+    <title>MiKi | Kirche neu erleben</title>
     
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- 1. DESIGN SYSTEM & VARS --- */
+        :root {
+            --primary: #10BB82;        /* Fresh Mint */
+            --primary-dark: #059669;
+            --accent: #6366f1;         /* Indigo/Purple für Kontrast */
+            --dark: #0f172a;           /* Deep Navy */
+            --darker: #020617;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --gray: #94a3b8;
+            
+            --glass: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 50px -10px rgba(16, 187, 130, 0.3);
+            
+            --radius: 24px;
+            --font-main: 'Inter', sans-serif;
+            --font-head: 'Unbounded', sans-serif; /* Modern, breit */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; border-radius: var(--radius); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .section-padding { padding: 100px 0; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-head);
+        }
+
+        .btn-primary {
+            background: var(--dark);
+            color: var(--primary);
+            border: 2px solid var(--dark);
+        }
+        .btn-primary:hover {
+            background: var(--primary);
+            color: var(--dark);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(16, 187, 130, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 12px 30px;
+            border-radius: 100px;
+            z-index: 100;
+            display: flex;
+            gap: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.3);
+            width: max-content;
+            max-width: 90%;
+        }
+        .navbar a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        .navbar a:hover { color: var(--primary); }
+        .nav-logo { font-family: var(--font-head); font-weight: 900; color: var(--primary) !important; margin-right: 10px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-color: var(--darker);
+            overflow: hidden;
+            color: white;
+            padding-top: 80px; /* Space for Nav */
+        }
+
+        /* Hero Background Image with Overlay */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/P1.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            filter: grayscale(30%);
+            z-index: 1;
+        }
+
+        /* Animated Gradient Blob */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: 2;
+            animation: pulseBlob 10s infinite alternate;
+        }
+
+        @keyframes pulseBlob {
+            0% { transform: scale(1) translate(-20%, -20%); }
+            100% { transform: scale(1.2) translate(20%, 20%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .subline {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- VISION --- */
+        .vision-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .vision-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .vision-list i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 2px;
+        }
+        .vision-image-container {
+            position: relative;
+        }
+        .vision-image-container::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary);
+            border-radius: var(--radius);
+            z-index: -1;
+        }
+
+        /* --- EVENTS (Cards) --- */
+        #events { background: var(--dark); color: white; }
+        #events h2 { color: white; }
+        #events p { color: var(--gray); }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--radius);
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary);
+            transition: 0.4s;
+        }
+        .event-card:hover::before { width: 100%; opacity: 0.1; }
+
+        .event-date-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-family: var(--font-head);
+        }
+
+        .event-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        /* --- PROGRESS --- */
+        .progress-item {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .progress-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(16, 187, 130, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .progress-bar-bg {
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        /* --- BLOG --- */
+        .blog-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .blog-header {
+            background: var(--dark);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .blog-content { padding: 30px; flex-grow: 1; }
+        
+        /* Markdown Styling inside Blog */
+        .blog-content h3 { margin-bottom: 10px; font-size: 1.3rem; }
+        .blog-content p { color: #475569; font-size: 0.95rem; }
+
+        /* --- DONATE --- */
+        .donate-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .donate-section h2 { color: var(--dark); margin-bottom: 20px; }
+        .donate-section p { font-size: 1.1rem; color: var(--dark); font-weight: 500; }
+        
+        /* --- FOOTER --- */
+        footer {
+            background: var(--darker);
+            color: #64748b;
+            padding: 80px 0 40px;
+            font-size: 0.9rem;
+        }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.2rem; }
+        .footer-col a:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 15px; margin-top: 15px; }
+        .social-links a { font-size: 1.5rem; color: white; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex; justify-content: center; align-items: center;
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background: white;
+            width: 90%; max-width: 600px;
+            border-radius: var(--radius);
+            padding: 40px;
+            position: relative;
+            animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-header { margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
+        .modal-details-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+            background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 20px;
+        }
+
+        /* --- ANIMATION CLASSES --- */
+        .hidden-el { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .show-el { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* Mobile */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+            .navbar { bottom: 20px; top: auto; width: 90%; justify-content: space-around; padding: 15px; }
+            .nav-logo { display: none; }
+        }
+    </style>
 </head>
 <body>
 
 <div id="app">
+    
+    <nav class="navbar">
+        <a href="#" class="nav-logo">MiKi</a>
+        <a href="#events">Events</a>
+        <a href="#umbau">Status</a>
+        <a href="#spenden">Support</a>
+    </nav>
+
     <header class="hero">
-        <div class="container">
-            <h1>MiKi – Kirche neu erleben.</h1>
-            <p class="subline">Ein Ort von Jugendlichen für Jugendliche. Glaube. Gemeinschaft. Gestaltung.</p>
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <h1><span class="text-gradient">Kirche</span><br>neu erleben.</h1>
+            <p class="subline">Ein Ort von Jugendlichen für Jugendliche. Skate. Pray. Create.</p>
             <div class="hero-buttons">
-                <a href="#events" class="btn btn-primary">Komm vorbei</a>
-                <a href="#spenden" class="btn btn-secondary">Projekt unterstützen</a>
+                <a href="#events" class="btn btn-primary">
+                    Komm vorbei <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#spenden" class="btn btn-secondary">
+                    Projekt supporten <i class="ph ph-heart"></i>
+                </a>
             </div>
         </div>
     </header>
 
     <section class="section-padding" id="vision">
         <div class="container grid-2">
-            <div class="vision-text">
+            <div class="vision-text hidden-el">
+                <h4 style="color: var(--primary); text-transform: uppercase; margin-bottom: 10px;">Who we are</h4>
                 <h2>Unsere Vision</h2>
-                <p><strong>Die Michaelskirche wird zur MiKi.</strong> Wir glauben daran, dass Kirche nicht verstaubt sein muss. Gemeinsam mit Jugendlichen gestalten wir die Michaelskirche in Heidenheim um.</p>
-                <br>
-                <ul>
-                    <li>✨ <strong>Mitgestaltung:</strong> Jugendliche entscheiden, wie ihr Raum aussieht.</li>
-                    <li>🛠 <strong>Active Space:</strong> Keine starren Bänke, sondern Raum für Action und Ruhe.</li>
-                    <li>🔥 <strong>Begegnung:</strong> Ein lebendiger Ort für Glaube und Gemeinschaft.</li>
+                <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
+                    <strong>Die Michaelskirche wird zur MiKi.</strong> Kein Staub, keine Langeweile. Wir bauen einen Ort, an dem du sein kannst, wie du bist.
+                </p>
+                <ul class="vision-list">
+                    <li>
+                        <i class="ph ph-paint-brush-broad"></i>
+                        <div><strong>Dein Style:</strong> Jugendliche entscheiden, wie der Raum aussieht.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-armchair"></i>
+                        <div><strong>Active Space:</strong> Couches statt Holzbänke. Action statt Stille.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-users-three"></i>
+                        <div><strong>Community:</strong> Ein lebendiger Spot für Glaube & Friends.</div>
+                    </li>
                 </ul>
             </div>
-            <div class="vision-img-wrapper">
-                <img src="assets/P2.png" alt="Visualisierung Umbau Michaelskirche" onerror="this.style.display='none'; this.parentNode.style.backgroundColor='#ddd'; this.parentNode.innerHTML='<div style=\'padding:40px;text-align:center\'>Bild assets/P2.png fehlt</div>'">
+            <div class="vision-img-wrapper hidden-el">
+                <div class="vision-image-container">
+                    <img src="assets/P2.png" alt="Visualisierung Umbau" 
+                         onerror="this.src='https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=1000&auto=format&fit=crop';"> 
+                         </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding" style="background-color: #f1f5f9;" id="events">
+    <section class="section-padding" id="events">
         <div class="container">
-            <h2>Kommende Events</h2>
-            <p>Sei dabei und erlebe Gemeinschaft.</p>
+            <div class="hidden-el">
+                <h2 style="color:white;">Upcoming Events</h2>
+                <p>Verpasse keine Party, keinen Gottesdienst und keine Session.</p>
+            </div>
             
             <div class="events-grid">
-                <div v-for="(event, index) in events" :key="index" class="event-card" @click="openEventModal(event)" style="cursor: pointer;">
-                    <span class="event-date">{{ event.date }}</span>
+                <div v-for="(event, index) in events" :key="index" class="event-card hidden-el" @click="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
+                    <span class="event-date-badge">{{ event.date }}</span>
                     <h3>{{ event.title }}</h3>
-                    <p>{{ event.desc }}</p>
-                    <small style="color: var(--primary); font-weight: 600; margin-top: 15px;">Mehr erfahren →</small>
+                    <p style="color: rgba(255,255,255,0.7);">{{ event.desc }}</p>
+                    <div style="margin-top: 20px; display: flex; align-items: center; gap: 5px; color: var(--primary); font-weight: 600;">
+                        Details checken <i class="ph ph-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EVENT DETAILS MODAL -->
     <div v-if="selectedEvent" class="modal-overlay" @click="closeEventModal">
         <div class="modal-content" @click.stop>
-            <button class="modal-close" @click="closeEventModal">✕</button>
-            <h2>{{ selectedEvent.title }}</h2>
-            <p class="modal-date">📅 {{ selectedEvent.date }}</p>
+            <button @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
-            <div class="modal-details">
-                <div class="detail-item">
-                    <strong>🕐 Zeit:</strong> {{ selectedEvent.time }}
-                </div>
-                <div class="detail-item">
-                    <strong>📍 Ort:</strong> {{ selectedEvent.location }}
-                </div>
-                <div class="detail-item">
-                    <strong>👥 Plätze:</strong> {{ selectedEvent.capacity }}
-                </div>
+            <div class="modal-header">
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.date }}</span>
+                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
+            </div>
+            
+            <div class="modal-details-grid">
+                <div><i class="ph ph-clock"></i> <strong>Zeit:</strong><br>{{ selectedEvent.time }}</div>
+                <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br>{{ selectedEvent.location }}</div>
+                <div><i class="ph ph-users"></i> <strong>Space:</strong><br>{{ selectedEvent.capacity }}</div>
             </div>
 
-            <div class="modal-description">
-                <h3>Über das Event</h3>
-                <p>{{ selectedEvent.detailedDesc }}</p>
-            </div>
+            <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.detailedDesc }}</p>
 
-            <div class="modal-actions">
-                <button class="btn btn-primary" @click="closeEventModal">Fenster schließen</button>
-            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 30px; justify-content: center;" @click="closeEventModal">Alles klar!</button>
         </div>
     </div>
 
-    <section class="section-padding" id="umbau">
+    <section class="section-padding" id="umbau" style="background: #f1f5f9;">
         <div class="container">
-            <h2>Umbau-Status</h2>
-            <p>Hier siehst du, woran wir gerade arbeiten.</p>
-
-            <div class="progress-container">
-                <div v-for="(item, index) in progress" :key="index" class="progress-item">
-                    <div style="flex: 1;">
-                        <div class="progress-info">
-                            <span>{{ item.label }}</span>
-                            <span>{{ item.percent }}%</span>
+            <div class="grid-2">
+                <div class="hidden-el">
+                    <h2>Work in Progress</h2>
+                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du live, wie weit wir sind.</p>
+                    <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
+                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, die Theke zu streichen.</p>
+                        <a href="#" style="color: white; text-decoration: underline;">Schreib uns auf Insta →</a>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`">
+                        <div class="progress-circle">{{ item.percent }}%</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                                <span>{{ item.label }}</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" :style="{ width: item.percent + '%' }"></div>
+                            </div>
+                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
                         </div>
-                        <div class="bar-bg">
-                            <div class="bar-fill" :style="{ width: item.percent + '%' }"></div>
-                        </div>
-                        <small style="color: var(--text-light); display:block; margin-top:5px;">Status: {{ item.status }}</small>
                     </div>
                 </div>
             </div>
@@ -113,64 +558,59 @@
 
     <section class="section-padding" id="blog">
         <div class="container">
-            <h2>News & Updates</h2>
+            <h2>Updates & Needs</h2>
             
-            <div v-if="loadingPosts">Lade Updates...</div>
-            <div v-else class="blog-grid">
-                <div v-for="(post, index) in posts" :key="index" class="blog-card">
-                    <span class="event-date">{{ post.date }}</span>
-                    <div class="blog-excerpt" v-html="post.renderedContent"></div>
-                </div>
+            <div v-if="loadingPosts">Lade News...</div>
+            <div v-else class="blog-grid" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <article v-for="(post, index) in posts" :key="index" class="blog-card hidden-el">
+                    <div class="blog-header">
+                        <span style="font-weight: 700;">Update</span>
+                        <span style="opacity: 0.8; font-size: 0.85rem;">{{ post.date }}</span>
+                    </div>
+                    <div class="blog-content" v-html="post.renderedContent"></div>
+                </article>
             </div>
         </div>
     </section>
 
     <section class="section-padding donate-section" id="spenden">
         <div class="container">
-            <h2>Unterstütze die MiKi</h2>
-            <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
-                Deine Spende ermöglicht Räume, in denen junge Menschen Glauben und Gemeinschaft neu erleben können.
-                Jeder Euro fließt direkt in den Umbau und die Jugendarbeit.
+            <h2 style="font-size: 2.5rem;">Support the Dream</h2>
+            <p style="max-width: 600px; margin: 0 auto 40px auto;">
+                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, Pizza und Events.
             </p>
-            
-            <div class="donate-options">
-                <button class="btn btn-secondary" onclick="alert('Weiterleitung zu PayPal...')">Jetzt per PayPal spenden</button>
-                <button class="btn" style="background: white; color: var(--dark);" onclick="alert('Infos zur Überweisung...')">Banküberweisung</button>
-            </div>
-
-            <div class="payment-placeholder">
-                <p>Wir akzeptieren PayPal, Überweisung und Sachspenden.</p>
-            </div>
+            <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
+                <i class="ph ph-paypal-logo"></i> Per PayPal spenden
+            </button>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
                 <div class="footer-col">
-                    <h4>MiKi Heidenheim</h4>
-                    <p>Jugendkirche an der Michaelskirche.<br>
-                    Ein Projekt der Evangelischen Jugend.</p>
+                    <h4 style="color: var(--primary);">MiKi Heidenheim</h4>
+                    <p>Jugendkirche an der Michaelskirche.<br>Ein Projekt der Evangelischen Jugend.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Social Media</h4>
-                    <p>Folge uns für Daily Updates:</p>
-                    <ul style="margin-top: 10px;">
-                        <li><a href="#">Instagram @miki_hdh</a></li>
-                        <li><a href="#">TikTok @miki_church</a></li>
-                    </ul>
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="#"><i class="ph ph-tiktok-logo"></i></a>
+                        <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Rechtliches</h4>
-                    <ul>
+                    <h4>Legal Stuff</h4>
+                    <ul style="line-height: 2;">
                         <li><a href="#">Impressum</a></li>
                         <li><a href="#">Datenschutz</a></li>
-                        <li><a href="#">Kontakt</a></li>
                     </ul>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid #1e293b; padding-top: 20px;">
-                &copy; {{ new Date().getFullYear() }} MiKi Jugendkirche.
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.5;">
+                &copy; {{ new Date().getFullYear() }} MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
     </footer>
@@ -181,178 +621,98 @@
 
     createApp({
         setup() {
-            // --- STATE: EVENTS ---
+            // EVENTS DATA
             const events = ref([
                 { 
-                    title: "Grand Opening Party", 
-                    date: "15. Mai 2024", 
-                    desc: "Die große Eröffnung nach dem ersten Bauabschnitt mit Live-Musik und Foodtrucks.",
-                    location: "Michaelskirche Heidenheim",
-                    time: "19:00 - 22:00 Uhr",
-                    capacity: "200 Personen",
-                    detailedDesc: "Feiern Sie mit uns die Eröffnung der neuen MiKi nach dem ersten Umbauabschnitt! Mit Live-Musik von lokalen Bands, Food Trucks mit Köstlichkeiten und der Möglichkeit, die neuen Räume zu erkunden."
+                    title: "Grand Opening", 
+                    date: "15. Mai", 
+                    desc: "Live-Musik, Foodtrucks & Good Vibes.",
+                    location: "Michaelskirche HDH",
+                    time: "19:00 - End",
+                    capacity: "Open House",
+                    detailedDesc: "Das Warten hat ein Ende. Feiere mit uns den Start der neuen MiKi. Wir haben drei Bands am Start, Foodtrucks stehen vor der Tür und die Lounge ist eröffnet."
                 },
                 { 
-                    title: "Jugendgottesdienst 'Light'", 
-                    date: "02. Juni 2024", 
-                    desc: "Moderner Worship, starker Input und danach Chillout im neuen Café-Bereich.",
-                    location: "Michaelskirche Heidenheim",
-                    time: "19:30 - 21:00 Uhr",
-                    capacity: "150 Personen",
-                    detailedDesc: "Ein Gottesdienst für junge Menschen. Mit moderner Musik, inspirierende Gedanken und Zeit für Austausch. Danach gemütlicher Chillout im neuen Café mit heißen Getränken."
+                    title: "Worship 'Light'", 
+                    date: "02. Juni", 
+                    desc: "Moderner Input, danach Chillout.",
+                    location: "MiKi Lounge",
+                    time: "19:30 - 21:00",
+                    capacity: "150 Plätze",
+                    detailedDesc: "Keine Orgel, keine langen Predigten. Worship Light ist dein Start in die Woche mit guter Musik und Gedanken, die dich wirklich betreffen."
                 },
                 { 
                     title: "Skate & Pray", 
-                    date: "20. Juni 2024", 
-                    desc: "Workshop an der neuen Rampe, danach gemeinsamer Impuls.",
-                    location: "Skatepark (Michaelskirche Bereich)",
-                    time: "18:00 - 20:00 Uhr",
-                    capacity: "40 Personen",
-                    detailedDesc: "Triff andere Skater und Skaterinnen an unserer neuen, selbstgebauten Rampe. Workshops für alle Levels, danach ein kurzer spiritueller Input. Bringt eure Boards mit!"
-                },
-                { 
-                    title: "FunChurch Workcamp", 
-                    date: "15. Februar 2026", 
-                    desc: "Eine Woche bauen, werkeln, Glauben und Gemeinschaft",
-                    location: "Michaelskirche Heidenheim",
-                    time: "Montag - Freitag, 09:00 - 18:00 Uhr",
-                    capacity: "50 Personen",
-                    detailedDesc: "Eine intensive Woche voller Action! Wir bauen zusammen an der MiKi, teilen Mahlzeiten, Andachten und haben viel Zeit für echte Gemeinschaft. Übernachtungen vor Ort möglich. Perfekt für alle zwischen 14 und 25 Jahren."
+                    date: "20. Juni", 
+                    desc: "Session an der neuen Rampe.",
+                    location: "Outdoor Area",
+                    time: "18:00 - 20:00",
+                    capacity: "40 Skater",
+                    detailedDesc: "Bring dein Board mit! Wir weihen die neuen Obstacles ein. Davor gibt es einen kurzen Impuls zum Thema 'Balance'."
                 }
             ]);
 
-            // --- STATE: PROGRESS ---
+            // PROGRESS DATA
             const progress = ref([
-                { label: "Barbau", percent: 85, status: "Theke steht, Anschlüsse fehlen noch." },
-                { label: "Chillout Area", percent: 40, status: "Möbel bestellt, Boden wird verlegt." },
-                { label: "Skaterampe", percent: 10, status: "Planungsphase abgeschlossen." },
-                { label: "Gebetshäuschen (Telefonzelle)", percent: 100, status: "Fertiggestellt & Einsatzbereit!" }
+                { label: "Theken-Bau", percent: 85, status: "Holzarbeiten fertig, Lack fehlt." },
+                { label: "Chillout Area", percent: 40, status: "Möbel sind bestellt." },
+                { label: "Skaterampe", percent: 15, status: "Fundament steht." },
+                { label: "Gebets-Box", percent: 100, status: "Ready to pray!" }
             ]);
 
-            // --- STATE: BLOG (FETCH LOGIC) ---
+            // BLOG FETCH SIMULATION
             const posts = ref([]);
             const loadingPosts = ref(true);
-
-            // Simuliert eine externe Markdown Datei, falls fetch fehlschlägt (für Demo-Zwecke)
             const fallbackMarkdown = `
-### Bauarbeiten gehen voran!
-*12. April 2024*
+### Danke für die Spenden!
+*12. April*
 
-Wir haben heute die **neue Theke** geliefert bekommen. Danke an alle Helfer, die beim Schleppen geholfen haben!
-
-Es geht voran! Nächste Woche wird gestrichen.
+Wow! Dank eurer Hilfe konnten wir die **neue Soundanlage** finanzieren. 
+Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             `;
 
             const fetchPosts = async () => {
                 try {
-                    // Hier würden im echten Betrieb externe .md Dateien geladen werden
-                    // Beispiel: const response = await fetch('assets/posts/update1.md');
-                    
-                    // Da wir hier eine Single-File-Solution ohne Server haben,
-                    // simulieren wir einen fehlgeschlagenen Fetch oder eine lokale Datei.
-                    
-                    // Code für echten Fetch (auskommentiert):
-                    /*
-                    const response = await fetch('assets/blogpost1.md');
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    const text = await response.text();
-                    */
-
-                    // SIMULATION für Demo (Verzögerung + Mock Data):
-                    await new Promise(r => setTimeout(r, 800));
-                    
-                    // Wir nutzen hier den Fallback-String als "gefetchten" Content
-                    const text = fallbackMarkdown; 
-
-                    // Parse Markdown mit 'marked'
-                    const htmlContent = marked.parse(text);
-
-                    posts.value = [{
-                        date: "Aktuell",
-                        renderedContent: htmlContent
-                    }, {
-                        date: "März 2024",
-                        renderedContent: marked.parse("### Startschuss gefallen\nEndlich geht es los mit dem Umbau. Die Bänke sind raus!")
-                    }];
-
-                } catch (error) {
-                    console.error("Fehler beim Laden der Blogposts:", error);
-                    posts.value = [{ 
-                        date: "Fehler", 
-                        renderedContent: "<p>Konnte Updates nicht laden (Benötigt Webserver für Fetch API).</p>" 
-                    }];
+                    await new Promise(r => setTimeout(r, 800)); // Simuliere Netzwerk
+                    const htmlContent = marked.parse(fallbackMarkdown);
+                    posts.value = [
+                        { date: "Heute", renderedContent: htmlContent },
+                        { date: "März", renderedContent: marked.parse("### Startschuss!\nDie Bänke sind raus, der Raum ist leer. Jetzt gehts los.") }
+                    ];
+                } catch (e) {
+                    console.error(e);
                 } finally {
                     loadingPosts.value = false;
                 }
             };
 
+            // MODAL LOGIC
+            const selectedEvent = ref(null);
+            const openEventModal = (ev) => { selectedEvent.value = ev; document.body.style.overflow = 'hidden'; };
+            const closeEventModal = () => { selectedEvent.value = null; document.body.style.overflow = 'auto'; };
+
+            // ANIMATION OBSERVER
             onMounted(() => {
                 fetchPosts();
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            entry.target.classList.add('show-el');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                setTimeout(() => {
+                    document.querySelectorAll('.hidden-el').forEach(el => observer.observe(el));
+                }, 100);
             });
 
-            // --- EVENT MODAL STATE ---
-            const selectedEvent = ref(null);
-
-            const openEventModal = (event) => {
-                selectedEvent.value = event;
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeEventModal = () => {
-                selectedEvent.value = null;
-                document.body.style.overflow = 'auto';
-            };
-
             return {
-                events,
-                progress,
-                posts,
-                loadingPosts,
-                selectedEvent,
-                openEventModal,
-                closeEventModal
+                events, progress, posts, loadingPosts, selectedEvent, openEventModal, closeEventModal
             };
         }
     }).mount('#app');
-
-    // --- SCROLL ANIMATION LOGIC ---
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    // Beobachte alle animierten Elemente
-    document.addEventListener('DOMContentLoaded', () => {
-        const animatedElements = document.querySelectorAll('.event-card, .blog-card, .progress-item');
-        animatedElements.forEach(el => {
-            el.classList.add('scroll-animate');
-            observer.observe(el);
-        });
-    });
-
-    // --- PARALLAX EFFECT für Vision Text ---
-    window.addEventListener('scroll', () => {
-        const visionSection = document.querySelector('#vision');
-        if (visionSection) {
-            const rect = visionSection.getBoundingClientRect();
-            const scrollPercent = 1 - (rect.top / window.innerHeight);
-            const parallaxValue = scrollPercent * 30;
-            
-            const visionText = visionSection.querySelector('.vision-text');
-            if (visionText) {
-                visionText.style.transform = `translateY(${parallaxValue * 0.3}px)`;
-            }
-        }
-    });
 </script>
-
 </body>
 </html>
