@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiKi - Kirche neu erleben</title>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #2563eb;       /* Kräftiges Blau */
+            --secondary: #facc15;     /* Jugendliches Gelb/Gold */
+            --dark: #1e293b;          /* Dunkles Anthrazit */
+            --light: #f8fafc;         /* Helles Grau/Weiß */
+            --text-main: #334155;
+            --text-light: #94a3b8;
+            --radius: 12px;
+            --container-width: 1100px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            color: var(--dark);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        /* --- COMPONENTS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* --- 1. HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+            /* Fallback Farbe, falls Bild fehlt */
+            background-color: var(--dark); 
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/P1.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .hero .subline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* --- 2. VISION SECTION --- */
+        .vision-img-wrapper {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- 3. EVENTS SECTION --- */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.2s;
+        }
+
+        .event-card:hover {
+            transform: scale(1.02);
+        }
+
+        .event-date {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* --- 4. PROGRESS SECTION --- */
+        .progress-container {
+            margin-top: 40px;
+        }
+
+        .progress-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .progress-info {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .bar-bg {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            flex: 2;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* --- 5. BLOG SECTION --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-excerpt {
+            color: var(--text-main);
+            margin: 15px 0;
+            flex-grow: 1;
+        }
+
+        /* --- 6. DONATE SECTION --- */
+        .donate-section {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+        }
+        
+        .donate-section h2 { color: white; }
+        
+        .donate-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .payment-placeholder {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* --- 7. FOOTER --- */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 60px 0 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; }
+            .progress-item { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <header class="hero">
+        <div class="container">
+            <h1>MiKi – Kirche neu erleben.</h1>
+            <p class="subline">Ein Ort von Jugendlichen für Jugendliche. Glaube. Gemeinschaft. Gestaltung.</p>
+            <div class="hero-buttons">
+                <a href="#events" class="btn btn-primary">Komm vorbei</a>
+                <a href="#spenden" class="btn btn-secondary">Projekt unterstützen</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-padding" id="vision">
+        <div class="container grid-2">
+            <div class="vision-text">
+                <h2>Unsere Vision</h2>
+                <p><strong>Die Michaelskirche wird zur MiKi.</strong> Wir glauben daran, dass Kirche nicht verstaubt sein muss. Gemeinsam mit Jugendlichen gestalten wir die Michaelskirche in Heidenheim um.</p>
+                <br>
+                <ul>
+                    <li>✨ <strong>Mitgestaltung:</strong> Jugendliche entscheiden, wie ihr Raum aussieht.</li>
+                    <li>🛠 <strong>Active Space:</strong> Keine starren Bänke, sondern Raum für Action und Ruhe.</li>
+                    <li>🔥 <strong>Begegnung:</strong> Ein lebendiger Ort für Glaube und Gemeinschaft.</li>
+                </ul>
+            </div>
+            <div class="vision-img-wrapper">
+                <img src="assets/P2.png" alt="Visualisierung Umbau Michaelskirche" onerror="this.style.display='none'; this.parentNode.style.backgroundColor='#ddd'; this.parentNode.innerHTML='<div style=\'padding:40px;text-align:center\'>Bild assets/P2.png fehlt</div>'">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: #f1f5f9;" id="events">
+        <div class="container">
+            <h2>Kommende Events</h2>
+            <p>Sei dabei und erlebe Gemeinschaft.</p>
+            
+            <div class="events-grid">
+                <div v-for="(event, index) in events" :key="index" class="event-card">
+                    <span class="event-date">{{ event.date }}</span>
+                    <h3>{{ event.title }}</h3>
+                    <p>{{ event.desc }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="umbau">
+        <div class="container">
+            <h2>Umbau-Status</h2>
+            <p>Hier siehst du, woran wir gerade arbeiten.</p>
+
+            <div class="progress-container">
+                <div v-for="(item, index) in progress" :key="index" class="progress-item">
+                    <div style="flex: 1;">
+                        <div class="progress-info">
+                            <span>{{ item.label }}</span>
+                            <span>{{ item.percent }}%</span>
+                        </div>
+                        <div class="bar-bg">
+                            <div class="bar-fill" :style="{ width: item.percent + '%' }"></div>
+                        </div>
+                        <small style="color: var(--text-light); display:block; margin-top:5px;">Status: {{ item.status }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="blog">
+        <div class="container">
+            <h2>News & Updates</h2>
+            
+            <div v-if="loadingPosts">Lade Updates...</div>
+            <div v-else class="blog-grid">
+                <div v-for="(post, index) in posts" :key="index" class="blog-card">
+                    <span class="event-date">{{ post.date }}</span>
+                    <div class="blog-excerpt" v-html="post.renderedContent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding donate-section" id="spenden">
+        <div class="container">
+            <h2>Unterstütze die MiKi</h2>
+            <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
+                Deine Spende ermöglicht Räume, in denen junge Menschen Glauben und Gemeinschaft neu erleben können.
+                Jeder Euro fließt direkt in den Umbau und die Jugendarbeit.
+            </p>
+            
+            <div class="donate-options">
+                <button class="btn btn-secondary" onclick="alert('Weiterleitung zu PayPal...')">Jetzt per PayPal spenden</button>
+                <button class="btn" style="background: white; color: var(--dark);" onclick="alert('Infos zur Überweisung...')">Banküberweisung</button>
+            </div>
+
+            <div class="payment-placeholder">
+                <p>Wir akzeptieren PayPal, Überweisung und Sachspenden.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>MiKi Heidenheim</h4>
+                    <p>Jugendkirche an der Michaelskirche.<br>
+                    Ein Projekt der Evangelischen Jugend.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Social Media</h4>
+                    <p>Folge uns für Daily Updates:</p>
+                    <ul style="margin-top: 10px;">
+                        <li><a href="#">Instagram @miki_hdh</a></li>
+                        <li><a href="#">TikTok @miki_church</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid #1e293b; padding-top: 20px;">
+                &copy; {{ new Date().getFullYear() }} MiKi Jugendkirche.
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const { createApp, ref, onMounted } = Vue;
+
+    createApp({
+        setup() {
+            // --- STATE: EVENTS ---
+            const events = ref([
+                { 
+                    title: "Grand Opening Party", 
+                    date: "15. Mai 2024", 
+                    desc: "Die große Eröffnung nach dem ersten Bauabschnitt mit Live-Musik und Foodtrucks." 
+                },
+                { 
+                    title: "Jugendgottesdienst 'Light'", 
+                    date: "02. Juni 2024", 
+                    desc: "Moderner Worship, starker Input und danach Chillout im neuen Café-Bereich." 
+                },
+                { 
+                    title: "Skate & Pray", 
+                    date: "20. Juni 2024", 
+                    desc: "Workshop an der neuen Rampe, danach gemeinsamer Impuls." 
+                }
+            ]);
+
+            // --- STATE: PROGRESS ---
+            const progress = ref([
+                { label: "Barbau", percent: 85, status: "Theke steht, Anschlüsse fehlen noch." },
+                { label: "Chillout Area", percent: 40, status: "Möbel bestellt, Boden wird verlegt." },
+                { label: "Skaterampe", percent: 10, status: "Planungsphase abgeschlossen." },
+                { label: "Gebetshäuschen (Telefonzelle)", percent: 100, status: "Fertiggestellt & Einsatzbereit!" }
+            ]);
+
+            // --- STATE: BLOG (FETCH LOGIC) ---
+            const posts = ref([]);
+            const loadingPosts = ref(true);
+
+            // Simuliert eine externe Markdown Datei, falls fetch fehlschlägt (für Demo-Zwecke)
+            const fallbackMarkdown = `
+### Bauarbeiten gehen voran!
+*12. April 2024*
+
+Wir haben heute die **neue Theke** geliefert bekommen. Danke an alle Helfer, die beim Schleppen geholfen haben!
+
+Es geht voran! Nächste Woche wird gestrichen.
+            `;
+
+            const fetchPosts = async () => {
+                try {
+                    // Hier würden im echten Betrieb externe .md Dateien geladen werden
+                    // Beispiel: const response = await fetch('assets/posts/update1.md');
+                    
+                    // Da wir hier eine Single-File-Solution ohne Server haben,
+                    // simulieren wir einen fehlgeschlagenen Fetch oder eine lokale Datei.
+                    
+                    // Code für echten Fetch (auskommentiert):
+                    /*
+                    const response = await fetch('assets/blogpost1.md');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const text = await response.text();
+                    */
+
+                    // SIMULATION für Demo (Verzögerung + Mock Data):
+                    await new Promise(r => setTimeout(r, 800));
+                    
+                    // Wir nutzen hier den Fallback-String als "gefetchten" Content
+                    const text = fallbackMarkdown; 
+
+                    // Parse Markdown mit 'marked'
+                    const htmlContent = marked.parse(text);
+
+                    posts.value = [{
+                        date: "Aktuell",
+                        renderedContent: htmlContent
+                    }, {
+                        date: "März 2024",
+                        renderedContent: marked.parse("### Startschuss gefallen\nEndlich geht es los mit dem Umbau. Die Bänke sind raus!")
+                    }];
+
+                } catch (error) {
+                    console.error("Fehler beim Laden der Blogposts:", error);
+                    posts.value = [{ 
+                        date: "Fehler", 
+                        renderedContent: "<p>Konnte Updates nicht laden (Benötigt Webserver für Fetch API).</p>" 
+                    }];
+                } finally {
+                    loadingPosts.value = false;
+                }
+            };
+
+            onMounted(() => {
+                fetchPosts();
+            });
+
+            return {
+                events,
+                progress,
+                posts,
+                loadingPosts
+            };
+        }
+    }).mount('#app');
+</script>
+
+</body>
+</html>
