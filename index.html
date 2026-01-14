@@ -15,7 +15,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Unbounded:wght@400;700;900&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -37,7 +37,7 @@
             --shadow-hover: 0 20px 50px -10px rgba(16, 187, 130, 0.3);
             
             --radius: 24px;
-            --font-main: 'Inter', sans-serif;
+            --font-main: 'Poppins', sans-serif;
             --font-head: 'Just Me Again Down Here', sans-serif; /* Handschrift-Stil */
         }
 
@@ -438,7 +438,7 @@
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Events</a>
         <a href="#umbau">Status</a>
-        <a href="#spenden">Support</a>
+        <a href="#blog">Support</a>
     </nav>
 
     <header class="hero">
@@ -450,7 +450,7 @@
                 <a href="#events" class="btn btn-primary">
                     Komm vorbei <i class="ph ph-arrow-right"></i>
                 </a>
-                <a href="#spenden" class="btn btn-secondary">
+                <a href="#blog" class="btn btn-secondary">
                     Projekt supporten <i class="ph ph-heart"></i>
                 </a>
             </div>
@@ -460,20 +460,20 @@
     <section class="section-padding" id="vision">
         <div class="container grid-2">
             <div class="vision-text hidden-el">
-                <h4 style="color: var(--primary); text-transform: uppercase; margin-bottom: 10px;">wer wir sind</h4>
+                
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Die Michaelskirche wird zur MiKi.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
+                    <strong>Kirche mal anders.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
 
                 </p>
                 <ul class="vision-list">
                     <li>
                         <i class="ph ph-paint-brush-broad"></i>
-                        <div><strong>DIY:</strong> Du kannst mitentscheiden, wie die MiKi aussieht</div>
+                        <div><strong>DIY:</strong> Du kannst selbst anpacken und mitgestalten.</div>
                     </li>
                     <li>
                         <i class="ph ph-armchair"></i>
-                        <div><strong>Kirche mal anders:</strong> Couches statt Holzbänke. Action statt Stille.</div>
+                        <div><strong>Wie daheim:</strong> Couches statt Holzbänke. Action statt Stille.</div>
                     </li>
                     <li>
                         <i class="ph ph-users-three"></i>
@@ -566,15 +566,59 @@
         <div class="container">
             <h2>Gebets- und Spendenanliegen</h2>
             
-            <div v-if="loadingPosts">Lade News...</div>
-            <div v-else class="blog-grid" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <article v-for="(post, index) in posts" :key="index" class="blog-card hidden-el">
-                    <div class="blog-header">
-                        <span style="font-weight: 700;">Update</span>
-                        <span style="opacity: 0.8; font-size: 0.85rem;">{{ post.date }}</span>
+            <!-- Gebetsanliegen & Spendenprojekte Grid -->
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                
+                <!-- Gebetsanliegen Karte -->
+                <div class="prayer-card" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px);">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Gebetsanliegen</h3>
                     </div>
-                    <div class="blog-content" v-html="post.renderedContent"></div>
-                </article>
+                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8;">
+                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten füreinander ein und tragen euch im Gebet.
+                    </p>
+                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;" onclick="alert('Gebetsanliegen können hier eingereicht werden')">
+                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                    </button>
+                </div>
+
+                <!-- Spendenprojekte Karte -->
+                <div class="donation-card" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px);">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
+                    </div>
+                    
+                    <!-- Projekt -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <h4 style="margin: 0; font-size: 1rem;">MiKi Umgestaltung</h4>
+                            <span style="font-weight: 700; color: var(--primary);">€2.400 / €3.000</span>
+                        </div>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit die MiKi ein echter Ort für junge Menschen wird – mit neuer Innenausstattung, Skatepark und Lounge-Bereich</p>
+                        <div style="height: 8px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 80%; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); border-radius: 10px;"></div>
+                        </div>
+                        <p style="margin: 8px 0 0 0; opacity: 0.6; font-size: 0.85rem;">80% finanziert</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- News/Updates Bereich -->
+            <div style="margin-top: 80px;">
+                <h3 style="text-align: center; margin-bottom: 40px;">Neueste Updates</h3>
+                <div v-if="loadingPosts">Lade News...</div>
+                <div v-else class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <article v-for="(post, index) in posts" :key="index" class="blog-card hidden-el">
+                        <div class="blog-header">
+                            <span style="font-weight: 700;">Update</span>
+                            <span style="opacity: 0.8; font-size: 0.85rem;">{{ post.date }}</span>
+                        </div>
+                        <div class="blog-content" v-html="post.renderedContent"></div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -583,12 +627,13 @@
         <div class="container">
             <h2 style="font-size: 2.5rem;">Unterstütze die MiKi</h2>
             <p style="max-width: 600px; margin: 0 auto 40px auto;">
-                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, Pizza und coole Events.
+                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Pizza.
             </p>
             <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
                 <i class="ph ph-paypal-logo"></i> Per PayPal spenden
             </button>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
+<br>Iban: DE51 6329 0110 0110 3650 03 <br> Verwendungszeweck: MiKi</p>
         </div>
     </section>
 
@@ -597,12 +642,12 @@
             <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
                 <div class="footer-col">
                     <h4 style="color: var(--primary);">MiKi Heidenheim</h4>
-                    <p>Jugendkirche an der Michaelskirche.<br>Ein Projekt der Evangelischen Jugend.</p>
+                    <p>Jugendkirche an der Michaelskirche.<br>Ein Projekt des Evangelischen Jugendweks Heidenheim</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Connect</h4>
+                    <h4>Folge uns auf Social Media</h4>
                     <div class="social-links">
-                        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
                         <a href="#"><i class="ph ph-tiktok-logo"></i></a>
                         <a href="#"><i class="ph ph-youtube-logo"></i></a>
                     </div>
