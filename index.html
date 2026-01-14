@@ -15,7 +15,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Unbounded:wght@400;700;900&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -38,7 +38,7 @@
             
             --radius: 24px;
             --font-main: 'Inter', sans-serif;
-            --font-head: 'Unbounded', sans-serif; /* Modern, breit */
+            --font-head: 'Just Me Again Down Here', sans-serif; /* Handschrift-Stil */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,6 +58,11 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
         }
+
+        h1 { font-size: clamp(3.5rem, 10vw, 7rem); }
+        h2 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+        h3 { font-size: clamp(1.8rem, 5vw, 3rem); }
+        h4 { font-size: clamp(1.3rem, 3vw, 2rem); }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
@@ -193,7 +198,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3.5rem, 10vw, 7rem);
             margin-bottom: 20px;
             line-height: 1;
         }
@@ -455,23 +460,24 @@
     <section class="section-padding" id="vision">
         <div class="container grid-2">
             <div class="vision-text hidden-el">
-                <h4 style="color: var(--primary); text-transform: uppercase; margin-bottom: 10px;">Who we are</h4>
+                <h4 style="color: var(--primary); text-transform: uppercase; margin-bottom: 10px;">wer wir sind</h4>
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Die Michaelskirche wird zur MiKi.</strong> Kein Staub, keine Langeweile. Wir bauen einen Ort, an dem du sein kannst, wie du bist.
+                    <strong>Die Michaelskirche wird zur MiKi.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
+
                 </p>
                 <ul class="vision-list">
                     <li>
                         <i class="ph ph-paint-brush-broad"></i>
-                        <div><strong>Dein Style:</strong> Jugendliche entscheiden, wie der Raum aussieht.</div>
+                        <div><strong>DIY:</strong> Du kannst mitentscheiden, wie die MiKi aussieht</div>
                     </li>
                     <li>
                         <i class="ph ph-armchair"></i>
-                        <div><strong>Active Space:</strong> Couches statt Holzbänke. Action statt Stille.</div>
+                        <div><strong>Kirche mal anders:</strong> Couches statt Holzbänke. Action statt Stille.</div>
                     </li>
                     <li>
                         <i class="ph ph-users-three"></i>
-                        <div><strong>Community:</strong> Ein lebendiger Spot für Glaube & Friends.</div>
+                        <div><strong>Gemeinschaft:</strong> Ein lebendiger Spot für Glaube, Sport und Freunde.</div>
                     </li>
                 </ul>
             </div>
@@ -487,8 +493,8 @@
     <section class="section-padding" id="events">
         <div class="container">
             <div class="hidden-el">
-                <h2 style="color:white;">Upcoming Events</h2>
-                <p>Verpasse keine Party, keinen Gottesdienst und keine Session.</p>
+                <h2 style="color:white;">Was geht in der MiKi?!</h2>
+                <p>Verpasse nichts! Hier findest du alle aktuellen Termine.</p>
             </div>
             
             <div class="events-grid">
@@ -529,11 +535,11 @@
         <div class="container">
             <div class="grid-2">
                 <div class="hidden-el">
-                    <h2>Work in Progress</h2>
+                    <h2>Was wird gebaut?</h2>
                     <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du live, wie weit wir sind.</p>
                     <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
                         <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
-                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, die Theke zu streichen.</p>
+                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken.</p>
                         <a href="#" style="color: white; text-decoration: underline;">Schreib uns auf Insta →</a>
                     </div>
                 </div>
@@ -558,7 +564,7 @@
 
     <section class="section-padding" id="blog">
         <div class="container">
-            <h2>Updates & Needs</h2>
+            <h2>Gebets- und Spendenanliegen</h2>
             
             <div v-if="loadingPosts">Lade News...</div>
             <div v-else class="blog-grid" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
@@ -575,14 +581,14 @@
 
     <section class="section-padding donate-section" id="spenden">
         <div class="container">
-            <h2 style="font-size: 2.5rem;">Support the Dream</h2>
+            <h2 style="font-size: 2.5rem;">Unterstütze die MiKi</h2>
             <p style="max-width: 600px; margin: 0 auto 40px auto;">
-                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, Pizza und Events.
+                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, Pizza und coole Events.
             </p>
             <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
                 <i class="ph ph-paypal-logo"></i> Per PayPal spenden
             </button>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto</p>
         </div>
     </section>
 
@@ -624,40 +630,40 @@
             // EVENTS DATA
             const events = ref([
                 { 
-                    title: "Grand Opening", 
-                    date: "15. Mai", 
-                    desc: "Live-Musik, Foodtrucks & Good Vibes.",
+                    title: "Church Makeover", 
+                    date: "14. - 21. Februar", 
+                    desc: "Eine Woche bauen, gestalten, erleben.",
                     location: "Michaelskirche HDH",
                     time: "19:00 - End",
-                    capacity: "Open House",
-                    detailedDesc: "Das Warten hat ein Ende. Feiere mit uns den Start der neuen MiKi. Wir haben drei Bands am Start, Foodtrucks stehen vor der Tür und die Lounge ist eröffnet."
+                    capacity: "10 Plätze",
+                    detailedDesc: "Jetzt geht's los! Wir verwandeln die Michaelskirche in die MiKi. Komm vorbei, bring Freunde mit und sei Teil dieses einzigartigen Projekts."
                 },
                 { 
-                    title: "Worship 'Light'", 
+                    title: "Worship Night'", 
                     date: "02. Juni", 
-                    desc: "Moderner Input, danach Chillout.",
-                    location: "MiKi Lounge",
+                    desc: "Worship, danach Chillout.",
+                    location: "Michaelskirche HDH",
                     time: "19:30 - 21:00",
                     capacity: "150 Plätze",
-                    detailedDesc: "Keine Orgel, keine langen Predigten. Worship Light ist dein Start in die Woche mit guter Musik und Gedanken, die dich wirklich betreffen."
+                    detailedDesc: "Lobreis und Anbetung in der MiKi. Lass den Alltagsstress hinter dir und tauche ein in eine Nacht voller Musik, Gemeinschaft und Inspiration."
                 },
                 { 
                     title: "Skate & Pray", 
                     date: "20. Juni", 
                     desc: "Session an der neuen Rampe.",
-                    location: "Outdoor Area",
+                    location: "Michaelskirche HDH",
                     time: "18:00 - 20:00",
                     capacity: "40 Skater",
-                    detailedDesc: "Bring dein Board mit! Wir weihen die neuen Obstacles ein. Davor gibt es einen kurzen Impuls zum Thema 'Balance'."
+                    detailedDesc: "Bring dein Board, BMX oder Scooter mit! Wir weihen die neuen Halfpipe ein. Davor gibt es einen kurzen Impuls"
                 }
             ]);
 
             // PROGRESS DATA
             const progress = ref([
-                { label: "Theken-Bau", percent: 85, status: "Holzarbeiten fertig, Lack fehlt." },
-                { label: "Chillout Area", percent: 40, status: "Möbel sind bestellt." },
-                { label: "Skaterampe", percent: 15, status: "Fundament steht." },
-                { label: "Gebets-Box", percent: 100, status: "Ready to pray!" }
+                { label: "BarBauProjekt", percent: 85, status: "Arbeitsfläche fehlt noch." },
+                { label: "Chillout Area", percent: 40, status: "Couchtische und Deko steht noch an" },
+                { label: "Skaterampe", percent: 10, status: "Noch in Planung." },
+                { label: "Gebets-Box", percent: 10, status: "Eine alte Telefonzelle haben wir schon :)" }
             ]);
 
             // BLOG FETCH SIMULATION
