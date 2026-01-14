@@ -532,6 +532,77 @@
         </div>
     </div>
 
+    <div v-if="showImpressum" class="modal-overlay" @click="showImpressum = false">
+        <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+            <button @click="showImpressum = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            
+            <div class="modal-header">
+                <h2 style="margin: 0; font-size: 1.8rem;">Impressum</h2>
+            </div>
+
+            <div style="line-height: 1.8; color: #334155; font-size: 0.95rem;">
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Kontakt</div>
+                <p style="margin: 0;">
+                    <strong>Evangelisches Jugendwerk Heidenheim</strong><br>
+                    Bahnhofstr. 33<br>
+                    89522 Heidenheim an der Brenz<br>
+                    Telefon: 07321 / 4881-371<br>
+                    Fax: 07321 / 3594 - 64<br>
+                    E-Mail: bezirk@ejhdh.de
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Verantwortlicher Träger</div>
+                <p style="margin: 0;">
+                    Evangelisches Jugendwerk Heidenheim, vertreten durch:<br>
+                    <strong>1. Vorsitzender Axel Kolb</strong> (zugleich verantwortlich i.S.v. § 18 Abs. 2 MStV und § 5 DDG)
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Träger</div>
+                <p style="margin: 0;">
+                    Evangelisches Jugendwerk Heidenheim gehört der Evangelischen Landeskirche in Württemberg an.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Verantwortlich für den Inhalt (§55 Abs. 2 RStV)</div>
+                <p style="margin: 0;">
+                    <strong>Armin Geng</strong>, ehrenamtlicher Mitarbeiter<br>
+                    <strong>Jonathan Helsen</strong>, Jugendreferent<br>
+                    <strong>Jörg Kresse</strong>, Jugendreferent
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Website-Erstellung</div>
+                <p style="margin: 0;">
+                    Diese Website wurde erstellt mit einem Internet-Gemeindebaukasten des Evangelischen Medienhauses Stuttgart. Mehr Informationen unter <a href="https://www.gemeindebaukasten.de" target="_blank" style="color: var(--primary);">www.gemeindebaukasten.de</a>.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 30px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Haftungsausschluss</div>
+                
+                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">1. Inhalt des Onlineangebotes</div>
+                <p style="margin: 0;">
+                    Unsere Inhalte sind sorgfältig recherchiert und erstellt. Dennoch können wir keinerlei Gewähr für die Aktualität, Korrektheit oder Vollständigkeit der bereitgestellten Informationen übernehmen. Haftungsansprüche gegen die oben aufgeführte Stelle, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden sind grundsätzlich ausgeschlossen, sofern seitens der Stelle kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">2. Verweise und Links</div>
+                <p style="margin: 0;">
+                    Die oben aufgeführte Stelle ist nur für die „eigenen Inhalte" dieser Internetseite nach den einschlägigen Gesetzen verantwortlich. Von diesen eigenen Inhalten sind Verweise („Links") zu anderen Internetauftritten zu unterscheiden. Durch Links halten wir „fremde Inhalte" zur Nutzung bereit. Zum Zeitpunkt der Verlinkung haben wir den fremden Inhalt der verlinkten Internetseiten daraufhin überprüft, dass durch ihn keine mögliche zivilrechtliche oder strafrechtliche Verantwortlichkeit ausgelöst wird. Wir können jedoch nicht ständig die Links auf unserer Internetseite auf Veränderungen, die eine Verantwortlichkeit neu begründen könnten, kontrollieren. Wenn Sie den Eindruck haben, dass ein Link in unserem Internetauftritt zu fremden Internetseiten mit rechtswidrigem oder strafrechtlichem Inhalt führt, geben Sie uns bitte Bescheid, damit wir diesen Link prüfen und gegebenenfalls entfernen können.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">3. Urheber- und Kennzeichenrecht</div>
+                <p style="margin: 0;">
+                    Die oben aufgeführte Stelle ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind. Das ‚Copyright' für veröffentlichte, von der Stelle selbst erstellte Objekte bleibt allein bei den Autoren der Seiten. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Stelle nicht gestattet.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">4. Rechtswirksamkeit dieses Haftungsausschlusses</div>
+                <p style="margin: 0;">
+                    Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Internetseite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile in ihrem Inhalt und ihrer Gültigkeit davon unberührt.
+                </p>
+
+                <p style="margin-top: 30px; color: var(--gray); font-size: 0.9rem;">
+                    <strong>Datum:</strong> 08.01.2026
+                </p>
+            </div>
+        </div>
+    </div>
+
     <section class="section-padding" id="umbau" style="background: #f1f5f9;">
         <div class="container">
             <div class="grid-2">
@@ -656,7 +727,7 @@
                 <div class="footer-col">
                     <h4>Legal Stuff</h4>
                     <ul style="line-height: 2;">
-                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#" @click.prevent="showImpressum = true">Impressum</a></li>
                         <li><a href="#">Datenschutz</a></li>
                     </ul>
                 </div>
@@ -740,6 +811,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
 
             // MODAL LOGIC
             const selectedEvent = ref(null);
+            const showImpressum = ref(false);
             const openEventModal = (ev) => { selectedEvent.value = ev; document.body.style.overflow = 'hidden'; };
             const closeEventModal = () => { selectedEvent.value = null; document.body.style.overflow = 'auto'; };
 
@@ -761,7 +833,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, openEventModal, closeEventModal
+                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal
             };
         }
     }).mount('#app');
