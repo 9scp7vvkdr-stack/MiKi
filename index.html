@@ -142,8 +142,24 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: var(--dark);
+            position: relative;
         }
         .navbar a:hover { color: var(--primary); }
+        .navbar a.active {
+            /* keine Farbänderung für aktiven Link */
+        }
+        .navbar a.active::after {
+            content: '';
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            bottom: -2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            opacity: 0.8;
+            transition: all 0.2s;
+        }
         .nav-logo { font-family: var(--font-head); font-weight: 900; color: var(--primary) !important; margin-right: 10px; }
 
         /* --- HERO SECTION --- */
@@ -434,9 +450,9 @@
     
     <nav class="navbar">
         <a href="#" class="nav-logo">MiKi</a>
-        <a href="#events">Events</a>
-        <a href="#umbau">Status</a>
-        <a href="#blog">Support</a>
+        <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
+        <a href="#umbau" :class="{ active: activeSection === 'umbau' }">Status</a>
+        <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
     </nav>
 
     <header class="hero">
@@ -744,6 +760,7 @@
 
     createApp({
         setup() {
+            const activeSection = ref('events');
             // EVENTS DATA
             const events = ref([
                 { 
@@ -830,10 +847,30 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
                 setTimeout(() => {
                     document.querySelectorAll('.hidden-el').forEach(el => observer.observe(el));
                 }, 100);
+
+                // --- NAVBAR ACTIVE SECTION (Vue) ---
+                const sectionOrder = [
+                    { id: 'events' },
+                    { id: 'umbau' },
+                    { id: 'blog' }
+                ];
+                function vueScrollHandler() {
+                    const scrollPos = window.scrollY + 130;
+                    let current = 'events';
+                    for (const sec of sectionOrder) {
+                        const el = document.getElementById(sec.id);
+                        if (el && el.offsetTop <= scrollPos) {
+                            current = sec.id;
+                        }
+                    }
+                    activeSection.value = current;
+                }
+                window.addEventListener('scroll', vueScrollHandler);
+                vueScrollHandler();
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal
+                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal, activeSection
             };
         }
     }).mount('#app');
