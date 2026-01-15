@@ -532,6 +532,14 @@
         </div>
     </div>
 
+    <!-- Lightbox Modal für Fotos -->
+    <div v-if="lightboxPhoto" class="modal-overlay" @click="closeLightbox" style="z-index: 2000;">
+        <div @click.stop style="position: relative; max-width: 90vw; max-height: 90vh;">
+            <button @click="closeLightbox" style="position: absolute; right: -40px; top: -40px; background: white; border: none; font-size: 2rem; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">✕</button>
+            <img :src="lightboxPhoto" :alt="'Großansicht'" style="width: 100%; height: 100%; object-fit: contain; max-height: 85vh; border-radius: var(--radius);">
+        </div>
+    </div>
+
     <div v-if="showImpressum" class="modal-overlay" @click="showImpressum = false">
         <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
             <button @click="showImpressum = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
@@ -647,12 +655,21 @@
                         <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
                         <h3 style="margin: 0;">Gebetsanliegen</h3>
                     </div>
-                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8;">
+                    <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
                         Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten füreinander ein und tragen euch im Gebet.
                     </p>
-                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center;" onclick="alert('Gebetsanliegen können hier eingereicht werden')">
-                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
-                    </button>
+                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
+                        <strong>Möchtest du für die MiKi beten?</strong><br>
+                        Dann komme in unsere <strong>Updates- und Gebetsgruppe</strong> auf WhatsApp und bete mit anderen für die MiKi!
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="https://chat.whatsapp.com/BzIN5Mw8t9LIgEcpU9xs6T" target="_blank" class="btn btn-primary" style="flex: 1; text-align: center; justify-content: center; gap: 8px;">
+                            <i class="ph ph-whatsapp-logo"></i> Zur Gebetsgruppe
+                        </a>
+                        <button class="btn" style="flex: 1; background: white; color: var(--dark); border: 2px solid var(--primary); text-align: center; justify-content: center; gap: 8px; cursor: pointer;">
+                            <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Spendenprojekte Karte -->
@@ -662,8 +679,8 @@
                         <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
                     </div>
                     
-                    <!-- Projekt -->
-                    <div>
+                    <!-- Projekt 1: Church Makeover -->
+                    <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                             <h4 style="margin: 0; font-size: 1rem;">Church Makeover</h4>
                             <span style="font-weight: 700; color: var(--primary);">€5000 / €10000</span>
@@ -674,23 +691,21 @@
                         </div>
                         <p style="margin: 8px 0 0 0; opacity: 0.6; font-size: 0.85rem;">50% finanziert</p>
                     </div>
-                </div>
 
-            </div>
-
-            <!-- News/Updates Bereich -->
-            <div style="margin-top: 80px;">
-                <h3 style="text-align: center; margin-bottom: 40px;">Neueste Updates</h3>
-                <div v-if="loadingPosts">Lade News...</div>
-                <div v-else class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                    <article v-for="(post, index) in posts" :key="index" class="blog-card hidden-el">
-                        <div class="blog-header">
-                            <span style="font-weight: 700;">Update</span>
-                            <span style="opacity: 0.8; font-size: 0.85rem;">{{ post.date }}</span>
+                    <!-- Projekt 2: Soundanlage -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <h4 style="margin: 0; font-size: 1rem;">Professionelle Soundanlage</h4>
+                            <span style="font-weight: 700; color: var(--primary);">€2000 / €3000</span>
                         </div>
-                        <div class="blog-content" v-html="post.renderedContent"></div>
-                    </article>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Für Events und Worship Nights – damit der Sound in der Michaelskirche professionell wird</p>
+                        <div style="height: 8px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                            <div style="height: 100%; width: 67%; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); border-radius: 10px;"></div>
+                        </div>
+                        <p style="margin: 8px 0 0 0; opacity: 0.6; font-size: 0.85rem;">67% finanziert</p>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -706,6 +721,36 @@
             </button>
             <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
 <br>Iban: DE51 6329 0110 0110 3650 03 <br> Verwendungszeweck: MiKi</p>
+        </div>
+    </section>
+
+    <!-- News/Updates Bereich mit Carousel -->
+    <section class="section-padding" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 187, 130, 0.05) 100%);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Neueste Updates</h2>
+            
+            <!-- Photo Carousel -->
+            <div style="max-width: 400px; margin: 0 auto 50px auto;">
+                <div style="position: relative; overflow: hidden; border-radius: var(--radius); background: rgba(0,0,0,0.3); aspect-ratio: 16 / 10; cursor: pointer;" @click="openLightbox(photos[currentPhoto])">
+                    <img v-if="photos[currentPhoto]" :src="photos[currentPhoto]" :alt="'Update ' + (currentPhoto + 1)" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease;">
+                    <div v-else style="width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">Foto wird geladen...</div>
+                    
+                    <!-- Previous Button -->
+                    <button v-if="photos.length > 1" @click.stop="previousPhoto" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    
+                    <!-- Next Button -->
+                    <button v-if="photos.length > 1" @click.stop="nextPhoto" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                    
+                    <!-- Dots Indicator -->
+                    <div v-if="photos.length > 1" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
+                        <button v-for="(photo, index) in photos" :key="index" @click.stop="currentPhoto = index" :style="{ width: '8px', height: '8px', borderRadius: '50%', border: 'none', cursor: 'pointer', background: index === currentPhoto ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.5)', transition: 'all 0.3s ease' }"></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -783,6 +828,33 @@
                 { label: "Gebets-Box", percent: 10, status: "Eine alte Telefonzelle haben wir schon :)" }
             ]);
 
+            // PHOTOS FOR CAROUSEL
+            const photos = ref([
+                'Assets/U1.png',
+                'Assets/U2.png',
+                'Assets/U3.png'
+            ]);
+            const currentPhoto = ref(0);
+            const lightboxPhoto = ref(null);
+
+            const nextPhoto = () => {
+                currentPhoto.value = (currentPhoto.value + 1) % photos.value.length;
+            };
+
+            const previousPhoto = () => {
+                currentPhoto.value = (currentPhoto.value - 1 + photos.value.length) % photos.value.length;
+            };
+
+            const openLightbox = (photo) => {
+                lightboxPhoto.value = photo;
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeLightbox = () => {
+                lightboxPhoto.value = null;
+                document.body.style.overflow = 'auto';
+            };
+
             // BLOG FETCH SIMULATION
             const posts = ref([]);
             const loadingPosts = ref(true);
@@ -833,7 +905,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal
+                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
             };
         }
     }).mount('#app');
