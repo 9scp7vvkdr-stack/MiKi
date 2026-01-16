@@ -6,18 +6,17 @@
     <meta name="description" content="MiKi Heidenheim - Kirche neu erleben. Ein Ort von Jugendlichen für Jugendliche. Events, Skatepark und Gemeinschaft.">
     <meta property="og:title" content="MiKi - Kirche neu erleben">
     <meta property="og:description" content="Komm vorbei in der Michaelskirche. Skate, Pray, Chill.">
-    <meta property="og:image" content="assets/P1.jpeg">
+    <meta property="og:image" content="Assets/P1.jpeg">
     
     <title>MiKi | Kirche neu erleben</title>
     
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="extern/vue.globals.js"></script>
+    <script src="extern/marked.min.js"></script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="extern/fonts/fonts.css">
     
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <link rel="stylesheet" href="extern/phosphor/style.css">
 
     <style>
         /* --- 1. DESIGN SYSTEM & VARS --- */
@@ -142,8 +141,24 @@
             font-weight: 600;
             font-size: 0.9rem;
             color: var(--dark);
+            position: relative;
         }
         .navbar a:hover { color: var(--primary); }
+        .navbar a.active {
+            /* keine Farbänderung für aktiven Link */
+        }
+        .navbar a.active::after {
+            content: '';
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            bottom: -2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            opacity: 0.8;
+            transition: all 0.2s;
+        }
         .nav-logo { font-family: var(--font-head); font-weight: 900; color: var(--primary) !important; margin-right: 10px; }
 
         /* --- HERO SECTION --- */
@@ -164,7 +179,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('assets/P1.jpeg');
+            background-image: url('Assets/P1.jpeg');
             background-size: cover;
             background-position: center;
             opacity: 0.6;
@@ -434,9 +449,9 @@
     
     <nav class="navbar">
         <a href="#" class="nav-logo">MiKi</a>
-        <a href="#events">Events</a>
-        <a href="#umbau">Status</a>
-        <a href="#blog">Support</a>
+        <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
+        <a href="#umbau" :class="{ active: activeSection === 'umbau' }">Status</a>
+        <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
     </nav>
 
     <header class="hero">
@@ -484,7 +499,7 @@
             </div>
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
-                    <img src="assets/P2.png" alt="Visualisierung Umbau" 
+                    <img src="Assets/P2.png" alt="Visualisierung Umbau" 
                          onerror="this.src='https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=1000&auto=format&fit=crop';"> 
                          </div>
             </div>
@@ -789,6 +804,7 @@
 
     createApp({
         setup() {
+            const activeSection = ref('events');
             // EVENTS DATA
             const events = ref([
                 { 
@@ -902,10 +918,30 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
                 setTimeout(() => {
                     document.querySelectorAll('.hidden-el').forEach(el => observer.observe(el));
                 }, 100);
+
+                // --- NAVBAR ACTIVE SECTION (Vue) ---
+                const sectionOrder = [
+                    { id: 'events' },
+                    { id: 'umbau' },
+                    { id: 'blog' }
+                ];
+                function vueScrollHandler() {
+                    const scrollPos = window.scrollY + 130;
+                    let current = 'events';
+                    for (const sec of sectionOrder) {
+                        const el = document.getElementById(sec.id);
+                        if (el && el.offsetTop <= scrollPos) {
+                            current = sec.id;
+                        }
+                    }
+                    activeSection.value = current;
+                }
+                window.addEventListener('scroll', vueScrollHandler);
+                vueScrollHandler();
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
+                events, progress, posts, loadingPosts, selectedEvent, showImpressum, openEventModal, closeEventModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
             };
         }
     }).mount('#app');
