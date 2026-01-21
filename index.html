@@ -450,6 +450,7 @@
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
         <a href="#umbau" :class="{ active: activeSection === 'umbau' }">Status</a>
+        <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
         <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
     </nav>
 
@@ -471,39 +472,6 @@
             </p>
         </div>
     </header>
-
-    <section class="section-padding" id="vision">
-        <div class="container grid-2">
-            <div class="vision-text hidden-el">
-                
-                <h2>Unsere Vision</h2>
-                <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Kirche mal anders.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
-
-                </p>
-                <ul class="vision-list">
-                    <li>
-                        <i class="ph ph-paint-brush-broad"></i>
-                        <div><strong>DIY:</strong> Du kannst selbst anpacken und mitgestalten.</div>
-                    </li>
-                    <li>
-                        <i class="ph ph-armchair"></i>
-                        <div><strong>Wie daheim:</strong> Couches statt Holzbänke. Action statt Stille.</div>
-                    </li>
-                    <li>
-                        <i class="ph ph-users-three"></i>
-                        <div><strong>Gemeinschaft:</strong> Ein lebendiger Spot für Glaube, Sport und Freunde.</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="vision-img-wrapper hidden-el">
-                <div class="vision-image-container">
-                    <img src="Assets/P2.png" alt="Visualisierung Umbau" 
-                         onerror="this.src='https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=1000&auto=format&fit=crop';"> 
-                         </div>
-            </div>
-        </div>
-    </section>
 
     <section class="section-padding" id="events">
         <div class="container">
@@ -649,7 +617,7 @@
         </div>
     </div>
 
-    <section class="section-padding" id="umbau" style="background: #f1f5f9;">
+    <section class="section-padding" id="umbau" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
         <div class="container">
             <div class="grid-2">
                 <div class="hidden-el">
@@ -676,6 +644,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News/Updates Bereich -->
+    <section class="section-padding" style="background: #f8fafc;">
+        <div class="container">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Neueste Updates</h2>
+                <p style="color: #475569; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.8;">
+                    Bleib immer auf dem Laufenden! Folge uns auf Instagram, um die neuesten Fotos, Updates und Behind-the-Scenes aus der MiKi zu sehen. Dort teilen wir regelmäßig, wie sich die Michaelskirche verwandelt und welche spannenden Events anstehen.
+                </p>
+                <a href="https://www.instagram.com/miki_hdh/" target="_blank" class="btn btn-primary" style="gap: 10px; font-size: 1.1rem;">
+                    <i class="ph ph-instagram-logo" style="font-size: 1.5rem;"></i> Folg uns auf Instagram @miki_hdh
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="vision" style="background: #ffffff;">
+        <div class="container grid-2">
+            <div class="vision-text hidden-el">
+                
+                <h2>Unsere Vision</h2>
+                <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
+                    <strong>Kirche mal anders.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
+
+                </p>
+                <ul class="vision-list">
+                    <li>
+                        <i class="ph ph-paint-brush-broad"></i>
+                        <div><strong>DIY:</strong> Du kannst selbst anpacken und mitgestalten.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-armchair"></i>
+                        <div><strong>Wie daheim:</strong> Couches statt Holzbänke. Action statt Stille.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-users-three"></i>
+                        <div><strong>Gemeinschaft:</strong> Ein lebendiger Spot für Glaube, Sport und Freunde.</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="vision-img-wrapper hidden-el">
+                <div class="vision-image-container">
+                    <img src="Assets/P2.png" alt="Visualisierung Umbau" 
+                         onerror="this.src='https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=1000&auto=format&fit=crop';"> 
+                         </div>
             </div>
         </div>
     </section>
@@ -759,53 +775,6 @@
             </button>
             <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
 <br>Iban: DE51 6329 0110 0110 3650 03 <br> Verwendungszeweck: MiKi</p>
-        </div>
-    </section>
-
-    <!-- News/Updates Bereich mit Carousel -->
-    <section class="section-padding" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(16, 187, 130, 0.05) 100%);">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Neueste Updates</h2>
-            
-            <!-- Grid: Carousel + Text -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 50px;">
-                <!-- Photo Carousel -->
-                <div>
-                    <div style="position: relative; overflow: hidden; border-radius: var(--radius); background: rgba(0,0,0,0.3); aspect-ratio: 16 / 10; cursor: pointer;" @click="openLightbox(photos[currentPhoto])">
-                        <img v-if="photos[currentPhoto]" :src="photos[currentPhoto]" :alt="'Update ' + (currentPhoto + 1)" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease;">
-                        <div v-else style="width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5);">Foto wird geladen...</div>
-                        
-                        <!-- Previous Button -->
-                        <button v-if="photos.length > 1" @click.stop="previousPhoto" style="position: absolute; left: 8px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">
-                            <i class="ph ph-caret-left"></i>
-                        </button>
-                        
-                        <!-- Next Button -->
-                        <button v-if="photos.length > 1" @click.stop="nextPhoto" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.6)'">
-                            <i class="ph ph-caret-right"></i>
-                        </button>
-                        
-                        <!-- Dots Indicator -->
-                        <div v-if="photos.length > 1" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px;">
-                            <button v-for="(photo, index) in photos" :key="index" @click.stop="currentPhoto = index" :style="{ width: '8px', height: '8px', borderRadius: '50%', border: 'none', cursor: 'pointer', background: index === currentPhoto ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.5)', transition: 'all 0.3s ease' }"></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Text Content -->
-                <div style="line-height: 1.8;">
-                    <h3 style="margin-top: 0; margin-bottom: 20px; font-size: 1.8rem;">Was tut sich gerade?</h3>
-                    <p style="color: #475569; margin-bottom: 15px;">
-                        Hier siehst du die neuesten Fotos und Updates aus der MiKi. Schau regelmäßig vorbei, um zu sehen, wie sich die Michaelskirche verwandelt und welche spannenden Events anstehen.
-                    </p>
-                    <p style="color: #475569; margin-bottom: 25px;">
-                        Folge uns auch auf Instagram, um nichts zu verpassen und Teil der Community zu werden!
-                    </p>
-                    <a href="https://www.instagram.com/miki_hdh/" target="_blank" class="btn btn-primary">
-                        <i class="ph ph-instagram-logo"></i> Folg uns auf Instagram
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -964,6 +933,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
                 const sectionOrder = [
                     { id: 'events' },
                     { id: 'umbau' },
+                    { id: 'vision' },
                     { id: 'blog' }
                 ];
                 function vueScrollHandler() {
