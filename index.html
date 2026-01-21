@@ -539,7 +539,7 @@
                 <a href="https://wa.me/+491743086657?text=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
                     <i class="ph ph-whatsapp-logo"></i> Per WhatsApp teilen
                 </a>
-                <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn" style="width: 100%; justify-content: center; gap: 8px; background: white; color: var(--dark); border: 2px solid var(--primary); font-size: 1rem;">
+                <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
                     <i class="ph ph-envelope"></i> Per E-Mail teilen
                 </a>
             </div>
@@ -548,7 +548,7 @@
 
     <div v-if="showImpressum" class="modal-overlay" @click="showImpressum = false">
         <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
-            <button @click="showImpressum = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            <button @click="showImpressum = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
             
             <div class="modal-header">
                 <h2 style="margin: 0; font-size: 1.8rem;">Impressum</h2>
@@ -583,10 +583,6 @@
                     <strong>Jörg Kresse</strong>, Jugendreferent
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Website-Erstellung</div>
-                <p style="margin: 0;">
-                    Diese Website wurde erstellt mit einem Internet-Gemeindebaukasten des Evangelischen Medienhauses Stuttgart. Mehr Informationen unter <a href="https://www.gemeindebaukasten.de" target="_blank" style="color: var(--primary);">www.gemeindebaukasten.de</a>.
-                </p>
 
                 <div style="color: var(--dark); margin-top: 30px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Haftungsausschluss</div>
                 
@@ -714,16 +710,11 @@
                     </p>
                     <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
                         <strong>Möchtest du für die MiKi beten?</strong><br>
-                        Dann komme in unsere <strong>Updates- und Gebetsgruppe</strong> auf WhatsApp und bete mit anderen für die MiKi!
+                        Danke für dein <strong>Gebet</strong> Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
                     </p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="https://chat.whatsapp.com/BzIN5Mw8t9LIgEcpU9xs6T" target="_blank" class="btn btn-primary" style="flex: 1; text-align: center; justify-content: center; gap: 8px;">
-                            <i class="ph ph-whatsapp-logo"></i> Zur Gebetsgruppe
-                        </a>
-                        <button class="btn" style="flex: 1; background: white; color: var(--dark); border: 2px solid var(--primary); text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
-                            <i class="ph ph-pencil-simple"></i> Anliegen teilen
-                        </button>
-                    </div>
+                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
+                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                    </button>
                 </div>
 
                 <!-- Spendenprojekte Karte -->
