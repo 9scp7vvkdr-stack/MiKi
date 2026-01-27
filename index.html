@@ -13,6 +13,8 @@
     <script src="extern/vue.globals.js"></script>
     <script src="extern/marked.min.js"></script>
     
+    <link rel="preload" href="Assets/P1.jpeg" as="image">
+    <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="extern/fonts/fonts.css">
     
     
@@ -160,7 +162,7 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            min-height: 95vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -647,7 +649,7 @@
     <!-- News/Updates Bereich -->
     <section class="section-padding" style="background: #f8fafc;">
         <div class="container">
-            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <div class="hidden-el" style="text-align: center; max-width: 700px; margin: 0 auto;">
                 <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Neueste Updates</h2>
                 <p style="color: #475569; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.8;">
                     Bleib immer auf dem Laufenden! Folge uns auf Instagram, um die neuesten Fotos, Updates und Behind-the-Scenes aus der MiKi zu sehen. Dort teilen wir regelmäßig, wie sich die Michaelskirche verwandelt und welche spannenden Events anstehen.
@@ -757,15 +759,17 @@
 
     <section class="section-padding donate-section" id="spenden">
         <div class="container">
-            <h2 style="font-size: 2.5rem;">Unterstütze die MiKi</h2>
-            <p style="max-width: 600px; margin: 0 auto 40px auto;">
-                Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Pizza.
-            </p>
-            <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
-                <i class="ph ph-paypal-logo"></i> Per PayPal spenden
-            </button>
-            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
+            <div class="hidden-el">
+                <h2 style="font-size: 2.5rem;">Unterstütze die MiKi</h2>
+                <p style="max-width: 600px; margin: 0 auto 40px auto;">
+                    Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Pizza.
+                </p>
+                <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
+                    <i class="ph ph-paypal-logo"></i> Per PayPal spenden
+                </button>
+                <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
 <br>Iban: DE51 6329 0110 0110 3650 03 <br> Verwendungszeweck: MiKi</p>
+            </div>
         </div>
     </section>
 
