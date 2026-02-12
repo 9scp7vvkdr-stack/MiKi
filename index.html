@@ -6,14 +6,15 @@
     <meta name="description" content="MiKi Heidenheim - Kirche neu erleben. Ein Ort von Jugendlichen für Jugendliche. Events, Skatepark und Gemeinschaft.">
     <meta property="og:title" content="MiKi - Kirche neu erleben">
     <meta property="og:description" content="Komm vorbei in der Michaelskirche. Skate, Pray, Chill.">
-    <meta property="og:image" content="Assets/P1.jpeg">
+    <meta property="og:image" content="Assets/P3.jpg">
     
     <title>MiKi | Kirche neu erleben</title>
     
     <script src="extern/vue.globals.js"></script>
     <script src="extern/marked.min.js"></script>
     
-    <link rel="preload" href="Assets/P1.jpeg" as="image">
+    <link rel="preload" href="Assets/P3.jpg" as="image">
+    <link rel="preload" href="Assets/P4.jpg" as="image">
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="extern/fonts/fonts.css">
     
@@ -178,12 +179,12 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-image: url('Assets/P1.jpeg');
             background-size: cover;
             background-position: center;
             opacity: 0.6;
             filter: grayscale(10%);
             z-index: 1;
+            transition: background-image 1s ease-in-out;
         }
 
         /* Animated Gradient Blob */
@@ -457,7 +458,7 @@
     </nav>
 
     <header class="hero">
-        <div class="hero-bg"></div>
+        <div class="hero-bg" id="heroBackground"></div>
         <div class="container hero-content">
             <h1><span class="text-gradient">MiKi</h1>
             <p class="subline">Ein Ort von Jugendlichen für Jugendliche.</p>
@@ -543,6 +544,118 @@
                 <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
                     <i class="ph ph-envelope"></i> Per E-Mail teilen
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutzerklärung Modal -->
+    <div v-if="showDatenschutz" class="modal-overlay" @click="showDatenschutz = false">
+        <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+            <button @click="showDatenschutz = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
+            
+            <div class="modal-header">
+                <h2 style="margin: 0; font-size: 1.8rem;">Datenschutzerklärung</h2>
+            </div>
+
+            <div style="line-height: 1.8; color: #334155; font-size: 0.95rem;">
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">1. Allgemeine Hinweise</div>
+                <p style="margin: 0 0 15px 0;">
+                    Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen.<br>
+                    Die Verarbeitung personenbezogener Daten erfolgt nach den Bestimmungen des Datenschutzgesetzes der Evangelischen Kirche in Deutschland (DSG-EKD) sowie den einschlägigen kirchlichen Datenschutzvorschriften.<br>
+                    Diese Website dient ausschließlich der Information über das Evangelische Jugendwerk Bezirk Heidenheim.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">2. Verantwortliche Stelle</div>
+                <p style="margin: 0 0 15px 0;">
+                    Evangelisches Jugendwerk Bezirk Heidenheim<br>
+                    Bahnhofstraße 33, 89518 Heidenheim<br>
+                    07321 / 4881 - 371<br>
+                    bezirk(at)ejhdh.de<br>
+                    Vertreten durch: Stefan Hörz
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">3. Hosting über GitHub Pages</div>
+                <p style="margin: 0 0 15px 0;">
+                    Diese Website wird über GitHub Pages, einen Dienst der GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA, bereitgestellt.<br><br>
+                    Beim Aufruf der Website werden durch GitHub automatisch technische Zugriffsdaten verarbeitet, insbesondere:
+                </p>
+                <ul style="margin: 0 0 15px 0; padding-left: 20px;">
+                    <li>IP-Adresse</li>
+                    <li>Datum und Uhrzeit des Zugriffs</li>
+                    <li>aufgerufene Seite</li>
+                    <li>Browsertyp und Betriebssystem</li>
+                </ul>
+                <p style="margin: 0 0 15px 0;">
+                    Diese Daten sind technisch erforderlich, um die Website bereitzustellen und die Sicherheit der IT-Systeme zu gewährleisten.<br><br>
+                    Eine Datenübermittlung in ein Drittland (USA) kann dabei nicht ausgeschlossen werden. GitHub verwendet nach eigenen Angaben geeignete Garantien zur Sicherstellung eines angemessenen Datenschutzniveaus (z. B. Standardvertragsklauseln).<br><br>
+                    Rechtsgrundlage ist § 6 Nr. 4 DSG-EKD (berechtigtes Interesse an einem sicheren und stabilen Betrieb der Website).<br><br>
+                    Weitere Informationen finden Sie in der Datenschutzerklärung von GitHub: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" target="_blank" style="color: var(--primary); text-decoration: underline;">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">4. Protokolldaten (Server-Logfiles)</div>
+                <p style="margin: 0 0 15px 0;">
+                    Beim Besuch dieser Website werden automatisch Informationen erfasst, die Ihr Browser an den Server übermittelt. Diese Daten werden ausschließlich zur technischen Überwachung und Sicherstellung des Betriebs verwendet. Eine Zusammenführung mit anderen Daten erfolgt nicht.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">5. Cookies und Tracking</div>
+                <p style="margin: 0 0 15px 0;">
+                    Diese Website verwendet keine Cookies, keine Analyse-Tools und keine Tracking-Technologien.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">6. Externe Links (Instagram und WhatsApp)</div>
+                <p style="margin: 0 0 15px 0;">
+                    Auf unserer Website befinden sich Links zu externen Diensten wie:
+                </p>
+                <ul style="margin: 0 0 15px 0; padding-left: 20px;">
+                    <li>Instagram (Meta Platforms Ireland Ltd.)</li>
+                    <li>WhatsApp (WhatsApp Ireland Limited)</li>
+                </ul>
+                <p style="margin: 0 0 15px 0;">
+                    Beim Anklicken dieser Links verlassen Sie unsere Website. Dabei können personenbezogene Daten (z. B. Ihre IP-Adresse) an den jeweiligen Anbieter übertragen werden.<br><br>
+                    Wir haben keinen Einfluss auf Art und Umfang der Datenverarbeitung durch diese Anbieter. Es gelten die Datenschutzbestimmungen der jeweiligen Dienste.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Keine Einbindung externer Inhalte</div>
+                <p style="margin: 0 0 15px 0;">
+                    Auf dieser Website werden keine externen Inhalte wie Social-Media-Feeds, Karten, externe Schriftarten oder Videos eingebunden.<br>
+                    Alle verwendeten Inhalte werden lokal bereitgestellt.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">8. Ihre Rechte nach dem DSG-EKD</div>
+                <p style="margin: 0 0 15px 0;">
+                    Sie haben nach dem Datenschutzgesetz der EKD insbesondere das Recht auf:
+                </p>
+                <ul style="margin: 0 0 15px 0; padding-left: 20px;">
+                    <li>Auskunft (§ 19 DSG-EKD)</li>
+                    <li>Berichtigung (§ 20 DSG-EKD)</li>
+                    <li>Löschung (§ 21 DSG-EKD)</li>
+                    <li>Einschränkung der Verarbeitung (§ 22 DSG-EKD)</li>
+                    <li>Widerspruch gegen die Verarbeitung (§ 25 DSG-EKD)</li>
+                </ul>
+                <p style="margin: 0 0 15px 0;">
+                    Zur Wahrnehmung Ihrer Rechte können Sie sich jederzeit an die verantwortliche Stelle wenden.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">9. Kirchliche Datenschutzaufsicht</div>
+                <p style="margin: 0 0 15px 0;">
+                    Zuständige Aufsichtsbehörde ist:
+                </p>
+                <p style="margin: 0 0 15px 0;">
+                    Der Beauftragte für den Datenschutz der Evangelischen Kirche in Deutschland<br>
+                    Außenstelle Ulm<br>
+                    Hafenbad 22<br>
+                    89073 Ulm<br>
+                    E-Mail: sued(at)datenschutz.ekd.de<br>
+                    Web: <a href="https://datenschutz.ekd.de" target="_blank" style="color: var(--primary); text-decoration: underline;">https://datenschutz.ekd.de</a>
+                </p>
+                <p style="margin: 0 0 15px 0;">
+                    Sie haben das Recht, sich bei der zuständigen kirchlichen Datenschutzaufsicht zu beschweren.
+                </p>
+
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">10. Änderungen dieser Datenschutzerklärung</div>
+                <p style="margin: 0;">
+                    Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie an geänderte rechtliche Rahmenbedingungen oder technische Änderungen anzupassen.
+                </p>
             </div>
         </div>
     </div>
@@ -791,7 +904,7 @@
                     <h4>Legal Stuff</h4>
                     <ul style="line-height: 2;">
                         <li><a href="#" @click.prevent="showImpressum = true">Impressum</a></li>
-                        <li><a href="https://www.ejhdh.de/meta/datenschutz" target="_blank">Datenschutz</a></li>
+                        <li><a href="#" @click.prevent="showDatenschutz = true">Datenschutz</a></li>
                     </ul>
                 </div>
             </div>
@@ -808,6 +921,9 @@
     createApp({
         setup() {
             const activeSection = ref('events');
+            const showImpressum = ref(false);
+            const showDatenschutz = ref(false);
+            const showPrayerModal = ref(false);
             // EVENTS DATA
             const events = ref([
                 { 
@@ -941,10 +1057,23 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
                 }
                 window.addEventListener('scroll', vueScrollHandler);
                 vueScrollHandler();
+
+                // HERO IMAGE ALTERNATION
+                const heroImages = ['Assets/P3.jpg', 'Assets/P4.jpg'];
+                let currentHeroIndex = 0;
+                const heroBg = document.getElementById('heroBackground');
+                
+                const switchHeroImage = () => {
+                    currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+                    heroBg.style.backgroundImage = `url('${heroImages[currentHeroIndex]}')`;
+                };
+                
+                heroBg.style.backgroundImage = `url('${heroImages[0]}')`;
+                setInterval(switchHeroImage, 5000); // Wechsel alle 5 Sekunden
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, showImpressum, showPrayerModal, openEventModal, closeEventModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
+                events, progress, posts, loadingPosts, selectedEvent, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox, heroImages, currentHeroImage
             };
         }
     }).mount('#app');
