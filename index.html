@@ -4,11 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MiKi Heidenheim - Kirche neu erleben. Ein Ort von Jugendlichen für Jugendliche. Events, Skatepark und Gemeinschaft.">
-    <meta property="og:title" content="MiKi - Kirche neu erleben">
-    <meta property="og:description" content="Komm vorbei in der Michaelskirche. Skate, Pray, Chill.">
+    <meta name="keywords" content="Kirche, Jugendkirche, Heidenheim, Skatepark, Events, Gemeinschaft, Glaube, MiKi">
+    <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
+    <meta name="theme-color" content="#10BB82">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Open Graph Tags für Social Media Previews -->
+    <meta property="og:title" content="MiKi Heidenheim - Kirche neu erleben">
+    <meta property="og:description" content="Ein Ort von Jugendlichen für Jugendliche. Skate, Pray, Chill. Komm vorbei in der Michaelskirche!">
     <meta property="og:image" content="Assets/P1.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MiKi Heidenheim - Kirche neu erleben">
+    <meta name="twitter:description" content="Ein Ort von Jugendlichen für Jugendliche. Skate, Pray, Chill.">
+    <meta name="twitter:image" content="Assets/P1.jpg">
     
     <title>MiKi | Kirche neu erleben</title>
+    
+    <link rel="canonical" href="https://miki-heidenheim.de/">
+    <link rel="apple-touch-icon" href="Assets/P1.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- JSON-LD Structured Data für Google Rich Results -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MiKi Heidenheim",
+        "description": "Jugendkirche an der Michaelskirche - Ein Ort von Jugendlichen für Jugendliche",
+        "url": "https://miki-heidenheim.de/",
+        "logo": "Assets/P1.jpg",
+        "image": "Assets/P1.jpg",
+        "sameAs": [
+            "https://www.instagram.com/miki_hdh/",
+            "https://www.ejhdh.de"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Michaelskirche, Bahnhofstraße 33",
+            "addressLocality": "Heidenheim an der Brenz",
+            "postalCode": "89518",
+            "addressCountry": "DE"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+49-7321-4881-371",
+            "contactType": "Customer Support"
+        },
+        "founder": {
+            "@type": "Organization",
+            "name": "Evangelisches Jugendwerk Heidenheim"
+        }
+    }
+    </script>
     
     <script src="extern/vue.globals.js"></script>
     <script src="extern/marked.min.js"></script>
@@ -933,7 +988,7 @@
                 </div>
             </div>
             <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.5;">
-                &copy; {{ new Date().getFullYear() }} MiKi Jugendkirche. Built with Vue.
+                &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
     </footer>
@@ -1117,6 +1172,9 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             };
         }
     }).mount('#app');
+
+    // Set current year in footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
 
     // Hero Image Carousel - wechselt zwischen P1.jpg und P4.jpg alle 4.5 Sekunden
     (function() {
