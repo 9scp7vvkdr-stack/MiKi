@@ -778,13 +778,13 @@
                 
                 <div class="progress-container">
                     <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`">
-                        <div class="progress-circle">{{ item.percent }}%</div>
+                        <div class="progress-circle">{{ item.animatedPercent }}%</div>
                         <div style="flex: 1;">
                             <div style="display: flex; justify-content: space-between; font-weight: 700;">
                                 <span>{{ item.label }}</span>
                             </div>
                             <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" :style="{ width: item.percent + '%' }"></div>
+                                <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
                             </div>
                             <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
                         </div>
@@ -976,10 +976,10 @@
 
             // PROGRESS DATA
             const progress = ref([
-                { label: "BarBauProjekt", percent: 100, status: "Die Bar ist fertig" },
-                { label: "Chillout Area", percent: 55, status: "Couchtische und Deko steht noch an" },
-                { label: "Skaterampe", percent: 10, status: "Noch in Planung." },
-                { label: "Gebets-Box", percent: 50, status: "Der innenaufbau fehlt noch" }
+                { label: "BarBauProjekt", percent: 100, status: "Die Bar ist fertig", animatedPercent: 0 },
+                { label: "Chillout Area", percent: 55, status: "Couchtische und Deko steht noch an", animatedPercent: 0 },
+                { label: "Skaterampe", percent: 10, status: "Noch in Planung.", animatedPercent: 0 },
+                { label: "Gebets-Box", percent: 50, status: "Der innenaufbau fehlt noch", animatedPercent: 0 }
             ]);
 
             // PHOTOS FOR CAROUSEL
@@ -1079,6 +1079,37 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
                 }
                 window.addEventListener('scroll', vueScrollHandler);
                 vueScrollHandler();
+
+                // --- PROGRESS BAR ANIMATION ON SCROLL ---
+                const progressObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(document.querySelectorAll('.progress-item')).indexOf(entry.target);
+                            if (index !== -1 && progress.value[index]) {
+                                const target = progress.value[index].percent;
+                                const animateBar = () => {
+                                    let current = 0;
+                                    const step = target / 30; // 30 frames für Animationen
+                                    const interval = setInterval(() => {
+                                        current += step;
+                                        if (current >= target) {
+                                            progress.value[index].animatedPercent = target;
+                                            clearInterval(interval);
+                                        } else {
+                                            progress.value[index].animatedPercent = Math.round(current);
+                                        }
+                                    }, 20);
+                                };
+                                animateBar();
+                                progressObserver.unobserve(entry.target);
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                setTimeout(() => {
+                    document.querySelectorAll('.progress-item').forEach(el => progressObserver.observe(el));
+                }, 100);
             });
 
             return {
