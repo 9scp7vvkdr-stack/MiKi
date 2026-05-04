@@ -432,6 +432,21 @@
             width: 0;
             transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
+        .progress-item {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .progress-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(16, 187, 130, 0.18);
+        }
+        .progress-photo-modal img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
 
         /* --- BLOG --- */
         .blog-card {
@@ -601,6 +616,32 @@
         <div @click.stop style="position: relative; max-width: 90vw; max-height: 90vh;">
             <button @click="closeLightbox" style="position: absolute; right: -40px; top: -40px; background: white; border: none; font-size: 2rem; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">✕</button>
             <img :src="lightboxPhoto" :alt="'Großansicht'" style="width: 100%; height: 100%; object-fit: contain; max-height: 85vh; border-radius: var(--radius);">
+        </div>
+    </div>
+
+    <!-- Baufortschritt Modal -->
+    <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
+        <div class="modal-content progress-photo-modal" @click.stop style="max-width: 680px; padding: 32px;">
+            <button @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+
+            <div class="modal-header">
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
+                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedProgress.label }}</h2>
+            </div>
+
+            <!-- Bild wird erst geladen, wenn das Modal geöffnet wird -->
+            <img :src="selectedProgress.photo" :alt="'Foto: ' + selectedProgress.label">
+
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                <div style="background: rgba(16,187,130,0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary); font-size: 1rem;">
+                    {{ selectedProgress.percent }}% fertig
+                </div>
+                <span style="color: var(--gray); font-size: 0.9rem;">{{ selectedProgress.status }}</span>
+            </div>
+
+            <p style="line-height: 1.8; color: #334155;">{{ selectedProgress.detailedDesc }}</p>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 24px; justify-content: center;" @click="closeProgressModal">Alles klar!</button>
         </div>
     </div>
 
@@ -832,11 +873,12 @@
                 </div>
                 
                 <div class="progress-container">
-                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`">
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" @click="openProgressModal(item)">
                         <div class="progress-circle">{{ item.animatedPercent }}%</div>
                         <div style="flex: 1;">
-                            <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
                                 <span>{{ item.label }}</span>
+                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
                             </div>
                             <div class="progress-bar-bg">
                                 <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
@@ -1031,10 +1073,38 @@
 
             // PROGRESS DATA
             const progress = ref([
-                { label: "BarBauProjekt", percent: 100, status: "Die Bar ist fertig", animatedPercent: 0 },
-                { label: "Chillout Area", percent: 55, status: "Couchtische und Deko steht noch an", animatedPercent: 0 },
-                { label: "Skaterampe", percent: 10, status: "Noch in Planung.", animatedPercent: 0 },
-                { label: "Gebets-Box", percent: 50, status: "Der innenaufbau fehlt noch", animatedPercent: 0 }
+                {
+                    label: "BarBauProjekt",
+                    percent: 100,
+                    status: "Die Bar ist fertig",
+                    animatedPercent: 0,
+                    photo: 'Assets/W1.jpeg',
+                    detailedDesc: "Die Bar ist unser erstes abgeschlossenes Großprojekt – und wir sind so stolz darauf! In wochenlanger Eigenregie haben Jugendliche aus Holz und Beton eine vollständige Bar gezimmert. Hier können sich alle mit Getränken versorgen und in lockerer Atmosphäre zusammenkommen. Ein echtes Herzstück der MiKi – zu 100% von Jugendlichen für Jugendliche gebaut. Du willst auch mal anpacken? Komm dienstags ab 17 Uhr vorbei!"
+                },
+                {
+                    label: "Chillout Area",
+                    percent: 55,
+                    status: "Couchtische und Deko steht noch an",
+                    animatedPercent: 0,
+                    photo: 'Assets/W2.jpeg',
+                    detailedDesc: "Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!"
+                },
+                {
+                    label: "Skaterampe",
+                    percent: 10,
+                    status: "Noch in Planung.",
+                    animatedPercent: 0,
+                    photo: 'Assets/W3.jpg',
+                    detailedDesc: "Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!"
+                },
+                {
+                    label: "Gebets-Box",
+                    percent: 50,
+                    status: "Der Innenaufbau fehlt noch",
+                    animatedPercent: 0,
+                    photo: 'Assets/W4.jpeg',
+                    detailedDesc: "Die Gebets-Telefonzelle ist eine ganz besondere Ecke in der MiKi. Wir bauen eine alte Telefonzelle zu einem privaten Gebetsraum um – ein stiller Ort inmitten des Trubels, an dem man ungestört mit Gott sprechen kann. Die äußere Hülle steht bereits, aber der Innenausbau fehlt noch: Beleuchtung, Kissen und Gebetskarten warten auf ihre Umsetzung. Wenn du dieses Projekt unterstützen möchtest, freuen wir uns sehr über eine Spende!"
+                }
             ]);
 
             // PHOTOS FOR CAROUSEL
@@ -1092,11 +1162,14 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
 
             // MODAL LOGIC
             const selectedEvent = ref(null);
+            const selectedProgress = ref(null);
             const showImpressum = ref(false);
             const showDatenschutz = ref(false);
             const showPrayerModal = ref(false);
             const openEventModal = (ev) => { selectedEvent.value = ev; document.body.style.overflow = 'hidden'; };
             const closeEventModal = () => { selectedEvent.value = null; document.body.style.overflow = 'auto'; };
+            const openProgressModal = (item) => { selectedProgress.value = item; document.body.style.overflow = 'hidden'; };
+            const closeProgressModal = () => { selectedProgress.value = null; document.body.style.overflow = 'auto'; };
 
             // ANIMATION OBSERVER
             onMounted(() => {
@@ -1168,7 +1241,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
+                events, progress, posts, loadingPosts, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
             };
         }
     }).mount('#app');
