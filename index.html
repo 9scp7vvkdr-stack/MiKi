@@ -247,12 +247,7 @@
             transition: opacity 1s ease-in-out;
         }
         
-        .hero-bg-image:first-child {
-            background-image: url('Assets/P1.jpg');
-        }
-        
-        .hero-bg-image:last-child {
-            background-image: url('Assets/P4.jpg');
+        .hero-bg-image:not(.active) {
             opacity: 0;
         }
         
@@ -551,8 +546,9 @@
 
     <header class="hero">
         <div class="hero-bg">
-            <div class="hero-bg-image active"></div>
-            <div class="hero-bg-image"></div>
+            <div class="hero-bg-image active" style="background-image: url('Assets/P1.jpg');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/P4.jpg');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/W2.jpeg');"></div>
         </div>
         <div class="container hero-content">
             <h1><span class="text-gradient">MiKi</h1>
@@ -1249,7 +1245,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Hero Image Carousel - wechselt zwischen P1.jpg und P4.jpg alle 4.5 Sekunden
+    // Hero Image Carousel - wechselt zwischen P1.jpg, P4.jpg und W2.jpeg alle 4.5 Sekunden
     (function() {
         const images = document.querySelectorAll('.hero-bg-image');
         let currentIndex = 0;
