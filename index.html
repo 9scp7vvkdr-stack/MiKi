@@ -68,9 +68,8 @@
     <script src="extern/vue.globals.js"></script>
     <script src="extern/marked.min.js"></script>
     
-    <link rel="preload" href="Assets/P1.jpg" as="image">
-    <link rel="preload" href="Assets/P4.jpg" as="image">
-    <link rel="preload" href="Assets/W2.jpeg" as="image">
+    <link rel="preload" href="Assets/T5.webp" as="image">
+    <link rel="preload" href="Assets/T1.webp" as="image">
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="extern/fonts/fonts.css">
     
@@ -615,9 +614,11 @@
 
     <header class="hero">
         <div class="hero-bg">
-            <div class="hero-bg-image active" style="background-image: url('Assets/P1.jpg');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/P4.jpg');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/W2.jpeg');"></div>
+            <div class="hero-bg-image active" style="background-image: url('Assets/T5.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T1.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T2.jpg');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T3.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T4.webp');"></div>
         </div>
         <div class="container hero-content">
             <h1><span class="text-gradient">MiKi</h1>
@@ -997,7 +998,7 @@
             </div>
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
-                    <img src="Assets/P2.jpeg" alt="Visualisierung Umbau" 
+                    <img src="Assets/P2.webp" alt="Visualisierung Umbau" 
                          onerror="this.src='https://images.unsplash.com/photo-1524601500432-1e1a4c71d692?q=80&w=1000&auto=format&fit=crop';"> 
                          </div>
             </div>
@@ -1314,7 +1315,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Hero Image Carousel - wechselt zwischen P1.jpg, P4.jpg und W2.jpeg alle 4.5 Sekunden
+    // Hero Image Carousel - T5 → T1 → T2 → T3 → T4 → … alle 4.5 Sekunden
     (function() {
         const images = document.querySelectorAll('.hero-bg-image');
         let currentIndex = 0;
