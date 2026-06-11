@@ -249,13 +249,9 @@
         .hero-bg-image:not(.active) {
             opacity: 0;
         }
-        
+
         .hero-bg-image.active {
             opacity: 0.6;
-        }
-        
-        .hero-bg-image.inactive {
-            opacity: 0;
         }
 
         /* Animated Gradient Blob */
@@ -304,12 +300,6 @@
         }
 
         /* --- VISION --- */
-        .vision-card {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
         .vision-list li {
             margin-bottom: 15px;
             display: flex;
@@ -405,6 +395,8 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .progress-circle {
             width: 60px;
@@ -433,10 +425,6 @@
             width: 0;
             transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
-        .progress-item {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
         .progress-item:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 25px rgba(16, 187, 130, 0.18);
@@ -448,33 +436,6 @@
             border-radius: 16px;
             margin-bottom: 24px;
         }
-
-        /* --- BLOG --- */
-        .blog-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 0;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: 0.3s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        .blog-header {
-            background: var(--dark);
-            color: white;
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .blog-content { padding: 30px; flex-grow: 1; }
-        
-        /* Markdown Styling inside Blog */
-        .blog-content h3 { margin-bottom: 10px; font-size: 1.3rem; }
-        .blog-content p { color: #475569; font-size: 0.95rem; }
 
         /* --- DONATE --- */
         .donate-section {
