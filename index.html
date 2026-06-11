@@ -65,7 +65,7 @@
     }
     </script>
     
-    <script src="extern/vue.globals.js"></script>
+    <script defer src="extern/vue.globals.js"></script>
 
     <link rel="preload" href="Assets/T5.webp" as="image">
     <link rel="preload" href="Assets/T1.webp" as="image">
@@ -1094,6 +1094,8 @@
 </div>
 
 <script>
+    // defer + DOMContentLoaded: laeuft erst, nachdem das deferte Vue geladen ist
+    document.addEventListener('DOMContentLoaded', function () {
     const { createApp, ref, onMounted } = Vue;
 
     createApp({
@@ -1268,6 +1270,7 @@
         // Starte Wechsel nach 4.5 Sekunden
         setInterval(switchImage, 4500);
     })();
+    });
 </script>
 </body>
 </html>
