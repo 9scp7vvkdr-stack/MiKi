@@ -66,8 +66,7 @@
     </script>
     
     <script src="extern/vue.globals.js"></script>
-    <script src="extern/marked.min.js"></script>
-    
+
     <link rel="preload" href="Assets/T5.webp" as="image">
     <link rel="preload" href="Assets/T1.webp" as="image">
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
@@ -677,14 +676,6 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal für Fotos -->
-    <div v-if="lightboxPhoto" class="modal-overlay" @click="closeLightbox" style="z-index: 2000;">
-        <div @click.stop style="position: relative; max-width: 90vw; max-height: 90vh;">
-            <button @click="closeLightbox" style="position: absolute; right: -40px; top: -40px; background: white; border: none; font-size: 2rem; cursor: pointer; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">✕</button>
-            <img :src="lightboxPhoto" :alt="'Großansicht'" style="width: 100%; height: 100%; object-fit: contain; max-height: 85vh; border-radius: var(--radius);">
-        </div>
-    </div>
-
     <!-- Baufortschritt Modal -->
     <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
         <div class="modal-content progress-photo-modal" @click.stop style="max-width: 680px; padding: 32px;">
@@ -1173,59 +1164,6 @@
                 }
             ]);
 
-            // PHOTOS FOR CAROUSEL
-            const photos = ref([
-                'Assets/U1.png',
-                'Assets/U2.png',
-                'Assets/U3.png'
-            ]);
-            const currentPhoto = ref(0);
-            const lightboxPhoto = ref(null);
-
-            const nextPhoto = () => {
-                currentPhoto.value = (currentPhoto.value + 1) % photos.value.length;
-            };
-
-            const previousPhoto = () => {
-                currentPhoto.value = (currentPhoto.value - 1 + photos.value.length) % photos.value.length;
-            };
-
-            const openLightbox = (photo) => {
-                lightboxPhoto.value = photo;
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeLightbox = () => {
-                lightboxPhoto.value = null;
-                document.body.style.overflow = 'auto';
-            };
-
-            // BLOG FETCH SIMULATION
-            const posts = ref([]);
-            const loadingPosts = ref(true);
-            const fallbackMarkdown = `
-### Danke für die Spenden!
-*12. April*
-
-Wow! Dank eurer Hilfe konnten wir die **neue Soundanlage** finanzieren. 
-Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
-            `;
-
-            const fetchPosts = async () => {
-                try {
-                    await new Promise(r => setTimeout(r, 800)); // Simuliere Netzwerk
-                    const htmlContent = marked.parse(fallbackMarkdown);
-                    posts.value = [
-                        { date: "Heute", renderedContent: htmlContent },
-                        { date: "März", renderedContent: marked.parse("### Startschuss!\nDie Bänke sind raus, der Raum ist leer. Jetzt gehts los.") }
-                    ];
-                } catch (e) {
-                    console.error(e);
-                } finally {
-                    loadingPosts.value = false;
-                }
-            };
-
             // MODAL LOGIC
             const selectedEvent = ref(null);
             const selectedProgress = ref(null);
@@ -1239,8 +1177,6 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
 
             // ANIMATION OBSERVER
             onMounted(() => {
-                fetchPosts();
-                
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if(entry.isIntersecting) {
@@ -1307,7 +1243,7 @@ Nächsten Sonntag wird sie eingeweiht. Kommt vorbei!
             });
 
             return {
-                events, progress, posts, loadingPosts, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection, photos, currentPhoto, nextPhoto, previousPhoto, lightboxPhoto, openLightbox, closeLightbox
+                events, progress, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
             };
         }
     }).mount('#app');
