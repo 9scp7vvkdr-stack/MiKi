@@ -578,10 +578,9 @@
 
     <header class="hero">
         <div class="hero-bg">
-            <div class="hero-bg-image" style="background-image: url('Assets/T1.webp');"></div>
+            <div class="hero-bg-image active" style="background-image: url('Assets/T1.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T2.jpg');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T3.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T4.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T5.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T6.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T7.webp');"></div>
@@ -1220,13 +1219,11 @@
 
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
-    });
-</script>
 
-<script>
-    // Hero Image Carousel - zufaellige Reihenfolge und zufaelliges Startbild,
-    // Wechsel alle 2.5 Sekunden. Bewusst eigenstaendig (ohne Vue), damit das
-    // Startbild sofort erscheint und nicht auf das grosse Vue-Bundle wartet.
+    // Hero Image Carousel - zufaellige Reihenfolge/Start, Wechsel alle 2.5 s.
+    // WICHTIG: laeuft NACH dem Vue-Mount, damit die Klassenwechsel auf Vues
+    // echten DOM-Knoten passieren. (Vor dem Mount ersetzt Vue die Hero-Divs,
+    // wodurch das setInterval nur abgekoppelte Knoten schalten wuerde -> Standbild.)
     (function() {
         const images = Array.from(document.querySelectorAll('.hero-bg-image'));
         if (!images.length) return;
@@ -1238,7 +1235,8 @@
         }
 
         let currentIndex = 0;
-        images[0].classList.add('active'); // zufaelliges Startbild blendet ein
+        images.forEach(img => img.classList.remove('active'));
+        images[0].classList.add('active'); // zufaelliges Startbild
 
         setInterval(function() {
             const nextIndex = (currentIndex + 1) % images.length;
@@ -1247,6 +1245,7 @@
             currentIndex = nextIndex;
         }, 2500);
     })();
+    });
 </script>
 </body>
 </html>
