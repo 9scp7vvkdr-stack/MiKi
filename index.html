@@ -67,8 +67,6 @@
     
     <script defer src="extern/vue.globals.js"></script>
 
-    <link rel="preload" href="Assets/T5.webp" as="image">
-    <link rel="preload" href="Assets/T1.webp" as="image">
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="extern/fonts/fonts.css">
     
@@ -574,11 +572,14 @@
 
     <header class="hero">
         <div class="hero-bg">
-            <div class="hero-bg-image active" style="background-image: url('Assets/T5.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T1.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T2.jpg');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T3.webp');"></div>
             <div class="hero-bg-image" style="background-image: url('Assets/T4.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T5.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T6.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T7.webp');"></div>
+            <div class="hero-bg-image" style="background-image: url('Assets/T8.webp');"></div>
         </div>
         <div class="container hero-content">
             <h1><span class="text-gradient">MiKi</h1>
@@ -1213,25 +1214,33 @@
 
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+    });
+</script>
 
-    // Hero Image Carousel - T5 → T1 → T2 → T3 → T4 → … alle 4.5 Sekunden
+<script>
+    // Hero Image Carousel - zufaellige Reihenfolge und zufaelliges Startbild,
+    // Wechsel alle 2.5 Sekunden. Bewusst eigenstaendig (ohne Vue), damit das
+    // Startbild sofort erscheint und nicht auf das grosse Vue-Bundle wartet.
     (function() {
-        const images = document.querySelectorAll('.hero-bg-image');
-        let currentIndex = 0;
+        const images = Array.from(document.querySelectorAll('.hero-bg-image'));
+        if (!images.length) return;
 
-        function switchImage() {
-            const nextIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.remove('active');
-            images[currentIndex].classList.add('inactive');
-            images[nextIndex].classList.remove('inactive');
-            images[nextIndex].classList.add('active');
-            currentIndex = nextIndex;
+        // Fisher-Yates: pro Seitenaufruf eine neue Zufallsreihenfolge
+        for (let i = images.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [images[i], images[j]] = [images[j], images[i]];
         }
 
-        // Starte Wechsel nach 4.5 Sekunden
-        setInterval(switchImage, 4500);
+        let currentIndex = 0;
+        images[0].classList.add('active'); // zufaelliges Startbild blendet ein
+
+        setInterval(function() {
+            const nextIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.remove('active');
+            images[nextIndex].classList.add('active');
+            currentIndex = nextIndex;
+        }, 2500);
     })();
-    });
 </script>
 </body>
 </html>
