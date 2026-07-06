@@ -514,10 +514,17 @@
             .navbar {
                 top: 12px; bottom: auto;
                 width: 92%; justify-content: space-around;
-                padding: 12px 8px; gap: 0;
+                padding: 4px 6px; gap: 0;
             }
             .nav-logo { display: block; margin-right: 0; }
-            .navbar a { font-size: 0.78rem; }
+            .navbar a { font-size: 0.8rem; padding: 12px 8px; }
+
+            /* Tap-Ziele >= 44px auf dem Handy */
+            .social-links a {
+                min-width: 44px; min-height: 44px;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .footer-col ul a { display: inline-block; padding: 9px 0; }
 
             /* Layout */
             .grid-2 { grid-template-columns: 1fr; gap: 36px; }
