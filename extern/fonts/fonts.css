@@ -7,24 +7,28 @@
 }
 
 /* Poppins (lokal, selbst gehostet - keine Google-Fonts). Nur die genutzten
-   Gewichte 400/600/700; 500 und 800 runden auf den naechsten Schnitt. */
+   Gewichte 400/600/700; 500 und 800 runden auf den naechsten Schnitt.
+   woff2 bevorzugt (~7 KB/Schnitt), TTF als Fallback fuer aeltere Browser. */
 @font-face {
   font-family: 'Poppins';
-  src: url('poppins/Poppins-Regular.ttf') format('truetype');
+  src: url('poppins/poppins-v24-latin-regular.woff2') format('woff2'),
+       url('poppins/Poppins-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
-  src: url('poppins/Poppins-SemiBold.ttf') format('truetype');
+  src: url('poppins/poppins-v24-latin-600.woff2') format('woff2'),
+       url('poppins/Poppins-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
-  src: url('poppins/Poppins-Bold.ttf') format('truetype');
+  src: url('poppins/poppins-v24-latin-700.woff2') format('woff2'),
+       url('poppins/Poppins-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
