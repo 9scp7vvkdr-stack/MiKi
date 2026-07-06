@@ -137,6 +137,32 @@
         .text-gradient {
             color: var(--primary);
         }
+
+        /* --- TEXT-AKZENTE: handgemalter Textmarker (bewusst sparsam einsetzen) --- */
+        .mark {
+            background-image: linear-gradient(
+                104deg,
+                rgba(16, 187, 130, 0) 0.5%,
+                rgba(16, 187, 130, 0.45) 2%,
+                rgba(16, 187, 130, 0.6) 6%,
+                rgba(16, 187, 130, 0.5) 94%,
+                rgba(16, 187, 130, 0) 99%
+            );
+            background-repeat: no-repeat;
+            background-size: 100% 0.62em;
+            background-position: 0 88%;
+            padding: 0 0.12em;
+            /* ungleiche Ecken -> handgemalter, leicht schiefer Eindruck */
+            border-radius: 0.35em 0.6em 0.4em 0.55em;
+        }
+        /* krumme, handgezeichnete Unterstreichung (Inline-SVG, lokal - kein Drittserver) */
+        .underline-sketch {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='10' preserveAspectRatio='none'%3E%3Cpath d='M1,6 C25,1 45,9 65,5 C85,2 100,8 119,5' fill='none' stroke='%2310BB82' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 0 100%;
+            background-size: 100% 0.42em;
+            padding-bottom: 0.12em;
+        }
         
         /* --- BUTTONS --- */
         .btn {
@@ -491,6 +517,28 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- HOVER-PERSOENLICHKEIT (nur echte Zeiger/Desktop, nicht auf Touch) --- */
+        @media (hover: hover) and (pointer: fine) {
+            .btn i { transition: transform 0.3s ease; }
+            .btn:hover i.ph-arrow-right { transform: translateX(4px); }
+            .btn:hover i.ph-heart { transform: scale(1.15); }
+            .navbar a:not(.nav-logo):hover { transform: translateY(-2px); }
+            .social-links a { transition: transform 0.3s ease, color 0.3s ease; }
+            .social-links a:hover { transform: translateY(-3px) rotate(-6deg); color: var(--primary); }
+        }
+
+        /* --- BEWEGUNG ZURUECKHALTEN: prefers-reduced-motion respektieren --- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+            html { scroll-behavior: auto !important; }
+            /* Scroll-Reveal-Inhalte sofort sichtbar, ohne Versatz */
+            .hidden-el { opacity: 1 !important; transform: none !important; }
+        }
 
         /* --- MOBILE --- */
         @media(max-width: 768px) {
@@ -895,7 +943,7 @@
             <div class="grid-2">
                 <div class="hidden-el">
                     <h2>Was wird gebaut?</h2>
-                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du live, wie weit wir sind.</p>
+                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
                     <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
                         <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
                         <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken. <br> Hast du Ideen? Dann schick uns eine WhatsApp!</p>
@@ -928,7 +976,7 @@
             <div class="hidden-el" style="text-align: center; max-width: 700px; margin: 0 auto;">
                 <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Neueste Updates</h2>
                 <p style="color: #475569; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.8;">
-                    Bleib immer auf dem Laufenden! Folge uns auf Instagram, um die neuesten Fotos, Updates und Behind-the-Scenes aus der MiKi zu sehen. Dort teilen wir regelmäßig, wie sich die Michaelskirche verwandelt und welche spannenden Events anstehen.
+                    Bleib immer auf dem Laufenden! Folge uns auf Instagram, um die neuesten Fotos, Updates und Behind-the-Scenes aus der MiKi zu sehen. Dort teilen wir regelmäßig, wie sich die Michaelskirche <span class="underline-sketch">verwandelt</span> und welche spannenden Events anstehen.
                 </p>
                 <a href="https://www.instagram.com/miki_hdh/" target="_blank" class="btn btn-primary" style="gap: 10px; font-size: 1.1rem;">
                     <i class="ph ph-instagram-logo" style="font-size: 1.5rem;"></i> Folg uns auf Instagram @miki_hdh
@@ -943,7 +991,7 @@
                 
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Kirche mal anders.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
+                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. 
 
                 </p>
                 <ul class="vision-list">
