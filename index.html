@@ -1287,7 +1287,7 @@
     // Set current year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Hero Image Carousel - zufaellige Reihenfolge/Start, Wechsel alle 2.5 s.
+    // Hero Image Carousel - zufaellige Reihenfolge, Wechsel alle 4.5 s.
     // WICHTIG: laeuft NACH dem Vue-Mount, damit die Klassenwechsel auf Vues
     // echten DOM-Knoten passieren. (Vor dem Mount ersetzt Vue die Hero-Divs,
     // wodurch das setInterval nur abgekoppelte Knoten schalten wuerde -> Standbild.)
@@ -1301,16 +1301,23 @@
             [images[i], images[j]] = [images[j], images[i]];
         }
 
+        // Das beim Seitenaufbau bereits sichtbare Bild bleibt das erste der Runde.
+        // Sonst wuerde es hier sofort weggeblendet und waere deutlich kuerzer zu
+        // sehen als alle anderen.
+        const activeIndex = images.findIndex(img => img.classList.contains('active'));
+        const order = activeIndex > 0
+            ? images.slice(activeIndex).concat(images.slice(0, activeIndex))
+            : images;
+
         let currentIndex = 0;
-        images.forEach(img => img.classList.remove('active'));
-        images[0].classList.add('active'); // zufaelliges Startbild
+        order.forEach((img, i) => img.classList.toggle('active', i === 0));
 
         setInterval(function() {
-            const nextIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.remove('active');
-            images[nextIndex].classList.add('active');
+            const nextIndex = (currentIndex + 1) % order.length;
+            order[currentIndex].classList.remove('active');
+            order[nextIndex].classList.add('active');
             currentIndex = nextIndex;
-        }, 2500);
+        }, 4500);
     })();
     });
 </script>
