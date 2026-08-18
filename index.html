@@ -486,8 +486,9 @@
         .supporter-strip h3 {
             color: var(--dark);
             font-size: 1.8rem;
-            margin-bottom: 28px;
+            margin-bottom: 16px;
         }
+        .supporter-strip p { max-width: 640px; margin: 0 auto 32px auto; }
         .logo-marquee {
             /* Volle Breite, auch wenn der Container auf 1200px begrenzt ist */
             width: 100vw;
@@ -500,7 +501,7 @@
         .logo-track {
             display: flex;
             width: max-content;
-            animation: logoScroll 45s linear infinite;
+            animation: logoScroll 75s linear infinite;
         }
         .logo-group { display: flex; align-items: center; gap: 24px; padding-right: 24px; }
         .logo-item {
@@ -1146,7 +1147,8 @@
 
             <!-- Unterstuetzer-Logos als endloses Laufband -->
             <div class="supporter-strip hidden-el">
-                <h3>Danke an unsere Unterstützer</h3>
+                <h3>Unsere Unterstützer</h3>
+                <p>Ohne Rückenwind läuft nichts. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
                 <div class="logo-marquee">
                     <div class="logo-track">
                         <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
