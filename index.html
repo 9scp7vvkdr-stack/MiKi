@@ -623,7 +623,7 @@
                 padding: 4px 6px; gap: 0;
             }
             .nav-logo { display: block; margin-right: 0; }
-            .navbar a { font-size: 0.8rem; padding: 12px 8px; }
+            .navbar a { font-size: 0.72rem; padding: 12px 4px; white-space: nowrap; }
 
             /* Tap-Ziele >= 44px auf dem Handy */
             .social-links a {
@@ -692,6 +692,7 @@
         <a href="#umbau" :class="{ active: activeSection === 'umbau' }">Status</a>
         <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
         <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
+        <a href="#kontakt" :class="{ active: activeSection === 'kontakt' }">Kontakt</a>
     </nav>
 
     <header class="hero">
@@ -1163,7 +1164,7 @@
         </div>
     </section>
 
-    <footer>
+    <footer id="kontakt">
         <div class="container">
             <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
                 <div class="footer-col">
@@ -1314,7 +1315,8 @@
                     { id: 'events' },
                     { id: 'umbau' },
                     { id: 'vision' },
-                    { id: 'blog' }
+                    { id: 'blog' },
+                    { id: 'kontakt' }
                 ];
                 function vueScrollHandler() {
                     const scrollPos = window.scrollY + 130;
@@ -1325,6 +1327,9 @@
                             current = sec.id;
                         }
                     }
+                    // Footer ist oft kuerzer als der Viewport -> am Seitenende immer "Kontakt"
+                    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5;
+                    if (atBottom) current = 'kontakt';
                     activeSection.value = current;
                 }
                 window.addEventListener('scroll', vueScrollHandler);
