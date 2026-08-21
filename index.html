@@ -209,6 +209,20 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
+        /* Kleiner Outline-Button, z. B. fuer den Maps-Link im dunklen Footer */
+        .btn-map {
+            padding: 11px 22px;
+            font-size: 0.85rem;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-map:hover {
+            background: var(--primary);
+            color: var(--darker);
+            transform: translateY(-3px);
+        }
+
         /* --- NAVIGATION --- */
         .navbar {
             position: fixed;
@@ -330,6 +344,24 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 16px;
+        }
+
+        .hero-address {
+            display: inline-block;
+            margin-top: 24px;
+            max-width: 100%;
+            padding: 4px 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: center;
+            color: #FFFFF7;
+            opacity: 0.75;
+        }
+        .hero-address:hover,
+        .hero-address:focus-visible {
+            opacity: 1;
+            color: var(--primary);
         }
 
         /* --- VISION --- */
@@ -615,6 +647,7 @@
                 font-size: 0.85rem;
                 justify-content: center;
             }
+            .hero-address { margin-top: 18px; font-size: 0.8rem; }
 
             /* Navbar */
             .navbar {
@@ -715,6 +748,9 @@
                     Projekt supporten <i class="ph ph-heart"></i>
                 </a>
             </div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="hero-address">
+                📍&nbsp;Michaelskirche &middot;&nbsp;An der Stadtmauer 1, 89520&nbsp;Heidenheim
+            </a>
             <p style="margin-top: 40px; font-size: 0.85rem; opacity: 0.8; color: white; font-weight: 500;">
                 Powered by <a href="https://www.ejhdh.de" target="_blank" style="color: white; text-decoration: underline;">Evangelisches Jugendwerk Heidenheim</a>
             </p>
@@ -873,13 +909,14 @@
                     Rechtsgrundlage für die Weiterleitung an PayPal ist § 6 Nr. 2 DSG-EKD (Vertragserfüllung bzw. vorvertragliche Maßnahmen) in Verbindung mit Ihrer aktiven Entscheidung zur Nutzung des Spendenbuttons.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Externe Links (Instagram und WhatsApp)</div>
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Externe Links (Instagram, WhatsApp und Google Maps)</div>
                 <p style="margin: 0 0 15px 0;">
                     Auf unserer Website befinden sich Links zu externen Diensten wie:
                 </p>
                 <ul style="margin: 0 0 15px 20px;">
                     <li>Instagram (Meta Platforms Ireland Ltd.)</li>
                     <li>WhatsApp (WhatsApp Ireland Limited)</li>
+                    <li>Google Maps (Google Ireland Limited)</li>
                 </ul>
                 <p style="margin: 0 0 15px 0;">
                     Beim Anklicken dieser Links verlassen Sie unsere Website. Dabei können personenbezogene Daten (z. B. Ihre IP-Adresse) an den jeweiligen Anbieter übertragen werden.<br><br>
@@ -892,6 +929,14 @@
                     Dabei werden personenbezogene Daten – insbesondere Ihre Mobilfunknummer sowie der Inhalt Ihrer Nachricht – an WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, und die Muttergesellschaft Meta Platforms Inc. (USA) übertragen. Eine Datenübermittlung in die USA kann dabei nicht ausgeschlossen werden.<br><br>
                     Die Nutzung dieses Kontaktwegs erfolgt freiwillig und ausschließlich auf Ihre Initiative hin. Die von Ihnen übermittelten Inhalte werden ausschließlich zur Bearbeitung Ihres Anliegens verwendet und nicht an Dritte weitergegeben. Weitere Informationen zur Datenverarbeitung durch WhatsApp finden Sie unter: <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" style="color: var(--primary); text-decoration: underline;">https://www.whatsapp.com/legal/privacy-policy-eea</a><br><br>
                     Rechtsgrundlage ist § 6 Nr. 2 DSG-EKD (Vertragserfüllung bzw. vorvertragliche Maßnahmen) sowie § 6 Nr. 1 DSG-EKD (Einwilligung durch aktive Kontaktaufnahme).
+                </p>
+
+                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">Aktive Nutzung von Google Maps</div>
+                <p style="margin: 0 0 15px 0;">
+                    Auf dieser Website befindet sich ein Link, über den Sie unsere Adresse in Google Maps öffnen können. Wenn Sie diesen Link anklicken, verlassen Sie unsere Website und werden zu Google Maps weitergeleitet.<br><br>
+                    Dabei können personenbezogene Daten – insbesondere Ihre IP-Adresse – an die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, sowie an die Google LLC (USA) übertragen werden. Eine Datenübermittlung in die USA kann dabei nicht ausgeschlossen werden.<br><br>
+                    Die Nutzung dieses Links erfolgt freiwillig und ausschließlich auf Ihre Initiative hin. Weitere Informationen finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">https://policies.google.com/privacy</a><br><br>
+                    Rechtsgrundlage ist § 6 Nr. 1 DSG-EKD (Einwilligung durch aktive Nutzung des Links).
                 </p>
 
                 <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">8. Keine Einbindung externer Inhalte</div>
@@ -1177,6 +1222,15 @@
                         <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple"></i>Stefan.hoerz@ejhdh.de</a></li>
                         <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone"></i>0174 3086657</a></li>
                     </ul>
+                    <h3 style="font-size: 1rem; margin-top: 28px; margin-bottom: 12px;">So findest du uns</h3>
+                    <address style="font-style: normal; line-height: 1.7; margin-bottom: 16px;">
+                        MiKi &ndash; Michaelskirche<br>
+                        An der Stadtmauer 1<br>
+                        89520 Heidenheim an der Brenz
+                    </address>
+                    <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map">
+                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
+                    </a>
                 </div>
                 <div class="footer-col">
                     <h3>Folge uns auf Social Media</h3>
