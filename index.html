@@ -781,6 +781,9 @@
             padding: 24px 0;
             overflow: hidden;
             pointer-events: none;
+            /* Luecke zwischen Titelbild und Terminen dunkel fuellen, damit an den Raendern
+               neben dem schraegen Band nie der helle Seitenhintergrund durchblitzt */
+            background: linear-gradient(180deg, transparent 46px, var(--dark) 46px);
         }
         .ticker {
             width: 110vw;
@@ -788,7 +791,7 @@
             background: var(--primary);
             color: var(--dark);
             padding: 12px 0;
-            transform: rotate(-2deg);
+            transform: rotate(-1.5deg);
             box-shadow: 0 14px 30px -12px rgba(2, 6, 23, 0.45);
         }
         .ticker-track {
@@ -1102,7 +1105,7 @@
             .hero-rotator { margin-bottom: 26px; }
 
             /* Ticker */
-            .ticker-wrap { margin: -36px 0; padding: 18px 0; }
+            .ticker-wrap { margin: -36px 0; padding: 18px 0; background: linear-gradient(180deg, transparent 36px, var(--dark) 36px); }
             .ticker { padding: 9px 0; }
             .ticker-group span { padding: 0 14px; }
 
