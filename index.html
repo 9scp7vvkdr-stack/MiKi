@@ -858,6 +858,21 @@
         .doodle.indigo { color: var(--accent); opacity: 0.4; }
 
         /* --- FINALER AUFRUF vor dem Footer --- */
+        /* Foto-Hintergrund, gleitet beim Scrollen; die Abdunklung haelt den Text lesbar */
+        .cta-bg {
+            position: absolute;
+            left: 0; right: 0;
+            top: -20%; bottom: -20%;
+            z-index: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        .cta-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
         .cta-final {
             background: var(--dark);
             color: #fff;
@@ -1200,11 +1215,11 @@
                     </div>
                 </article>
                 <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.jpeg" alt="Die selbstgebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
-                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-coffee"></i></span>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.jpeg" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
-                        <h3>Die Bar</h3>
-                        <p>Von Jugendlichen selbst gebaut – unser ganzer Stolz.</p>
+                        <h3>DIY-Kirche</h3>
+                        <p>Ihr gestaltet die Kirche selbst um. Die Bar? Komplett von Jugendlichen gebaut. Mach mit!</p>
                     </div>
                 </article>
             </div>
@@ -1213,6 +1228,7 @@
 
     <!-- Letzter Anstoss: einfach vorbeikommen -->
     <section class="section-padding cta-final has-doodles">
+        <div class="cta-bg" data-parallax="12" style="background-image: url('Assets/T11.webp');" aria-hidden="true"></div>
         <div class="glow-blob mint" data-parallax-px="-80" aria-hidden="true"></div>
         <div class="glow-blob indigo" data-parallax-px="80" aria-hidden="true"></div>
         <div class="container hidden-el">
