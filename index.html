@@ -1204,7 +1204,7 @@
         <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
         <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
         <a href="#fragen" :class="{ active: activeSection === 'fragen' }">FAQ</a>
-        <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
+        <a href="#spenden" :class="{ active: activeSection === 'spenden' }">Support</a>
         <a href="#kontakt" :class="{ active: activeSection === 'kontakt' }">Kontakt</a>
     </nav>
 
@@ -1741,58 +1741,6 @@
         </div>
     </section>
 
-    <section class="section-padding" id="blog" style="background: #ffffff;">
-        <div class="container">
-            <span class="kicker"><i class="ph ph-hand-heart"></i> Support</span>
-            <h2>Gebets- und Spendenanliegen</h2>
-            
-            <!-- Gebetsanliegen & Spendenprojekte Grid -->
-            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
-                
-                <!-- Gebetsanliegen Karte -->
-                <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 0ms;">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
-                        <h3 style="margin: 0;">Gebetsanliegen</h3>
-                    </div>
-                    <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
-                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten zusammen und tragen dich im Gebet.
-                    </p>
-                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
-                        <strong>Möchtest du für die MiKi beten?</strong><br>
-                        Danke für dein <strong>Gebet</strong>! Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
-                    </p>
-                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
-                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
-                    </button>
-                </div>
-
-                <!-- Spendenprojekte Karte -->
-                <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 100ms;">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
-                        <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
-                    </div>
-                    
-                    <!-- Projekt 1: Boulderwand -->
-                    <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
-                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
-                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen </p>
-                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
-                    </div>
-
-                    <!-- Projekt 2: Gebets-Telefonzelle -->
-                    <div>
-                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Gebets-Telefonzelle</h4>
-                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit jeder ins Gespräch mit Gott kommt. Wir brauchen Budget für die Reparatur und Baumaterialien.</p>
-                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €1.200</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <section class="section-padding donate-section" id="spenden">
         <div class="container">
             <div class="donate-grid hidden-el">
@@ -1841,6 +1789,58 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="blog" style="background: #ffffff;">
+        <div class="container">
+            <span class="kicker"><i class="ph ph-hand-heart"></i> Support</span>
+            <h2>Gebets- und Spendenanliegen</h2>
+            
+            <!-- Gebetsanliegen & Spendenprojekte Grid -->
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                
+                <!-- Gebetsanliegen Karte -->
+                <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 0ms;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Gebetsanliegen</h3>
+                    </div>
+                    <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
+                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten zusammen und tragen dich im Gebet.
+                    </p>
+                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
+                        <strong>Möchtest du für die MiKi beten?</strong><br>
+                        Danke für dein <strong>Gebet</strong>! Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
+                    </p>
+                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
+                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                    </button>
+                </div>
+
+                <!-- Spendenprojekte Karte -->
+                <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 100ms;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
+                    </div>
+                    
+                    <!-- Projekt 1: Boulderwand -->
+                    <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
+                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen </p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
+                    </div>
+
+                    <!-- Projekt 2: Gebets-Telefonzelle -->
+                    <div>
+                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Gebets-Telefonzelle</h4>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit jeder ins Gespräch mit Gott kommt. Wir brauchen Budget für die Reparatur und Baumaterialien.</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €1.200</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2030,7 +2030,7 @@
                     { id: 'events' },
                     { id: 'vision' },
                     { id: 'fragen' },
-                    { id: 'blog' },
+                    { id: 'spenden' },
                     { id: 'kontakt' }
                 ];
                 function vueScrollHandler() {
