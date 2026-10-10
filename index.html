@@ -421,23 +421,6 @@
             opacity: 0.85;
         }
 
-        .hero-address {
-            display: inline-block;
-            margin-top: 24px;
-            max-width: 100%;
-            padding: 4px 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            line-height: 1.5;
-            text-align: center;
-            color: #FFFFF7;
-            opacity: 0.75;
-        }
-        .hero-address:hover,
-        .hero-address:focus-visible {
-            opacity: 1;
-            color: var(--primary);
-        }
 
         /* --- VISION --- */
         .vision-list li {
@@ -910,7 +893,6 @@
             text-shadow: 0 1px 12px rgba(2, 6, 23, 0.6);
         }
         .exp-caption h3 { font-size: clamp(2rem, 3vw, 2.5rem); color: #fff; margin-bottom: 2px; }
-        .exp-caption p { font-size: 0.95rem; line-height: 1.45; color: rgba(255, 255, 255, 0.9); }
 
         .btn-glow {
             background: var(--primary);
@@ -1033,52 +1015,35 @@
         .cta-final h2 { color: #fff; font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 14px; }
         .cta-final .cta-lead { font-size: 1.15rem; color: rgba(255, 255, 255, 0.85); max-width: 560px; margin: 0 auto; }
         .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; }
-        /* Instagram hervorgehoben: Karte mit Verlaufsrahmen in Instagram-Farben */
+        /* Instagram: dezente Zeile unter den Buttons */
         .insta-card {
             display: flex;
             align-items: center;
-            gap: 20px;
-            max-width: 680px;
-            margin: 44px auto 0;
-            padding: 20px 24px;
+            gap: 14px;
+            max-width: 520px;
+            margin: 36px auto 0;
+            padding: 12px 18px;
             text-align: left;
-            border-radius: var(--radius);
-            border: 2px solid transparent;
-            background:
-                linear-gradient(var(--dark), var(--dark)) padding-box,
-                linear-gradient(120deg, #f9ce34, #ee2a7b, #6228d7) border-box;
-            box-shadow: 0 20px 50px -20px rgba(238, 42, 123, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s ease, background 0.3s ease;
         }
-        .insta-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 26px 60px -18px rgba(238, 42, 123, 0.65);
-        }
+        .insta-card:hover { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
         .insta-icon {
             flex-shrink: 0;
-            width: 64px; height: 64px;
-            border-radius: 18px;
+            width: 42px; height: 42px;
+            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2.2rem;
+            font-size: 1.5rem;
             color: #fff;
             background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
         }
-        .insta-text { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-        .insta-text strong { font-size: 1.15rem; color: #fff; }
+        .insta-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .insta-text strong { font-size: 0.98rem; color: #fff; }
         .insta-handle { color: var(--primary); }
-        .insta-text > span { font-size: 0.95rem; color: rgba(255, 255, 255, 0.8); line-height: 1.5; }
-        .insta-cta {
-            flex-shrink: 0;
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 12px 22px;
-            border-radius: 100px;
-            background: #fff;
-            color: var(--dark);
-            font-family: var(--font-head);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .insta-text > span { font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.4; }
+        .insta-arrow { flex-shrink: 0; color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; }
 
         /* Event-Karten etwas lebendiger */
         .event-card:hover { box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.45); }
@@ -1126,7 +1091,6 @@
             .hero { padding-top: 100px; padding-bottom: 50px; min-height: 100svh; }
             .hero h1 { font-size: 5rem; }
             .hero h1 .hero-claim { margin-top: 10px; letter-spacing: 0.08em; }
-            .hero-address { margin-top: 18px; font-size: 0.8rem; }
             .hero-rotator { margin-bottom: 26px; }
 
             /* Ticker */
@@ -1147,7 +1111,6 @@
                 background: linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.6) 40%, rgba(2, 6, 23, 0.92) 100%);
             }
             .exp-caption h3 { font-size: 1.7rem; }
-            .exp-caption p { font-size: 0.82rem; }
 
 
             /* Deko auf dem Handy weglassen - Lesbarkeit geht vor */
@@ -1158,8 +1121,7 @@
             .contact-card img { width: 120px; height: 120px; }
 
             /* Instagram-Karte: untereinander statt nebeneinander */
-            .insta-card { flex-direction: column; text-align: center; gap: 14px; padding: 24px 20px; margin-top: 36px; }
-            .insta-text strong { font-size: 1.05rem; }
+            .insta-card { margin-top: 28px; padding: 12px 14px; }
 
             /* Navbar */
             .navbar {
@@ -1241,8 +1203,8 @@
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
         <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
-        <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
         <a href="#fragen" :class="{ active: activeSection === 'fragen' }">FAQ</a>
+        <a href="#blog" :class="{ active: activeSection === 'blog' }">Support</a>
         <a href="#kontakt" :class="{ active: activeSection === 'kontakt' }">Kontakt</a>
     </nav>
 
@@ -1267,9 +1229,6 @@
                 <span class="sr-only">Dein Ort zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
                 <span aria-hidden="true">Dein Ort zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
-            <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="hero-address">
-                📍&nbsp;Michaelskirche &middot;&nbsp;An der Stadtmauer 1, 89520&nbsp;Heidenheim
-            </a>
             <p style="margin-top: 40px; font-size: 0.85rem; opacity: 0.8; color: white; font-weight: 500;">
                 Powered by <a href="https://www.ejhdh.de" target="_blank" style="color: white; text-decoration: underline;">Evangelisches Jugendwerk Heidenheim</a>
             </p>
@@ -1318,8 +1277,8 @@
         <div class="container">
             <div class="section-head hidden-el">
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
-                <h2>Kirche? <span class="mark">Aber anders.</span></h2>
-                <p>Trampolin, Zocken, Bar und Couches – und Leute, die Bock auf dich haben. Schau dir an, was in der MiKi in Heidenheim so abgeht.</p>
+                <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
+                <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen.</p>
             </div>
 
             <div class="exp-grid">
@@ -1328,7 +1287,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
                     <div class="exp-caption">
                         <h3>Springen</h3>
-                        <p>Ein Trampolin mitten in der Kirche. Ja, wirklich.</p>
                     </div>
                 </article>
                 <article class="exp-card tall hidden-el" style="transition-delay: 100ms;">
@@ -1336,7 +1294,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
                     <div class="exp-caption">
                         <h3>Chillen</h3>
-                        <p>Couches statt Holzbänke. Abhängen, quatschen, Hausis machen.</p>
                     </div>
                 </article>
                 <article class="exp-card hidden-el">
@@ -1344,7 +1301,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller"></i></span>
                     <div class="exp-caption">
                         <h3>Zocken</h3>
-                        <p>Zusammen statt allein daheim.</p>
                     </div>
                 </article>
                 <article class="exp-card hidden-el" style="transition-delay: 100ms;">
@@ -1352,7 +1308,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
                     <div class="exp-caption">
                         <h3>Darts &amp; Games</h3>
-                        <p>Wer trifft die 180?</p>
                     </div>
                 </article>
                 <article class="exp-card hidden-el">
@@ -1360,7 +1315,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-music-notes"></i></span>
                     <div class="exp-caption">
                         <h3>Musik &amp; Glaube</h3>
-                        <p>Live-Musik, echte Fragen und Raum für Gott.</p>
                     </div>
                 </article>
                 <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
@@ -1368,7 +1322,6 @@
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
                         <h3>DIY-Kirche</h3>
-                        <p>Ihr gestaltet die Kirche selbst um. Die Bar? Komplett von Jugendlichen gebaut. Mach mit!</p>
                     </div>
                 </article>
             </div>
@@ -1379,7 +1332,7 @@
     <section class="section-padding cta-final has-doodles">
         <div class="cta-bg" data-parallax="12" style="background-image: url('Assets/T11.webp');" aria-hidden="true"></div>
         <div class="container hidden-el">
-            <h2>Bock bekommen?</h2>
+            <h2>Klingt gut?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
             <div class="cta-buttons">
                 <a href="https://wa.me/+491743086657?text=Hey%20ich+hätte+Bock+auf+die+MiKi" target="_blank" rel="noopener" class="btn btn-glow">
@@ -1393,9 +1346,9 @@
                 <span class="insta-icon" aria-hidden="true"><i class="ph ph-instagram-logo"></i></span>
                 <span class="insta-text">
                     <strong>Folg uns auf Instagram <span class="insta-handle">@miki_hdh</span></strong>
-                    <span>Fotos, Updates und Behind-the-Scenes aus der MiKi – damit du kein Event verpasst.</span>
+                    <span>Fotos, Updates und Behind-the-Scenes aus der MiKi.</span>
                 </span>
-                <span class="insta-cta">Folgen <i class="ph ph-arrow-right"></i></span>
+                <i class="ph ph-arrow-right insta-arrow" aria-hidden="true"></i>
             </a>
         </div>
     </section>
@@ -1675,7 +1628,7 @@
                 <div class="hidden-el">
                     <span class="kicker"><i class="ph ph-hammer"></i> Umbau</span>
                     <h2>Das wird gerade gebaut</h2>
-                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
+                    <p style="margin-bottom: 20px;">Die MiKi wird ständig weitergebaut und es ist noch einiges geplant. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
                     <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
                         <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
                         <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken. <br> Hast du Ideen? Dann schick uns eine WhatsApp!</p>
@@ -1710,7 +1663,7 @@
                 <span class="kicker"><i class="ph ph-lightbulb"></i> Vision</span>
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Hier ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wir glauben, dass Jesus dein Leben verändern kann – und laden dich ein, das selbst herauszufinden. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können. Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird, und setzen die Umgestaltung selbst um.
+                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Hier ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Mit der MiKi möchten wir einen Raum schaffen, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können. Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird, und setzen die Umgestaltung selbst um.
 
                 </p>
                 <ul class="vision-list">
@@ -1730,13 +1683,65 @@
             </div>
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
-                    <img src="Assets/P2.webp" alt="Visualisierung des Umbaus der MiKi in der Michaelskirche Heidenheim" loading="lazy" width="1184" height="864" style="height: auto;">
+                    <img src="Assets/T2.jpg" alt="Jugendliche packen gemeinsam beim Umbau der MiKi an" loading="lazy" width="1600" height="1064" style="height: auto;">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding" id="blog">
+    <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
+    <section class="section-padding" id="fragen" style="background: #f8fafc;">
+        <div class="container faq-wrap">
+            <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
+                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
+                <h2>Gut zu wissen</h2>
+            </div>
+            <div class="faq-list hidden-el">
+                <details class="faq-item">
+                    <summary>Muss ich gläubig sein, um in die MiKi zu kommen?</summary>
+                    <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was hat es mit diesem Jesus auf sich?</summary>
+                    <p>Wir glauben, dass Jesus dein Leben verändern kann, und laden dich ein, das selbst herauszufinden. Komm mit all deinen Fragen, Zweifeln oder Themen gerne auf uns zu.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was kostet das?</summary>
+                    <p>Nichts. Der Eintritt ist frei.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Ab welchem Alter kann ich kommen?</summary>
+                    <p>Die MiKi ist für alle ab der 5. Klasse. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Muss ich mich anmelden?</summary>
+                    <p>Nein. Zur Open Church am Freitag kommst du einfach vorbei – allein oder mit deinen Freunden.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
+                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Wo genau ist die MiKi?</summary>
+                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                </details>
+            </div>
+
+            <!-- Ansprechpartner mit Gesicht: schafft Vertrauen -->
+            <div class="contact-card hidden-el">
+                <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
+                <div class="contact-text">
+                    <h3>Hi, ich bin Stefan!</h3>
+                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
+                    <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
+                        <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="blog" style="background: #ffffff;">
         <div class="container">
             <span class="kicker"><i class="ph ph-hand-heart"></i> Support</span>
             <h2>Gebets- und Spendenanliegen</h2>
@@ -1835,54 +1840,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
-    <section class="section-padding" id="fragen" style="background: #f8fafc;">
-        <div class="container faq-wrap">
-            <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
-                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
-                <h2>Gut zu wissen</h2>
-            </div>
-            <div class="faq-list hidden-el">
-                <details class="faq-item">
-                    <summary>Muss ich gläubig sein, um in die MiKi zu kommen?</summary>
-                    <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Was kostet das?</summary>
-                    <p>Nichts. Der Eintritt ist frei.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Ab welchem Alter kann ich kommen?</summary>
-                    <p>Die MiKi ist für alle ab der 5. Klasse. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Muss ich mich anmelden?</summary>
-                    <p>Nein. Zur Open Church am Freitag kommst du einfach vorbei – allein oder mit deinen Freunden.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
-                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Wo genau ist die MiKi?</summary>
-                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
-                </details>
-            </div>
-
-            <!-- Ansprechpartner mit Gesicht: schafft Vertrauen -->
-            <div class="contact-card hidden-el">
-                <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
-                <div class="contact-text">
-                    <h3>Hi, ich bin Stefan!</h3>
-                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
-                    <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
-                        <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
-                    </a>
                 </div>
             </div>
         </div>
@@ -2072,8 +2029,8 @@
                 const sectionOrder = [
                     { id: 'events' },
                     { id: 'vision' },
-                    { id: 'blog' },
                     { id: 'fragen' },
+                    { id: 'blog' },
                     { id: 'kontakt' }
                 ];
                 function vueScrollHandler() {
