@@ -556,17 +556,77 @@
             position: relative;
             overflow: hidden;
         }
-        .donate-section h2 { color: var(--dark); margin-bottom: 20px; }
-        .donate-section p { font-size: 1.1rem; color: var(--dark); font-weight: 500; }
+        .donate-section { padding: 72px 0 56px; }
+        .donate-section h2 { color: var(--dark); font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 14px; }
+        .donate-section p { font-size: 1.05rem; color: var(--dark); font-weight: 500; }
+
+        /* Kompakt: links Text, rechts weisse Spendenbox */
+        .donate-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            text-align: left;
+        }
+        .kicker.kicker-on-mint { color: var(--dark); background: rgba(255, 255, 255, 0.4); }
+        .donate-box {
+            background: #fff;
+            color: var(--dark);
+            border-radius: var(--radius);
+            padding: 26px;
+            box-shadow: 0 24px 50px -24px rgba(2, 6, 23, 0.45);
+        }
+        .donate-box .btn {
+            width: 100%;
+            justify-content: center;
+            background: var(--dark);
+            color: #fff;
+        }
+        .donate-box .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(2, 6, 23, 0.5); }
+        .donate-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .donate-divider::before,
+        .donate-divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+        .bank-rows { display: grid; gap: 12px; }
+        .bank-row { display: flex; flex-direction: column; gap: 2px; }
+        .bank-label { font-size: 0.75rem; font-weight: 600; color: #64748b; }
+        .bank-value { font-size: 0.95rem; font-weight: 700; }
+        .bank-iban { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .bank-iban .bank-value { letter-spacing: 0.03em; }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 100px;
+            background: rgba(16, 187, 130, 0.14);
+            color: var(--primary-ink);
+            font-family: var(--font-main);
+            font-size: 0.78rem;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+        .copy-btn:hover { background: rgba(16, 187, 130, 0.25); }
 
         /* --- UNTERSTUETZER-LOGOS (Endlos-Laufband) --- */
-        .supporter-strip { margin-top: 80px; }
-        .supporter-strip h3 {
-            color: var(--dark);
-            font-size: 1.8rem;
-            margin-bottom: 16px;
+        .supporter-strip { margin-top: 56px; }
+        .supporter-strip .supporter-title {
+            max-width: 640px;
+            margin: 0 auto 20px auto;
+            font-size: 0.95rem;
         }
-        .supporter-strip p { max-width: 640px; margin: 0 auto 32px auto; }
+        .supporter-title strong { font-family: var(--font-head); font-size: 1.6rem; font-weight: 400; display: block; line-height: 1.2; }
         .logo-marquee {
             /* Volle Breite, auch wenn der Container auf 1200px begrenzt ist */
             width: 100vw;
@@ -584,11 +644,11 @@
         .logo-group { display: flex; align-items: center; gap: 24px; padding-right: 24px; }
         .logo-item {
             flex: 0 0 auto;
-            width: 200px; height: 110px;
+            width: 150px; height: 82px;
             display: flex; align-items: center; justify-content: center;
             background: var(--white);
-            border-radius: 18px;
-            padding: 18px 22px;
+            border-radius: 16px;
+            padding: 14px 18px;
             box-shadow: 0 10px 30px -14px rgba(0,0,0,0.45);
         }
         .logo-item img {
@@ -1064,9 +1124,13 @@
             .progress-photo-modal img { max-height: 220px; }
 
             /* Unterstuetzer-Laufband */
-            .supporter-strip { margin-top: 52px; }
-            .logo-group { gap: 14px; padding-right: 14px; }
-            .logo-item { width: 148px; height: 84px; padding: 12px 16px; border-radius: 14px; }
+            .supporter-strip { margin-top: 40px; }
+            .logo-group { gap: 12px; padding-right: 12px; }
+            .logo-item { width: 118px; height: 66px; padding: 10px 14px; border-radius: 12px; }
+
+            /* Spenden: untereinander */
+            .donate-grid { grid-template-columns: 1fr; gap: 28px; }
+            .donate-box { padding: 22px 20px; }
 
             /* Vision Deko-Rahmen weglassen */
             .vision-image-container::after { display: none; }
@@ -1522,6 +1586,39 @@
         </div>
     </div>
 
+    <section class="section-padding" id="umbau" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
+        <div class="container">
+            <div class="grid-2">
+                <div class="hidden-el">
+                    <span class="kicker"><i class="ph ph-hammer"></i> Umbau</span>
+                    <h2>Das wird gerade gebaut</h2>
+                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
+                    <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
+                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken. <br> Hast du Ideen? Dann schick uns eine WhatsApp!</p>
+                        <a href="https://wa.me/+491743086657?text=Hey%20ich+hätte+Bock+auf+die+MiKi" target="_blank" style="color: white; text-decoration: underline;">Schreib uns auf WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" @click="openProgressModal(item)">
+                        <div class="progress-circle">{{ item.animatedPercent }}%</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+                                <span>{{ item.label }}</span>
+                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
+                            </div>
+                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section-padding has-doodles" id="vision" style="background: #ffffff;">
         <svg class="doodle" data-parallax-px="-90" style="top: 60px; left: 3%;" width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="currentColor"/></svg>
         <svg class="doodle indigo" data-parallax-px="70" style="bottom: 40px; right: 4%;" width="64" height="64" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 9" stroke-linecap="round"/></svg>
@@ -1551,39 +1648,6 @@
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
                     <img src="Assets/P2.webp" alt="Visualisierung des Umbaus der MiKi in der Michaelskirche Heidenheim" loading="lazy" width="1184" height="864" style="height: auto;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-padding" id="umbau" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
-        <div class="container">
-            <div class="grid-2">
-                <div class="hidden-el">
-                    <span class="kicker"><i class="ph ph-hammer"></i> Umbau</span>
-                    <h2>Was wird gebaut?</h2>
-                    <p style="margin-bottom: 20px;">Wir bauen um. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
-                    <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
-                        <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
-                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken. <br> Hast du Ideen? Dann schick uns eine WhatsApp!</p>
-                        <a href="https://wa.me/+491743086657?text=Hey%20ich+hätte+Bock+auf+die+MiKi" target="_blank" style="color: white; text-decoration: underline;">Schreib uns auf WhatsApp</a>
-                    </div>
-                </div>
-                
-                <div class="progress-container">
-                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" @click="openProgressModal(item)">
-                        <div class="progress-circle">{{ item.animatedPercent }}%</div>
-                        <div style="flex: 1;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-                                <span>{{ item.label }}</span>
-                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
-                            </div>
-                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1643,22 +1707,42 @@
 
     <section class="section-padding donate-section" id="spenden">
         <div class="container">
-            <div class="hidden-el">
-                <h2 style="font-size: 2.5rem;">Unterstütze die MiKi</h2>
-                <p style="max-width: 600px; margin: 0 auto 40px auto;">
-                    Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter.
-                </p>
-                <button class="btn" style="background: var(--dark); color: white;" onclick="alert('PayPal Link')">
-                    <i class="ph ph-paypal-logo"></i> Per PayPal spenden
-                </button>
-                <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">oder klassisch per Überweisung an folgendes Konto: <br> Kontoinhaber: Ev. Kirchenbezirk Heidenheim
-<br>Iban: DE51 6329 0110 0110 3650 03 <br> Verwendungszeweck: MiKi</p>
+            <div class="donate-grid hidden-el">
+                <div>
+                    <span class="kicker kicker-on-mint"><i class="ph ph-heart"></i> Spenden</span>
+                    <h2>Unterstütze die MiKi</h2>
+                    <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter.</p>
+                </div>
+                <div class="donate-box">
+                    <button class="btn" onclick="alert('PayPal Link')">
+                        <i class="ph ph-paypal-logo"></i> Per PayPal spenden
+                    </button>
+                    <div class="donate-divider">oder per Überweisung</div>
+                    <div class="bank-rows">
+                        <div class="bank-row">
+                            <span class="bank-label">Kontoinhaber</span>
+                            <span class="bank-value">Ev. Kirchenbezirk Heidenheim</span>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">IBAN</span>
+                            <span class="bank-iban">
+                                <span class="bank-value">DE51 6329 0110 0110 3650 03</span>
+                                <button type="button" class="copy-btn" @click="copyIban">
+                                    <i :class="ibanCopied ? 'ph ph-check' : 'ph ph-copy'"></i> {{ ibanCopied ? 'Kopiert!' : 'Kopieren' }}
+                                </button>
+                            </span>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">Verwendungszweck</span>
+                            <span class="bank-value">MiKi</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Unterstuetzer-Logos als endloses Laufband -->
             <div class="supporter-strip hidden-el">
-                <h3>Unsere Unterstützer</h3>
-                <p>Ohne Rückenwind läuft nichts. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
+                <p class="supporter-title"><strong>Unsere Unterstützer</strong>Ohne Rückenwind läuft nichts. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
                 <div class="logo-marquee">
                     <div class="logo-track">
                         <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
@@ -1808,6 +1892,24 @@
             const showImpressum = ref(false);
             const showDatenschutz = ref(false);
             const showPrayerModal = ref(false);
+
+            // IBAN in die Zwischenablage (ohne Leerzeichen, so akzeptieren es alle Banking-Apps)
+            const ibanCopied = ref(false);
+            const copyIban = async () => {
+                const iban = 'DE51632901100110365003';
+                try {
+                    await navigator.clipboard.writeText(iban);
+                } catch (e) {
+                    const t = document.createElement('textarea');
+                    t.value = iban;
+                    document.body.appendChild(t);
+                    t.select();
+                    document.execCommand('copy');
+                    t.remove();
+                }
+                ibanCopied.value = true;
+                setTimeout(() => { ibanCopied.value = false; }, 2000);
+            };
             const openEventModal = (ev) => { selectedEvent.value = ev; document.body.style.overflow = 'hidden'; };
             const closeEventModal = () => { selectedEvent.value = null; document.body.style.overflow = 'auto'; };
             const openProgressModal = (item) => { selectedProgress.value = item; document.body.style.overflow = 'hidden'; };
@@ -1884,7 +1986,7 @@
             });
 
             return {
-                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
+                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
             };
         }
     }).mount('#app');
