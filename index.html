@@ -621,12 +621,7 @@
 
         /* --- UNTERSTUETZER-LOGOS (Endlos-Laufband) --- */
         .supporter-strip { margin-top: 56px; }
-        .supporter-strip .supporter-title {
-            max-width: 640px;
-            margin: 0 auto 20px auto;
-            font-size: 0.95rem;
-        }
-        .supporter-title strong { font-family: var(--font-head); font-size: 1.6rem; font-weight: 400; display: block; line-height: 1.2; }
+        .supporter-title { color: var(--dark); font-size: 1.6rem; font-weight: 400; margin-bottom: 18px; }
         .logo-marquee {
             /* Volle Breite, auch wenn der Container auf 1200px begrenzt ist */
             width: 100vw;
@@ -1711,7 +1706,7 @@
                 <div>
                     <span class="kicker kicker-on-mint"><i class="ph ph-heart"></i> Spenden</span>
                     <h2>Unterstütze die MiKi</h2>
-                    <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter.</p>
+                    <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
                 </div>
                 <div class="donate-box">
                     <button class="btn" onclick="alert('PayPal Link')">
@@ -1742,7 +1737,7 @@
 
             <!-- Unterstuetzer-Logos als endloses Laufband -->
             <div class="supporter-strip hidden-el">
-                <p class="supporter-title"><strong>Unsere Unterstützer</strong>Ohne Rückenwind läuft nichts. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
+                <h3 class="supporter-title">Unsere Unterstützer</h3>
                 <div class="logo-marquee">
                     <div class="logo-track">
                         <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
