@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
     <meta name="description" content="Jugendkirche in der Michaelskirche Heidenheim: Trampolin, Zocken, Chillen, Bar &amp; Events – von Jugendlichen für Jugendliche. Egal ob gläubig oder nicht, komm vorbei!">
     <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
     <meta name="theme-color" content="#10BB82">
@@ -273,7 +274,6 @@
             color: var(--dark);
             border-color: var(--primary);
             box-shadow: 0 0 30px rgba(16, 187, 130, 0.4);
-            transform: translateY(-3px);
         }
 
         .btn-secondary {
@@ -463,7 +463,6 @@
 
         .event-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: var(--radius);
@@ -474,7 +473,6 @@
         }
 
         .event-card:hover {
-            transform: translateY(-10px);
             border-color: var(--primary);
             background: rgba(255, 255, 255, 0.1);
         }
@@ -549,7 +547,6 @@
             transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
         .progress-item:hover {
-            transform: translateY(-4px);
             box-shadow: 0 10px 25px rgba(16, 187, 130, 0.18);
         }
         .progress-photo-modal img {
@@ -1060,7 +1057,18 @@
             .logo-marquee:hover .logo-track { animation-play-state: paused; }
             .exp-card:hover .exp-media img { transform: scale(1.07); }
             .exp-card:hover .exp-icon { transform: rotate(8deg) scale(1.1); }
+            /* Anheben nur mit Maus - auf Touch-Geraeten wuerde es nach dem Tippen haengen bleiben */
+            .btn-primary:hover { transform: translateY(-3px); }
+            .event-card:hover { transform: translateY(-10px); }
+            .progress-item:hover { transform: translateY(-4px); }
         }
+
+        /* Touch: kurzes Feedback beim Antippen statt Hover */
+        .event-card, .progress-item, .btn, .faq-item summary, .insta-card, .copy-btn {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .event-card:active, .progress-item:active { transform: scale(0.98); }
+        .btn:active, .insta-card:active, .copy-btn:active { transform: scale(0.96); }
 
         /* --- BEWEGUNG ZURUECKHALTEN: prefers-reduced-motion respektieren --- */
         @media (prefers-reduced-motion: reduce) {
@@ -1181,7 +1189,10 @@
             /* Vision Deko-Rahmen weglassen */
             .vision-image-container::after { display: none; }
 
-            /* Spende/Gebet-Karten */
+            /* Spende/Gebet-Karten: mehr Platz fuer den Text */
+            .prayer-card, .donation-card { padding: 24px 20px !important; }
+            .prayer-card > p:last-of-type { padding: 14px !important; }
+            .copy-btn { min-height: 36px; padding: 8px 14px; }
             #blog .grid-2,
             [style*="grid-template-columns: repeat(auto-fit"] {
                 grid-template-columns: 1fr !important;
@@ -1283,42 +1294,42 @@
 
             <div class="exp-grid">
                 <article class="exp-card wide hidden-el">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
                     <div class="exp-caption">
                         <h3>Springen</h3>
                     </div>
                 </article>
                 <article class="exp-card tall hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
                     <div class="exp-caption">
                         <h3>Chillen</h3>
                     </div>
                 </article>
                 <article class="exp-card hidden-el">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T10.webp" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T10.webp" srcset="Assets/T10-1200.webp 1200w, Assets/T10.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller"></i></span>
                     <div class="exp-caption">
                         <h3>Zocken</h3>
                     </div>
                 </article>
                 <article class="exp-card hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T7.webp" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T7.webp" srcset="Assets/T7-1200.webp 1200w, Assets/T7.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
                     <div class="exp-caption">
                         <h3>Darts &amp; Games</h3>
                     </div>
                 </article>
                 <article class="exp-card hidden-el">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-music-notes"></i></span>
                     <div class="exp-caption">
                         <h3>Musik &amp; Glaube</h3>
                     </div>
                 </article>
                 <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.webp" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.webp" srcset="Assets/W1-1200.webp 1200w, Assets/W1.webp 1400w" sizes="(max-width: 768px) 400px, 800px" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
                         <h3>DIY-Kirche</h3>
@@ -1683,7 +1694,7 @@
             </div>
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
-                    <img src="Assets/T2.jpg" alt="Jugendliche packen gemeinsam beim Umbau der MiKi an" loading="lazy" width="1600" height="1064" style="height: auto;">
+                    <img src="Assets/T2.jpg" srcset="Assets/T2-1200.webp 1200w, Assets/T2.jpg 1600w" sizes="(max-width: 768px) 100vw, 600px" alt="Jugendliche packen gemeinsam beim Umbau der MiKi an" loading="lazy" width="1600" height="1064" style="height: auto;">
                 </div>
             </div>
         </div>
@@ -1802,7 +1813,7 @@
             <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
                 
                 <!-- Gebetsanliegen Karte -->
-                <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 0ms;">
+                <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 0ms;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
                         <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
                         <h3 style="margin: 0;">Gebetsanliegen</h3>
@@ -1820,7 +1831,7 @@
                 </div>
 
                 <!-- Spendenprojekte Karte -->
-                <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); backdrop-filter: blur(10px); transition-delay: 100ms;">
+                <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 100ms;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
                         <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
                         <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
@@ -1891,7 +1902,7 @@
 <script>
     // defer + DOMContentLoaded: laeuft erst, nachdem das deferte Vue geladen ist
     document.addEventListener('DOMContentLoaded', function () {
-    const { createApp, ref, onMounted } = Vue;
+    const { createApp, ref, onMounted, watch } = Vue;
 
     createApp({
         setup() {
@@ -1996,10 +2007,15 @@
                 ibanCopied.value = true;
                 setTimeout(() => { ibanCopied.value = false; }, 2000);
             };
-            const openEventModal = (ev) => { selectedEvent.value = ev; document.body.style.overflow = 'hidden'; };
-            const closeEventModal = () => { selectedEvent.value = null; document.body.style.overflow = 'auto'; };
-            const openProgressModal = (item) => { selectedProgress.value = item; document.body.style.overflow = 'hidden'; };
-            const closeProgressModal = () => { selectedProgress.value = null; document.body.style.overflow = 'auto'; };
+            const openEventModal = (ev) => { selectedEvent.value = ev; };
+            const closeEventModal = () => { selectedEvent.value = null; };
+            const openProgressModal = (item) => { selectedProgress.value = item; };
+            const closeProgressModal = () => { selectedProgress.value = null; };
+            // Solange irgendein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
+            watch(
+                () => !!(selectedEvent.value || selectedProgress.value || showPrayerModal.value || showImpressum.value || showDatenschutz.value),
+                (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
+            );
 
             // ANIMATION OBSERVER
             onMounted(() => {
@@ -2047,7 +2063,12 @@
                     if (atBottom) current = 'kontakt';
                     activeSection.value = current;
                 }
-                window.addEventListener('scroll', vueScrollHandler);
+                let navTicking = false;
+                window.addEventListener('scroll', () => {
+                    if (navTicking) return;
+                    navTicking = true;
+                    requestAnimationFrame(() => { navTicking = false; vueScrollHandler(); });
+                }, { passive: true });
                 vueScrollHandler();
 
                 // --- PROGRESS BAR ANIMATION ON SCROLL ---
@@ -2099,13 +2120,13 @@
         const images = Array.from(document.querySelectorAll('.hero-bg-image'));
         if (!images.length) return;
 
-        // Nur das erste Foto laedt sofort (schneller Seitenstart, v. a. mobil).
-        // Die uebrigen holen wir, sobald die Seite fertig geladen ist.
-        const loadRest = () => images.forEach(img => {
-            if (img.dataset.bg) img.style.backgroundImage = "url('" + img.dataset.bg + "')";
-        });
-        if (document.readyState === 'complete') loadRest();
-        else window.addEventListener('load', loadRest);
+        // Foto laden (nur einmal): setzt das Hintergrundbild aus data-bg
+        const load = (img) => {
+            if (img && img.dataset.bg) {
+                img.style.backgroundImage = "url('" + img.dataset.bg + "')";
+                delete img.dataset.bg;
+            }
+        };
 
         // Fisher-Yates: pro Seitenaufruf eine neue Zufallsreihenfolge
         for (let i = images.length - 1; i > 0; i--) {
@@ -2124,11 +2145,21 @@
         let currentIndex = 0;
         order.forEach((img, i) => img.classList.toggle('active', i === 0));
 
+        // Spart mobiles Datenvolumen: Es wird immer nur das NAECHSTE Foto vorgeladen,
+        // nicht alle auf einmal - und zwar erst, wenn die Seite fertig geladen ist.
+        const preloadNext = () => load(order[(currentIndex + 1) % order.length]);
+        if (document.readyState === 'complete') preloadNext();
+        else window.addEventListener('load', preloadNext);
+
         setInterval(function() {
+            // Pause, wenn das Titelbild nicht zu sehen ist (weggescrollt oder Tab im Hintergrund)
+            if (document.hidden || window.scrollY > window.innerHeight) return;
             const nextIndex = (currentIndex + 1) % order.length;
+            load(order[nextIndex]);
             order[currentIndex].classList.remove('active');
             order[nextIndex].classList.add('active');
             currentIndex = nextIndex;
+            preloadNext();
         }, 4500);
     })();
 
