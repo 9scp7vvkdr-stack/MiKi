@@ -865,26 +865,53 @@
         }
         .cta-final h2 { color: #fff; font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 14px; }
         .cta-final .cta-lead { font-size: 1.15rem; color: rgba(255, 255, 255, 0.85); max-width: 560px; margin: 0 auto; }
-        .cta-chips {
+        .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 36px; }
+        /* Instagram hervorgehoben: Karte mit Verlaufsrahmen in Instagram-Farben */
+        .insta-card {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin: 30px 0 40px;
-        }
-        .cta-chip {
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            border-radius: 100px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            font-weight: 600;
-            font-size: 0.95rem;
+            gap: 20px;
+            max-width: 680px;
+            margin: 44px auto 0;
+            padding: 20px 24px;
+            text-align: left;
+            border-radius: var(--radius);
+            border: 2px solid transparent;
+            background:
+                linear-gradient(var(--dark), var(--dark)) padding-box,
+                linear-gradient(120deg, #f9ce34, #ee2a7b, #6228d7) border-box;
+            box-shadow: 0 20px 50px -20px rgba(238, 42, 123, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .cta-chip i { color: var(--primary); font-size: 1.2rem; }
-        .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+        .insta-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 26px 60px -18px rgba(238, 42, 123, 0.65);
+        }
+        .insta-icon {
+            flex-shrink: 0;
+            width: 64px; height: 64px;
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+        }
+        .insta-text { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .insta-text strong { font-size: 1.15rem; color: #fff; }
+        .insta-handle { color: var(--primary); }
+        .insta-text > span { font-size: 0.95rem; color: rgba(255, 255, 255, 0.8); line-height: 1.5; }
+        .insta-cta {
+            flex-shrink: 0;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 22px;
+            border-radius: 100px;
+            background: #fff;
+            color: var(--dark);
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
         .glow-blob {
             position: absolute;
             z-index: 0;
@@ -970,6 +997,10 @@
             /* Deko auf dem Handy weglassen - Lesbarkeit geht vor */
             .doodle { display: none; }
             .glow-blob { width: 320px; height: 320px; }
+
+            /* Instagram-Karte: untereinander statt nebeneinander */
+            .insta-card { flex-direction: column; text-align: center; gap: 14px; padding: 24px 20px; margin-top: 36px; }
+            .insta-text strong { font-size: 1.05rem; }
 
             /* Navbar */
             .navbar {
@@ -1185,14 +1216,8 @@
         <div class="glow-blob mint" data-parallax-px="-80" aria-hidden="true"></div>
         <div class="glow-blob indigo" data-parallax-px="80" aria-hidden="true"></div>
         <div class="container hidden-el">
-            <span class="kicker kicker-dark"><i class="ph ph-hand-waving"></i> Wir sehen uns</span>
             <h2>Bock bekommen?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
-            <div class="cta-chips">
-                <span class="cta-chip"><i class="ph ph-door-open"></i> Einfach reinkommen</span>
-                <span class="cta-chip"><i class="ph ph-users-three"></i> Freunde mitbringen</span>
-                <span class="cta-chip"><i class="ph ph-heart"></i> Egal ob gläubig oder nicht</span>
-            </div>
             <div class="cta-buttons">
                 <a href="https://wa.me/+491743086657?text=Hey%20ich+hätte+Bock+auf+die+MiKi" target="_blank" rel="noopener" class="btn btn-glow">
                     <i class="ph ph-whatsapp-logo"></i> Schreib uns
@@ -1200,10 +1225,15 @@
                 <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-ghost-light">
                     <i class="ph ph-map-pin"></i> So findest du hin
                 </a>
-                <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" class="btn btn-ghost-light">
-                    <i class="ph ph-instagram-logo"></i> Instagram
-                </a>
             </div>
+            <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" class="insta-card">
+                <span class="insta-icon" aria-hidden="true"><i class="ph ph-instagram-logo"></i></span>
+                <span class="insta-text">
+                    <strong>Folg uns auf Instagram <span class="insta-handle">@miki_hdh</span></strong>
+                    <span>Fotos, Updates und Behind-the-Scenes aus der MiKi – damit du kein Event verpasst.</span>
+                </span>
+                <span class="insta-cta">Folgen <i class="ph ph-arrow-right"></i></span>
+            </a>
         </div>
     </section>
 
@@ -1539,22 +1569,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News/Updates Bereich -->
-    <section class="section-padding" style="background: #f8fafc;">
-        <div class="container">
-            <div class="hidden-el" style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <span class="kicker"><i class="ph ph-instagram-logo"></i> @miki_hdh</span>
-                <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Neueste Updates</h2>
-                <p style="color: #475569; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.8;">
-                    Bleib immer auf dem Laufenden! Folge uns auf Instagram, um die neuesten Fotos, Updates und Behind-the-Scenes aus der MiKi zu sehen. Dort teilen wir regelmäßig, wie sich die Michaelskirche <span class="underline-sketch">verwandelt</span> und welche spannenden Events anstehen.
-                </p>
-                <a href="https://www.instagram.com/miki_hdh/" target="_blank" class="btn btn-primary" style="gap: 10px; font-size: 1.1rem;">
-                    <i class="ph ph-instagram-logo" style="font-size: 1.5rem;"></i> Folg uns auf Instagram @miki_hdh
-                </a>
             </div>
         </div>
     </section>
