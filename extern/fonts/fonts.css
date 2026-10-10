@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Just Me Again Down Here';
-  src: url('JustMeAgainDownHere-Regular.ttf') format('truetype');
+  src: url('JustMeAgainDownHere-Regular.woff2') format('woff2'),
+       url('JustMeAgainDownHere-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

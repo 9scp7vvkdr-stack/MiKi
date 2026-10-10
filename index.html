@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MiKi – die Jugendkirche an der Michaelskirche in Heidenheim. Von Jugendlichen für Jugendliche: Events, Skatepark, Gemeinschaft und Glaube.">
+    <meta name="description" content="Jugendkirche in der Michaelskirche Heidenheim: Trampolin, Zocken, Chillen, Bar &amp; Events – von Jugendlichen für Jugendliche. Egal ob gläubig oder nicht, komm vorbei!">
     <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
     <meta name="theme-color" content="#10BB82">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- Open Graph Tags für Social Media Previews -->
-    <meta property="og:title" content="MiKi – Jugendkirche Heidenheim | Kirche neu erleben">
+    <meta property="og:title" content="MiKi – Jugendkirche &amp; Jugendtreff in Heidenheim">
     <meta property="og:description" content="Eine Kirche mit Trampolin, Gaming-Ecke und Bar? Komm vorbei und erlebe die MiKi selbst!">
-    <meta property="og:image" content="https://www.miki-hdh.de/Assets/P1.jpg">
+    <meta property="og:image" content="https://www.miki-hdh.de/Assets/og-image.jpg">
+    <meta property="og:image:alt" content="Jugendliche chillen zusammen auf den Couches in der MiKi">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/jpeg">
@@ -22,11 +23,11 @@
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MiKi – Jugendkirche Heidenheim | Kirche neu erleben">
+    <meta name="twitter:title" content="MiKi – Jugendkirche &amp; Jugendtreff in Heidenheim">
     <meta name="twitter:description" content="Eine Kirche mit Trampolin, Gaming-Ecke und Bar? Komm vorbei und erlebe die MiKi selbst!">
-    <meta name="twitter:image" content="https://www.miki-hdh.de/Assets/P1.jpg">
+    <meta name="twitter:image" content="https://www.miki-hdh.de/Assets/og-image.jpg">
     
-    <title>MiKi – Jugendkirche Heidenheim | Kirche neu erleben</title>
+    <title>MiKi – Jugendkirche &amp; Jugendtreff in Heidenheim</title>
     
     <link rel="canonical" href="https://www.miki-hdh.de/">
 
@@ -35,6 +36,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon-192.png?v=2">
     <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon-512.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/apple-touch-icon.png?v=2">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -52,12 +54,13 @@
             "Jugendkirche Heidenheim",
             "Jugendkirche Michaelskirche Heidenheim"
         ],
-        "description": "Jugendkirche an der Michaelskirche in Heidenheim – ein Ort von Jugendlichen für Jugendliche mit Events, Skatepark und Gemeinschaft.",
+        "description": "Jugendkirche und Treffpunkt für Jugendliche in der Michaelskirche Heidenheim – von Jugendlichen für Jugendliche, mit Trampolin, Gaming, Bar, Chillout-Area, Events und Open Church.",
         "url": "https://www.miki-hdh.de/",
-        "logo": "https://www.miki-hdh.de/Assets/P1.jpg",
-        "image": "https://www.miki-hdh.de/Assets/P1.jpg",
+        "logo": "https://www.miki-hdh.de/Assets/MiKi-Logo.png",
+        "image": "https://www.miki-hdh.de/Assets/og-image.jpg",
         "telephone": "+49-174-3086657",
         "sameAs": [
+            "https://www.google.com/search?kgmid=/g/11b6t2py1l",
             "https://www.instagram.com/miki_hdh/",
             "https://www.ejhdh.de"
         ],
@@ -121,13 +124,17 @@
     }
     </script>
 
-    <script defer src="extern/vue.globals.js"></script>
+    <!-- Produktions-Build von Vue (inkl. Template-Compiler): ~160 KB statt 574 KB, schneller, ohne Dev-Warnungen -->
+    <script defer src="extern/vue.global.prod.js"></script>
 
-    <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Assets/T1.webp" as="image" fetchpriority="high">
     <link rel="stylesheet" href="extern/fonts/fonts.css">
     
     
-    <link rel="stylesheet" href="extern/phosphor/style.css">
+    <!-- Icons blockieren den ersten Seitenaufbau nicht (78 KB CSS werden nachgeladen) -->
+    <link rel="stylesheet" href="extern/phosphor/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="extern/phosphor/style.css"></noscript>
 
     <style>
         /* --- 1. DESIGN SYSTEM & VARS --- */
@@ -660,7 +667,7 @@
         /* --- FOOTER --- */
         footer {
             background: var(--darker);
-            color: #64748b;
+            color: #94a3b8;
             padding: 80px 0 40px;
             font-size: 0.9rem;
         }
@@ -698,6 +705,12 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* --- TASTATUR-FOKUS: sichtbar, aber nur bei Tastaturbedienung --- */
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+        }
 
         /* --- SCROLL-FORTSCHRITT (duenner Balken ganz oben) --- */
         .scroll-progress {
@@ -912,6 +925,68 @@
         }
         .doodle.indigo { color: var(--accent); opacity: 0.4; }
 
+        /* --- HAEUFIGE FRAGEN (Aufklapp-Liste, ohne JavaScript) --- */
+        .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+        .faq-item {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px -12px rgba(2, 6, 23, 0.25);
+            border: 1px solid #e2e8f0;
+            transition: border-color 0.2s ease;
+        }
+        .faq-item[open] { border-color: rgba(16, 187, 130, 0.6); }
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            font-weight: 700;
+            font-size: 1.02rem;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+';
+            flex-shrink: 0;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(16, 187, 130, 0.12);
+            color: var(--primary-ink);
+            font-size: 1.3rem;
+            font-weight: 700;
+            transition: transform 0.25s ease;
+        }
+        .faq-item[open] summary::after { transform: rotate(45deg); }
+        .faq-item p { padding: 0 22px 20px; color: #475569; }
+        .faq-item a { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
+
+        /* Ansprechpartner-Karte unter den Fragen */
+        .contact-card {
+            max-width: 760px;
+            margin: 40px auto 0;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 26px;
+            background: var(--dark);
+            color: #fff;
+            border-radius: var(--radius);
+            box-shadow: 0 24px 50px -24px rgba(2, 6, 23, 0.5);
+        }
+        .contact-card img {
+            flex-shrink: 0;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            transform: rotate(-3deg);
+        }
+        .contact-text h3 { color: #fff; font-size: 2.2rem; margin-bottom: 6px; }
+        .contact-text p { color: rgba(255, 255, 255, 0.85); font-size: 0.98rem; margin-bottom: 18px; }
+
         /* --- FINALER AUFRUF vor dem Footer --- */
         /* Foto-Hintergrund, gleitet beim Scrollen; die Abdunklung haelt den Text lesbar */
         .cta-bg {
@@ -1056,6 +1131,10 @@
             /* Deko auf dem Handy weglassen - Lesbarkeit geht vor */
             .doodle { display: none; }
 
+            /* Ansprechpartner-Karte: Foto oben, Text darunter */
+            .contact-card { flex-direction: column; text-align: center; gap: 18px; padding: 26px 20px; }
+            .contact-card img { width: 120px; height: 120px; }
+
             /* Instagram-Karte: untereinander statt nebeneinander */
             .insta-card { flex-direction: column; text-align: center; gap: 14px; padding: 24px 20px; margin-top: 36px; }
             .insta-text strong { font-size: 1.05rem; }
@@ -1147,14 +1226,14 @@
     <header class="hero">
         <div class="hero-bg">
             <div class="hero-bg-image active" style="background-image: url('Assets/T1.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T2.jpg');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T3.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T5.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T6.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T7.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T8.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T10.webp');"></div>
-            <div class="hero-bg-image" style="background-image: url('Assets/T11.webp');"></div>
+            <div class="hero-bg-image" data-bg="Assets/T2.jpg"></div>
+            <div class="hero-bg-image" data-bg="Assets/T3.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T5.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T6.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T7.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T8.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T10.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T11.webp"></div>
         </div>
         <div class="container hero-content">
             <h1>
@@ -1197,7 +1276,7 @@
             </div>
             
             <div class="events-grid">
-                <div v-for="(event, index) in events" :key="index" class="event-card hidden-el" @click="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
+                <div v-for="(event, index) in events" :key="index" class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
                     <span class="event-date-badge">{{ event.date }}</span>
                     <h3>{{ event.title }}</h3>
                     <p style="color: rgba(255,255,255,0.7);">{{ event.desc }}</p>
@@ -1217,7 +1296,7 @@
             <div class="section-head hidden-el">
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Aber anders.</span></h2>
-                <p>Trampolin, Zocken, Bar und Couches – und Leute, die Bock auf dich haben. Schau dir an, was in der MiKi so abgeht.</p>
+                <p>Trampolin, Zocken, Bar und Couches – und Leute, die Bock auf dich haben. Schau dir an, was in der MiKi in Heidenheim so abgeht.</p>
             </div>
 
             <div class="exp-grid">
@@ -1262,13 +1341,61 @@
                     </div>
                 </article>
                 <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.jpeg" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.webp" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
                         <h3>DIY-Kirche</h3>
                         <p>Ihr gestaltet die Kirche selbst um. Die Bar? Komplett von Jugendlichen gebaut. Mach mit!</p>
                     </div>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
+    <section class="section-padding" id="fragen" style="background: #f8fafc;">
+        <div class="container faq-wrap">
+            <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
+                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
+                <h2>Gut zu wissen</h2>
+            </div>
+            <div class="faq-list hidden-el">
+                <details class="faq-item">
+                    <summary>Muss ich gläubig sein, um in die MiKi zu kommen?</summary>
+                    <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was kostet das?</summary>
+                    <p>Nichts. Der Eintritt ist frei.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Ab welchem Alter kann ich kommen?</summary>
+                    <p>Die MiKi ist für alle ab der 5. Klasse. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Muss ich mich anmelden?</summary>
+                    <p>Nein. Zur Open Church am Freitag kommst du einfach vorbei – allein oder mit deinen Freunden.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
+                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Wo genau ist die MiKi?</summary>
+                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                </details>
+            </div>
+
+            <!-- Ansprechpartner mit Gesicht: schafft Vertrauen -->
+            <div class="contact-card hidden-el">
+                <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
+                <div class="contact-text">
+                    <h3>Hi, ich bin Stefan!</h3>
+                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
+                    <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
+                        <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1299,8 +1426,8 @@
     </section>
 
     <div v-if="selectedEvent" class="modal-overlay" @click="closeEventModal">
-        <div class="modal-content" @click.stop>
-            <button @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+            <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
                 <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.date }}</span>
@@ -1320,8 +1447,8 @@
 
     <!-- Baufortschritt Modal -->
     <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
-        <div class="modal-content progress-photo-modal" @click.stop style="max-width: 680px; padding: 32px;">
-            <button @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        <div class="modal-content progress-photo-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 680px; padding: 32px;">
+            <button type="button" aria-label="Schließen" @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
 
             <div class="modal-header">
                 <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
@@ -1346,15 +1473,15 @@
 
     <!-- Gebetsanliegen Modal -->
     <div v-if="showPrayerModal" class="modal-overlay" @click="showPrayerModal = false">
-        <div class="modal-content" @click.stop>
-            <button @click="showPrayerModal = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+            <button type="button" aria-label="Schließen" @click="showPrayerModal = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
                 <h2 style="margin: 0; font-size: 1.8rem;">Dein Gebetsanliegen teilen</h2>
             </div>
 
             <p style="line-height: 1.7; color: #334155; margin-bottom: 30px;">
-                Dein Anliegen geht an den Jugendreferent <strong>Stefan</strong>, der für dich und dein Anliegen betet. Auf Wunsch kann dein Anliegen auch anonym in einer Gebetsgemeinschaft geteilt werden.<br><br>Wähle deinen bevorzugten Kontaktweg:
+                Dein Anliegen geht an unseren Jugendreferenten <strong>Stefan</strong>, der für dich und dein Anliegen betet. Auf Wunsch kann dein Anliegen auch anonym in einer Gebetsgemeinschaft geteilt werden.<br><br>Wähle deinen bevorzugten Kontaktweg:
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -1369,8 +1496,8 @@
     </div>
 
     <div v-if="showDatenschutz" class="modal-overlay" @click="showDatenschutz = false">
-        <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
-            <button @click="showDatenschutz = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+            <button type="button" aria-label="Schließen" @click="showDatenschutz = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
             
             <div class="modal-header">
                 <h2 style="margin: 0; font-size: 1.8rem;">Datenschutzerklärung</h2>
@@ -1501,8 +1628,8 @@
     </div>
 
     <div v-if="showImpressum" class="modal-overlay" @click="showImpressum = false">
-        <div class="modal-content" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
-            <button @click="showImpressum = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+            <button type="button" aria-label="Schließen" @click="showImpressum = false" style="position: fixed; right: 30px; top: 30px; background: white; border: 2px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--primary); z-index: 1001; transition: all 0.3s; font-weight: bold;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='white'; this.style.color='var(--primary)';">✕</button>
             
             <div class="modal-header">
                 <h2 style="margin: 0; font-size: 1.8rem;">Impressum</h2>
@@ -1582,7 +1709,7 @@
                 </div>
                 
                 <div class="progress-container">
-                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" @click="openProgressModal(item)">
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" role="button" tabindex="0" @click="openProgressModal(item)" @keydown.enter="openProgressModal(item)" @keydown.space.prevent="openProgressModal(item)">
                         <div class="progress-circle">{{ item.animatedPercent }}%</div>
                         <div style="flex: 1;">
                             <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
@@ -1608,7 +1735,7 @@
                 <span class="kicker"><i class="ph ph-lightbulb"></i> Vision</span>
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
-                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Wir möchten Menschen in eine (tiefere) Beziehung mit Jesus bringen. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können.  Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird und setzen die Umgestaltungsmaßnahmen selbst um. Außerdem ist es ganz egal, ob du Gläubig bist oder nicht. Hier ist jeder willkommen. 
+                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Hier ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wir glauben, dass Jesus dein Leben verändern kann – und laden dich ein, das selbst herauszufinden. Dafür schaffen wir einen Raum, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können. Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird, und setzen die Umgestaltung selbst um.
 
                 </p>
                 <ul class="vision-list">
@@ -1649,11 +1776,11 @@
                         <h3 style="margin: 0;">Gebetsanliegen</h3>
                     </div>
                     <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
-                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten füreinander ein und tragen euch im Gebet.
+                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten zusammen und tragen dich im Gebet.
                     </p>
                     <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
                         <strong>Möchtest du für die MiKi beten?</strong><br>
-                        Danke für dein <strong>Gebet</strong> Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
+                        Danke für dein <strong>Gebet</strong>! Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
                     </p>
                     <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
                         <i class="ph ph-pencil-simple"></i> Anliegen teilen
@@ -1743,7 +1870,7 @@
             <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
                 <div class="footer-col">
                     <h3 style="color: var(--primary);">MiKi Heidenheim</h3>
-                    <p>Ein Projekt von <a href="https://www.ejhdh.de" target="_blank" style="color: var(--primary); text-decoration: underline;">Evangelischen Jugendwerk Heidenheim</a></p>
+                    <p>Ein Projekt vom <a href="https://www.ejhdh.de" target="_blank" style="color: var(--primary); text-decoration: underline;">Evangelischen Jugendwerk Heidenheim</a></p>
                     <address style="font-style: normal; line-height: 1.7; margin-top: 20px;">
                         An der Stadtmauer 1<br>
                         89520 Heidenheim an der Brenz
@@ -1763,9 +1890,7 @@
                 <div class="footer-col">
                     <h3>Folge uns auf Social Media</h3>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/miki_hdh/" target="_blank"><i class="ph ph-instagram-logo"></i></a>
-                        <a href="#"><i class="ph ph-tiktok-logo"></i></a>
-                        <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -1776,7 +1901,7 @@
                     </ul>
                 </div>
             </div>
-            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.5;">
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
                 &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
@@ -1809,14 +1934,14 @@
                     desc: "Die MiKi ist offen, komm einfach vorbei",
                     location: "Michaelskirche HDH",
                     time: "12:00 - 16:30",
-                    detailedDesc: "Ob Skaten, Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen - die MiKi ist jeden Freitag für dich geöffnet!"
+                    detailedDesc: "Ob Skaten (kommt bald!), Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen - die MiKi ist jeden Freitag für dich geöffnet!"
                 },
                 { 
                     title: "Orgel x Deine Mukke", 
                     date: "08.11.2026", 
                     desc: "ACDC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre ",
                     location: "MiKi",
-                    time: "-",
+                    time: "19:00 Uhr",
                     detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen. Stimme über Instagram ab und komme vorbei."
                 }
             ]);
@@ -1828,7 +1953,7 @@
                     percent: 100,
                     status: "Die Bar ist fertig",
                     animatedPercent: 0,
-                    photo: 'Assets/W1.jpeg',
+                    photo: 'Assets/W1.webp',
                     detailedDesc: "Die Bar ist unser erstes abgeschlossenes Großprojekt – und wir sind so stolz darauf! In wochenlanger Eigenregie haben Jugendliche aus Holz und Beton eine vollständige Bar gezimmert. Hier können sich alle mit Getränken versorgen und in lockerer Atmosphäre zusammenkommen. Ein echtes Herzstück der MiKi – zu 100% von Jugendlichen für Jugendliche gebaut. Du willst auch mal anpacken? Komm dienstags ab 17 Uhr vorbei!"
                 },
                 {
@@ -1836,7 +1961,7 @@
                     percent: 55,
                     status: "Couchtische und Deko steht noch an",
                     animatedPercent: 0,
-                    photo: 'Assets/W2.jpeg',
+                    photo: 'Assets/W2.webp',
                     detailedDesc: "Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!"
                 },
                 {
@@ -1844,7 +1969,7 @@
                     percent: 10,
                     status: "Noch in Planung.",
                     animatedPercent: 0,
-                    photo: 'Assets/W3.jpg',
+                    photo: 'Assets/W3.webp',
                     detailedDesc: "Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!"
                 },
                 {
@@ -1898,6 +2023,16 @@
 
             // ANIMATION OBSERVER
             onMounted(() => {
+                // Escape schliesst jedes offene Fenster
+                document.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Escape') return;
+                    if (selectedEvent.value) closeEventModal();
+                    if (selectedProgress.value) closeProgressModal();
+                    showPrayerModal.value = false;
+                    showImpressum.value = false;
+                    showDatenschutz.value = false;
+                });
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if(entry.isIntersecting) {
@@ -1982,6 +2117,14 @@
     (function() {
         const images = Array.from(document.querySelectorAll('.hero-bg-image'));
         if (!images.length) return;
+
+        // Nur das erste Foto laedt sofort (schneller Seitenstart, v. a. mobil).
+        // Die uebrigen holen wir, sobald die Seite fertig geladen ist.
+        const loadRest = () => images.forEach(img => {
+            if (img.dataset.bg) img.style.backgroundImage = "url('" + img.dataset.bg + "')";
+        });
+        if (document.readyState === 'complete') loadRest();
+        else window.addEventListener('load', loadRest);
 
         // Fisher-Yates: pro Seitenaufruf eine neue Zufallsreihenfolge
         for (let i = images.length - 1; i > 0; i--) {
