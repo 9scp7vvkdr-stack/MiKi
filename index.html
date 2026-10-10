@@ -982,17 +982,6 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .glow-blob {
-            position: absolute;
-            z-index: 0;
-            width: 520px; height: 520px;
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(10px);
-            will-change: transform;
-        }
-        .glow-blob.mint   { background: radial-gradient(circle, rgba(16, 187, 130, 0.35) 0%, transparent 65%); top: -180px; left: -160px; }
-        .glow-blob.indigo { background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 65%); bottom: -200px; right: -160px; }
 
         /* Event-Karten etwas lebendiger */
         .event-card:hover { box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.45); }
@@ -1066,7 +1055,6 @@
 
             /* Deko auf dem Handy weglassen - Lesbarkeit geht vor */
             .doodle { display: none; }
-            .glow-blob { width: 320px; height: 320px; }
 
             /* Instagram-Karte: untereinander statt nebeneinander */
             .insta-card { flex-direction: column; text-align: center; gap: 14px; padding: 24px 20px; margin-top: 36px; }
@@ -1288,8 +1276,6 @@
     <!-- Letzter Anstoss: einfach vorbeikommen -->
     <section class="section-padding cta-final has-doodles">
         <div class="cta-bg" data-parallax="12" style="background-image: url('Assets/T11.webp');" aria-hidden="true"></div>
-        <div class="glow-blob mint" data-parallax-px="-80" aria-hidden="true"></div>
-        <div class="glow-blob indigo" data-parallax-px="80" aria-hidden="true"></div>
         <div class="container hidden-el">
             <h2>Bock bekommen?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
