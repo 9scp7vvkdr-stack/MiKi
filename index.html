@@ -862,6 +862,7 @@
             width: 100%; height: 100%;
             object-fit: cover;
             border-radius: 0;
+            filter: brightness(1.18) saturate(1.08); /* Fotos sind teils abends entstanden -> aufhellen */
             transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .exp-card::after {
@@ -869,7 +870,8 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-            background: linear-gradient(180deg, rgba(2, 6, 23, 0) 30%, rgba(2, 6, 23, 0.9) 100%);
+            /* nur unten abdunkeln - dort steht die Ueberschrift */
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0) 50%, rgba(2, 6, 23, 0.7) 100%);
         }
         .exp-icon {
             position: absolute;
@@ -990,6 +992,19 @@
         }
         .contact-text h3 { color: #fff; font-size: 2.2rem; margin-bottom: 6px; }
         .contact-text p { color: rgba(255, 255, 255, 0.85); font-size: 0.98rem; margin-bottom: 18px; }
+        .contact-card { scroll-margin-top: 100px; } /* beim Sprung aus der Navigation nicht unter der Leiste verstecken */
+        .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+        .contact-mail {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            padding: 8px 0;
+        }
+        .contact-mail:hover { color: var(--primary); }
 
         /* --- FINALER AUFRUF vor dem Footer --- */
         /* Foto-Hintergrund, gleitet beim Scrollen; die Abdunklung haelt den Text lesbar */
@@ -1119,7 +1134,7 @@
             .exp-caption { padding: 14px 14px; }
             /* Schmale Kacheln: Text reicht hoeher ins Bild -> Abdunklung frueher starten */
             .exp-card::after {
-                background: linear-gradient(180deg, rgba(2, 6, 23, 0.15) 0%, rgba(2, 6, 23, 0.6) 40%, rgba(2, 6, 23, 0.92) 100%);
+                background: linear-gradient(180deg, rgba(2, 6, 23, 0) 45%, rgba(2, 6, 23, 0.75) 100%);
             }
             .exp-caption h3 { font-size: 1.7rem; }
 
@@ -1130,6 +1145,7 @@
             /* Ansprechpartner-Karte: Foto oben, Text darunter */
             .contact-card { flex-direction: column; text-align: center; gap: 18px; padding: 26px 20px; }
             .contact-card img { width: 120px; height: 120px; }
+            .contact-actions { flex-direction: column; }
 
             /* Instagram-Karte: untereinander statt nebeneinander */
             .insta-card { margin-top: 28px; padding: 12px 14px; }
@@ -1216,10 +1232,10 @@
     <nav class="navbar">
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events" :class="{ active: activeSection === 'events' }">Events</a>
-        <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
         <a href="#fragen" :class="{ active: activeSection === 'fragen' }">FAQ</a>
-        <a href="#spenden" :class="{ active: activeSection === 'spenden' }">Support</a>
         <a href="#kontakt" :class="{ active: activeSection === 'kontakt' }">Kontakt</a>
+        <a href="#vision" :class="{ active: activeSection === 'vision' }">Vision</a>
+        <a href="#spenden" :class="{ active: activeSection === 'spenden' }">Support</a>
     </nav>
 
     <header class="hero">
@@ -1304,10 +1320,10 @@
                     </div>
                 </article>
                 <article class="exp-card tall hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
-                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/barbauprojekt.webp" srcset="Assets/barbauprojekt-800.webp 800w, Assets/barbauprojekt.webp 1200w" sizes="(max-width: 768px) 260px, 480px" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
-                        <h3>Chillen</h3>
+                        <h3>DIY-Kirche</h3>
                     </div>
                 </article>
                 <article class="exp-card hidden-el">
@@ -1326,16 +1342,16 @@
                 </article>
                 <article class="exp-card hidden-el">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
-                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-music-notes"></i></span>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hands-praying"></i></span>
                     <div class="exp-caption">
-                        <h3>Musik &amp; Glaube</h3>
+                        <h3>Glaube</h3>
                     </div>
                 </article>
                 <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
-                    <div class="exp-media" data-parallax="10"><img src="Assets/W1.webp" srcset="Assets/W1-1200.webp 1200w, Assets/W1.webp 1400w" sizes="(max-width: 768px) 400px, 800px" alt="Die von Jugendlichen selbst gebaute Bar in der MiKi" loading="lazy" decoding="async"></div>
-                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
                     <div class="exp-caption">
-                        <h3>DIY-Kirche</h3>
+                        <h3>Chillen</h3>
                     </div>
                 </article>
             </div>
@@ -1349,9 +1365,6 @@
             <h2>Klingt gut?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
             <div class="cta-buttons">
-                <a href="https://wa.me/+491743086657?text=Hey%20ich+hätte+Bock+auf+die+MiKi" target="_blank" rel="noopener" class="btn btn-glow">
-                    <i class="ph ph-whatsapp-logo"></i> Schreib uns
-                </a>
                 <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-ghost-light">
                     <i class="ph ph-map-pin"></i> So findest du hin
                 </a>
@@ -1636,6 +1649,63 @@
         </div>
     </div>
 
+    <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
+    <section class="section-padding" id="fragen" style="background: #f8fafc;">
+        <div class="container faq-wrap">
+            <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
+                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
+                <h2>Gut zu wissen</h2>
+            </div>
+            <div class="faq-list hidden-el">
+                <details class="faq-item">
+                    <summary>Muss ich gläubig sein, um in die MiKi zu kommen?</summary>
+                    <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was hat es mit diesem Jesus auf sich?</summary>
+                    <p>Wir glauben, dass Jesus dein Leben verändern kann, und laden dich ein, das selbst herauszufinden. Komm mit all deinen Fragen, Zweifeln oder Themen gerne auf uns zu.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was kostet das?</summary>
+                    <p>Nichts. Der Eintritt ist frei.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Ab welchem Alter kann ich kommen?</summary>
+                    <p>Die MiKi ist für alle ab der 5. Klasse. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Muss ich mich anmelden?</summary>
+                    <p>Nein. Zur Open Church am Freitag kommst du einfach vorbei – allein oder mit deinen Freunden.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
+                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Wo genau ist die MiKi?</summary>
+                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                </details>
+            </div>
+
+            <!-- Ansprechpartner mit Gesicht: schafft Vertrauen -->
+            <div class="contact-card hidden-el" id="kontakt">
+                <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
+                <div class="contact-text">
+                    <h3>Hi, ich bin Stefan!</h3>
+                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
+                    <div class="contact-actions">
+                        <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
+                            <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
+                        </a>
+                        <a href="mailto:Stefan.hoerz@ejhdh.de" class="contact-mail">
+                            <i class="ph ph-envelope-simple"></i> Stefan.hoerz@ejhdh.de
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section-padding" id="umbau" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
         <div class="container">
             <div class="grid-2">
@@ -1698,58 +1768,6 @@
             <div class="vision-img-wrapper hidden-el">
                 <div class="vision-image-container">
                     <img src="Assets/T2.jpg" srcset="Assets/T2-1200.webp 1200w, Assets/T2.jpg 1600w" sizes="(max-width: 768px) 100vw, 600px" alt="Jugendliche packen gemeinsam beim Umbau der MiKi an" loading="lazy" width="1600" height="1064" style="height: auto;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
-    <section class="section-padding" id="fragen" style="background: #f8fafc;">
-        <div class="container faq-wrap">
-            <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
-                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
-                <h2>Gut zu wissen</h2>
-            </div>
-            <div class="faq-list hidden-el">
-                <details class="faq-item">
-                    <summary>Muss ich gläubig sein, um in die MiKi zu kommen?</summary>
-                    <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Was hat es mit diesem Jesus auf sich?</summary>
-                    <p>Wir glauben, dass Jesus dein Leben verändern kann, und laden dich ein, das selbst herauszufinden. Komm mit all deinen Fragen, Zweifeln oder Themen gerne auf uns zu.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Was kostet das?</summary>
-                    <p>Nichts. Der Eintritt ist frei.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Ab welchem Alter kann ich kommen?</summary>
-                    <p>Die MiKi ist für alle ab der 5. Klasse. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Muss ich mich anmelden?</summary>
-                    <p>Nein. Zur Open Church am Freitag kommst du einfach vorbei – allein oder mit deinen Freunden.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
-                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Wo genau ist die MiKi?</summary>
-                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
-                </details>
-            </div>
-
-            <!-- Ansprechpartner mit Gesicht: schafft Vertrauen -->
-            <div class="contact-card hidden-el">
-                <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
-                <div class="contact-text">
-                    <h3>Hi, ich bin Stefan!</h3>
-                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
-                    <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
-                        <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
-                    </a>
                 </div>
             </div>
         </div>
@@ -1859,7 +1877,7 @@
         </div>
     </section>
 
-    <footer id="kontakt">
+    <footer>
         <div class="container">
             <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
                 <div class="footer-col">
@@ -2045,25 +2063,24 @@
                 }, 100);
 
                 // --- NAVBAR ACTIVE SECTION (Vue) ---
+                // Reihenfolge wie auf der Seite. "umbau" hat keinen Menuepunkt -> dort ist nichts markiert.
                 const sectionOrder = [
                     { id: 'events' },
-                    { id: 'vision' },
                     { id: 'fragen' },
-                    { id: 'spenden' },
-                    { id: 'kontakt' }
+                    { id: 'kontakt' },
+                    { id: 'umbau' },
+                    { id: 'vision' },
+                    { id: 'spenden' }
                 ];
                 function vueScrollHandler() {
                     const scrollPos = window.scrollY + 130;
                     let current = '';
                     for (const sec of sectionOrder) {
                         const el = document.getElementById(sec.id);
-                        if (el && el.offsetTop <= scrollPos) {
+                        if (el && el.getBoundingClientRect().top + window.scrollY <= scrollPos) {
                             current = sec.id;
                         }
                     }
-                    // Footer ist oft kuerzer als der Viewport -> am Seitenende immer "Kontakt"
-                    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5;
-                    if (atBottom) current = 'kontakt';
                     activeSection.value = current;
                 }
                 let navTicking = false;
