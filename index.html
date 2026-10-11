@@ -460,6 +460,47 @@
             gap: 30px;
             margin-top: 50px;
         }
+        .events-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+        .events-nav { display: none; gap: 10px; flex-shrink: 0; }
+        .events-nav.show { display: flex; }
+        .events-arrow {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            background: transparent;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+        }
+        .events-arrow:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+        .events-arrow:disabled { opacity: 0.3; cursor: default; }
+
+        /* Computer: alle Termine in EINER Reihe. Passen nicht alle hinein,
+           wird die Reihe seitlich blaetterbar (Pfeile, Touchpad, Wischen). */
+        @media (min-width: 769px) {
+            .events-grid {
+                grid-template-columns: none;
+                grid-auto-flow: column;
+                grid-auto-columns: calc((100% - 2 * 20px) / 3);
+                gap: 20px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                /* Platz, damit Anheben und Schatten beim Hover nicht abgeschnitten werden */
+                padding: 14px 4px 28px;
+                margin: 36px -4px -28px;
+            }
+            .events-grid::-webkit-scrollbar { display: none; }
+            .event-card { scroll-snap-align: start; padding: 26px 24px; display: flex; flex-direction: column; align-items: flex-start; }
+            /* "Details checken" in allen Karten auf gleicher Hoehe (ganz unten) */
+            .event-card > div:last-child { margin-top: auto !important; padding-top: 20px; }
+        }
+        @media (min-width: 1100px) {
+            .events-grid { grid-auto-columns: calc((100% - 3 * 20px) / 4); }
+        }
 
         .event-card {
             background: rgba(255, 255, 255, 0.05);
@@ -1281,12 +1322,19 @@
     <section class="section-padding has-doodles" id="events">
         <svg class="doodle" data-parallax-px="-70" style="top: 70px; right: 8%;" width="70" height="70" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 9" stroke-linecap="round"/></svg>
         <div class="container">
-            <div class="hidden-el">
-                <span class="kicker kicker-dark"><i class="ph ph-calendar-blank"></i> Termine</span>
-                <h2 style="color:white;">Was geht in der MiKi?!</h2>
-                <p>Verpasse nichts! Hier findest du alle aktuellen Termine.</p>
+            <div class="events-head hidden-el">
+                <div>
+                    <span class="kicker kicker-dark"><i class="ph ph-calendar-blank"></i> Termine</span>
+                    <h2 style="color:white;">Was geht in der MiKi?!</h2>
+                    <p>Verpasse nichts! Hier findest du alle aktuellen Termine.</p>
+                </div>
+                <!-- Pfeile erscheinen nur, wenn mehr Termine da sind, als in eine Reihe passen -->
+                <div class="events-nav" aria-label="Termine blättern">
+                    <button type="button" class="events-arrow" data-dir="-1" aria-label="Vorherige Termine"><i class="ph ph-arrow-left"></i></button>
+                    <button type="button" class="events-arrow" data-dir="1" aria-label="Weitere Termine"><i class="ph ph-arrow-right"></i></button>
+                </div>
             </div>
-            
+
             <div class="events-grid">
                 <div v-for="(event, index) in events" :key="index" class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
                     <span class="event-date-badge">{{ event.date }}</span>
@@ -2193,6 +2241,30 @@
             currentIndex = nextIndex;
             preloadNext();
         }, 4500);
+    })();
+
+    // Termine: Pfeile zum Blaettern, sobald nicht alle Termine in eine Reihe passen
+    (function() {
+        const grid = document.querySelector('.events-grid');
+        const nav = document.querySelector('.events-nav');
+        if (!grid || !nav) return;
+        const [prev, next] = nav.querySelectorAll('.events-arrow');
+        const update = () => {
+            const max = grid.scrollWidth - grid.clientWidth;
+            nav.classList.toggle('show', max > 4);
+            prev.disabled = grid.scrollLeft <= 4;
+            next.disabled = grid.scrollLeft >= max - 4;
+        };
+        nav.addEventListener('click', (e) => {
+            const btn = e.target.closest('.events-arrow');
+            if (!btn) return;
+            const card = grid.querySelector('.event-card');
+            const step = card ? card.offsetWidth + 20 : grid.clientWidth;
+            grid.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
+        });
+        grid.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
     })();
 
     // Bewegung nur, wenn der Nutzer sie nicht im System abgeschaltet hat
