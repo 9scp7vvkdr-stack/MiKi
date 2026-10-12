@@ -940,6 +940,43 @@
             /* nur unten abdunkeln - dort steht die Ueberschrift */
             background: linear-gradient(180deg, rgba(2, 6, 23, 0) 50%, rgba(2, 6, 23, 0.7) 100%);
         }
+        .exp-card { cursor: pointer; }
+        /* kleines "+" oben rechts: zeigt, dass man fuer mehr Infos tippen kann */
+        .exp-more {
+            position: absolute;
+            right: 14px; top: 16px;
+            z-index: 2;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--dark);
+            font-size: 1rem;
+            box-shadow: 0 6px 16px -6px rgba(2, 6, 23, 0.6);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+        }
+        .exp-card:active { transform: scale(0.98); }
+        .tile-modal img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .tile-modal h2 { font-size: 2.4rem; margin-bottom: 10px; }
+        .tile-modal p { line-height: 1.75; color: #334155; }
+        .tile-close {
+            position: absolute;
+            right: 44px; top: 44px;
+            z-index: 1;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.92);
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px -4px rgba(2, 6, 23, 0.4);
+        }
         .exp-icon {
             position: absolute;
             top: 16px; left: 16px;
@@ -1166,6 +1203,7 @@
             .logo-marquee:hover .logo-track { animation-play-state: paused; }
             .exp-card:hover .exp-media img { transform: scale(1.07); }
             .exp-card:hover .exp-icon { transform: rotate(8deg) scale(1.1); }
+            .exp-card:hover .exp-more { transform: rotate(90deg) scale(1.1); background: var(--primary); }
             /* Anheben nur mit Maus - auf Touch-Geraeten wuerde es nach dem Tippen haengen bleiben */
             .btn-primary:hover { transform: translateY(-3px); }
             .event-card:hover { transform: translateY(-10px); }
@@ -1222,6 +1260,11 @@
             .exp-card { border-radius: 18px; }
             .exp-card.tall { grid-row: span 1; }
             .exp-icon { width: 38px; height: 38px; font-size: 1.2rem; top: 12px; left: 12px; border-radius: 11px; }
+            .exp-more { width: 30px; height: 30px; right: 10px; top: 14px; font-size: 0.9rem; }
+            .tile-modal { padding: 22px 20px 28px !important; }
+            .tile-modal img { height: 220px; }
+            .tile-modal h2 { font-size: 2rem; }
+            .tile-close { right: 30px; top: 30px; }
             .exp-caption { padding: 14px 14px; }
             /* Schmale Kacheln: Text reicht hoeher ins Bild -> Abdunklung frueher starten */
             .exp-card::after {
@@ -1410,47 +1453,53 @@
             </div>
 
             <div class="exp-grid">
-                <article class="exp-card wide hidden-el">
+                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
                     <div class="exp-caption">
                         <h3>Springen</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card tall hidden-el" style="transition-delay: 100ms;">
+                <article class="exp-card tall hidden-el" role="button" tabindex="0" aria-label="Mehr über DIY-Kirche" @click="openTile('diy')" @keydown.enter="openTile('diy')" @keydown.space.prevent="openTile('diy')" style="transition-delay: 100ms;">
                     <div class="exp-media" data-parallax="10"><img src="Assets/barbauprojekt.webp" srcset="Assets/barbauprojekt-800.webp 800w, Assets/barbauprojekt.webp 1200w" sizes="(max-width: 768px) 260px, 480px" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
                         <h3>DIY-Kirche</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el">
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Zocken" @click="openTile('zocken')" @keydown.enter="openTile('zocken')" @keydown.space.prevent="openTile('zocken')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T10.webp" srcset="Assets/T10-1200.webp 1200w, Assets/T10.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller"></i></span>
                     <div class="exp-caption">
                         <h3>Zocken</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el" style="transition-delay: 100ms;">
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Darts &amp; Games" @click="openTile('darts')" @keydown.enter="openTile('darts')" @keydown.space.prevent="openTile('darts')" style="transition-delay: 100ms;">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T7.webp" srcset="Assets/T7-1200.webp 1200w, Assets/T7.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
                     <div class="exp-caption">
                         <h3>Darts &amp; Games</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el">
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Glaube" @click="openTile('glaube')" @keydown.enter="openTile('glaube')" @keydown.space.prevent="openTile('glaube')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hands-praying"></i></span>
                     <div class="exp-caption">
                         <h3>Glaube</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card wide hidden-el" style="transition-delay: 100ms;">
+                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Chillen" @click="openTile('chillen')" @keydown.enter="openTile('chillen')" @keydown.space.prevent="openTile('chillen')" style="transition-delay: 100ms;">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
                     <div class="exp-caption">
                         <h3>Chillen</h3>
                     </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
             </div>
         </div>
@@ -1498,6 +1547,20 @@
                 <i class="ph ph-whatsapp-logo"></i> Per WhatsApp anmelden
             </a>
             <button class="btn btn-primary" :style="{ width: '100%', marginTop: selectedEvent.whatsapp ? '12px' : '30px', justifyContent: 'center' }" @click="closeEventModal">Alles klar!</button>
+        </div>
+    </div>
+
+    <!-- "Kirche? Anders als du denkst": Infos zur angeklickten Kachel -->
+    <div v-if="selectedTile" class="modal-overlay" @click="selectedTile = null">
+        <div class="modal-content tile-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 640px; padding: 32px;">
+            <button type="button" aria-label="Schließen" @click="selectedTile = null" class="tile-close">✕</button>
+            <img :src="selectedTile.img" :alt="selectedTile.alt" :style="{ objectPosition: selectedTile.pos || 'center' }">
+            <h2>{{ selectedTile.title }}</h2>
+            <p>{{ selectedTile.text }}</p>
+            <a v-if="selectedTile.link" :href="selectedTile.link.href" class="btn btn-glow" style="width: 100%; margin-top: 24px; justify-content: center;" @click.prevent="goToFromTile(selectedTile.link.href)">
+                {{ selectedTile.link.label }} <i class="ph ph-arrow-right"></i>
+            </a>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: selectedTile.link ? '12px' : '24px', justifyContent: 'center' }" @click="selectedTile = null">Alles klar!</button>
         </div>
     </div>
 
@@ -2051,7 +2114,7 @@
 <script>
     // defer + DOMContentLoaded: laeuft erst, nachdem das deferte Vue geladen ist
     document.addEventListener('DOMContentLoaded', function () {
-    const { createApp, ref, onMounted, watch } = Vue;
+    const { createApp, ref, onMounted, watch, nextTick } = Vue;
 
     createApp({
         setup() {
@@ -2149,6 +2212,60 @@
             const showPrayerModal = ref(false);
             const showPaypalHint = ref(false);
 
+            // Texte zu den Foto-Kacheln ("Kirche? Anders als du denkst")
+            const tiles = {
+                springen: {
+                    title: 'Springen',
+                    img: 'Assets/T3-1200.webp', pos: '70% 30%',
+                    alt: 'Das Trampolin in der MiKi, davor die Lounge mit Couches',
+                    text: 'Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.',
+                    link: { href: '#events', label: 'Zu den Terminen' }
+                },
+                diy: {
+                    title: 'DIY-Kirche',
+                    img: 'Assets/barbauprojekt-800.webp', pos: '50% 35%',
+                    alt: 'Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar',
+                    text: 'Die MiKi richtet keine Firma ein – das machen wir selbst. Die Bar und das Neon-Kreuz haben Jugendliche gebaut, und es geht weiter: Eine Boulderwand und eine Halfpipe sind schon geplant. Du willst mit anpacken? Komm dienstags von 17 bis 19 Uhr zum Baujugendkreis. Ob du schon mal was gebaut hast, ist völlig egal.',
+                    link: { href: '#umbau', label: 'Das wird gerade gebaut' }
+                },
+                zocken: {
+                    title: 'Zocken',
+                    img: 'Assets/T10-1200.webp',
+                    alt: 'Jugendliche zocken zusammen auf einer großen Leinwand',
+                    text: 'Zocken macht zusammen einfach mehr Spaß als allein daheim. In der MiKi gibt es einen eigenen Gaming-Bereich – fordere deine Freunde heraus oder lern beim Zocken neue Leute kennen.'
+                },
+                darts: {
+                    title: 'Darts & Games',
+                    img: 'Assets/T7-1200.webp',
+                    alt: 'Zwei Jugendliche spielen Darts',
+                    text: 'Darts, Spiele und ein bisschen Wettkampf: Ob du die 180 triffst oder knapp an der Scheibe vorbei – Spaß macht es trotzdem. Perfekt, um mit anderen ins Gespräch zu kommen.'
+                },
+                glaube: {
+                    title: 'Glaube',
+                    img: 'Assets/T8-1200.webp',
+                    alt: 'Live-Musik in der Michaelskirche',
+                    text: 'In der MiKi ist jeder willkommen – egal, ob du glaubst, zweifelst oder einfach neugierig bist. Wenn du Lust hast, lernst du im Jugendkreis (freitags, 19 Uhr) den christlichen Glauben kennen: mit Musik, echten Fragen und Gemeinschaft. Musst du aber nicht.',
+                    link: { href: '#fragen', label: 'Fragen zum Glauben? Zur FAQ' }
+                },
+                chillen: {
+                    title: 'Chillen',
+                    img: 'Assets/T6-1200.webp',
+                    alt: 'Jugendliche sitzen zusammen auf den Couches in der MiKi',
+                    text: 'Couches statt Holzbänke: In der Lounge kannst du einfach abhängen, quatschen, Hausis machen oder dir an der Bar Getränke und Snacks holen. Kein Programm, kein Muss – einfach ein Ort, an dem du gerne bist.'
+                }
+            };
+            const selectedTile = ref(null);
+            const openTile = (key) => { selectedTile.value = tiles[key]; };
+            // Link im Fenster: erst schliessen, dann zum Abschnitt springen
+            // (sonst verschwindet der Link mit dem Fenster und der Browser bricht den Sprung ab)
+            const goToFromTile = (href) => {
+                selectedTile.value = null;
+                nextTick(() => {
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            };
+
             // IBAN in die Zwischenablage (ohne Leerzeichen, so akzeptieren es alle Banking-Apps)
             const ibanCopied = ref(false);
             const copyIban = async () => {
@@ -2172,7 +2289,7 @@
             const closeProgressModal = () => { selectedProgress.value = null; };
             // Solange irgendein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
             watch(
-                () => !!(selectedEvent.value || selectedProgress.value || showPrayerModal.value || showImpressum.value || showDatenschutz.value),
+                () => !!(selectedEvent.value || selectedProgress.value || selectedTile.value || showPrayerModal.value || showImpressum.value || showDatenschutz.value),
                 (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
             );
 
@@ -2183,6 +2300,7 @@
                     if (e.key !== 'Escape') return;
                     if (selectedEvent.value) closeEventModal();
                     if (selectedProgress.value) closeProgressModal();
+                    selectedTile.value = null;
                     showPrayerModal.value = false;
                     showImpressum.value = false;
                     showDatenschutz.value = false;
@@ -2262,7 +2380,7 @@
             });
 
             return {
-                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, showPaypalHint, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
+                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, showPaypalHint, selectedTile, openTile, goToFromTile, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
             };
         }
     }).mount('#app');
