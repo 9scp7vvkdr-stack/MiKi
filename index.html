@@ -45,7 +45,7 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Church",
+        "@type": ["Church", "TouristAttraction"],
         "name": "MiKi – Jugendkirche Heidenheim",
         "alternateName": [
             "MiKi",
@@ -64,6 +64,17 @@
             "https://www.miki-hdh.de/Assets/vorschau-16x9.jpg"
         ],
         "telephone": "+49-174-3086657",
+        "isAccessibleForFree": true,
+        "publicAccess": true,
+        "touristType": ["Kulturinteressierte", "Jugendliche", "Familien"],
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "name": "Open Church",
+            "dayOfWeek": "https://schema.org/Friday",
+            "opens": "12:00",
+            "closes": "16:30",
+            "validFrom": "2026-11-13"
+        }],
         "sameAs": [
             "https://www.google.com/search?kgmid=/g/11b6t2py1l",
             "https://www.instagram.com/miki_hdh/",
@@ -1009,6 +1020,30 @@
         .faq-item[open] summary::after { transform: rotate(45deg); }
         .faq-item p { padding: 0 22px 20px; color: #475569; }
         .faq-item a { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
+        /* Laengere Antworten mit mehreren Absaetzen und Liste */
+        .faq-item .faq-body { padding: 0 22px 20px; color: #475569; }
+        .faq-item .faq-body p { padding: 0; margin-bottom: 12px; }
+        .faq-item .faq-body p:last-child { margin-bottom: 0; }
+        /* Zeitstrahl (Geschichte der Michaelskirche) */
+        .timeline { list-style: none; margin: 4px 0 16px; border-left: 2px solid rgba(16, 187, 130, 0.35); }
+        .timeline li { position: relative; padding: 0 0 14px 18px; }
+        .timeline li:last-child { padding-bottom: 0; }
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: -6px; top: 0.5em;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 3px #fff;
+        }
+        .tl-year {
+            display: block;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            color: var(--primary-ink);
+        }
 
         /* Ansprechpartner-Karte unter den Fragen */
         .contact-card {
@@ -1735,6 +1770,28 @@
                 <details class="faq-item">
                     <summary>Wo genau ist die MiKi?</summary>
                     <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                </details>
+                <details class="faq-item">
+                    <summary>Geschichte der Michaelskirche</summary>
+                    <div class="faq-body">
+                        <p>Die MiKi steckt in einem echten Kulturdenkmal – hier der Schnelldurchlauf durch über 500 Jahre:</p>
+                        <ol class="timeline">
+                            <li><span class="tl-year">um 1200</span> An dieser Stelle steht eine kleine romanische Kapelle – sozusagen die Ur-Oma der Michaelskirche.</li>
+                            <li><span class="tl-year">um 1490</span> Die heutige Kirche wird gebaut. Ihr Turm ist direkt in die Stadtmauer eingebaut.</li>
+                            <li><span class="tl-year">1621</span> Der bekannte Baumeister Heinrich Schickhardt plant einen Anbau – die Kirche wird größer.</li>
+                            <li><span class="tl-year">1629</span> Gottfried Enßlin, Maler <em>und</em> Bürgermeister von Heidenheim, malt 35 Bilder mit Szenen aus der Bibel. 27 davon hängen heute an den Emporen.</li>
+                            <li><span class="tl-year">1668</span> Der Turm bekommt seine Haube mit den bunten Dachziegeln, die du heute noch siehst.</li>
+                            <li><span class="tl-year">bis 1898</span> Die Michaelskirche ist die wichtigste evangelische Kirche der Stadt.</li>
+                            <li><span class="tl-year">1965–67</span> Bei einer Renovierung tauchen die Bilder von 1629 wieder auf – sie waren lange Zeit übermalt.</li>
+                            <li><span class="tl-year">1969</span> Die heutige Orgel wird gebaut. Der Mittelteil ihrer Front ist aber noch von 1726.</li>
+                            <li><span class="tl-year">seit 2025</span> Die Kirche wird zur MiKi: Couches, Bar, Gaming und Trampolin – vieles von Jugendlichen selbst gebaut. Als Nächstes geplant: Boulderwand und Halfpipe.</li>
+                        </ol>
+                        <p><strong>Fun Fact:</strong> Die Sonnenuhr über dem Eingang hing früher am Oberen Stadttor, das es heute gar nicht mehr gibt. Und acht der alten Bilder kannst du im Museum auf Schloss Hellenstein anschauen.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Kann ich die Michaelskirche besichtigen?</summary>
+                    <p>Ja, gerne! Am einfachsten kommst du zur Open Church vorbei: freitags von 12:00 bis 16:30 Uhr (ab 13.11.2026). Der Eintritt ist frei. Wenn du mit einer Gruppe kommen möchtest, sag vorher kurz <a href="#kontakt">Stefan</a> Bescheid.</p>
                 </details>
             </div>
 
