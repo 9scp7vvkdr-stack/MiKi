@@ -644,6 +644,21 @@
             color: #fff;
         }
         .donate-box .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(2, 6, 23, 0.5); }
+        .donate-section .paypal-hint {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(16, 187, 130, 0.12);
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+            line-height: 1.5;
+            animation: fadeIn 0.3s;
+        }
+        .paypal-hint i { color: var(--primary-ink); font-size: 1.2rem; margin-top: 1px; }
         .donate-divider {
             display: flex;
             align-items: center;
@@ -1890,9 +1905,14 @@
                     <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
                 </div>
                 <div class="donate-box">
-                    <button class="btn" onclick="alert('PayPal Link')">
+                    <!-- PayPal folgt noch: bis dahin Hinweis auf die Ueberweisung -->
+                    <button type="button" class="btn" @click="showPaypalHint = true" :aria-expanded="showPaypalHint ? 'true' : 'false'">
                         <i class="ph ph-paypal-logo"></i> Per PayPal spenden
                     </button>
+                    <p v-if="showPaypalHint" class="paypal-hint" role="status">
+                        <i class="ph ph-wrench"></i>
+                        <span>An PayPal arbeiten wir gerade noch. Bis dahin kannst du ganz einfach per Überweisung spenden – die Kontodaten findest du direkt hier drunter. Danke dir!</span>
+                    </p>
                     <div class="donate-divider">oder per Überweisung</div>
                     <div class="bank-rows">
                         <div class="bank-row">
@@ -2127,6 +2147,7 @@
             const showImpressum = ref(false);
             const showDatenschutz = ref(false);
             const showPrayerModal = ref(false);
+            const showPaypalHint = ref(false);
 
             // IBAN in die Zwischenablage (ohne Leerzeichen, so akzeptieren es alle Banking-Apps)
             const ibanCopied = ref(false);
@@ -2241,7 +2262,7 @@
             });
 
             return {
-                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
+                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, showPaypalHint, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
             };
         }
     }).mount('#app');
