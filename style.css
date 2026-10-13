@@ -616,6 +616,10 @@ footer {
     background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 20px;
 }
 
+/* Vue-Teile verstecken, bis Vue geladen ist (sonst blitzen bei langsamem Netz
+   leere Fenster und Platzhalter wie {{ event.title }} auf) */
+[v-cloak] { display: none !important; }
+
 /* --- ANIMATION CLASSES --- */
 .hidden-el { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
 .show-el { opacity: 1; transform: translateY(0); }
@@ -1324,6 +1328,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .page-hero p { font-size: 1.15rem; max-width: 640px; color: rgba(255, 255, 255, 0.9); }
 .page-back {
     display: flex;
+    padding: 10px 0;
     width: fit-content;
     align-items: center;
     gap: 6px;
@@ -1350,6 +1355,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .legal-wrap { max-width: 800px; }
 .legal-back {
     display: inline-flex;
+    padding: 10px 0;
     align-items: center;
     gap: 6px;
     margin-bottom: 20px;

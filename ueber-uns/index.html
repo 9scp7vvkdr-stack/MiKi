@@ -192,7 +192,7 @@
                 </div>
                 
                 <div class="progress-container">
-                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" role="button" tabindex="0" @click="openProgressModal(item)" @keydown.enter="openProgressModal(item)" @keydown.space.prevent="openProgressModal(item)">
+                    <div v-for="(item, index) in progress" :key="index" v-cloak class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" role="button" tabindex="0" @click="openProgressModal(item)" @keydown.enter="openProgressModal(item)" @keydown.space.prevent="openProgressModal(item)">
                         <div class="progress-circle">{{ item.animatedPercent }}%</div>
                         <div style="flex: 1;">
                             <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
@@ -223,7 +223,7 @@
                     <button type="button" class="btn" @click="showPaypalHint = true" :aria-expanded="showPaypalHint ? 'true' : 'false'">
                         <i class="ph ph-paypal-logo"></i> Per PayPal spenden
                     </button>
-                    <p v-if="showPaypalHint" class="paypal-hint" role="status">
+                    <p v-if="showPaypalHint" v-cloak class="paypal-hint" role="status">
                         <i class="ph ph-wrench"></i>
                         <span>An PayPal arbeiten wir gerade noch. Bis dahin kannst du ganz einfach per Überweisung spenden – die Kontodaten findest du direkt hier drunter. Danke dir!</span>
                     </p>
@@ -237,7 +237,7 @@
                             <span class="bank-label">IBAN</span>
                             <span class="bank-iban">
                                 <span class="bank-value">DE51 6329 0110 0110 3650 03</span>
-                                <button type="button" class="copy-btn" @click="copyIban">
+                                <button type="button" class="copy-btn" @click="copyIban" v-cloak>
                                     <i :class="ibanCopied ? 'ph ph-check' : 'ph ph-copy'"></i> {{ ibanCopied ? 'Kopiert!' : 'Kopieren' }}
                                 </button>
                             </span>
@@ -256,7 +256,7 @@
                 <div class="logo-marquee">
                     <div class="logo-track">
                         <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
-                        <div class="logo-group" v-for="n in 6" :key="n" :aria-hidden="n > 1 ? 'true' : null">
+                        <div class="logo-group" v-for="n in 6" :key="n" v-cloak :aria-hidden="n > 1 ? 'true' : null">
                             <div class="logo-item" v-for="s in supporters" :key="s.name">
                                 <img :src="s.logo" :alt="n === 1 ? s.name : ''" loading="lazy" decoding="async">
                             </div>
@@ -303,7 +303,7 @@
                     <!-- Projekt 1: Boulderwand -->
                     <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
                         <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
-                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen </p>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen.</p>
                         <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
                     </div>
 
@@ -355,7 +355,7 @@
     </section>
 
     <!-- Baufortschritt Modal -->
-    <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
+    <div v-if="selectedProgress" v-cloak class="modal-overlay" @click="closeProgressModal">
         <div class="modal-content progress-photo-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 680px; padding: 32px;">
             <button type="button" aria-label="Schließen" @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
 
@@ -381,7 +381,7 @@
     </div>
 
     <!-- Gebetsanliegen Modal -->
-    <div v-if="showPrayerModal" class="modal-overlay" @click="showPrayerModal = false">
+    <div v-if="showPrayerModal" v-cloak class="modal-overlay" @click="showPrayerModal = false">
         <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
             <button type="button" aria-label="Schließen" @click="showPrayerModal = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
@@ -468,7 +468,7 @@
                 {
                     label: "Chillout Area",
                     percent: 55,
-                    status: "Couchtische und Deko steht noch an",
+                    status: "Couchtische und Deko stehen noch an",
                     animatedPercent: 0,
                     photo: '../Assets/W2.webp',
                     detailedDesc: "Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!"
@@ -476,7 +476,7 @@
                 {
                     label: "Skaterampe",
                     percent: 10,
-                    status: "Noch in Planung.",
+                    status: "Noch in Planung",
                     animatedPercent: 0,
                     photo: '../Assets/W3.webp',
                     detailedDesc: "Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!"
