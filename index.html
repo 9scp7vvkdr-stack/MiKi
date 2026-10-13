@@ -479,6 +479,57 @@
             gap: 30px;
             margin-top: 50px;
         }
+        /* Unterteilung: Highlights (einmalig) und Jede Woche (regelmaessig) */
+        .events-sub {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 40px 0 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .events-sub::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
+        .events-sub + .events-grid { margin-top: 0; }
+        .event-start { display: block; margin: -6px 0 10px; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+
+        .highlight-list { display: grid; gap: 16px; }
+        .highlight-card {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(16, 187, 130, 0.22) 0%, rgba(99, 102, 241, 0.22) 100%);
+            border: 1px solid rgba(16, 187, 130, 0.5);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .highlight-card:hover { border-color: var(--primary); box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.5); }
+        .highlight-card:active { transform: scale(0.98); }
+        .hl-date {
+            flex-shrink: 0;
+            width: 92px; height: 92px;
+            border-radius: 20px;
+            background: var(--primary);
+            color: var(--dark);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            line-height: 1;
+            transform: rotate(-4deg);
+            box-shadow: 0 12px 24px -10px rgba(16, 187, 130, 0.7);
+        }
+        .hl-day { font-size: 2.4rem; font-weight: 700; }
+        .hl-month { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+        .hl-body { flex: 1; min-width: 0; }
+        .hl-meta { display: block; color: var(--primary); font-weight: 700; font-size: 0.9rem; }
+        .hl-body h3 { color: #fff; font-family: var(--font-main); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 4px 0 6px; }
+        .hl-body p { color: rgba(255, 255, 255, 0.75); }
+        .hl-cta { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 600; }
+        .event-place { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
+
         .events-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
         .events-nav { display: none; gap: 10px; flex-shrink: 0; }
         .events-nav.show { display: flex; }
@@ -516,9 +567,6 @@
             .event-card { scroll-snap-align: start; padding: 26px 24px; display: flex; flex-direction: column; align-items: flex-start; }
             /* "Details checken" in allen Karten auf gleicher Hoehe (ganz unten) */
             .event-card > div:last-child { margin-top: auto !important; padding-top: 20px; }
-        }
-        @media (min-width: 1100px) {
-            .events-grid { grid-auto-columns: calc((100% - 3 * 20px) / 4); }
         }
 
         .event-card {
@@ -1312,6 +1360,13 @@
             .grid-2 { grid-template-columns: 1fr; gap: 36px; }
             .section-padding { padding: 64px 0; }
 
+            /* Highlights: Datum links, Text rechts, "Details" darunter */
+            .events-sub { margin-top: 32px; }
+            .highlight-card { flex-wrap: wrap; gap: 16px 18px; padding: 20px; }
+            .hl-date { width: 70px; height: 70px; border-radius: 16px; }
+            .hl-day { font-size: 1.8rem; }
+            .hl-cta { width: 100%; }
+
             /* Events */
             .events-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
 
@@ -1434,9 +1489,31 @@
                 </div>
             </div>
 
+            <!-- Einmalige Events: erscheinen oben und verschwinden nach dem Termin automatisch -->
+            <template v-if="upcomingEvents.length">
+                <div class="events-sub">Highlights</div>
+                <div class="highlight-list">
+                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
+                        <div class="hl-date" aria-hidden="true">
+                            <span class="hl-day">{{ event.dayNum }}</span>
+                            <span class="hl-month">{{ event.monthShort }}</span>
+                        </div>
+                        <div class="hl-body">
+                            <span class="hl-meta">{{ event.badge }}</span>
+                            <h3>{{ event.title }}</h3>
+                            <p>{{ event.desc }}</p>
+                        </div>
+                        <span class="hl-cta">Details checken <i class="ph ph-arrow-right"></i></span>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Regelmaessige Angebote -->
+            <div class="events-sub">Jede Woche</div>
             <div class="events-grid">
-                <div v-for="(event, index) in events" :key="index" class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
-                    <span class="event-date-badge">{{ event.date }}</span>
+                <div v-for="(event, index) in regularEvents" :key="event.title" class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
+                    <span class="event-date-badge">{{ event.badge }}</span>
+                    <span v-if="event.startNote" class="event-start">{{ event.startNote }}</span>
                     <h3>{{ event.title }}</h3>
                     <p style="color: rgba(255,255,255,0.7);">{{ event.desc }}</p>
                     <div style="margin-top: 20px; display: flex; align-items: center; gap: 5px; color: var(--primary); font-weight: 600;">
@@ -1538,21 +1615,24 @@
             <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
-                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.date }}</span>
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.badge }}</span>
                 <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
             </div>
             
             <div class="modal-details-grid">
-                <div><i class="ph ph-clock"></i> <strong>Zeit:</strong><br>{{ selectedEvent.time }}</div>
-                <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br>{{ selectedEvent.location }}</div>
+                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br>{{ selectedEvent.when }}</div>
+                <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br><a :href="mapsUrl" target="_blank" rel="noopener" class="event-place">MiKi (Michaelskirche)</a></div>
             </div>
 
             <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.detailedDesc }}</p>
 
+            <a v-if="selectedEvent.link" :href="selectedEvent.link.href" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
+                <i :class="'ph ' + (selectedEvent.link.icon || 'ph-arrow-square-out')"></i> {{ selectedEvent.link.label }}
+            </a>
             <a v-if="selectedEvent.whatsapp" :href="'https://wa.me/+491743086657?text=' + encodeURIComponent(selectedEvent.whatsapp)" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
                 <i class="ph ph-whatsapp-logo"></i> Per WhatsApp anmelden
             </a>
-            <button class="btn btn-primary" :style="{ width: '100%', marginTop: selectedEvent.whatsapp ? '12px' : '30px', justifyContent: 'center' }" @click="closeEventModal">Alles klar!</button>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeEventModal">Alles klar!</button>
         </div>
     </div>
 
@@ -1682,14 +1762,14 @@
                     Rechtsgrundlage für die Weiterleitung an PayPal ist § 6 Nr. 2 DSG-EKD (Vertragserfüllung bzw. vorvertragliche Maßnahmen) in Verbindung mit Ihrer aktiven Entscheidung zur Nutzung des Spendenbuttons.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Externe Links (Instagram, WhatsApp und Google Maps)</div>
+                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Externe Links (Instagram, WhatsApp, Google Maps und Google Forms)</div>
                 <p style="margin: 0 0 15px 0;">
                     Auf unserer Website befinden sich Links zu externen Diensten wie:
                 </p>
                 <ul style="margin: 0 0 15px 20px;">
                     <li>Instagram (Meta Platforms Ireland Ltd.)</li>
                     <li>WhatsApp (WhatsApp Ireland Limited)</li>
-                    <li>Google Maps (Google Ireland Limited)</li>
+                    <li>Google Maps und Google Forms (Google Ireland Limited)</li>
                 </ul>
                 <p style="margin: 0 0 15px 0;">
                     Beim Anklicken dieser Links verlassen Sie unsere Website. Dabei können personenbezogene Daten (z. B. Ihre IP-Adresse) an den jeweiligen Anbieter übertragen werden.<br><br>
@@ -2120,49 +2200,93 @@
 <script>
     // defer + DOMContentLoaded: laeuft erst, nachdem das deferte Vue geladen ist
     document.addEventListener('DOMContentLoaded', function () {
-    const { createApp, ref, onMounted, watch, nextTick } = Vue;
+    const { createApp, ref, onMounted, watch, nextTick, computed } = Vue;
 
     createApp({
         setup() {
             const activeSection = ref('');
             const tickerWords = ['Chillen', 'Zocken', 'Trampolin', 'Musik', 'Bar', 'Mitbauen', 'Freunde', 'Glaube'];
             // EVENTS DATA
+            // TERMINE
+            // So traegst du Termine ein:
+            //  - Regelmaessig: type 'regular', days (z. B. 'Freitags'), time. Optional "from" (Startdatum,
+            //    JJJJ-MM-TT) - der Hinweis "Start am ..." verschwindet nach dem Datum von selbst.
+            //  - Einmalig: type 'once', start im Format 'JJJJ-MM-TTTHH:MM:00+01:00' (Winterzeit +01:00,
+            //    Sommerzeit +02:00). Das Event steht oben bei "Highlights" und verschwindet 4 Stunden
+            //    nach Beginn automatisch - niemand muss es loeschen.
+            // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
-                { 
-                    title: "Baujugendkreis", 
-                    date: "Dienstags, 17:00 - 19:00 Uhr", 
-                    desc: "Bauen, chillen, Gemeinschaft",
-                    location: "Michaelskirche HDH",
-                    time: "17:00 - 19:00 Uhr",
-                    capacity: "-",
-                    detailedDesc: "Du hast Lust die MiKi zu gestalten, gemeinsam zu werkeln und an kleinen und großen Projekten zu arbeiten? Dabei ist es übrigens ganz egal, ob du handwerklich schon viel gemacht hast oder nicht. Komm vorbei!"
-                },
-                { 
-                    title: "Open Church", 
-                    date: "Jeden Freitag (ab 13.11.2026)", 
+                {
+                    type: 'regular',
+                    title: "Open Church",
+                    days: "Freitags",
+                    time: "12:00–16:30 Uhr",
+                    from: "2026-11-13",
                     desc: "Die MiKi ist offen, komm einfach vorbei",
-                    location: "Michaelskirche HDH",
-                    time: "12:00 - 16:30",
                     detailedDesc: "Ob Skaten (kommt bald!), Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen - die MiKi ist jeden Freitag für dich geöffnet!"
                 },
                 {
+                    type: 'regular',
                     title: "Jugendkreis",
-                    date: "Freitags, 19:00 Uhr",
-                    desc: "Glaube, Gemeinschaft & Ausflüge",
-                    location: "Michaelskirche HDH",
+                    days: "Freitags",
                     time: "19:00 Uhr",
+                    desc: "Glaube, Gemeinschaft & Ausflüge",
                     detailedDesc: "Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen – ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp an. So bist du immer auf dem Laufenden und wir können besser planen.",
                     whatsapp: "Hey, ich hätte Lust auf den Jugendkreis!"
                 },
-                { 
-                    title: "Orgel x Deine Mukke", 
-                    date: "08.11.2026", 
-                    desc: "ACDC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre ",
-                    location: "MiKi",
-                    time: "19:00 Uhr",
-                    detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen. Stimme über Instagram ab und komme vorbei."
+                {
+                    type: 'regular',
+                    title: "Baujugendkreis",
+                    days: "Dienstags",
+                    time: "17:00–19:00 Uhr",
+                    desc: "Bauen, chillen, Gemeinschaft",
+                    detailedDesc: "Du hast Lust die MiKi zu gestalten, gemeinsam zu werkeln und an kleinen und großen Projekten zu arbeiten? Dabei ist es übrigens ganz egal, ob du handwerklich schon viel gemacht hast oder nicht. Komm vorbei!"
+                },
+                {
+                    type: 'once',
+                    title: "Orgel x Deine Mukke",
+                    start: "2026-11-08T19:00:00+01:00",
+                    desc: "ACDC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre",
+                    detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen: ACDC, Coldplay, Hans Zimmer und mehr – auf der Orgel, gemischt mit Schlagzeug und E-Gitarre. Stimm jetzt ab und komm vorbei!",
+                    image: "Assets/T8.webp",
+                    link: { href: "https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header", label: "Jetzt Songs abstimmen", icon: "ph-music-notes" }
                 }
             ]);
+
+            // Datum/Uhrzeit immer in deutscher Zeit anzeigen
+            const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim';
+            const fmt = (d, opts) => d.toLocaleString('de-DE', Object.assign({ timeZone: 'Europe/Berlin' }, opts));
+            const now = new Date();
+
+            const regularEvents = computed(() => events.value
+                .filter(e => e.type === 'regular')
+                .map(e => {
+                    const from = e.from ? new Date(e.from + 'T00:00:00+01:00') : null;
+                    const startsLater = from && now < from;
+                    return Object.assign({}, e, {
+                        badge: e.days + ' · ' + e.time,
+                        when: e.days + ', ' + e.time + (startsLater ? ' (ab ' + fmt(from, { day: '2-digit', month: '2-digit', year: 'numeric' }) + ')' : ''),
+                        startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : ''
+                    });
+                }));
+
+            const upcomingEvents = computed(() => events.value
+                .filter(e => e.type === 'once')
+                .map(e => {
+                    const start = new Date(e.start);
+                    const end = e.end ? new Date(e.end) : new Date(start.getTime() + 4 * 3600 * 1000);
+                    const time = fmt(start, { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+                    return Object.assign({}, e, {
+                        startDate: start,
+                        endDate: end,
+                        dayNum: fmt(start, { day: '2-digit' }),
+                        monthShort: fmt(start, { month: 'short' }).replace('.', ''),
+                        badge: fmt(start, { weekday: 'short' }).replace('.', '') + ', ' + fmt(start, { day: '2-digit', month: '2-digit' }) + ' · ' + time,
+                        when: fmt(start, { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }) + ', ' + time
+                    });
+                })
+                .filter(e => now < e.endDate)
+                .sort((a, b) => a.startDate - b.startDate));
 
             // PROGRESS DATA
             const progress = ref([
@@ -2301,6 +2425,34 @@
 
             // ANIMATION OBSERVER
             onMounted(() => {
+                // Fuer Google: kommende einmalige Events als "Event" auszeichnen (erscheinen ggf. in der Event-Suche)
+                const eventData = upcomingEvents.value.map(e => {
+                    const item = {
+                        '@context': 'https://schema.org',
+                        '@type': 'Event',
+                        name: e.title,
+                        description: e.detailedDesc,
+                        startDate: e.start,
+                        eventStatus: 'https://schema.org/EventScheduled',
+                        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+                        location: {
+                            '@type': 'Place',
+                            name: 'MiKi (Michaelskirche)',
+                            address: { '@type': 'PostalAddress', streetAddress: 'An der Stadtmauer 1', addressLocality: 'Heidenheim an der Brenz', postalCode: '89520', addressCountry: 'DE' }
+                        },
+                        organizer: { '@type': 'Organization', name: 'MiKi – Jugendkirche Heidenheim', url: 'https://www.miki-hdh.de/' }
+                    };
+                    if (e.end) item.endDate = e.end;
+                    if (e.image) item.image = ['https://www.miki-hdh.de/' + e.image];
+                    return item;
+                });
+                if (eventData.length) {
+                    const sc = document.createElement('script');
+                    sc.type = 'application/ld+json';
+                    sc.textContent = JSON.stringify(eventData);
+                    document.head.appendChild(sc);
+                }
+
                 // Escape schliesst jedes offene Fenster
                 document.addEventListener('keydown', (e) => {
                     if (e.key !== 'Escape') return;
@@ -2386,7 +2538,7 @@
             });
 
             return {
-                events, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, showPaypalHint, selectedTile, openTile, goToFromTile, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
+                events, regularEvents, upcomingEvents, mapsUrl, progress, supporters, tickerWords, selectedEvent, selectedProgress, showImpressum, showDatenschutz, showPrayerModal, showPaypalHint, selectedTile, openTile, goToFromTile, ibanCopied, copyIban, openEventModal, closeEventModal, openProgressModal, closeProgressModal, activeSection
             };
         }
     }).mount('#app');
