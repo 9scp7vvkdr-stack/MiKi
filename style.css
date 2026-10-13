@@ -1321,22 +1321,16 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .page-back:hover { color: var(--primary); }
 
-/* "Die Michaelskirche": Steckbrief, Foto, aufklappbare Geschichte */
-.mk-grid { align-items: start; }
-.mk-facts-title { font-size: 2rem; margin-bottom: 14px; }
-.mk-facts { display: grid; gap: 0; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.3); overflow: hidden; }
-.mk-facts > div { display: grid; grid-template-columns: 140px 1fr; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #eef2f6; }
-.mk-facts > div:last-child { border-bottom: none; }
-.mk-facts dt { font-weight: 700; color: var(--primary-ink); font-size: 0.9rem; }
-.mk-facts dd { margin: 0; color: #334155; font-size: 0.95rem; line-height: 1.5; }
-.mk-figure { margin: 0; }
-.mk-figure img { width: 100%; height: auto; box-shadow: 0 20px 40px -20px rgba(2, 6, 23, 0.45); }
-.mk-figure figcaption { margin-top: 10px; font-size: 0.85rem; color: #64748b; }
-.mk-history { max-width: none; margin-top: 40px; }
+/* "Die Michaelskirche": eine Textspalte in Lesebreite + aufklappbare Geschichte */
+.mk-wrap { max-width: 760px; margin: 0 auto; }
+.mk-intro p { font-size: 1.08rem; line-height: 1.75; color: #334155; margin-top: 14px; }
+.mk-intro h2 { margin-bottom: 4px; }
+.mk-history { margin-top: 36px; }
 .mk-history summary { font-size: 1.1rem; }
-.mk-history summary small { display: block; font-size: 0.85rem; font-weight: 500; color: #64748b; }
-.mk-history-body { padding: 4px 22px 24px; }
-.mk-history .timeline { margin: 0; color: #334155; }
+.mk-history summary small { display: block; margin-top: 2px; font-size: 0.85rem; font-weight: 500; color: #64748b; }
+.mk-history-body { padding: 6px 24px 26px; }
+.mk-history .timeline { margin: 0; color: #334155; line-height: 1.65; }
+.mk-history .timeline li { padding-bottom: 18px; }
 
 /* Impressum / Datenschutz */
 .legal-page { background: #fff; padding: 130px 0 90px; }
@@ -1360,8 +1354,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .teaser-icon { width: 42px; height: 42px; font-size: 1.3rem; }
     .page-hero { min-height: 0; padding: 110px 0 48px; }
     .page-hero p { font-size: 1.02rem; }
-    .mk-facts > div { grid-template-columns: 1fr; gap: 2px; padding: 12px 16px; }
+    .mk-intro p { font-size: 1.02rem; }
     .mk-history { margin-top: 28px; }
-    .mk-history-body { padding: 4px 16px 20px; }
+    .mk-history-body { padding: 4px 18px 22px; }
     .legal-page { padding: 104px 0 64px; }
 }
