@@ -88,7 +88,7 @@
 <div id="app">
 
     <nav class="navbar">
-        <a href="../" class="nav-logo" aria-label="Zur Startseite">MiKi</a>
+        <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left"></i> MiKi</a>
         <a href="#vision">Vision</a>
         <a href="#michaelskirche">Kirche</a>
         <a href="#umbau">Umbau</a>
@@ -340,6 +340,20 @@
         </div>
     </section>
 
+    <!-- Rueckweg fuer Jugendliche: zur Startseite -->
+    <section class="parents-teaser" style="background: #ffffff;">
+        <div class="container">
+            <a href="../" class="teaser-card hidden-el">
+                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-sparkle"></i></span>
+                <span class="teaser-text">
+                    <strong>Du bist jugendlich?</strong>
+                    <span>Termine, was in der MiKi so geht und Antworten auf deine Fragen findest du auf der Startseite.</span>
+                </span>
+                <i class="ph ph-arrow-right teaser-arrow" aria-hidden="true"></i>
+            </a>
+        </div>
+    </section>
+
     <!-- Baufortschritt Modal -->
     <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
         <div class="modal-content progress-photo-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 680px; padding: 32px;">
@@ -421,6 +435,7 @@
                 <div class="footer-col">
                     <h3>Mehr</h3>
                     <ul style="line-height: 2;">
+                        <li><a href="../">Startseite</a></li>
                         <li><a href="../ueber-uns/">Über die MiKi</a></li>
                         <li><a href="../impressum/">Impressum</a></li>
                         <li><a href="../datenschutz/">Datenschutz</a></li>

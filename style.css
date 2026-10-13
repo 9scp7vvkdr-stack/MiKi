@@ -1249,6 +1249,19 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     font-weight: 700;
 }
 .nav-short { display: none; }
+/* Unterseiten: deutlicher Zurueck-Button zur Startseite */
+.navbar a.nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(16, 187, 130, 0.14);
+    color: var(--primary-ink);
+    font-weight: 700;
+    white-space: nowrap;
+}
+.navbar a.nav-home:hover { background: var(--primary); color: var(--dark); transform: none; }
 
 /* Startseite: Hinweis fuer Erwachsene ganz unten */
 .parents-teaser { background: #f8fafc; padding: 0 0 90px; }
@@ -1349,6 +1362,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 @media (max-width: 768px) {
     .nav-long { display: none; }
     .nav-short { display: inline; }
+    .navbar a.nav-home { padding: 6px 9px; margin-right: 2px; }
+    /* sehr schmale Handys: Navigation mit Zurueck-Button etwas kompakter */
+    @media (max-width: 380px) {
+        .navbar a { font-size: 0.68rem; padding: 12px 3px; }
+        .navbar a.nav-home { padding: 6px 8px; }
+    }
     .parents-teaser { padding-bottom: 64px; }
     .teaser-card { padding: 18px; gap: 14px; }
     .teaser-icon { width: 42px; height: 42px; font-size: 1.3rem; }
