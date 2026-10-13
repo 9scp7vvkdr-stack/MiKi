@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Die MiKi in der denkmalgeschützten Michaelskirche Heidenheim: Vision, Baufortschritt, die Geschichte der Kirche und wie du die Jugendkirche mit Spenden und Gebet unterstützen kannst.">
+    <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
+    <meta name="theme-color" content="#10BB82">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <meta property="og:title" content="Über die MiKi – Vision, Umbau & Michaelskirche Heidenheim">
+    <meta property="og:description" content="Die MiKi in der denkmalgeschützten Michaelskirche Heidenheim: Vision, Baufortschritt, die Geschichte der Kirche und wie du die Jugendkirche mit Spenden und Gebet unterstützen kannst.">
+    <meta property="og:image" content="https://www.miki-hdh.de/Assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:url" content="https://www.miki-hdh.de/ueber-uns/">
+    <meta property="og:site_name" content="MiKi – Jugendkirche Heidenheim">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Über die MiKi – Vision, Umbau & Michaelskirche Heidenheim</title>
+    <link rel="canonical" href="https://www.miki-hdh.de/ueber-uns/">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../Assets/favicon-32.png?v=2">
+    <link rel="icon" type="image/png" sizes="192x192" href="../Assets/favicon-192.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Assets/apple-touch-icon.png?v=2">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": "https://www.miki-hdh.de/ueber-uns/",
+        "name": "Über die MiKi – Vision, Umbau & Michaelskirche Heidenheim",
+        "inLanguage": "de-DE",
+        "isPartOf": { "@type": "WebSite", "name": "MiKi – Jugendkirche Heidenheim", "url": "https://www.miki-hdh.de/" },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://www.miki-hdh.de/" },
+                { "@type": "ListItem", "position": 2, "name": "Über die MiKi", "item": "https://www.miki-hdh.de/ueber-uns/" }
+            ]
+        }
+    }
+    </script>
+    <!-- Die Michaelskirche als Sehenswuerdigkeit (fuer Suchen wie "Sehenswürdigkeiten Heidenheim") -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["PlaceOfWorship", "TouristAttraction"],
+        "name": "Michaelskirche Heidenheim",
+        "alternateName": ["Evangelische Michaelskirche Heidenheim an der Brenz", "MiKi – Jugendkirche Heidenheim"],
+        "description": "Die evangelische Michaelskirche ist ein eingetragenes Kulturdenkmal an der mittelalterlichen Stadtmauer von Heidenheim. Die heutige Kirche wurde um 1490 erbaut; sehenswert sind der in die Stadtmauer integrierte Turm mit seiner Haube von 1668, 27 frühbarocke Holztafelbilder von 1629 und die Orgel. Seit 2025 wird sie zur Jugendkirche MiKi umgestaltet.",
+        "url": "https://www.miki-hdh.de/ueber-uns/#michaelskirche",
+        "image": ["https://www.miki-hdh.de/Assets/T3.webp", "https://www.miki-hdh.de/Assets/T1.webp"],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "An der Stadtmauer 1",
+            "addressLocality": "Heidenheim an der Brenz",
+            "postalCode": "89520",
+            "addressCountry": "DE"
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim",
+        "isAccessibleForFree": true,
+        "publicAccess": true,
+        "touristType": ["Kulturinteressierte", "Familien"],
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "name": "Open Church",
+            "dayOfWeek": "https://schema.org/Friday",
+            "opens": "12:00",
+            "closes": "16:30",
+            "validFrom": "2026-11-13"
+        }]
+    }
+    </script>
+    <script defer src="../extern/vue.global.prod.js"></script>
+    <script defer src="../site.js"></script>
+
+    <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../extern/fonts/fonts.css">
+    <link rel="stylesheet" href="../extern/phosphor/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="../extern/phosphor/style.css"></noscript>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<div id="app">
+
+    <nav class="navbar">
+        <a href="../" class="nav-logo" aria-label="Zur Startseite">MiKi</a>
+        <a href="#vision">Vision</a>
+        <a href="#umbau">Umbau</a>
+        <a href="#spenden">Spenden</a>
+        <a href="#michaelskirche">Kirche</a>
+        <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <header class="page-hero">
+        <div class="page-hero-bg" data-parallax="12" style="background-image: url('../Assets/T1.webp');" aria-hidden="true"></div>
+        <div class="container page-hero-content">
+            <a href="../" class="page-back"><i class="ph ph-arrow-left"></i> Zur Startseite</a>
+            <span class="kicker kicker-dark">Für Eltern, Gemeinde &amp; Unterstützer</span>
+            <h1>Über die MiKi</h1>
+            <p>Wie aus der denkmalgeschützten Michaelskirche eine Jugendkirche wird – und wie du dabei helfen kannst.</p>
+        </div>
+    </header>
+
+    <section class="section-padding has-doodles" id="vision" style="background: #ffffff;">
+        <svg class="doodle" data-parallax-px="-90" style="top: 60px; left: 3%;" width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 L23 17 L38 20 L23 23 L20 38 L17 23 L2 20 L17 17 Z" fill="currentColor"/></svg>
+        <svg class="doodle indigo" data-parallax-px="70" style="bottom: 40px; right: 4%;" width="64" height="64" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 9" stroke-linecap="round"/></svg>
+        <div class="container grid-2">
+            <div class="vision-text hidden-el">
+                <span class="kicker"><i class="ph ph-lightbulb"></i> Vision</span>
+                <h2>Unsere Vision</h2>
+                <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
+                    <strong>Kirche mal <span class="mark">anders</span>.</strong> Hier ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Mit der MiKi möchten wir einen Raum schaffen, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können. Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird, und setzen die Umgestaltung selbst um.
+                </p>
+                <ul class="vision-list">
+                    <li>
+                        <i class="ph ph-paint-brush-broad"></i>
+                        <div><strong>DIY:</strong> Du kannst selbst anpacken und mitgestalten.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-armchair"></i>
+                        <div><strong>Wie daheim:</strong> Couches statt Holzbänke. Action statt Stille.</div>
+                    </li>
+                    <li>
+                        <i class="ph ph-users-three"></i>
+                        <div><strong>Gemeinschaft:</strong> Ein lebendiger Spot für Glaube, Sport und Freunde.</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="vision-img-wrapper hidden-el">
+                <div class="vision-image-container">
+                    <img src="../Assets/T2.jpg" srcset="../Assets/T2-1200.webp 1200w, ../Assets/T2.jpg 1600w" sizes="(max-width: 768px) 100vw, 600px" alt="Jugendliche packen gemeinsam beim Umbau der MiKi an" loading="lazy" width="1600" height="1064" style="height: auto;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="umbau" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
+        <div class="container">
+            <div class="grid-2">
+                <div class="hidden-el">
+                    <span class="kicker"><i class="ph ph-hammer"></i> Umbau</span>
+                    <h2>Das wird gerade gebaut</h2>
+                    <p style="margin-bottom: 20px;">Die MiKi wird ständig weitergebaut und es ist noch einiges geplant. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
+                    <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Mach mit!</h3>
+                        <p style="color: #94a3b8; margin-bottom: 20px;">Wir suchen noch Leute, die Bock haben, anzupacken. <br> Hast du Ideen? Dann schick uns eine WhatsApp!</p>
+                        <a href="https://wa.me/+491743086657?text=Hey%2C%20ich%20h%C3%A4tte%20Bock%20auf%20die%20MiKi" target="_blank" rel="noopener" style="color: white; text-decoration: underline;">Schreib uns auf WhatsApp</a>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" role="button" tabindex="0" @click="openProgressModal(item)" @keydown.enter="openProgressModal(item)" @keydown.space.prevent="openProgressModal(item)">
+                        <div class="progress-circle">{{ item.animatedPercent }}%</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+                                <span>{{ item.label }}</span>
+                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
+                            </div>
+                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding donate-section" id="spenden">
+        <div class="container">
+            <div class="donate-grid hidden-el">
+                <div>
+                    <span class="kicker kicker-on-mint"><i class="ph ph-heart"></i> Spenden</span>
+                    <h2>Unterstütze die MiKi</h2>
+                    <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
+                </div>
+                <div class="donate-box">
+                    <!-- PayPal folgt noch: bis dahin Hinweis auf die Ueberweisung -->
+                    <button type="button" class="btn" @click="showPaypalHint = true" :aria-expanded="showPaypalHint ? 'true' : 'false'">
+                        <i class="ph ph-paypal-logo"></i> Per PayPal spenden
+                    </button>
+                    <p v-if="showPaypalHint" class="paypal-hint" role="status">
+                        <i class="ph ph-wrench"></i>
+                        <span>An PayPal arbeiten wir gerade noch. Bis dahin kannst du ganz einfach per Überweisung spenden – die Kontodaten findest du direkt hier drunter. Danke dir!</span>
+                    </p>
+                    <div class="donate-divider">oder per Überweisung</div>
+                    <div class="bank-rows">
+                        <div class="bank-row">
+                            <span class="bank-label">Kontoinhaber</span>
+                            <span class="bank-value">Ev. Kirchenbezirk Heidenheim</span>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">IBAN</span>
+                            <span class="bank-iban">
+                                <span class="bank-value">DE51 6329 0110 0110 3650 03</span>
+                                <button type="button" class="copy-btn" @click="copyIban">
+                                    <i :class="ibanCopied ? 'ph ph-check' : 'ph ph-copy'"></i> {{ ibanCopied ? 'Kopiert!' : 'Kopieren' }}
+                                </button>
+                            </span>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">Verwendungszweck</span>
+                            <span class="bank-value">MiKi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unterstuetzer-Logos als endloses Laufband -->
+            <div class="supporter-strip hidden-el">
+                <h3 class="supporter-title">Unsere Unterstützer</h3>
+                <div class="logo-marquee">
+                    <div class="logo-track">
+                        <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
+                        <div class="logo-group" v-for="n in 6" :key="n" :aria-hidden="n > 1 ? 'true' : null">
+                            <div class="logo-item" v-for="s in supporters" :key="s.name">
+                                <img :src="s.logo" :alt="n === 1 ? s.name : ''" loading="lazy" decoding="async">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="blog" style="background: #ffffff;">
+        <div class="container">
+            <span class="kicker"><i class="ph ph-hand-heart"></i> Gebet &amp; Projekte</span>
+            <h2>Gebets- und Spendenanliegen</h2>
+            
+            <!-- Gebetsanliegen & Spendenprojekte Grid -->
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                
+                <!-- Gebetsanliegen Karte -->
+                <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 0ms;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Gebetsanliegen</h3>
+                    </div>
+                    <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
+                        Die MiKi ist ein Ort, an dem wir füreinander einstehen. Teile deine Gebetsanliegen mit uns – ob Sorgen, Freude oder wichtige Anliegen. Wir halten zusammen und tragen dich im Gebet.
+                    </p>
+                    <p style="opacity: 0.8; margin-bottom: 30px; line-height: 1.8; padding: 15px; background: rgba(16, 187, 130, 0.2); border-radius: 12px; border-left: 4px solid var(--primary);">
+                        <strong>Möchtest du für die MiKi beten?</strong><br>
+                        Danke für dein <strong>Gebet</strong>! Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
+                    </p>
+                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
+                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                    </button>
+                </div>
+
+                <!-- Spendenprojekte Karte -->
+                <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 100ms;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
+                        <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
+                    </div>
+                    
+                    <!-- Projekt 1: Boulderwand -->
+                    <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
+                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen </p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
+                    </div>
+
+                    <!-- Projekt 2: Gebets-Telefonzelle -->
+                    <div>
+                        <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Gebets-Telefonzelle</h4>
+                        <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit jeder ins Gespräch mit Gott kommt. Wir brauchen Budget für die Reparatur und Baumaterialien.</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €1.200</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Die Michaelskirche: Geschichte und Besichtigung -->
+    <section class="section-padding" id="michaelskirche" style="background: #f8fafc;">
+        <div class="container grid-2 mk-grid">
+            <div class="hidden-el">
+                <span class="kicker"><i class="ph ph-church"></i> Die Michaelskirche</span>
+                <h2>Über 500 Jahre Geschichte</h2>
+                <p class="mk-lead">Die MiKi steckt in einem echten Kulturdenkmal: Die evangelische Michaelskirche prägt mit ihrer Hanglage an der alten Stadtmauer das Stadtbild von Heidenheim – hier der Schnelldurchlauf durch ihre Geschichte.</p>
+                <div class="mk-visit">
+                    <h3>Besichtigen</h3>
+                    <p>Ja, gerne! Am einfachsten kommst du zur Open Church vorbei: freitags von 12:00 bis 16:30 Uhr (ab 13.11.2026). Der Eintritt ist frei. Wenn du mit einer Gruppe kommen möchtest, sag vorher kurz <a href="#kontakt">Stefan</a> Bescheid.</p>
+                </div>
+                <p class="mk-fun"><strong>Fun Fact:</strong> Die Sonnenuhr über dem Eingang hing früher am Oberen Stadttor, das es heute gar nicht mehr gibt. Und acht der alten Bilder kannst du im Museum auf Schloss Hellenstein anschauen.</p>
+            </div>
+            <div class="mk-timeline hidden-el">
+                <ol class="timeline">
+                    <li><span class="tl-year">um 1200</span> An dieser Stelle steht eine kleine romanische Kapelle – sozusagen die Ur-Oma der Michaelskirche.</li>
+                    <li><span class="tl-year">um 1490</span> Die heutige Kirche wird gebaut. Ihr Turm ist direkt in die Stadtmauer eingebaut.</li>
+                    <li><span class="tl-year">1621</span> Der bekannte Baumeister Heinrich Schickhardt plant einen Anbau – die Kirche wird größer.</li>
+                    <li><span class="tl-year">1629</span> Gottfried Enßlin, Maler <em>und</em> Bürgermeister von Heidenheim, malt 35 Bilder mit Szenen aus der Bibel. 27 davon hängen heute an den Emporen.</li>
+                    <li><span class="tl-year">1668</span> Der Turm bekommt seine Haube mit den bunten Dachziegeln, die du heute noch siehst.</li>
+                    <li><span class="tl-year">bis 1898</span> Die Michaelskirche ist die wichtigste evangelische Kirche der Stadt.</li>
+                    <li><span class="tl-year">1965–67</span> Bei einer Renovierung tauchen die Bilder von 1629 wieder auf – sie waren lange Zeit übermalt.</li>
+                    <li><span class="tl-year">1969</span> Die heutige Orgel wird gebaut. Der Mittelteil ihrer Front ist aber noch von 1726.</li>
+                    <li><span class="tl-year">seit 2025</span> Die Kirche wird zur MiKi: Couches, Bar, Gaming und Trampolin – vieles von Jugendlichen selbst gebaut. Als Nächstes geplant: Boulderwand und Halfpipe.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ansprechpartner fuer Eltern, Gemeinde, Presse und Unterstuetzer -->
+    <section class="section-padding" id="kontakt" style="background: #ffffff;">
+        <div class="container">
+            <div class="contact-card hidden-el">
+                <img src="../Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
+                <div class="contact-text">
+                    <h3>Fragen? Sprich mit Stefan</h3>
+                    <p>Stefan Hörz ist Jugendreferent beim Evangelischen Jugendwerk Bezirk Heidenheim und Ansprechpartner für die MiKi – für Eltern, Gemeinde, Presse, Stiftungen und alle, die mithelfen möchten.</p>
+                    <div class="contact-actions">
+                        <a href="mailto:Stefan.hoerz@ejhdh.de" class="btn btn-glow">
+                            <i class="ph ph-envelope-simple"></i> E-Mail schreiben
+                        </a>
+                        <a href="tel:+491743086657" class="contact-mail">
+                            <i class="ph ph-phone"></i> 0174 3086657
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Baufortschritt Modal -->
+    <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
+        <div class="modal-content progress-photo-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 680px; padding: 32px;">
+            <button type="button" aria-label="Schließen" @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+
+            <div class="modal-header">
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
+                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedProgress.label }}</h2>
+            </div>
+
+            <!-- Bild wird erst geladen, wenn das Modal geöffnet wird -->
+            <img :src="selectedProgress.photo" :alt="'Foto: ' + selectedProgress.label">
+
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                <div style="background: rgba(16,187,130,0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary); font-size: 1rem;">
+                    {{ selectedProgress.percent }}% fertig
+                </div>
+                <span style="color: var(--gray); font-size: 0.9rem;">{{ selectedProgress.status }}</span>
+            </div>
+
+            <p style="line-height: 1.8; color: #334155;">{{ selectedProgress.detailedDesc }}</p>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 24px; justify-content: center;" @click="closeProgressModal">Alles klar!</button>
+        </div>
+    </div>
+
+    <!-- Gebetsanliegen Modal -->
+    <div v-if="showPrayerModal" class="modal-overlay" @click="showPrayerModal = false">
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+            <button type="button" aria-label="Schließen" @click="showPrayerModal = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            
+            <div class="modal-header">
+                <h2 style="margin: 0; font-size: 1.8rem;">Dein Gebetsanliegen teilen</h2>
+            </div>
+
+            <p style="line-height: 1.7; color: #334155; margin-bottom: 30px;">
+                Dein Anliegen geht an unseren Jugendreferenten <strong>Stefan</strong>, der für dich und dein Anliegen betet. Auf Wunsch kann dein Anliegen auch anonym in einer Gebetsgemeinschaft geteilt werden.<br><br>Wähle deinen bevorzugten Kontaktweg:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="https://wa.me/+491743086657?text=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
+                    <i class="ph ph-whatsapp-logo"></i> Per WhatsApp teilen
+                </a>
+                <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
+                    <i class="ph ph-envelope"></i> Per E-Mail teilen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+                <div class="footer-col">
+                    <h3 style="color: var(--primary);">MiKi Heidenheim</h3>
+                    <p>Die MiKi wird getragen vom <a href="https://www.ejhdh.de" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Evangelischen Jugendwerk Bezirk Heidenheim</a> und der <a href="https://www.evangelisch-heidenheim.de" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: underline;">Evangelischen Kirchengemeinde Heidenheim</a>.</p>
+                    <address style="font-style: normal; line-height: 1.7; margin-top: 20px;">
+                        An der Stadtmauer 1<br>
+                        89520 Heidenheim an der Brenz
+                    </address>
+                    <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map" style="margin-top: 16px;">
+                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontakt</h3>
+                    <p style="margin-bottom: 10px; color: white; font-weight: 600;">Stefan Hörz</p>
+                    <ul style="line-height: 2;">
+                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple"></i>Stefan.hoerz@ejhdh.de</a></li>
+                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone"></i>0174 3086657</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Folge uns auf Social Media</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Mehr</h3>
+                    <ul style="line-height: 2;">
+                        <li><a href="../ueber-uns/">Über die MiKi</a></li>
+                        <li><a href="../impressum/">Impressum</a></li>
+                        <li><a href="../datenschutz/">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
+                &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const { createApp, ref, onMounted, watch } = Vue;
+
+    createApp({
+        setup() {
+            // PROGRESS DATA
+            const progress = ref([
+                {
+                    label: "BarBauProjekt",
+                    percent: 100,
+                    status: "Die Bar ist fertig",
+                    animatedPercent: 0,
+                    photo: '../Assets/W1.webp',
+                    detailedDesc: "Die Bar ist unser erstes abgeschlossenes Großprojekt – und wir sind so stolz darauf! In wochenlanger Eigenregie haben Jugendliche aus Holz und Beton eine vollständige Bar gezimmert. Hier können sich alle mit Getränken versorgen und in lockerer Atmosphäre zusammenkommen. Ein echtes Herzstück der MiKi – zu 100% von Jugendlichen für Jugendliche gebaut. Du willst auch mal anpacken? Komm dienstags ab 17 Uhr vorbei!"
+                },
+                {
+                    label: "Chillout Area",
+                    percent: 55,
+                    status: "Couchtische und Deko steht noch an",
+                    animatedPercent: 0,
+                    photo: '../Assets/W2.webp',
+                    detailedDesc: "Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!"
+                },
+                {
+                    label: "Skaterampe",
+                    percent: 10,
+                    status: "Noch in Planung.",
+                    animatedPercent: 0,
+                    photo: '../Assets/W3.webp',
+                    detailedDesc: "Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!"
+                },
+                {
+                    label: "Gebets-Box",
+                    percent: 50,
+                    status: "Der Innenaufbau fehlt noch",
+                    animatedPercent: 0,
+                    photo: '../Assets/W4.webp',
+                    detailedDesc: "Die Gebets-Telefonzelle ist eine ganz besondere Ecke in der MiKi. Wir bauen eine alte Telefonzelle zu einem privaten Gebetsraum um – ein stiller Ort inmitten des Trubels, an dem man ungestört mit Gott sprechen kann. Die äußere Hülle steht bereits, aber der Innenausbau fehlt noch: Beleuchtung, Kissen und Gebetskarten warten auf ihre Umsetzung. Wenn du dieses Projekt unterstützen möchtest, freuen wir uns sehr über eine Spende!"
+                }
+            ]);
+
+            // UNTERSTUETZER (Logo-Laufband im Spenden-Bereich)
+            // Pfade sind URL-kodiert (ü = %C3%BC, Leerzeichen = %20)
+            const supporters = ref([
+                { name: "Andere Zeiten",                          logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Andere_Zeiten.png' },
+                { name: "BERG",                                   logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Berg.png' },
+                { name: "EKD – Evangelische Kirche in Deutschland", logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_EKD.png' },
+                { name: "Innovationsfonds #gemeindebegeistert",    logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Innovationsfonds.png' },
+                { name: "Berthold Leibinger Stiftung",            logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Leibinger%20Stiftung.png' }
+            ]);
+
+            const selectedProgress = ref(null);
+            const showPrayerModal = ref(false);
+            const showPaypalHint = ref(false);
+            const openProgressModal = (item) => { selectedProgress.value = item; };
+            const closeProgressModal = () => { selectedProgress.value = null; };
+
+            // IBAN in die Zwischenablage (ohne Leerzeichen, so akzeptieren es alle Banking-Apps)
+            const ibanCopied = ref(false);
+            const copyIban = async () => {
+                const iban = 'DE51632901100110365003';
+                try {
+                    await navigator.clipboard.writeText(iban);
+                } catch (e) {
+                    const t = document.createElement('textarea');
+                    t.value = iban;
+                    document.body.appendChild(t);
+                    t.select();
+                    document.execCommand('copy');
+                    t.remove();
+                }
+                ibanCopied.value = true;
+                setTimeout(() => { ibanCopied.value = false; }, 2000);
+            };
+            // Solange ein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
+            watch(
+                () => !!(selectedProgress.value || showPrayerModal.value),
+                (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
+            );
+
+            onMounted(() => {
+                // Escape schliesst jedes offene Fenster
+                document.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Escape') return;
+                    closeProgressModal();
+                    showPrayerModal.value = false;
+                });
+
+                // --- PROGRESS BAR ANIMATION ON SCROLL ---
+                const progressObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(document.querySelectorAll('.progress-item')).indexOf(entry.target);
+                            if (index !== -1 && progress.value[index]) {
+                                const target = progress.value[index].percent;
+                                const animateBar = () => {
+                                    let current = 0;
+                                    const step = target / 30; // 30 frames für Animationen
+                                    const interval = setInterval(() => {
+                                        current += step;
+                                        if (current >= target) {
+                                            progress.value[index].animatedPercent = target;
+                                            clearInterval(interval);
+                                        } else {
+                                            progress.value[index].animatedPercent = Math.round(current);
+                                        }
+                                    }, 20);
+                                };
+                                animateBar();
+                                progressObserver.unobserve(entry.target);
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                setTimeout(() => {
+                    document.querySelectorAll('.progress-item').forEach(el => progressObserver.observe(el));
+                }, 100);
+            });
+
+            return {
+                progress, supporters, selectedProgress, showPrayerModal, showPaypalHint,
+                ibanCopied, copyIban, openProgressModal, closeProgressModal
+            };
+        }
+    }).mount('#app');
+
+    // Gemeinsame Funktionen (Einblenden, Navigation, Parallax, Jahr im Footer) - siehe site.js
+    MiKiSite.init();
+    });
+</script>
+</body>
+</html>

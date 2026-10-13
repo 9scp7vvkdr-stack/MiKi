@@ -3,14 +3,26 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.miki-hdh.de/</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.miki-hdh.de/Assets/vorschau-4x3.jpg</image:loc>
     </image:image>
     <image:image>
+      <image:loc>https://www.miki-hdh.de/Assets/T3.webp</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.miki-hdh.de/ueber-uns/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
       <image:loc>https://www.miki-hdh.de/Assets/T1.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.miki-hdh.de/Assets/T2.jpg</image:loc>
     </image:image>
   </url>
 </urlset>
