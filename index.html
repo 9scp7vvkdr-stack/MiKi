@@ -285,6 +285,8 @@
                     </div>
                 </div>
             </div>
+
+            <p class="events-note"><i class="ph ph-heart" aria-hidden="true"></i> Alle Angebote sind kostenfrei und jeder ist herzlich eingeladen.</p>
         </div>
     </section>
 
@@ -296,7 +298,7 @@
             <div class="section-head hidden-el">
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
-                <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben im Jugendkreis kennenlernen.</p>
+                <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben kennenlernen.</p>
                 <p class="exp-hint"><i class="ph ph-hand-tap" aria-hidden="true"></i><span><span class="hint-touch">Tipp</span><span class="hint-mouse">Klick</span> auf ein Bild für mehr Infos</span></p>
             </div>
 
@@ -358,24 +360,7 @@
         <div class="cta-bg" data-parallax="12" data-lazy-bg="Assets/T11.webp" aria-hidden="true"></div>
         <div class="container hidden-el">
             <h2>Klingt gut?</h2>
-            <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
-
-            <!-- Wann / Wo / Kosten - Zeiten kommen direkt aus der Termin-Liste -->
-            <ul class="cta-facts">
-                <li v-if="openChurch" v-cloak>
-                    <i class="ph ph-clock" aria-hidden="true"></i>
-                    <span><strong>Open Church</strong> · {{ openChurch.days }} {{ openChurch.time }}<template v-if="openChurch.fromShort"> · ab {{ openChurch.fromShort }}</template></span>
-                </li>
-                <li>
-                    <i class="ph ph-map-pin" aria-hidden="true"></i>
-                    <span>MiKi (Michaelskirche) · An der Stadtmauer 1, Heidenheim</span>
-                </li>
-                <li>
-                    <i class="ph ph-ticket" aria-hidden="true"></i>
-                    <span>Kostenlos · ohne Anmeldung</span>
-                </li>
-            </ul>
-            <p v-if="jugendkreis" v-cloak class="cta-alt">Lieber mit Programm? Der Jugendkreis trifft sich {{ jugendkreis.days.toLowerCase() }} um {{ jugendkreis.time }}.</p>
+            <p class="cta-lead">Dann komm einfach vorbei. Wir freuen uns auf dich!</p>
 
             <div class="cta-buttons">
                 <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-ghost-light">
@@ -384,11 +369,10 @@
             </div>
 
             <!-- Niedrige Hemmschwelle: direkter Draht zu Stefan -->
-            <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="cta-stefan">
+            <div class="cta-stefan">
                 <img src="Assets/stefan-hoerz.webp" alt="" width="48" height="48" loading="lazy" decoding="async">
-                <span>Hast du noch Fragen oder bist du dir unsicher? <strong>Schreib Stefan</strong> gerne eine Nachricht.</span>
-                <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
-            </a>
+                <span>Hast du noch Fragen oder bist du dir unsicher? <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener">Schreib Stefan</a> gerne eine Nachricht: <a href="tel:+491743086657">0174 3086657</a></span>
+            </div>
 
             <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" class="insta-card">
                 <span class="insta-icon" aria-hidden="true"><i class="ph ph-instagram-logo"></i></span>
@@ -584,7 +568,7 @@
                     time: "12:00–16:30 Uhr",
                     from: "2026-11-13",
                     desc: "Die MiKi ist offen, komm einfach vorbei",
-                    detailedDesc: "Ob Skaten (kommt bald!), Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen – die MiKi ist jeden Freitag für dich geöffnet!"
+                    detailedDesc: "Ob Kickern, Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen – die MiKi ist jeden Freitag für dich geöffnet!"
                 },
                 {
                     type: 'regular',
@@ -592,7 +576,7 @@
                     days: "Freitags",
                     time: "19:00 Uhr",
                     desc: "Glaube, Gemeinschaft & Ausflüge",
-                    detailedDesc: "Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen – ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp an. So bist du immer auf dem Laufenden und wir können besser planen.",
+                    detailedDesc: "Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen. Dabei ist es ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp. So bist du immer auf dem Laufenden und du stehst nicht vor verschlossener Türe.",
                     whatsapp: "Hey, ich hätte Lust auf den Jugendkreis!"
                 },
                 {
@@ -608,7 +592,7 @@
                     title: "Orgel x Deine Mukke",
                     start: "2026-11-08T19:00:00+01:00",
                     desc: "AC/DC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre",
-                    detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen: AC/DC, Coldplay, Hans Zimmer und mehr – auf der Orgel, gemischt mit Schlagzeug und E-Gitarre. Stimm jetzt ab und komm vorbei!",
+                    detailedDesc: "Wir planen ein legendäres Orgelkonzert, bei dem DU bestimmst, welche Lieder laufen: AC/DC, Coldplay, Hans Zimmer und mehr. Stimm jetzt ab und komm vorbei!",
                     image: "Assets/T8.webp",
                     link: { href: "https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header", label: "Jetzt Songs abstimmen", icon: "ph-music-notes" }
                 },
@@ -638,13 +622,9 @@
                     return Object.assign({}, e, {
                         badge: e.days + ' · ' + e.time,
                         when: e.days + ', ' + e.time + (startsLater ? ' (ab ' + fmt(from, { day: '2-digit', month: '2-digit', year: 'numeric' }) + ')' : ''),
-                        startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : '',
-                        fromShort: startsLater ? fmt(from, { day: '2-digit', month: '2-digit' }) : ''
+                        startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : ''
                     });
                 }));
-            // fuer "Klingt gut?": Zeiten direkt aus der Termin-Liste
-            const openChurch = computed(() => regularEvents.value.find(e => e.title === 'Open Church'));
-            const jugendkreis = computed(() => regularEvents.value.find(e => e.title === 'Jugendkreis'));
 
             const upcomingEvents = computed(() => events.value
                 .filter(e => e.type === 'once')
@@ -676,8 +656,7 @@
                     title: 'Springen',
                     img: 'Assets/T3-1200.webp', pos: '70% 30%',
                     alt: 'Das Trampolin in der MiKi, davor die Lounge mit Couches',
-                    text: 'Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.',
-                    link: { href: '#events', label: 'Zu den Terminen' }
+                    text: 'Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.'
                 },
                 diy: {
                     title: 'DIY-Kirche',
@@ -770,7 +749,7 @@
             });
 
             return {
-                tickerWords, regularEvents, upcomingEvents, openChurch, jugendkreis, mapsUrl,
+                tickerWords, regularEvents, upcomingEvents, mapsUrl,
                 selectedEvent, openEventModal, closeEventModal, selectedTile, openTile, goToFromTile
             };
         }

@@ -284,6 +284,16 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 }
 .events-sub::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
 .events-sub + .events-grid { margin-top: 0; }
+/* Hinweis unter den Terminen: kostenfrei, jeder willkommen */
+#events .events-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+.events-note i { color: var(--primary); font-size: 1.3rem; flex-shrink: 0; }
 .event-start { display: block; margin: -6px 0 10px; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
 
 .highlight-list { display: grid; gap: 16px; }
@@ -1025,20 +1035,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .cta-final h2 { color: #fff; font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 14px; }
 .cta-final .cta-lead { font-size: 1.15rem; color: rgba(255, 255, 255, 0.85); max-width: 560px; margin: 0 auto; }
 .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 28px; }
-.cta-facts {
-    display: inline-grid;
-    gap: 10px;
-    margin: 28px auto 0;
-    padding: 18px 24px;
-    text-align: left;
-    list-style: none;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.cta-facts li { display: flex; align-items: flex-start; gap: 12px; color: rgba(255, 255, 255, 0.92); }
-.cta-facts i { color: var(--primary); font-size: 1.25rem; margin-top: 2px; flex-shrink: 0; }
-.cta-alt { margin-top: 14px; color: rgba(255, 255, 255, 0.75); font-size: 0.95rem; }
 .cta-stefan {
     display: flex;
     align-items: center;
@@ -1057,9 +1053,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     object-fit: cover;
     border: 2px solid var(--primary);
 }
-.cta-stefan strong { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.cta-stefan i { flex-shrink: 0; color: var(--primary); font-size: 1.4rem; }
-.cta-stefan:hover strong { color: #fff; }
+.cta-stefan a { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.cta-stefan a:hover { color: #fff; }
 /* Instagram: dezente Zeile unter den Buttons */
 .insta-card {
     display: flex;
