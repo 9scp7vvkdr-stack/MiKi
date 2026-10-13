@@ -104,6 +104,23 @@
         update();
     }
 
+    // Hintergrundbilder spaet laden: data-lazy-bg="Assets/..." wird erst kurz vor dem
+    // Sichtbarwerden geladen (spart beim ersten Aufruf Daten, v. a. am Handy)
+    function lazyBackgrounds() {
+        var els = Array.prototype.slice.call(document.querySelectorAll('[data-lazy-bg]'));
+        function load(el) {
+            el.style.backgroundImage = "url('" + el.getAttribute('data-lazy-bg') + "')";
+            el.removeAttribute('data-lazy-bg');
+        }
+        if (!('IntersectionObserver' in window)) { els.forEach(load); return; }
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) { load(entry.target); observer.unobserve(entry.target); }
+            });
+        }, { rootMargin: '600px 0px' });
+        els.forEach(function (el) { observer.observe(el); });
+    }
+
     function footerYear() {
         var el = document.getElementById('footer-year');
         if (el) el.textContent = new Date().getFullYear();
@@ -115,6 +132,7 @@
             reveal();
             navHighlight();
             parallax();
+            lazyBackgrounds();
             footerYear();
         }
     };

@@ -10,7 +10,8 @@
     --darker: #020617;
     --light: #f8fafc;
     --white: #ffffff;
-    --gray: #94a3b8;
+    --gray: #94a3b8;           /* nur auf dunklem Grund verwenden */
+    --muted: #64748b;          /* graue Schrift auf hellem Grund (gut lesbar) */
 
     --glass: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.5);
@@ -426,7 +427,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    color: var(--primary);
+    color: var(--primary-ink);
     flex-shrink: 0;
 }
 .progress-bar-bg {
@@ -754,6 +755,25 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 /* --- WAS DICH ERWARTET: Foto-Kacheln mit Parallax im Bild --- */
 #erleben { background: #ffffff; }
 #events { padding-top: 140px; }
+/* Hinweis: Bilder sind anklickbar ("Tipp" am Handy, "Klick" mit Maus) */
+.section-head p.exp-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: rgba(16, 187, 130, 0.1);
+    color: var(--primary-ink);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.exp-hint i { font-size: 1.1rem; }
+.hint-mouse { display: none; }
+@media (hover: hover) and (pointer: fine) {
+    .hint-touch { display: none; }
+    .hint-mouse { display: inline; }
+}
 .exp-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1384,3 +1404,65 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .mk-history-body { padding: 4px 18px 22px; }
     .legal-page { padding: 104px 0 64px; }
 }
+
+
+/* =====================================================================
+   ICONS (Phosphor) – nur die auf der Seite genutzten: 5 KB statt 219 KB.
+   Neues Icon gebraucht? Dann muss extern/phosphor/miki-icons.woff2 neu erzeugt
+   werden (Quelle: extern/phosphor/Phosphor.woff2 + style.css im selben Ordner).
+   ===================================================================== */
+@font-face {
+    font-family: 'MiKi Icons';
+    src: url('extern/phosphor/miki-icons.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+.ph {
+    font-family: 'MiKi Icons' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.ph-armchair:before { content: "\e012"; }
+.ph-arrow-fat-lines-up:before { content: "\e52a"; }
+.ph-arrow-left:before { content: "\e058"; }
+.ph-arrow-right:before { content: "\e06c"; }
+.ph-arrow-square-out:before { content: "\e5de"; }
+.ph-calendar-blank:before { content: "\e10a"; }
+.ph-check:before { content: "\e182"; }
+.ph-church:before { content: "\ecea"; }
+.ph-clock:before { content: "\e19a"; }
+.ph-copy:before { content: "\e1ca"; }
+.ph-couch:before { content: "\e7f6"; }
+.ph-envelope:before { content: "\e214"; }
+.ph-envelope-simple:before { content: "\e218"; }
+.ph-game-controller:before { content: "\e26e"; }
+.ph-hammer:before { content: "\e80e"; }
+.ph-hand-heart:before { content: "\e810"; }
+.ph-hand-tap:before { content: "\ec90"; }
+.ph-hands-praying:before { content: "\ecc8"; }
+.ph-heart:before { content: "\e2a8"; }
+.ph-images:before { content: "\e836"; }
+.ph-instagram-logo:before { content: "\e2d0"; }
+.ph-lightbulb:before { content: "\e2dc"; }
+.ph-map-pin:before { content: "\e316"; }
+.ph-music-notes:before { content: "\e340"; }
+.ph-paint-brush-broad:before { content: "\e590"; }
+.ph-paypal-logo:before { content: "\e98c"; }
+.ph-pencil-simple:before { content: "\e3b4"; }
+.ph-phone:before { content: "\e3b8"; }
+.ph-plus:before { content: "\e3d4"; }
+.ph-question:before { content: "\e3e8"; }
+.ph-sparkle:before { content: "\e6a2"; }
+.ph-target:before { content: "\e47c"; }
+.ph-ticket:before { content: "\e490"; }
+.ph-users-three:before { content: "\e68e"; }
+.ph-whatsapp-logo:before { content: "\e5d0"; }
+.ph-wrench:before { content: "\e5d4"; }

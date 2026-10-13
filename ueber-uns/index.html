@@ -77,8 +77,8 @@
 
     <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../extern/fonts/fonts.css">
-    <link rel="stylesheet" href="../extern/phosphor/style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="../extern/phosphor/style.css"></noscript>
+    <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
+    <link rel="preload" href="../extern/phosphor/miki-icons.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -197,12 +197,12 @@
                         <div style="flex: 1;">
                             <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
                                 <span>{{ item.label }}</span>
-                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
+                                <span style="font-size: 0.8rem; color: var(--primary-ink); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
                             </div>
                             <div class="progress-bar-bg">
                                 <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
                             </div>
-                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
+                            <small style="color: var(--muted); display:block; margin-top:5px;">{{ item.status }}</small>
                         </div>
                     </div>
                 </div>
@@ -304,14 +304,14 @@
                     <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
                         <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
                         <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen.</p>
-                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary-ink);">Ziel: €25.000</p>
                     </div>
 
                     <!-- Projekt 2: Gebets-Telefonzelle -->
                     <div>
                         <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Gebets-Telefonzelle</h4>
                         <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit jeder ins Gespräch mit Gott kommt. Wir brauchen Budget für die Reparatur und Baumaterialien.</p>
-                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €1.200</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary-ink);">Ziel: €1.200</p>
                     </div>
                 </div>
 
@@ -360,7 +360,7 @@
             <button type="button" aria-label="Schließen" @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
 
             <div class="modal-header">
-                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
+                <span style="color: var(--primary-ink); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
                 <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedProgress.label }}</h2>
             </div>
 
@@ -368,10 +368,10 @@
             <img :src="selectedProgress.photo" :alt="'Foto: ' + selectedProgress.label">
 
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                <div style="background: rgba(16,187,130,0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary); font-size: 1rem;">
+                <div style="background: rgba(16,187,130,0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary-ink); font-size: 1rem;">
                     {{ selectedProgress.percent }}% fertig
                 </div>
-                <span style="color: var(--gray); font-size: 0.9rem;">{{ selectedProgress.status }}</span>
+                <span style="color: var(--muted); font-size: 0.9rem;">{{ selectedProgress.status }}</span>
             </div>
 
             <p style="line-height: 1.8; color: #334155;">{{ selectedProgress.detailedDesc }}</p>

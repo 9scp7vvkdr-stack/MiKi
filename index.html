@@ -179,9 +179,8 @@
     <link rel="preload" href="Assets/T1.webp" as="image" fetchpriority="high">
     <link rel="stylesheet" href="extern/fonts/fonts.css">
 
-    <!-- Icons blockieren den ersten Seitenaufbau nicht (78 KB CSS werden nachgeladen) -->
-    <link rel="stylesheet" href="extern/phosphor/style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="extern/phosphor/style.css"></noscript>
+    <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
+    <link rel="preload" href="extern/phosphor/miki-icons.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -298,6 +297,7 @@
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
                 <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben im Jugendkreis kennenlernen.</p>
+                <p class="exp-hint"><i class="ph ph-hand-tap" aria-hidden="true"></i><span><span class="hint-touch">Tipp</span><span class="hint-mouse">Klick</span> auf ein Bild für mehr Infos</span></p>
             </div>
 
             <div class="exp-grid">
@@ -355,7 +355,7 @@
 
     <!-- Letzter Anstoss: einfach vorbeikommen -->
     <section class="section-padding cta-final has-doodles">
-        <div class="cta-bg" data-parallax="12" style="background-image: url('Assets/T11.webp');" aria-hidden="true"></div>
+        <div class="cta-bg" data-parallax="12" data-lazy-bg="Assets/T11.webp" aria-hidden="true"></div>
         <div class="container hidden-el">
             <h2>Klingt gut?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
@@ -406,7 +406,7 @@
             <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
-                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.badge }}</span>
+                <span style="color: var(--primary-ink); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.badge }}</span>
                 <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
             </div>
             
