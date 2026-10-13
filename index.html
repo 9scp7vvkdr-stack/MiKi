@@ -1395,11 +1395,12 @@
         <div class="container hero-content">
             <h1>
                 <span class="text-gradient">MiKi</span>
-                <span class="hero-claim">Jugendkirche Heidenheim</span>
+                <!-- unsichtbar, aber fuer Google und Screenreader Teil der Hauptueberschrift -->
+                <span class="sr-only">Jugendkirche Heidenheim</span>
             </h1>
             <p class="hero-rotator">
-                <span class="sr-only">Dein Ort zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
-                <span aria-hidden="true">Dein Ort zum <span class="rot-word" id="rot-word">Chillen</span></span>
+                <span class="sr-only">Deine Kirche zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
+                <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
         </div>
     </header>
@@ -2471,7 +2472,7 @@
     // Bewegung nur, wenn der Nutzer sie nicht im System abgeschaltet hat
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Wechselwort im Hero ("Dein Ort zum ...")
+    // Wechselwort im Hero ("Deine Kirche zum ...")
     (function() {
         const el = document.getElementById('rot-word');
         if (!el || reduceMotion) return;
