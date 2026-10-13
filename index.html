@@ -571,7 +571,10 @@
             //    JJJJ-MM-TT) - der Hinweis "Start am ..." verschwindet nach dem Datum von selbst.
             //  - Einmalig: type 'once', start im Format 'JJJJ-MM-TTTHH:MM:00+01:00' (Winterzeit +01:00,
             //    Sommerzeit +02:00). Das Event steht oben bei "Highlights" und verschwindet 4 Stunden
-            //    nach Beginn automatisch - niemand muss es loeschen.
+            //    nach Beginn automatisch - niemand muss es loeschen. Optional "end" fuer ein anderes Ende.
+            //    Uhrzeit noch unklar? Nur das Datum angeben (start: 'JJJJ-MM-TT') - dann steht
+            //    "Uhrzeit folgt" da. Dann bitte "end" setzen, sonst verschwindet es um Mitternacht.
+            //    Optional "timeLabel" ersetzt die angezeigte Uhrzeit (z. B. "ab 20:00 Uhr").
             // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
                 {
@@ -608,6 +611,17 @@
                     detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen: AC/DC, Coldplay, Hans Zimmer und mehr – auf der Orgel, gemischt mit Schlagzeug und E-Gitarre. Stimm jetzt ab und komm vorbei!",
                     image: "Assets/T8.webp",
                     link: { href: "https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header", label: "Jetzt Songs abstimmen", icon: "ph-music-notes" }
+                },
+                {
+                    type: 'once',
+                    title: "Warten aufs Christkind",
+                    // Uhrzeit noch offen. Sobald sie feststeht, z. B. so eintragen:
+                    //   start: "2026-12-23T20:00:00+01:00",
+                    //   timeLabel: "ab 20:00 Uhr",
+                    start: "2026-12-23",
+                    end: "2026-12-24T03:00:00+01:00",        // nach dem Reinfeiern ausblenden
+                    desc: "Die MiKi hat offen – wir feiern zusammen in den Geburtstag von Jesus rein",
+                    detailedDesc: "Am 23. Dezember hat die MiKi für dich offen. Wir warten gemeinsam aufs Christkind und feiern zusammen in den Geburtstag von Jesus rein. Bring deine Freunde mit und komm vorbei!"
                 }
             ]);
 
@@ -635,9 +649,11 @@
             const upcomingEvents = computed(() => events.value
                 .filter(e => e.type === 'once')
                 .map(e => {
-                    const start = new Date(e.start);
-                    const end = e.end ? new Date(e.end) : new Date(start.getTime() + 4 * 3600 * 1000);
-                    const time = fmt(start, { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+                    // Nur Datum (JJJJ-MM-TT) = Uhrzeit steht noch nicht fest
+                    const dateOnly = e.start.length === 10;
+                    const start = new Date(dateOnly ? e.start + 'T00:00:00+01:00' : e.start);
+                    const end = e.end ? new Date(e.end) : new Date(start.getTime() + (dateOnly ? 24 : 4) * 3600 * 1000);
+                    const time = e.timeLabel || (dateOnly ? 'Uhrzeit folgt' : fmt(start, { hour: '2-digit', minute: '2-digit' }) + ' Uhr');
                     return Object.assign({}, e, {
                         startDate: start,
                         endDate: end,
