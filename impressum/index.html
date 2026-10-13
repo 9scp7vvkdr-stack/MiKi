@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <script>
-        // Merker "JavaScript laeuft" (fuer das Einblenden beim Scrollen). Kommt site.js nicht an
-        // (schlechtes Netz, Fehler), wird nach 3 Sekunden einfach alles normal angezeigt.
-        document.documentElement.className += ' js';
-        setTimeout(function () {
-            if (!window.MiKiSite) document.documentElement.className = document.documentElement.className.replace(' js', '');
-        }, 3000);
-    </script>
     <meta name="description" content="Impressum der MiKi – Jugendkirche Heidenheim.">
     <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
     <meta name="theme-color" content="#10BB82">
@@ -38,22 +30,22 @@
 
     <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../extern/fonts/fonts.css">
-    <link rel="preload" href="../extern/phosphor/miki-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../extern/phosphor/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="../extern/phosphor/style.css"></noscript>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
-    <nav class="navbar" aria-label="Hauptnavigation">
-        <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left" aria-hidden="true"></i> MiKi</a>
+    <nav class="navbar">
+        <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left"></i> MiKi</a>
         <a href="../ueber-uns/">Über die MiKi</a>
     </nav>
 
-    <main class="legal-page" id="inhalt">
+    <main class="legal-page">
         <div class="container legal-wrap">
-            <a href="../" class="legal-back"><i class="ph ph-arrow-left" aria-hidden="true"></i> Zur Startseite</a>
+            <a href="../" class="legal-back"><i class="ph ph-arrow-left"></i> Zur Startseite</a>
             <h1>Impressum</h1>
         <div style="line-height: 1.8; color: #334155; font-size: 0.95rem;">
                 <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Kontakt</div>
@@ -107,7 +99,7 @@
                     Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Internetseite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile in ihrem Inhalt und ihrer Gültigkeit davon unberührt.
                 </p>
 
-                <p style="margin-top: 30px; color: var(--muted); font-size: 0.9rem;">
+                <p style="margin-top: 30px; color: var(--gray); font-size: 0.9rem;">
                     <strong>Datum:</strong> 08.01.2026
                 </p>
             </div>
@@ -125,21 +117,21 @@
                         89520 Heidenheim an der Brenz
                     </address>
                     <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map" style="margin-top: 16px;">
-                        <i class="ph ph-map-pin" aria-hidden="true"></i> Route in Google Maps &ouml;ffnen
+                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
                     </a>
                 </div>
                 <div class="footer-col">
                     <h3>Kontakt</h3>
                     <p style="margin-bottom: 10px; color: white; font-weight: 600;">Stefan Hörz</p>
                     <ul style="line-height: 2;">
-                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple" aria-hidden="true"></i>Stefan.hoerz@ejhdh.de</a></li>
-                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone" aria-hidden="true"></i>0174 3086657</a></li>
+                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple"></i>Stefan.hoerz@ejhdh.de</a></li>
+                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone"></i>0174 3086657</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>Folge uns auf Social Media</h3>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -153,10 +145,13 @@
                 </div>
             </div>
             <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
-                &copy; <span id="footer-year">2026</span> MiKi – Jugendkirche Heidenheim
+                &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
     </footer>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () { MiKiSite.init(); });
+</script>
 </body>
 </html>

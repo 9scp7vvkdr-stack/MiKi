@@ -9,12 +9,6 @@
             var h = location.hash;
             if (['#vision', '#umbau', '#spenden', '#blog'].indexOf(h) !== -1) location.replace('ueber-uns/' + h);
         })();
-        // Merker "JavaScript laeuft" (fuer das Einblenden beim Scrollen). Kommt site.js nicht an
-        // (schlechtes Netz, Fehler), wird nach 3 Sekunden einfach alles normal angezeigt.
-        document.documentElement.className += ' js';
-        setTimeout(function () {
-            if (!window.MiKiSite) document.documentElement.className = document.documentElement.className.replace(' js', '');
-        }, 3000);
     </script>
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="Jugendkirche in der Michaelskirche Heidenheim: Trampolin, Zocken, Chillen, Bar &amp; Events – von Jugendlichen für Jugendliche. Egal ob gläubig oder nicht, komm vorbei!">
@@ -177,23 +171,28 @@
     }
     </script>
 
-    <!-- Einziges Skript: nur Extras, alle Inhalte stehen fest im HTML -->
+    <!-- Produktions-Build von Vue (inkl. Template-Compiler): ~160 KB statt 574 KB, schneller, ohne Dev-Warnungen -->
+    <script defer src="extern/vue.global.prod.js"></script>
     <script defer src="site.js"></script>
 
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="Assets/T1.webp" as="image" fetchpriority="high">
-    <link rel="preload" href="extern/phosphor/miki-icons.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="extern/fonts/fonts.css">
+
+    <!-- Icons blockieren den ersten Seitenaufbau nicht (78 KB CSS werden nachgeladen) -->
+    <link rel="stylesheet" href="extern/phosphor/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="extern/phosphor/style.css"></noscript>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
-    <nav class="navbar" aria-label="Hauptnavigation">
-        <a href="#" class="nav-logo" aria-label="Nach oben">MiKi</a>
+<div id="app">
+
+    <nav class="navbar">
+        <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Termine</a>
         <a href="#erleben">Was geht</a>
         <a href="#fragen">FAQ</a>
@@ -201,7 +200,6 @@
         <a href="ueber-uns/" class="nav-about"><span class="nav-long">Über die MiKi</span><span class="nav-short">Über uns</span></a>
     </nav>
 
-<main id="inhalt">
     <header class="hero">
         <div class="hero-bg">
             <div class="hero-bg-image active" style="background-image: url('Assets/T1.webp');"></div>
@@ -222,7 +220,7 @@
             </h1>
             <p class="hero-rotator">
                 <span class="sr-only">Deine Kirche zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
-                <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word" data-words="Chillen,Zocken,Springen,Mitbauen,Glauben">Chillen</span></span>
+                <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
         </div>
     </header>
@@ -231,10 +229,11 @@
     <div class="ticker-wrap" aria-hidden="true">
         <div class="ticker">
             <div class="ticker-track">
-                <div class="ticker-group"><span>Chillen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zocken</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Trampolin</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Musik</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Bar</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Mitbauen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Freunde</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Glaube</span><i class="ph ph-sparkle" aria-hidden="true"></i></div>
-                <div class="ticker-group"><span>Chillen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zocken</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Trampolin</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Musik</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Bar</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Mitbauen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Freunde</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Glaube</span><i class="ph ph-sparkle" aria-hidden="true"></i></div>
-                <div class="ticker-group"><span>Chillen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zocken</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Trampolin</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Musik</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Bar</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Mitbauen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Freunde</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Glaube</span><i class="ph ph-sparkle" aria-hidden="true"></i></div>
-                <div class="ticker-group"><span>Chillen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zocken</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Trampolin</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Musik</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Bar</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Mitbauen</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Freunde</span><i class="ph ph-sparkle" aria-hidden="true"></i><span>Glaube</span><i class="ph ph-sparkle" aria-hidden="true"></i></div>
+                <div class="ticker-group" v-for="n in 4" :key="n">
+                    <template v-for="w in tickerWords" :key="w">
+                        <span>{{ w }}</span><i class="ph ph-sparkle"></i>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
@@ -242,137 +241,50 @@
     <section class="section-padding has-doodles" id="events">
         <svg class="doodle" data-parallax-px="-70" style="top: 70px; right: 8%;" width="70" height="70" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 9" stroke-linecap="round"/></svg>
         <div class="container">
-            <div class="events-head">
+            <div class="events-head hidden-el">
                 <div>
-                    <span class="kicker kicker-dark"><i class="ph ph-calendar-blank" aria-hidden="true"></i> Termine</span>
+                    <span class="kicker kicker-dark"><i class="ph ph-calendar-blank"></i> Termine</span>
                     <h2 style="color:white;">Was geht in der MiKi?!</h2>
                     <p>Verpasse nichts! Hier findest du alle aktuellen Termine.</p>
                 </div>
                 <!-- Pfeile erscheinen nur, wenn mehr Termine da sind, als in eine Reihe passen -->
                 <div class="events-nav" aria-label="Termine blättern">
-                    <button type="button" class="events-arrow" data-dir="-1" aria-label="Vorherige Termine"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
-                    <button type="button" class="events-arrow" data-dir="1" aria-label="Weitere Termine"><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+                    <button type="button" class="events-arrow" data-dir="-1" aria-label="Vorherige Termine"><i class="ph ph-arrow-left"></i></button>
+                    <button type="button" class="events-arrow" data-dir="1" aria-label="Weitere Termine"><i class="ph ph-arrow-right"></i></button>
                 </div>
             </div>
 
-            <!--
-                TERMINE – so traegst du neue ein:
-                • Regelmaessig: eine <article class="event-card">-Karte unten bei "Jede Woche" kopieren und anpassen.
-                  Reihenfolge = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
-                • Einmalig (Highlight): die <article class="highlight-card">-Karte kopieren und anpassen.
-                  data-start = Beginn, data-end = Ende, Format JJJJ-MM-TTTHH:MM:00+01:00 (Winterzeit +01:00, Sommerzeit +02:00).
-                  Nach data-end verschwindet die Karte automatisch. Gibt es kein Highlight mehr, verschwindet der ganze Bereich.
-                • data-until="..." an einem Hinweis (z. B. "Start am 13.11.") blendet ihn ab diesem Zeitpunkt aus.
-                • Aendern sich Zeiten, bitte auch "Klingt gut?", die FAQ und llms.txt anpassen.
-            -->
-
-            <!-- Einmalige Events -->
-            <div class="highlights" data-hide-if-empty=".highlight-card">
+            <!-- Einmalige Events: erscheinen oben und verschwinden nach dem Termin automatisch -->
+            <template v-if="upcomingEvents.length">
                 <div class="events-sub">Highlights</div>
                 <div class="highlight-list">
-                    <article class="highlight-card" data-card data-start="2026-11-08T19:00:00+01:00" data-end="2026-11-08T23:00:00+01:00" data-image="Assets/T8.webp">
+                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
                         <div class="hl-date" aria-hidden="true">
-                            <span class="hl-day">08</span>
-                            <span class="hl-month">Nov</span>
+                            <span class="hl-day">{{ event.dayNum }}</span>
+                            <span class="hl-month">{{ event.monthShort }}</span>
                         </div>
                         <div class="hl-body">
-                            <span class="hl-meta">So, 08.11. · 19:00 Uhr</span>
-                            <h3>Orgel x Deine Mukke</h3>
-                            <p>ACDC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre</p>
+                            <span class="hl-meta">{{ event.badge }}</span>
+                            <h3>{{ event.title }}</h3>
+                            <p>{{ event.desc }}</p>
                         </div>
-                        <details class="event-more hl-more" data-modal>
-                            <summary>Details checken <i class="ph ph-arrow-right" aria-hidden="true"></i></summary>
-                            <div class="modal-body">
-                                <div class="modal-header modal-only">
-                                    <span class="modal-kicker">So, 08.11. · 19:00 Uhr</span>
-                                    <h2>Orgel x Deine Mukke</h2>
-                                </div>
-                                <div class="modal-details-grid">
-                                    <div><i class="ph ph-clock" aria-hidden="true"></i> <strong>Wann:</strong><br>Sonntag, 08.11.2026, 19:00 Uhr</div>
-                                    <div><i class="ph ph-map-pin" aria-hidden="true"></i> <strong>Ort:</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">MiKi (Michaelskirche)</a></div>
-                                </div>
-                                <p>Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen: ACDC, Coldplay, Hans Zimmer und mehr – auf der Orgel, gemischt mit Schlagzeug und E-Gitarre. Stimm jetzt ab und komm vorbei!</p>
-                                <div class="modal-actions">
-                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-glow"><i class="ph ph-music-notes" aria-hidden="true"></i> Jetzt Songs abstimmen</a>
-                                    <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                                </div>
-                            </div>
-                        </details>
-                    </article>
+                        <span class="hl-cta">Details checken <i class="ph ph-arrow-right"></i></span>
+                    </div>
                 </div>
-            </div>
+            </template>
 
             <!-- Regelmaessige Angebote -->
             <div class="events-sub">Jede Woche</div>
             <div class="events-grid">
-                <article class="event-card" data-card>
-                    <span class="event-date-badge">Freitags · 12:00–16:30 Uhr</span>
-                    <span class="event-start" data-until="2026-11-13T00:00:00+01:00">Start am 13.11.</span>
-                    <h3>Open Church</h3>
-                    <p class="event-desc">Die MiKi ist offen, komm einfach vorbei</p>
-                    <details class="event-more" data-modal>
-                        <summary>Details checken <i class="ph ph-arrow-right" aria-hidden="true"></i></summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Freitags · 12:00–16:30 Uhr</span>
-                                <h2>Open Church</h2>
-                            </div>
-                            <div class="modal-details-grid">
-                                <div><i class="ph ph-clock" aria-hidden="true"></i> <strong>Wann:</strong><br>Freitags, 12:00–16:30 Uhr<span data-until="2026-11-13T00:00:00+01:00"> (ab 13.11.2026)</span></div>
-                                <div><i class="ph ph-map-pin" aria-hidden="true"></i> <strong>Ort:</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">MiKi (Michaelskirche)</a></div>
-                            </div>
-                            <p>Ob Skaten (kommt bald!), Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen - die MiKi ist jeden Freitag für dich geöffnet!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-                <article class="event-card" data-card>
-                    <span class="event-date-badge">Freitags · 19:00 Uhr</span>
-                    <h3>Jugendkreis</h3>
-                    <p class="event-desc">Glaube, Gemeinschaft &amp; Ausflüge</p>
-                    <details class="event-more" data-modal>
-                        <summary>Details checken <i class="ph ph-arrow-right" aria-hidden="true"></i></summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Freitags · 19:00 Uhr</span>
-                                <h2>Jugendkreis</h2>
-                            </div>
-                            <div class="modal-details-grid">
-                                <div><i class="ph ph-clock" aria-hidden="true"></i> <strong>Wann:</strong><br>Freitags, 19:00 Uhr</div>
-                                <div><i class="ph ph-map-pin" aria-hidden="true"></i> <strong>Ort:</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">MiKi (Michaelskirche)</a></div>
-                            </div>
-                            <p>Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen – ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp an. So bist du immer auf dem Laufenden und wir können besser planen.</p>
-                            <div class="modal-actions">
-                                <a href="https://wa.me/+491743086657?text=Hey%2C%20ich%20h%C3%A4tte%20Lust%20auf%20den%20Jugendkreis!" target="_blank" rel="noopener" class="btn btn-glow"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Per WhatsApp anmelden</a>
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-                <article class="event-card" data-card>
-                    <span class="event-date-badge">Dienstags · 17:00–19:00 Uhr</span>
-                    <h3>Baujugendkreis</h3>
-                    <p class="event-desc">Bauen, chillen, Gemeinschaft</p>
-                    <details class="event-more" data-modal>
-                        <summary>Details checken <i class="ph ph-arrow-right" aria-hidden="true"></i></summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Dienstags · 17:00–19:00 Uhr</span>
-                                <h2>Baujugendkreis</h2>
-                            </div>
-                            <div class="modal-details-grid">
-                                <div><i class="ph ph-clock" aria-hidden="true"></i> <strong>Wann:</strong><br>Dienstags, 17:00–19:00 Uhr</div>
-                                <div><i class="ph ph-map-pin" aria-hidden="true"></i> <strong>Ort:</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">MiKi (Michaelskirche)</a></div>
-                            </div>
-                            <p>Du hast Lust die MiKi zu gestalten, gemeinsam zu werkeln und an kleinen und großen Projekten zu arbeiten? Dabei ist es übrigens ganz egal, ob du handwerklich schon viel gemacht hast oder nicht. Komm vorbei!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
+                <div v-for="(event, index) in regularEvents" :key="event.title" class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
+                    <span class="event-date-badge">{{ event.badge }}</span>
+                    <span v-if="event.startNote" class="event-start">{{ event.startNote }}</span>
+                    <h3>{{ event.title }}</h3>
+                    <p style="color: rgba(255,255,255,0.7);">{{ event.desc }}</p>
+                    <div style="margin-top: 20px; display: flex; align-items: center; gap: 5px; color: var(--primary); font-weight: 600;">
+                        Details checken <i class="ph ph-arrow-right"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -383,127 +295,76 @@
         <svg class="doodle indigo" data-parallax-px="80" style="bottom: 60px; left: 2%;" width="130" height="32" viewBox="0 0 120 30" aria-hidden="true"><path d="M2 15 C 15 0, 25 30, 40 15 S 65 0, 80 15 S 105 30, 118 15" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
         <div class="container">
             <div class="section-head hidden-el">
-                <span class="kicker"><i class="ph ph-sparkle" aria-hidden="true"></i> Was dich erwartet</span>
+                <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
                 <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben im Jugendkreis kennenlernen.</p>
             </div>
 
             <div class="exp-grid">
-                <details class="exp-card wide hidden-el" data-modal="tile-modal">
-                    <summary aria-label="Mehr über Springen">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>Springen</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/T3-1200.webp" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async">
-                        <h2 class="modal-only">Springen</h2>
-                        <p>Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.</p>
-                        <div class="modal-actions">
-                                <a href="#events" class="btn btn-glow">Zu den Terminen <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
+                    <div class="exp-caption">
+                        <h3>Springen</h3>
                     </div>
-                </details>
-                <details class="exp-card tall hidden-el" data-modal="tile-modal" style="transition-delay: 100ms;">
-                    <summary aria-label="Mehr über DIY-Kirche">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/barbauprojekt.webp" srcset="Assets/barbauprojekt-800.webp 800w, Assets/barbauprojekt.webp 1200w" sizes="(max-width: 768px) 260px, 480px" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>DIY-Kirche</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/barbauprojekt-800.webp" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async">
-                        <h2 class="modal-only">DIY-Kirche</h2>
-                        <p>Die MiKi richtet keine Firma ein – das machen wir selbst. Die Bar und das Neon-Kreuz haben Jugendliche gebaut, und es geht weiter: Eine Boulderwand und eine Halfpipe sind schon geplant. Du willst mit anpacken? Komm dienstags von 17 bis 19 Uhr zum Baujugendkreis. Ob du schon mal was gebaut hast, ist völlig egal.</p>
-                        <div class="modal-actions">
-                                <a href="ueber-uns/#umbau" class="btn btn-glow">Das wird gerade gebaut <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
+                <article class="exp-card tall hidden-el" role="button" tabindex="0" aria-label="Mehr über DIY-Kirche" @click="openTile('diy')" @keydown.enter="openTile('diy')" @keydown.space.prevent="openTile('diy')" style="transition-delay: 100ms;">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/barbauprojekt.webp" srcset="Assets/barbauprojekt-800.webp 800w, Assets/barbauprojekt.webp 1200w" sizes="(max-width: 768px) 260px, 480px" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
+                    <div class="exp-caption">
+                        <h3>DIY-Kirche</h3>
                     </div>
-                </details>
-                <details class="exp-card hidden-el" data-modal="tile-modal">
-                    <summary aria-label="Mehr über Zocken">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/T10.webp" srcset="Assets/T10-1200.webp 1200w, Assets/T10.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>Zocken</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/T10-1200.webp" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async">
-                        <h2 class="modal-only">Zocken</h2>
-                        <p>Zocken macht zusammen einfach mehr Spaß als allein daheim. In der MiKi gibt es einen eigenen Gaming-Bereich – fordere deine Freunde heraus oder lern beim Zocken neue Leute kennen.</p>
-                        <div class="modal-actions">
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Zocken" @click="openTile('zocken')" @keydown.enter="openTile('zocken')" @keydown.space.prevent="openTile('zocken')">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T10.webp" srcset="Assets/T10-1200.webp 1200w, Assets/T10.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller"></i></span>
+                    <div class="exp-caption">
+                        <h3>Zocken</h3>
                     </div>
-                </details>
-                <details class="exp-card hidden-el" data-modal="tile-modal" style="transition-delay: 100ms;">
-                    <summary aria-label="Mehr über Darts &amp; Games">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/T7.webp" srcset="Assets/T7-1200.webp 1200w, Assets/T7.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-target" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>Darts &amp; Games</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/T7-1200.webp" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async">
-                        <h2 class="modal-only">Darts &amp; Games</h2>
-                        <p>Darts, Spiele und ein bisschen Wettkampf: Ob du die 180 triffst oder knapp an der Scheibe vorbei – Spaß macht es trotzdem. Perfekt, um mit anderen ins Gespräch zu kommen.</p>
-                        <div class="modal-actions">
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Darts &amp; Games" @click="openTile('darts')" @keydown.enter="openTile('darts')" @keydown.space.prevent="openTile('darts')" style="transition-delay: 100ms;">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T7.webp" srcset="Assets/T7-1200.webp 1200w, Assets/T7.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
+                    <div class="exp-caption">
+                        <h3>Darts &amp; Games</h3>
                     </div>
-                </details>
-                <details class="exp-card hidden-el" data-modal="tile-modal">
-                    <summary aria-label="Mehr über Glaube">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-hands-praying" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>Glaube</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/T8-1200.webp" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async">
-                        <h2 class="modal-only">Glaube</h2>
-                        <p>In der MiKi ist jeder willkommen – egal, ob du glaubst, zweifelst oder einfach neugierig bist. Wenn du Lust hast, lernst du im Jugendkreis (freitags, 19 Uhr) den christlichen Glauben kennen: mit Musik, echten Fragen und Gemeinschaft. Musst du aber nicht.</p>
-                        <div class="modal-actions">
-                                <a href="#fragen" class="btn btn-glow">Fragen zum Glauben? Zur FAQ <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
+                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Glaube" @click="openTile('glaube')" @keydown.enter="openTile('glaube')" @keydown.space.prevent="openTile('glaube')">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-hands-praying"></i></span>
+                    <div class="exp-caption">
+                        <h3>Glaube</h3>
                     </div>
-                </details>
-                <details class="exp-card wide hidden-el" data-modal="tile-modal" style="transition-delay: 100ms;">
-                    <summary aria-label="Mehr über Chillen">
-                        <span class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></span>
-                        <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch" aria-hidden="true"></i></span>
-                        <span class="exp-caption"><h3>Chillen</h3></span>
-                        <span class="exp-more" aria-hidden="true"><i class="ph ph-plus" aria-hidden="true"></i></span>
-                    </summary>
-                    <div class="modal-body">
-                        <img class="modal-only" src="Assets/T6-1200.webp" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async">
-                        <h2 class="modal-only">Chillen</h2>
-                        <p>Couches statt Holzbänke: In der Lounge kannst du einfach abhängen, quatschen, Hausis machen oder dir an der Bar Getränke und Snacks holen. Kein Programm, kein Muss – einfach ein Ort, an dem du gerne bist.</p>
-                        <div class="modal-actions">
-                            <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                        </div>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
+                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Chillen" @click="openTile('chillen')" @keydown.enter="openTile('chillen')" @keydown.space.prevent="openTile('chillen')" style="transition-delay: 100ms;">
+                    <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
+                    <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
+                    <div class="exp-caption">
+                        <h3>Chillen</h3>
                     </div>
-                </details>
+                    <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Letzter Anstoss: einfach vorbeikommen -->
     <section class="section-padding cta-final has-doodles">
-        <div class="cta-bg" data-parallax="12" data-lazy-bg="Assets/T11.webp" aria-hidden="true"></div>
+        <div class="cta-bg" data-parallax="12" style="background-image: url('Assets/T11.webp');" aria-hidden="true"></div>
         <div class="container hidden-el">
             <h2>Klingt gut?</h2>
             <p class="cta-lead">Dann komm einfach vorbei – am besten mit deinen Freunden. Wir freuen uns auf dich!</p>
 
             <!-- Wann / Wo / Kosten - Zeiten kommen direkt aus der Termin-Liste -->
             <ul class="cta-facts">
-                <li>
+                <li v-if="openChurch">
                     <i class="ph ph-clock" aria-hidden="true"></i>
-                    <span><strong>Open Church</strong> · Freitags 12:00–16:30 Uhr<span data-until="2026-11-13T00:00:00+01:00"> · ab 13.11.</span></span>
+                    <span><strong>Open Church</strong> · {{ openChurch.days }} {{ openChurch.time }}<template v-if="openChurch.fromShort"> · ab {{ openChurch.fromShort }}</template></span>
                 </li>
                 <li>
                     <i class="ph ph-map-pin" aria-hidden="true"></i>
@@ -514,11 +375,11 @@
                     <span>Kostenlos · ohne Anmeldung</span>
                 </li>
             </ul>
-            <p class="cta-alt">Lieber mit Programm? Der Jugendkreis trifft sich freitags um 19:00 Uhr.</p>
+            <p v-if="jugendkreis" class="cta-alt">Lieber mit Programm? Der Jugendkreis trifft sich {{ jugendkreis.days.toLowerCase() }} um {{ jugendkreis.time }}.</p>
 
             <div class="cta-buttons">
                 <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-ghost-light">
-                    <i class="ph ph-map-pin" aria-hidden="true"></i> So findest du hin
+                    <i class="ph ph-map-pin"></i> So findest du hin
                 </a>
             </div>
 
@@ -530,7 +391,7 @@
             </a>
 
             <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" class="insta-card">
-                <span class="insta-icon" aria-hidden="true"><i class="ph ph-instagram-logo" aria-hidden="true"></i></span>
+                <span class="insta-icon" aria-hidden="true"><i class="ph ph-instagram-logo"></i></span>
                 <span class="insta-text">
                     <strong>Folg uns auf Instagram <span class="insta-handle">@miki_hdh</span></strong>
                     <span>Fotos, Updates und Behind-the-Scenes aus der MiKi.</span>
@@ -540,11 +401,51 @@
         </div>
     </section>
 
+    <div v-if="selectedEvent" class="modal-overlay" @click="closeEventModal">
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+            <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            
+            <div class="modal-header">
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.badge }}</span>
+                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
+            </div>
+            
+            <div class="modal-details-grid">
+                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br>{{ selectedEvent.when }}</div>
+                <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br><a :href="mapsUrl" target="_blank" rel="noopener" class="event-place">MiKi (Michaelskirche)</a></div>
+            </div>
+
+            <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.detailedDesc }}</p>
+
+            <a v-if="selectedEvent.link" :href="selectedEvent.link.href" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
+                <i :class="'ph ' + (selectedEvent.link.icon || 'ph-arrow-square-out')"></i> {{ selectedEvent.link.label }}
+            </a>
+            <a v-if="selectedEvent.whatsapp" :href="'https://wa.me/+491743086657?text=' + encodeURIComponent(selectedEvent.whatsapp)" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
+                <i class="ph ph-whatsapp-logo"></i> Per WhatsApp anmelden
+            </a>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeEventModal">Alles klar!</button>
+        </div>
+    </div>
+
+    <!-- "Kirche? Anders als du denkst": Infos zur angeklickten Kachel -->
+    <div v-if="selectedTile" class="modal-overlay" @click="selectedTile = null">
+        <div class="modal-content tile-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 640px; padding: 32px;">
+            <button type="button" aria-label="Schließen" @click="selectedTile = null" class="tile-close">✕</button>
+            <img :src="selectedTile.img" :alt="selectedTile.alt" :style="{ objectPosition: selectedTile.pos || 'center' }">
+            <h2>{{ selectedTile.title }}</h2>
+            <p>{{ selectedTile.text }}</p>
+            <a v-if="selectedTile.link" :href="selectedTile.link.href" class="btn btn-glow" style="width: 100%; margin-top: 24px; justify-content: center;" @click.prevent="goToFromTile(selectedTile.link.href)">
+                {{ selectedTile.link.label }} <i class="ph ph-arrow-right"></i>
+            </a>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: selectedTile.link ? '12px' : '24px', justifyContent: 'center' }" @click="selectedTile = null">Alles klar!</button>
+        </div>
+    </div>
+
     <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
     <section class="section-padding" id="fragen" style="background: #f8fafc;">
         <div class="container faq-wrap">
             <div class="section-head hidden-el" style="text-align: center; margin-left: auto; margin-right: auto;">
-                <span class="kicker"><i class="ph ph-question" aria-hidden="true"></i> Fragen?</span>
+                <span class="kicker"><i class="ph ph-question"></i> Fragen?</span>
                 <h2>Gut zu wissen</h2>
             </div>
             <div class="faq-list hidden-el">
@@ -586,10 +487,10 @@
                     <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
                     <div class="contact-actions">
                         <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
-                            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Schreib Stefan
+                            <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
                         </a>
                         <a href="mailto:Stefan.hoerz@ejhdh.de" class="contact-mail">
-                            <i class="ph ph-envelope-simple" aria-hidden="true"></i> Stefan.hoerz@ejhdh.de
+                            <i class="ph ph-envelope-simple"></i> Stefan.hoerz@ejhdh.de
                         </a>
                     </div>
                 </div>
@@ -601,7 +502,7 @@
     <section class="parents-teaser">
         <div class="container">
             <a href="ueber-uns/" class="teaser-card hidden-el">
-                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-users-three" aria-hidden="true"></i></span>
+                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
                 <span class="teaser-text">
                     <strong>Für Eltern, Gemeinde &amp; Unterstützer</strong>
                     <span>Vision, Baufortschritt, Spenden und die Geschichte der Michaelskirche findest du auf „Über die MiKi“.</span>
@@ -610,7 +511,6 @@
             </a>
         </div>
     </section>
-</main>
 
     <footer>
         <div class="container">
@@ -623,21 +523,21 @@
                         89520 Heidenheim an der Brenz
                     </address>
                     <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map" style="margin-top: 16px;">
-                        <i class="ph ph-map-pin" aria-hidden="true"></i> Route in Google Maps &ouml;ffnen
+                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
                     </a>
                 </div>
                 <div class="footer-col">
                     <h3>Kontakt</h3>
                     <p style="margin-bottom: 10px; color: white; font-weight: 600;">Stefan Hörz</p>
                     <ul style="line-height: 2;">
-                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple" aria-hidden="true"></i>Stefan.hoerz@ejhdh.de</a></li>
-                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone" aria-hidden="true"></i>0174 3086657</a></li>
+                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple"></i>Stefan.hoerz@ejhdh.de</a></li>
+                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone"></i>0174 3086657</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>Folge uns auf Social Media</h3>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -650,10 +550,310 @@
                 </div>
             </div>
             <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
-                &copy; <span id="footer-year">2026</span> MiKi – Jugendkirche Heidenheim
+                &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
     </footer>
+</div>
 
+<script>
+    // defer + DOMContentLoaded: laeuft erst, nachdem Vue und site.js geladen sind
+    document.addEventListener('DOMContentLoaded', function () {
+    const { createApp, ref, onMounted, watch, nextTick, computed } = Vue;
+
+    createApp({
+        setup() {
+            const tickerWords = ['Chillen', 'Zocken', 'Trampolin', 'Musik', 'Bar', 'Mitbauen', 'Freunde', 'Glaube'];
+
+            // TERMINE
+            // So traegst du Termine ein:
+            //  - Regelmaessig: type 'regular', days (z. B. 'Freitags'), time. Optional "from" (Startdatum,
+            //    JJJJ-MM-TT) - der Hinweis "Start am ..." verschwindet nach dem Datum von selbst.
+            //  - Einmalig: type 'once', start im Format 'JJJJ-MM-TTTHH:MM:00+01:00' (Winterzeit +01:00,
+            //    Sommerzeit +02:00). Das Event steht oben bei "Highlights" und verschwindet 4 Stunden
+            //    nach Beginn automatisch - niemand muss es loeschen.
+            // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
+            const events = ref([
+                {
+                    type: 'regular',
+                    title: "Open Church",
+                    days: "Freitags",
+                    time: "12:00–16:30 Uhr",
+                    from: "2026-11-13",
+                    desc: "Die MiKi ist offen, komm einfach vorbei",
+                    detailedDesc: "Ob Skaten (kommt bald!), Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen - die MiKi ist jeden Freitag für dich geöffnet!"
+                },
+                {
+                    type: 'regular',
+                    title: "Jugendkreis",
+                    days: "Freitags",
+                    time: "19:00 Uhr",
+                    desc: "Glaube, Gemeinschaft & Ausflüge",
+                    detailedDesc: "Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen – ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp an. So bist du immer auf dem Laufenden und wir können besser planen.",
+                    whatsapp: "Hey, ich hätte Lust auf den Jugendkreis!"
+                },
+                {
+                    type: 'regular',
+                    title: "Baujugendkreis",
+                    days: "Dienstags",
+                    time: "17:00–19:00 Uhr",
+                    desc: "Bauen, chillen, Gemeinschaft",
+                    detailedDesc: "Du hast Lust die MiKi zu gestalten, gemeinsam zu werkeln und an kleinen und großen Projekten zu arbeiten? Dabei ist es übrigens ganz egal, ob du handwerklich schon viel gemacht hast oder nicht. Komm vorbei!"
+                },
+                {
+                    type: 'once',
+                    title: "Orgel x Deine Mukke",
+                    start: "2026-11-08T19:00:00+01:00",
+                    desc: "ACDC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre",
+                    detailedDesc: "Wir planen ein legendäres Konzert, bei dem DU bestimmst, welche Lieder laufen: ACDC, Coldplay, Hans Zimmer und mehr – auf der Orgel, gemischt mit Schlagzeug und E-Gitarre. Stimm jetzt ab und komm vorbei!",
+                    image: "Assets/T8.webp",
+                    link: { href: "https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header", label: "Jetzt Songs abstimmen", icon: "ph-music-notes" }
+                }
+            ]);
+
+            // Datum/Uhrzeit immer in deutscher Zeit anzeigen
+            const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim';
+            const fmt = (d, opts) => d.toLocaleString('de-DE', Object.assign({ timeZone: 'Europe/Berlin' }, opts));
+            const now = new Date();
+
+            const regularEvents = computed(() => events.value
+                .filter(e => e.type === 'regular')
+                .map(e => {
+                    const from = e.from ? new Date(e.from + 'T00:00:00+01:00') : null;
+                    const startsLater = from && now < from;
+                    return Object.assign({}, e, {
+                        badge: e.days + ' · ' + e.time,
+                        when: e.days + ', ' + e.time + (startsLater ? ' (ab ' + fmt(from, { day: '2-digit', month: '2-digit', year: 'numeric' }) + ')' : ''),
+                        startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : '',
+                        fromShort: startsLater ? fmt(from, { day: '2-digit', month: '2-digit' }) : ''
+                    });
+                }));
+            // fuer "Klingt gut?": Zeiten direkt aus der Termin-Liste
+            const openChurch = computed(() => regularEvents.value.find(e => e.title === 'Open Church'));
+            const jugendkreis = computed(() => regularEvents.value.find(e => e.title === 'Jugendkreis'));
+
+            const upcomingEvents = computed(() => events.value
+                .filter(e => e.type === 'once')
+                .map(e => {
+                    const start = new Date(e.start);
+                    const end = e.end ? new Date(e.end) : new Date(start.getTime() + 4 * 3600 * 1000);
+                    const time = fmt(start, { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+                    return Object.assign({}, e, {
+                        startDate: start,
+                        endDate: end,
+                        dayNum: fmt(start, { day: '2-digit' }),
+                        monthShort: fmt(start, { month: 'short' }).replace('.', ''),
+                        badge: fmt(start, { weekday: 'short' }).replace('.', '') + ', ' + fmt(start, { day: '2-digit', month: '2-digit' }) + ' · ' + time,
+                        when: fmt(start, { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' }) + ', ' + time
+                    });
+                })
+                .filter(e => now < e.endDate)
+                .sort((a, b) => a.startDate - b.startDate));
+
+            const selectedEvent = ref(null);
+            const openEventModal = (ev) => { selectedEvent.value = ev; };
+            const closeEventModal = () => { selectedEvent.value = null; };
+
+            // Texte zu den Foto-Kacheln ("Kirche? Anders als du denkst")
+            const tiles = {
+                springen: {
+                    title: 'Springen',
+                    img: 'Assets/T3-1200.webp', pos: '70% 30%',
+                    alt: 'Das Trampolin in der MiKi, davor die Lounge mit Couches',
+                    text: 'Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.',
+                    link: { href: '#events', label: 'Zu den Terminen' }
+                },
+                diy: {
+                    title: 'DIY-Kirche',
+                    img: 'Assets/barbauprojekt-800.webp', pos: '50% 35%',
+                    alt: 'Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar',
+                    text: 'Die MiKi richtet keine Firma ein – das machen wir selbst. Die Bar und das Neon-Kreuz haben Jugendliche gebaut, und es geht weiter: Eine Boulderwand und eine Halfpipe sind schon geplant. Du willst mit anpacken? Komm dienstags von 17 bis 19 Uhr zum Baujugendkreis. Ob du schon mal was gebaut hast, ist völlig egal.',
+                    link: { href: 'ueber-uns/#umbau', label: 'Das wird gerade gebaut' }
+                },
+                zocken: {
+                    title: 'Zocken',
+                    img: 'Assets/T10-1200.webp',
+                    alt: 'Jugendliche zocken zusammen auf einer großen Leinwand',
+                    text: 'Zocken macht zusammen einfach mehr Spaß als allein daheim. In der MiKi gibt es einen eigenen Gaming-Bereich – fordere deine Freunde heraus oder lern beim Zocken neue Leute kennen.'
+                },
+                darts: {
+                    title: 'Darts & Games',
+                    img: 'Assets/T7-1200.webp',
+                    alt: 'Zwei Jugendliche spielen Darts',
+                    text: 'Darts, Spiele und ein bisschen Wettkampf: Ob du die 180 triffst oder knapp an der Scheibe vorbei – Spaß macht es trotzdem. Perfekt, um mit anderen ins Gespräch zu kommen.'
+                },
+                glaube: {
+                    title: 'Glaube',
+                    img: 'Assets/T8-1200.webp',
+                    alt: 'Live-Musik in der Michaelskirche',
+                    text: 'In der MiKi ist jeder willkommen – egal, ob du glaubst, zweifelst oder einfach neugierig bist. Wenn du Lust hast, lernst du im Jugendkreis (freitags, 19 Uhr) den christlichen Glauben kennen: mit Musik, echten Fragen und Gemeinschaft. Musst du aber nicht.',
+                    link: { href: '#fragen', label: 'Fragen zum Glauben? Zur FAQ' }
+                },
+                chillen: {
+                    title: 'Chillen',
+                    img: 'Assets/T6-1200.webp',
+                    alt: 'Jugendliche sitzen zusammen auf den Couches in der MiKi',
+                    text: 'Couches statt Holzbänke: In der Lounge kannst du einfach abhängen, quatschen, Hausis machen oder dir an der Bar Getränke und Snacks holen. Kein Programm, kein Muss – einfach ein Ort, an dem du gerne bist.'
+                }
+            };
+            const selectedTile = ref(null);
+            const openTile = (key) => { selectedTile.value = tiles[key]; };
+            // Link im Fenster: erst schliessen, dann zum Abschnitt springen
+            // (sonst verschwindet der Link mit dem Fenster und der Browser bricht den Sprung ab).
+            // Links auf eine andere Seite (z. B. "ueber-uns/#umbau") werden normal geoeffnet.
+            const goToFromTile = (href) => {
+                selectedTile.value = null;
+                if (href.charAt(0) !== '#') { window.location.href = href; return; }
+                nextTick(() => {
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            };
+
+            // Solange ein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
+            watch(
+                () => !!(selectedEvent.value || selectedTile.value),
+                (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
+            );
+
+            onMounted(() => {
+                // Fuer Google: kommende einmalige Events als "Event" auszeichnen (erscheinen ggf. in der Event-Suche)
+                const eventData = upcomingEvents.value.map(e => {
+                    const item = {
+                        '@context': 'https://schema.org',
+                        '@type': 'Event',
+                        name: e.title,
+                        description: e.detailedDesc,
+                        startDate: e.start,
+                        eventStatus: 'https://schema.org/EventScheduled',
+                        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+                        location: {
+                            '@type': 'Place',
+                            name: 'MiKi (Michaelskirche)',
+                            address: { '@type': 'PostalAddress', streetAddress: 'An der Stadtmauer 1', addressLocality: 'Heidenheim an der Brenz', postalCode: '89520', addressCountry: 'DE' }
+                        },
+                        organizer: { '@type': 'Organization', name: 'MiKi – Jugendkirche Heidenheim', url: 'https://www.miki-hdh.de/' }
+                    };
+                    if (e.end) item.endDate = e.end;
+                    if (e.image) item.image = ['https://www.miki-hdh.de/' + e.image];
+                    return item;
+                });
+                if (eventData.length) {
+                    const sc = document.createElement('script');
+                    sc.type = 'application/ld+json';
+                    sc.textContent = JSON.stringify(eventData);
+                    document.head.appendChild(sc);
+                }
+
+                // Escape schliesst jedes offene Fenster
+                document.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Escape') return;
+                    closeEventModal();
+                    selectedTile.value = null;
+                });
+            });
+
+            return {
+                tickerWords, regularEvents, upcomingEvents, openChurch, jugendkreis, mapsUrl,
+                selectedEvent, openEventModal, closeEventModal, selectedTile, openTile, goToFromTile
+            };
+        }
+    }).mount('#app');
+
+    // Gemeinsame Funktionen (Einblenden, Navigation, Parallax, Jahr im Footer) - siehe site.js
+    MiKiSite.init();
+
+    // Hero Image Carousel - zufaellige Reihenfolge, Wechsel alle 4.5 s.
+    // WICHTIG: laeuft NACH dem Vue-Mount, damit die Klassenwechsel auf Vues
+    // echten DOM-Knoten passieren. (Vor dem Mount ersetzt Vue die Hero-Divs,
+    // wodurch das setInterval nur abgekoppelte Knoten schalten wuerde -> Standbild.)
+    (function() {
+        const images = Array.from(document.querySelectorAll('.hero-bg-image'));
+        if (!images.length) return;
+
+        // Foto laden (nur einmal): setzt das Hintergrundbild aus data-bg
+        const load = (img) => {
+            if (img && img.dataset.bg) {
+                img.style.backgroundImage = "url('" + img.dataset.bg + "')";
+                delete img.dataset.bg;
+            }
+        };
+
+        // Fisher-Yates: pro Seitenaufruf eine neue Zufallsreihenfolge
+        for (let i = images.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [images[i], images[j]] = [images[j], images[i]];
+        }
+
+        // Das beim Seitenaufbau bereits sichtbare Bild bleibt das erste der Runde.
+        // Sonst wuerde es hier sofort weggeblendet und waere deutlich kuerzer zu
+        // sehen als alle anderen.
+        const activeIndex = images.findIndex(img => img.classList.contains('active'));
+        const order = activeIndex > 0
+            ? images.slice(activeIndex).concat(images.slice(0, activeIndex))
+            : images;
+
+        let currentIndex = 0;
+        order.forEach((img, i) => img.classList.toggle('active', i === 0));
+
+        // Spart mobiles Datenvolumen: Es wird immer nur das NAECHSTE Foto vorgeladen,
+        // nicht alle auf einmal - und zwar erst, wenn die Seite fertig geladen ist.
+        const preloadNext = () => load(order[(currentIndex + 1) % order.length]);
+        if (document.readyState === 'complete') preloadNext();
+        else window.addEventListener('load', preloadNext);
+
+        setInterval(function() {
+            // Pause, wenn das Titelbild nicht zu sehen ist (weggescrollt oder Tab im Hintergrund)
+            if (document.hidden || window.scrollY > window.innerHeight) return;
+            const nextIndex = (currentIndex + 1) % order.length;
+            load(order[nextIndex]);
+            order[currentIndex].classList.remove('active');
+            order[nextIndex].classList.add('active');
+            currentIndex = nextIndex;
+            preloadNext();
+        }, 4500);
+    })();
+
+    // Termine: Pfeile zum Blaettern, sobald nicht alle Termine in eine Reihe passen
+    (function() {
+        const grid = document.querySelector('.events-grid');
+        const nav = document.querySelector('.events-nav');
+        if (!grid || !nav) return;
+        const [prev, next] = nav.querySelectorAll('.events-arrow');
+        const update = () => {
+            const max = grid.scrollWidth - grid.clientWidth;
+            nav.classList.toggle('show', max > 4);
+            prev.disabled = grid.scrollLeft <= 4;
+            next.disabled = grid.scrollLeft >= max - 4;
+        };
+        nav.addEventListener('click', (e) => {
+            const btn = e.target.closest('.events-arrow');
+            if (!btn) return;
+            const card = grid.querySelector('.event-card');
+            const step = card ? card.offsetWidth + 20 : grid.clientWidth;
+            grid.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
+        });
+        grid.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+    })();
+
+    // Wechselwort im Hero ("Deine Kirche zum ...")
+    (function() {
+        const el = document.getElementById('rot-word');
+        if (!el || MiKiSite.reduceMotion) return;
+        const words = ['Chillen', 'Zocken', 'Springen', 'Mitbauen', 'Glauben'];
+        let i = 0;
+        setInterval(function() {
+            i = (i + 1) % words.length;
+            el.textContent = words[i];
+            el.classList.remove('rot-in');
+            void el.offsetWidth; // Animation neu starten
+            el.classList.add('rot-in');
+        }, 2400);
+    })();
+
+    });
+</script>
 </body>
 </html>

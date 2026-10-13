@@ -10,8 +10,7 @@
     --darker: #020617;
     --light: #f8fafc;
     --white: #ffffff;
-    --gray: #94a3b8;           /* nur auf dunklem Grund verwenden */
-    --muted: #64748b;          /* graue Schrift auf hellem Grund (Kontrast >= 4.5:1) */
+    --gray: #94a3b8;
 
     --glass: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.5);
@@ -179,13 +178,13 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 /* Hero Background Image with Overlay */
 .hero-bg {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     z-index: 1;
 }
 
 .hero-bg-image {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     background-size: cover;
     background-position: center;
     opacity: 0.6;
@@ -285,26 +284,6 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .events-sub::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
 .events-sub + .events-grid { margin-top: 0; }
 .event-start { display: block; margin: -6px 0 10px; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
-.event-card .event-desc { color: rgba(255, 255, 255, 0.75); }
-.event-more { margin-top: 20px; }
-.event-more > summary {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--primary);
-    font-weight: 600;
-}
-.event-more > summary i { transition: transform 0.2s ease; }
-/* Ohne JavaScript klappen die Details direkt in der Karte auf */
-.event-more[open] > summary i { transform: rotate(90deg); }
-.event-more .modal-body { margin-top: 16px; color: rgba(255, 255, 255, 0.85); }
-.event-more .modal-body p { color: rgba(255, 255, 255, 0.85); }
-.event-more .modal-details-grid { background: rgba(255, 255, 255, 0.07); color: #fff; }
-.event-more .modal-details-grid a { color: var(--primary); text-decoration: underline; }
-.event-more .modal-actions { margin-top: 18px; }
-.highlight-card { flex-wrap: wrap; }
-.hl-more { flex-shrink: 0; margin-top: 0; }
-.hl-more[open] { flex-basis: 100%; }
 
 .highlight-list { display: grid; gap: 16px; }
 .highlight-card {
@@ -338,6 +317,8 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .hl-meta { display: block; color: var(--primary); font-weight: 700; font-size: 0.9rem; }
 .hl-body h3 { color: #fff; font-family: var(--font-main); font-weight: 700; font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin: 4px 0 6px; }
 .hl-body p { color: rgba(255, 255, 255, 0.75); }
+.hl-cta { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 600; }
+.event-place { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
 
 .events-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
 .events-nav { display: none; gap: 10px; flex-shrink: 0; }
@@ -375,7 +356,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     .events-grid::-webkit-scrollbar { display: none; }
     .event-card { scroll-snap-align: start; padding: 26px 24px; display: flex; flex-direction: column; align-items: flex-start; }
     /* "Details checken" in allen Karten auf gleicher Hoehe (ganz unten) */
-    .event-card .event-more { margin-top: auto; padding-top: 20px; width: 100%; }
+    .event-card > div:last-child { margin-top: auto !important; padding-top: 20px; }
 }
 
 .event-card {
@@ -426,29 +407,16 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 /* --- PROGRESS --- */
 .progress-item {
     background: white;
+    padding: 25px;
     border-radius: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.progress-item > summary {
-    padding: 25px;
     display: flex;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.progress-main { flex: 1; display: block; }
-.progress-top { display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
-.progress-fotos { font-size: 0.8rem; color: var(--primary-ink); font-weight: 600; display: flex; align-items: center; gap: 4px; }
-.progress-status { display: block; margin-top: 5px; color: var(--muted); font-size: 0.85rem; }
-.progress-bar-bg { display: block; }
-.progress-bar-fill { display: block; }
-.progress-pill-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
-.progress-pill-row .progress-status { margin-top: 0; }
-.progress-pill { background: rgba(16, 187, 130, 0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary-ink); }
-/* Ohne JavaScript: Foto und Text klappen in der Karte auf */
-.progress-item .modal-body { padding: 0 25px 25px; }
-.progress-item .modal-body img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 16px; margin-bottom: 16px; }
 .progress-circle {
     width: 60px;
     height: 60px;
@@ -458,7 +426,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    color: var(--primary-ink);
+    color: var(--primary);
     flex-shrink: 0;
 }
 .progress-bar-bg {
@@ -473,12 +441,12 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     height: 100%;
     background: linear-gradient(90deg, var(--primary), var(--accent));
     border-radius: 10px;
+    width: 0;
     transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
 }
 .progress-item:hover {
     box-shadow: 0 10px 25px rgba(16, 187, 130, 0.18);
 }
-.progress-photo-modal { max-width: 680px; padding: 32px; }
 .progress-photo-modal img {
     width: 100%;
     max-height: 380px;
@@ -537,11 +505,6 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     animation: fadeIn 0.3s;
 }
 .paypal-hint i { color: var(--primary-ink); font-size: 1.2rem; margin-top: 1px; }
-.paypal-details > summary { display: flex; }
-.goal { margin: 0; font-weight: 700; color: var(--primary-ink); }
-.prayer-share > summary { display: flex; width: 100%; justify-content: center; gap: 8px; }
-.prayer-share .modal-body { margin-top: 16px; }
-.prayer-share .modal-actions { margin-top: 16px; }
 .donate-divider {
     display: flex;
     align-items: center;
@@ -581,11 +544,8 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 /* --- UNTERSTUETZER-LOGOS (Endlos-Laufband) --- */
 .supporter-strip { margin-top: 56px; }
 .supporter-title { color: var(--dark); font-size: 1.6rem; font-weight: 400; margin-bottom: 18px; }
-/* Ohne JavaScript: Logos stehen still und umgebrochen in der Mitte */
-.logo-track { display: flex; justify-content: center; }
-.logo-marquee:not(.is-running) .logo-group { flex-wrap: wrap; justify-content: center; padding-right: 0; row-gap: 16px; }
-/* Mit JavaScript (Klasse is-running): Endlos-Laufband ueber die volle Breite */
-.logo-marquee.is-running {
+.logo-marquee {
+    /* Volle Breite, auch wenn der Container auf 1200px begrenzt ist */
     width: 100vw;
     margin-left: calc(50% - 50vw);
     overflow: hidden;
@@ -593,8 +553,8 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
 }
-.logo-marquee.is-running .logo-track {
-    justify-content: flex-start;
+.logo-track {
+    display: flex;
     width: max-content;
     animation: logoScroll 94s linear infinite;
 }
@@ -635,7 +595,7 @@ footer {
 
 /* --- MODAL --- */
 .modal-overlay {
-    position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+    position: fixed; inset: 0;
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(5px);
     z-index: 1000;
@@ -650,42 +610,15 @@ footer {
     position: relative;
     animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.modal-header { margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; padding-right: 44px; }
-.modal-header h2 { margin-top: 5px; font-size: 1.8rem; }
-.modal-kicker { color: var(--primary-ink); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; }
-.modal-content { max-height: 90vh; overflow-y: auto; color: var(--dark); }
-.modal-content p { line-height: 1.75; color: #334155; }
-.modal-content .modal-details-grid a { color: var(--primary-ink); font-weight: 600; text-decoration: underline; }
-.modal-actions { display: grid; gap: 12px; margin-top: 28px; }
-.modal-actions .btn { width: 100%; justify-content: center; }
-.modal-close {
-    position: absolute;
-    right: 16px; top: 16px;
-    z-index: 2;
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--dark);
-    font-size: 1.2rem;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 12px -4px rgba(2, 6, 23, 0.4);
-}
-.modal-close:hover { background: var(--primary); }
+.modal-header { margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
 .modal-details-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
     background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 20px;
 }
 
-/* --- EINBLENDEN BEIM SCROLLEN ---
-   Nur wenn JavaScript laeuft (Klasse "js" am <html>). Ohne JavaScript ist alles sofort sichtbar. */
-.js .hidden-el {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.js .hidden-el.show-el { opacity: 1; transform: none; }
+/* --- ANIMATION CLASSES --- */
+.hidden-el { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.show-el { opacity: 1; transform: translateY(0); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -694,33 +627,7 @@ footer {
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible {
     outline: 3px solid var(--primary);
     outline-offset: 3px;
-    box-shadow: 0 0 0 3px var(--darker);
 }
-/* "Zum Inhalt springen": unsichtbar, bis man mit der Tab-Taste darauf kommt */
-.skip-link {
-    position: absolute;
-    left: 16px; top: -100px;
-    z-index: 300;
-    padding: 12px 18px;
-    border-radius: 12px;
-    background: var(--dark);
-    color: #fff;
-    font-weight: 700;
-}
-.skip-link:focus { top: 16px; }
-
-/* Vom Skript ein-/ausgeblendete Elemente (z. B. "Kopieren") */
-[hidden] { display: none !important; }
-
-/* Aufklapper ohne Standard-Dreieck (Termine, Kacheln, Fortschritt, PayPal, Gebet) */
-summary { cursor: pointer; }
-.event-more > summary, .exp-card > summary, .progress-item > summary,
-.paypal-details > summary, .prayer-share > summary { list-style: none; }
-.event-more > summary::-webkit-details-marker, .exp-card > summary::-webkit-details-marker,
-.progress-item > summary::-webkit-details-marker, .paypal-details > summary::-webkit-details-marker,
-.prayer-share > summary::-webkit-details-marker { display: none; }
-/* Teile, die nur im Pop-up-Fenster gebraucht werden (Titel, "Alles klar!") */
-details .modal-only { display: none; }
 
 /* --- SCROLL-FORTSCHRITT (duenner Balken ganz oben) --- */
 .scroll-progress {
@@ -751,7 +658,7 @@ details .modal-only { display: none; }
 .hero::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     z-index: 2;
     background: linear-gradient(180deg, rgba(2, 6, 23, 0.35) 0%, rgba(2, 6, 23, 0.1) 40%, rgba(2, 6, 23, 0.85) 100%);
     pointer-events: none;
@@ -875,28 +782,12 @@ details .modal-only { display: none; }
 .exp-card::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     z-index: 1;
     /* nur unten abdunkeln - dort steht die Ueberschrift */
     background: linear-gradient(180deg, rgba(2, 6, 23, 0) 50%, rgba(2, 6, 23, 0.7) 100%);
 }
 .exp-card { cursor: pointer; }
-/* Die ganze Kachel ist der Aufklapp-Knopf */
-.exp-card > summary { position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: block; }
-.exp-caption h3 { margin: 0; }
-/* Ohne JavaScript: Text legt sich ueber das Foto (die Ueberschrift unten bleibt zum Zuklappen frei) */
-.exp-card[open] > .modal-body {
-    position: absolute;
-    top: 0; right: 0; bottom: 56px; left: 0;
-    z-index: 3;
-    overflow-y: auto;
-    padding: 18px 20px;
-    background: rgba(2, 6, 23, 0.94);
-    color: #fff;
-    font-size: 0.92rem;
-    line-height: 1.55;
-}
-.exp-card[open] > .modal-body .btn { margin-top: 12px; padding: 10px 18px; font-size: 0.85rem; }
 /* kleines "+" oben rechts: zeigt, dass man fuer mehr Infos tippen kann */
 .exp-more {
     position: absolute;
@@ -919,9 +810,20 @@ details .modal-only { display: none; }
     border-radius: 16px;
     margin-bottom: 20px;
 }
-.tile-modal { max-width: 640px; padding: 32px; }
 .tile-modal h2 { font-size: 2.4rem; margin-bottom: 10px; }
-.tile-modal .modal-close { right: 44px; top: 44px; }
+.tile-modal p { line-height: 1.75; color: #334155; }
+.tile-close {
+    position: absolute;
+    right: 44px; top: 44px;
+    z-index: 1;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px -4px rgba(2, 6, 23, 0.4);
+}
 .exp-icon {
     position: absolute;
     top: 16px; left: 16px;
@@ -1088,7 +990,7 @@ details .modal-only { display: none; }
 .cta-bg::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.9) 100%);
 }
 .cta-final {
@@ -1202,8 +1104,15 @@ details .modal-only { display: none; }
     }
     html { scroll-behavior: auto !important; }
     /* Scroll-Reveal-Inhalte sofort sichtbar, ohne Versatz */
-    .js .hidden-el { opacity: 1 !important; transform: none !important; }
-    /* Logo-Laufband startet das Skript bei reduzierter Bewegung gar nicht erst */
+    .hidden-el { opacity: 1 !important; transform: none !important; }
+    /* Logos statisch: eine Gruppe, umgebrochen statt laufend */
+    .logo-marquee {
+        width: auto; margin-left: 0; overflow: visible;
+        -webkit-mask-image: none; mask-image: none;
+    }
+    .logo-track { animation: none !important; width: 100%; justify-content: center; }
+    .logo-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+    .logo-group + .logo-group { display: none; }
     /* Ticker steht still, Parallax wird im JS gar nicht erst gestartet */
     .ticker-track { animation: none !important; }
 }
@@ -1229,10 +1138,10 @@ details .modal-only { display: none; }
     .exp-card.tall { grid-row: span 1; }
     .exp-icon { width: 38px; height: 38px; font-size: 1.2rem; top: 12px; left: 12px; border-radius: 11px; }
     .exp-more { width: 30px; height: 30px; right: 10px; top: 14px; font-size: 0.9rem; }
-    .tile-modal { padding: 22px 20px 28px; }
+    .tile-modal { padding: 22px 20px 28px !important; }
     .tile-modal img { height: 220px; }
     .tile-modal h2 { font-size: 2rem; }
-    .tile-modal .modal-close { right: 30px; top: 30px; }
+    .tile-close { right: 30px; top: 30px; }
     .exp-caption { padding: 14px 14px; }
     /* Schmale Kacheln: Text reicht hoeher ins Bild -> Abdunklung frueher starten */
     .exp-card::after {
@@ -1277,14 +1186,13 @@ details .modal-only { display: none; }
     .highlight-card { flex-wrap: wrap; gap: 16px 18px; padding: 20px; }
     .hl-date { width: 70px; height: 70px; border-radius: 16px; }
     .hl-day { font-size: 1.8rem; }
-    .hl-more { width: 100%; }
+    .hl-cta { width: 100%; }
 
     /* Events */
     .events-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
 
     /* Progress */
-    .progress-item > summary { padding: 18px; gap: 14px; }
-    .progress-item .modal-body { padding: 0 18px 18px; }
+    .progress-item { padding: 18px; gap: 14px; }
     .progress-circle { width: 50px; height: 50px; font-size: 0.78rem; }
 
     /* Modals: max-height + scroll damit der X-Button immer erreichbar ist */
@@ -1407,7 +1315,7 @@ details .modal-only { display: none; }
 .page-hero::after {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    inset: 0;
     z-index: 1;
     background: linear-gradient(180deg, rgba(2, 6, 23, 0.45) 0%, rgba(2, 6, 23, 0.25) 40%, rgba(2, 6, 23, 0.9) 100%);
 }
@@ -1470,64 +1378,3 @@ details .modal-only { display: none; }
     .mk-history-body { padding: 4px 18px 22px; }
     .legal-page { padding: 104px 0 64px; }
 }
-
-
-/* =====================================================================
-   ICONS (Phosphor, nur die auf der Seite genutzten – 5 KB statt 225 KB)
-   Neues Icon gebraucht? Die Schrift extern/phosphor/miki-icons.woff2 muss dafuer
-   neu erzeugt werden (Quelle: extern/phosphor/Phosphor.woff2 + style.css).
-   ===================================================================== */
-@font-face {
-    font-family: 'MiKi Icons';
-    src: url('extern/phosphor/miki-icons.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-}
-.ph {
-    font-family: 'MiKi Icons' !important;
-    speak: never;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    letter-spacing: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.ph-armchair:before { content: "\e012"; }
-.ph-arrow-fat-lines-up:before { content: "\e52a"; }
-.ph-arrow-left:before { content: "\e058"; }
-.ph-arrow-right:before { content: "\e06c"; }
-.ph-calendar-blank:before { content: "\e10a"; }
-.ph-check:before { content: "\e182"; }
-.ph-church:before { content: "\ecea"; }
-.ph-clock:before { content: "\e19a"; }
-.ph-copy:before { content: "\e1ca"; }
-.ph-couch:before { content: "\e7f6"; }
-.ph-envelope:before { content: "\e214"; }
-.ph-envelope-simple:before { content: "\e218"; }
-.ph-game-controller:before { content: "\e26e"; }
-.ph-hammer:before { content: "\e80e"; }
-.ph-hand-heart:before { content: "\e810"; }
-.ph-hands-praying:before { content: "\ecc8"; }
-.ph-heart:before { content: "\e2a8"; }
-.ph-images:before { content: "\e836"; }
-.ph-instagram-logo:before { content: "\e2d0"; }
-.ph-lightbulb:before { content: "\e2dc"; }
-.ph-map-pin:before { content: "\e316"; }
-.ph-music-notes:before { content: "\e340"; }
-.ph-paint-brush-broad:before { content: "\e590"; }
-.ph-paypal-logo:before { content: "\e98c"; }
-.ph-pencil-simple:before { content: "\e3b4"; }
-.ph-phone:before { content: "\e3b8"; }
-.ph-plus:before { content: "\e3d4"; }
-.ph-question:before { content: "\e3e8"; }
-.ph-sparkle:before { content: "\e6a2"; }
-.ph-target:before { content: "\e47c"; }
-.ph-ticket:before { content: "\e490"; }
-.ph-users-three:before { content: "\e68e"; }
-.ph-whatsapp-logo:before { content: "\e5d0"; }
-.ph-wrench:before { content: "\e5d4"; }
-.ph-x:before { content: "\e4f6"; }

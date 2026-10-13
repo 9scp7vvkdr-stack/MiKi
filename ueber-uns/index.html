@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <script>
-        // Merker "JavaScript laeuft" (fuer das Einblenden beim Scrollen). Kommt site.js nicht an
-        // (schlechtes Netz, Fehler), wird nach 3 Sekunden einfach alles normal angezeigt.
-        document.documentElement.className += ' js';
-        setTimeout(function () {
-            if (!window.MiKiSite) document.documentElement.className = document.documentElement.className.replace(' js', '');
-        }, 3000);
-    </script>
     <meta name="description" content="Die MiKi in der denkmalgeschützten Michaelskirche Heidenheim: Vision, Baufortschritt, die Geschichte der Kirche und wie du die Jugendkirche mit Spenden und Gebet unterstützen kannst.">
     <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
     <meta name="theme-color" content="#10BB82">
@@ -80,22 +72,23 @@
         ]
     }
     </script>
-    <!-- Einziges Skript: nur Extras, alle Inhalte stehen fest im HTML -->
+    <script defer src="../extern/vue.global.prod.js"></script>
     <script defer src="../site.js"></script>
 
     <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../extern/fonts/fonts.css">
-    <link rel="preload" href="../extern/phosphor/miki-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../extern/phosphor/style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="../extern/phosphor/style.css"></noscript>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
+<div id="app">
 
-    <nav class="navbar" aria-label="Hauptnavigation">
-        <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left" aria-hidden="true"></i> MiKi</a>
+    <nav class="navbar">
+        <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left"></i> MiKi</a>
         <a href="#vision">Vision</a>
         <a href="#michaelskirche">Kirche</a>
         <a href="#umbau">Umbau</a>
@@ -103,11 +96,10 @@
         <a href="#kontakt">Kontakt</a>
     </nav>
 
-<main id="inhalt">
     <header class="page-hero">
         <div class="page-hero-bg" data-parallax="12" style="background-image: url('../Assets/T1.webp');" aria-hidden="true"></div>
         <div class="container page-hero-content">
-            <a href="../" class="page-back"><i class="ph ph-arrow-left" aria-hidden="true"></i> Zur Startseite</a>
+            <a href="../" class="page-back"><i class="ph ph-arrow-left"></i> Zur Startseite</a>
             <span class="kicker kicker-dark">Für Eltern, Gemeinde &amp; Unterstützer</span>
             <h1>Über die MiKi</h1>
             <p>Wie aus der denkmalgeschützten Michaelskirche eine Jugendkirche wird – und wie du dabei helfen kannst.</p>
@@ -119,22 +111,22 @@
         <svg class="doodle indigo" data-parallax-px="70" style="bottom: 40px; right: 4%;" width="64" height="64" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="6 9" stroke-linecap="round"/></svg>
         <div class="container grid-2">
             <div class="vision-text hidden-el">
-                <span class="kicker"><i class="ph ph-lightbulb" aria-hidden="true"></i> Vision</span>
+                <span class="kicker"><i class="ph ph-lightbulb"></i> Vision</span>
                 <h2>Unsere Vision</h2>
                 <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">
                     <strong>Kirche mal <span class="mark">anders</span>.</strong> Hier ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Mit der MiKi möchten wir einen Raum schaffen, in dem sich junge Menschen willkommen fühlen, Gemeinschaft erleben und den christlichen Glauben kennenlernen und vertiefen können. Das Besondere: Die jungen Menschen entscheiden, wie die Kirche aussehen wird, und setzen die Umgestaltung selbst um.
                 </p>
                 <ul class="vision-list">
                     <li>
-                        <i class="ph ph-paint-brush-broad" aria-hidden="true"></i>
+                        <i class="ph ph-paint-brush-broad"></i>
                         <div><strong>DIY:</strong> Du kannst selbst anpacken und mitgestalten.</div>
                     </li>
                     <li>
-                        <i class="ph ph-armchair" aria-hidden="true"></i>
+                        <i class="ph ph-armchair"></i>
                         <div><strong>Wie daheim:</strong> Couches statt Holzbänke. Action statt Stille.</div>
                     </li>
                     <li>
-                        <i class="ph ph-users-three" aria-hidden="true"></i>
+                        <i class="ph ph-users-three"></i>
                         <div><strong>Gemeinschaft:</strong> Ein lebendiger Spot für Glaube, Sport und Freunde.</div>
                     </li>
                 </ul>
@@ -153,7 +145,7 @@
             <!-- Eine Textspalte in angenehmer Lesebreite -->
             <div class="mk-wrap">
                 <div class="mk-intro hidden-el">
-                    <span class="kicker"><i class="ph ph-church" aria-hidden="true"></i> Sehenswürdigkeit in Heidenheim</span>
+                    <span class="kicker"><i class="ph ph-church"></i> Sehenswürdigkeit in Heidenheim</span>
                     <h2>Die Michaelskirche Heidenheim</h2>
                     <p>Über 500 Jahre alt und trotzdem alles andere als verstaubt: Die evangelische Michaelskirche in Heidenheim an der Brenz ist ein echtes Kulturdenkmal. Sie thront am Hang direkt an der alten Stadtmauer – ihr Turm ist sogar ein Teil davon.</p>
                     <p>Gebaut wurde sie um 1490 – also gut 500 Jahre vor dem ersten Smartphone. Drinnen gibt’s einiges zu entdecken: 27 Bilder mit Szenen aus der Bibel, gemalt 1629, eine Orgel mit einer rund 300 Jahre alten Front und draußen die bunte Turmhaube von 1668. Und seit Ende 2025 kommt etwas ganz Neues dazu: Sofas, Bar und Trampolin – die Kirche wird zur Jugendkirche MiKi.</p>
@@ -189,7 +181,7 @@
         <div class="container">
             <div class="grid-2">
                 <div class="hidden-el">
-                    <span class="kicker"><i class="ph ph-hammer" aria-hidden="true"></i> Umbau</span>
+                    <span class="kicker"><i class="ph ph-hammer"></i> Umbau</span>
                     <h2>Das wird gerade gebaut</h2>
                     <p style="margin-bottom: 20px;">Die MiKi wird ständig weitergebaut und es ist noch einiges geplant. Hier siehst du <span class="mark">live</span>, wie weit wir sind.</p>
                     <div style="padding: 30px; background: var(--dark); border-radius: var(--radius); color: white;">
@@ -200,118 +192,19 @@
                 </div>
                 
                 <div class="progress-container">
-                    <details class="progress-item hidden-el" data-modal="progress-photo-modal">
-                        <summary>
-                            <span class="progress-circle" data-percent="100">100%</span>
-                            <span class="progress-main">
-                                <span class="progress-top">
-                                    <span class="progress-label">BarBauProjekt</span>
-                                    <span class="progress-fotos"><i class="ph ph-images" aria-hidden="true"></i> Fotos</span>
-                                </span>
-                                <span class="progress-bar-bg" aria-hidden="true"><span class="progress-bar-fill" style="width: 100%;"></span></span>
-                                <span class="progress-status">Die Bar ist fertig</span>
-                            </span>
-                        </summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Baufortschritt</span>
-                                <h2>BarBauProjekt</h2>
+                    <div v-for="(item, index) in progress" :key="index" class="progress-item hidden-el" :style="`transition-delay: ${index * 100}ms`" role="button" tabindex="0" @click="openProgressModal(item)" @keydown.enter="openProgressModal(item)" @keydown.space.prevent="openProgressModal(item)">
+                        <div class="progress-circle">{{ item.animatedPercent }}%</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+                                <span>{{ item.label }}</span>
+                                <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px;"><i class="ph ph-images"></i> Fotos</span>
                             </div>
-                            <img src="../Assets/W1.webp" alt="Foto: BarBauProjekt" loading="lazy" decoding="async">
-                            <div class="progress-pill-row">
-                                <span class="progress-pill">100% fertig</span>
-                                <span class="progress-status">Die Bar ist fertig</span>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" :style="{ width: item.animatedPercent + '%' }"></div>
                             </div>
-                            <p>Die Bar ist unser erstes abgeschlossenes Großprojekt – und wir sind so stolz darauf! In wochenlanger Eigenregie haben Jugendliche aus Holz und Beton eine vollständige Bar gezimmert. Hier können sich alle mit Getränken versorgen und in lockerer Atmosphäre zusammenkommen. Ein echtes Herzstück der MiKi – zu 100% von Jugendlichen für Jugendliche gebaut. Du willst auch mal anpacken? Komm dienstags ab 17 Uhr vorbei!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
+                            <small style="color: var(--gray); display:block; margin-top:5px;">{{ item.status }}</small>
                         </div>
-                    </details>
-                    <details class="progress-item hidden-el" data-modal="progress-photo-modal" style="transition-delay: 100ms;">
-                        <summary>
-                            <span class="progress-circle" data-percent="55">55%</span>
-                            <span class="progress-main">
-                                <span class="progress-top">
-                                    <span class="progress-label">Chillout Area</span>
-                                    <span class="progress-fotos"><i class="ph ph-images" aria-hidden="true"></i> Fotos</span>
-                                </span>
-                                <span class="progress-bar-bg" aria-hidden="true"><span class="progress-bar-fill" style="width: 55%;"></span></span>
-                                <span class="progress-status">Couchtische und Deko steht noch an</span>
-                            </span>
-                        </summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Baufortschritt</span>
-                                <h2>Chillout Area</h2>
-                            </div>
-                            <img src="../Assets/W2.webp" alt="Foto: Chillout Area" loading="lazy" decoding="async">
-                            <div class="progress-pill-row">
-                                <span class="progress-pill">55% fertig</span>
-                                <span class="progress-status">Couchtische und Deko steht noch an</span>
-                            </div>
-                            <p>Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
-                    <details class="progress-item hidden-el" data-modal="progress-photo-modal" style="transition-delay: 200ms;">
-                        <summary>
-                            <span class="progress-circle" data-percent="10">10%</span>
-                            <span class="progress-main">
-                                <span class="progress-top">
-                                    <span class="progress-label">Skaterampe</span>
-                                    <span class="progress-fotos"><i class="ph ph-images" aria-hidden="true"></i> Fotos</span>
-                                </span>
-                                <span class="progress-bar-bg" aria-hidden="true"><span class="progress-bar-fill" style="width: 10%;"></span></span>
-                                <span class="progress-status">Noch in Planung.</span>
-                            </span>
-                        </summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Baufortschritt</span>
-                                <h2>Skaterampe</h2>
-                            </div>
-                            <img src="../Assets/W3.webp" alt="Foto: Skaterampe" loading="lazy" decoding="async">
-                            <div class="progress-pill-row">
-                                <span class="progress-pill">10% fertig</span>
-                                <span class="progress-status">Noch in Planung.</span>
-                            </div>
-                            <p>Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
-                    <details class="progress-item hidden-el" data-modal="progress-photo-modal" style="transition-delay: 300ms;">
-                        <summary>
-                            <span class="progress-circle" data-percent="50">50%</span>
-                            <span class="progress-main">
-                                <span class="progress-top">
-                                    <span class="progress-label">Gebets-Box</span>
-                                    <span class="progress-fotos"><i class="ph ph-images" aria-hidden="true"></i> Fotos</span>
-                                </span>
-                                <span class="progress-bar-bg" aria-hidden="true"><span class="progress-bar-fill" style="width: 50%;"></span></span>
-                                <span class="progress-status">Der Innenaufbau fehlt noch</span>
-                            </span>
-                        </summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <span class="modal-kicker">Baufortschritt</span>
-                                <h2>Gebets-Box</h2>
-                            </div>
-                            <img src="../Assets/W4.webp" alt="Foto: Gebets-Box" loading="lazy" decoding="async">
-                            <div class="progress-pill-row">
-                                <span class="progress-pill">50% fertig</span>
-                                <span class="progress-status">Der Innenaufbau fehlt noch</span>
-                            </div>
-                            <p>Die Gebets-Telefonzelle ist eine ganz besondere Ecke in der MiKi. Wir bauen eine alte Telefonzelle zu einem privaten Gebetsraum um – ein stiller Ort inmitten des Trubels, an dem man ungestört mit Gott sprechen kann. Die äußere Hülle steht bereits, aber der Innenausbau fehlt noch: Beleuchtung, Kissen und Gebetskarten warten auf ihre Umsetzung. Wenn du dieses Projekt unterstützen möchtest, freuen wir uns sehr über eine Spende!</p>
-                            <div class="modal-actions">
-                                <button type="button" class="btn btn-primary modal-only" data-close>Alles klar!</button>
-                            </div>
-                        </div>
-                    </details>
+                    </div>
                 </div>
             </div>
         </div>
@@ -321,19 +214,19 @@
         <div class="container">
             <div class="donate-grid hidden-el">
                 <div>
-                    <span class="kicker kicker-on-mint"><i class="ph ph-heart" aria-hidden="true"></i> Spenden</span>
+                    <span class="kicker kicker-on-mint"><i class="ph ph-heart"></i> Spenden</span>
                     <h2>Unterstütze die MiKi</h2>
                     <p>Damit die MiKi Realität bleibt, brauchen wir dich. Jeder Euro fließt direkt in Material, coole Events und Döner für unseren fleißigen ehrenamtlichen Mitarbeiter. Neben vielen privaten Spenden stärken uns diese Firmen, Organisationen und Stiftungen den Rücken. Danke, dass ihr an uns glaubt!</p>
                 </div>
                 <div class="donate-box">
-                    <!-- PayPal folgt noch: bis dahin klappt ein Hinweis auf die Ueberweisung auf (ohne JavaScript) -->
-                    <details class="paypal-details">
-                        <summary class="btn"><i class="ph ph-paypal-logo" aria-hidden="true"></i> Per PayPal spenden</summary>
-                        <p class="paypal-hint">
-                            <i class="ph ph-wrench" aria-hidden="true"></i>
-                            <span>An PayPal arbeiten wir gerade noch. Bis dahin kannst du ganz einfach per Überweisung spenden – die Kontodaten findest du direkt hier drunter. Danke dir!</span>
-                        </p>
-                    </details>
+                    <!-- PayPal folgt noch: bis dahin Hinweis auf die Ueberweisung -->
+                    <button type="button" class="btn" @click="showPaypalHint = true" :aria-expanded="showPaypalHint ? 'true' : 'false'">
+                        <i class="ph ph-paypal-logo"></i> Per PayPal spenden
+                    </button>
+                    <p v-if="showPaypalHint" class="paypal-hint" role="status">
+                        <i class="ph ph-wrench"></i>
+                        <span>An PayPal arbeiten wir gerade noch. Bis dahin kannst du ganz einfach per Überweisung spenden – die Kontodaten findest du direkt hier drunter. Danke dir!</span>
+                    </p>
                     <div class="donate-divider">oder per Überweisung</div>
                     <div class="bank-rows">
                         <div class="bank-row">
@@ -344,9 +237,8 @@
                             <span class="bank-label">IBAN</span>
                             <span class="bank-iban">
                                 <span class="bank-value">DE51 6329 0110 0110 3650 03</span>
-                                <!-- erscheint nur mit JavaScript (ohne kann man die IBAN normal markieren) -->
-                                <button type="button" class="copy-btn" data-copy="DE51632901100110365003" hidden>
-                                    <i class="ph ph-copy" aria-hidden="true"></i> <span class="copy-label">Kopieren</span>
+                                <button type="button" class="copy-btn" @click="copyIban">
+                                    <i :class="ibanCopied ? 'ph ph-check' : 'ph ph-copy'"></i> {{ ibanCopied ? 'Kopiert!' : 'Kopieren' }}
                                 </button>
                             </span>
                         </div>
@@ -363,13 +255,11 @@
                 <h3 class="supporter-title">Unsere Unterstützer</h3>
                 <div class="logo-marquee">
                     <div class="logo-track">
-                        <!-- Eine Gruppe; site.js vervielfaeltigt sie fuer die Endlos-Schleife (Animation schiebt um 3 von 6 Gruppen) -->
-                        <div class="logo-group">
-                            <div class="logo-item"><img src="../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Andere_Zeiten.png" alt="Andere Zeiten" loading="lazy" decoding="async"></div>
-                            <div class="logo-item"><img src="../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Berg.png" alt="BERG" loading="lazy" decoding="async"></div>
-                            <div class="logo-item"><img src="../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_EKD.png" alt="EKD – Evangelische Kirche in Deutschland" loading="lazy" decoding="async"></div>
-                            <div class="logo-item"><img src="../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Innovationsfonds.png" alt="Innovationsfonds #gemeindebegeistert" loading="lazy" decoding="async"></div>
-                            <div class="logo-item"><img src="../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Leibinger%20Stiftung.png" alt="Berthold Leibinger Stiftung" loading="lazy" decoding="async"></div>
+                        <!-- 6 identische Gruppen: die Animation schiebt um 3 Gruppen und startet nahtlos neu -->
+                        <div class="logo-group" v-for="n in 6" :key="n" :aria-hidden="n > 1 ? 'true' : null">
+                            <div class="logo-item" v-for="s in supporters" :key="s.name">
+                                <img :src="s.logo" :alt="n === 1 ? s.name : ''" loading="lazy" decoding="async">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -379,7 +269,7 @@
 
     <section class="section-padding" id="blog" style="background: #ffffff;">
         <div class="container">
-            <span class="kicker"><i class="ph ph-hand-heart" aria-hidden="true"></i> Gebet &amp; Projekte</span>
+            <span class="kicker"><i class="ph ph-hand-heart"></i> Gebet &amp; Projekte</span>
             <h2>Gebets- und Spendenanliegen</h2>
             
             <!-- Gebetsanliegen & Spendenprojekte Grid -->
@@ -388,7 +278,7 @@
                 <!-- Gebetsanliegen Karte -->
                 <div class="prayer-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 0ms;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);" aria-hidden="true"></i>
+                        <i class="ph ph-hands-praying" style="font-size: 2.5rem; color: var(--primary);"></i>
                         <h3 style="margin: 0;">Gebetsanliegen</h3>
                     </div>
                     <p style="opacity: 0.8; margin-bottom: 20px; line-height: 1.8;">
@@ -398,29 +288,15 @@
                         <strong>Möchtest du für die MiKi beten?</strong><br>
                         Danke für dein <strong>Gebet</strong>! Gerade stehen Finanzierung, Umbau und Kontakte knüpfen auf der To-Do-Liste. Betest du mit?
                     </p>
-                    <details class="prayer-share" data-modal>
-                        <summary class="btn btn-primary"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Anliegen teilen</summary>
-                        <div class="modal-body">
-                            <div class="modal-header modal-only">
-                                <h2>Dein Gebetsanliegen teilen</h2>
-                            </div>
-                            <p>Dein Anliegen geht an unseren Jugendreferenten <strong>Stefan</strong>, der für dich und dein Anliegen betet. Auf Wunsch kann dein Anliegen auch anonym in einer Gebetsgemeinschaft geteilt werden.<br><br>Wähle deinen bevorzugten Kontaktweg:</p>
-                            <div class="modal-actions">
-                                <a href="https://wa.me/+491743086657?text=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F" target="_blank" rel="noopener" class="btn btn-glow">
-                    <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Per WhatsApp teilen
-                </a>
-                <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn btn-glow">
-                    <i class="ph ph-envelope" aria-hidden="true"></i> Per E-Mail teilen
-                </a>
-                            </div>
-                        </div>
-                    </details>
+                    <button class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; gap: 8px; cursor: pointer;" @click="showPrayerModal = true">
+                        <i class="ph ph-pencil-simple"></i> Anliegen teilen
+                    </button>
                 </div>
 
                 <!-- Spendenprojekte Karte -->
                 <div class="donation-card hidden-el" style="background: linear-gradient(135deg, rgba(16, 187, 130, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%); padding: 40px; border-radius: var(--radius); border: 2px solid rgba(16, 187, 130, 0.3); transition-delay: 100ms;">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);" aria-hidden="true"></i>
+                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--primary);"></i>
                         <h3 style="margin: 0;">Aktuelle Spendenprojekte</h3>
                     </div>
                     
@@ -428,14 +304,14 @@
                     <div style="margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(16, 187, 130, 0.2);">
                         <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Boulderwand</h4>
                         <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Mit einer Boulderwand möchten wir ganz neue Menschen in die MiKi bringen. Gemeinsam mit dem DAV haben wir ein paar Konzepte entwickelt, die wir gerade denkmaltechnisch prüfen lassen </p>
-                        <p class="goal">Ziel: €25.000</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €25.000</p>
                     </div>
 
                     <!-- Projekt 2: Gebets-Telefonzelle -->
                     <div>
                         <h4 style="margin: 0 0 8px 0; font-size: 1.2rem; font-family: var(--font-main); font-weight: 700; color: var(--dark);">Gebets-Telefonzelle</h4>
                         <p style="margin: 0 0 12px 0; opacity: 0.7; font-size: 0.9rem;">Damit jeder ins Gespräch mit Gott kommt. Wir brauchen Budget für die Reparatur und Baumaterialien.</p>
-                        <p class="goal">Ziel: €1.200</p>
+                        <p style="margin: 0; font-weight: 600; color: var(--primary);">Ziel: €1.200</p>
                     </div>
                 </div>
 
@@ -453,10 +329,10 @@
                     <p>Stefan Hörz ist Jugendreferent beim Evangelischen Jugendwerk Bezirk Heidenheim und Ansprechpartner für die MiKi – für Eltern, Gemeinde, Presse, Stiftungen und alle, die mithelfen möchten.</p>
                     <div class="contact-actions">
                         <a href="mailto:Stefan.hoerz@ejhdh.de" class="contact-mail">
-                            <i class="ph ph-envelope-simple" aria-hidden="true"></i> Stefan.hoerz@ejhdh.de
+                            <i class="ph ph-envelope-simple"></i> Stefan.hoerz@ejhdh.de
                         </a>
                         <a href="tel:+491743086657" class="contact-mail">
-                            <i class="ph ph-phone" aria-hidden="true"></i> 0174 3086657
+                            <i class="ph ph-phone"></i> 0174 3086657
                         </a>
                     </div>
                 </div>
@@ -468,7 +344,7 @@
     <section class="parents-teaser" style="background: #ffffff;">
         <div class="container">
             <a href="../" class="teaser-card hidden-el">
-                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-sparkle" aria-hidden="true"></i></span>
+                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-sparkle"></i></span>
                 <span class="teaser-text">
                     <strong>Du bist jugendlich?</strong>
                     <span>Termine, was in der MiKi so geht und Antworten auf deine Fragen findest du auf der Startseite.</span>
@@ -478,7 +354,55 @@
         </div>
     </section>
 
-</main>
+    <!-- Baufortschritt Modal -->
+    <div v-if="selectedProgress" class="modal-overlay" @click="closeProgressModal">
+        <div class="modal-content progress-photo-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 680px; padding: 32px;">
+            <button type="button" aria-label="Schließen" @click="closeProgressModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+
+            <div class="modal-header">
+                <span style="color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem;">Baufortschritt</span>
+                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedProgress.label }}</h2>
+            </div>
+
+            <!-- Bild wird erst geladen, wenn das Modal geöffnet wird -->
+            <img :src="selectedProgress.photo" :alt="'Foto: ' + selectedProgress.label">
+
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                <div style="background: rgba(16,187,130,0.12); border-radius: 50px; padding: 6px 18px; font-weight: 800; color: var(--primary); font-size: 1rem;">
+                    {{ selectedProgress.percent }}% fertig
+                </div>
+                <span style="color: var(--gray); font-size: 0.9rem;">{{ selectedProgress.status }}</span>
+            </div>
+
+            <p style="line-height: 1.8; color: #334155;">{{ selectedProgress.detailedDesc }}</p>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 24px; justify-content: center;" @click="closeProgressModal">Alles klar!</button>
+        </div>
+    </div>
+
+    <!-- Gebetsanliegen Modal -->
+    <div v-if="showPrayerModal" class="modal-overlay" @click="showPrayerModal = false">
+        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+            <button type="button" aria-label="Schließen" @click="showPrayerModal = false" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+            
+            <div class="modal-header">
+                <h2 style="margin: 0; font-size: 1.8rem;">Dein Gebetsanliegen teilen</h2>
+            </div>
+
+            <p style="line-height: 1.7; color: #334155; margin-bottom: 30px;">
+                Dein Anliegen geht an unseren Jugendreferenten <strong>Stefan</strong>, der für dich und dein Anliegen betet. Auf Wunsch kann dein Anliegen auch anonym in einer Gebetsgemeinschaft geteilt werden.<br><br>Wähle deinen bevorzugten Kontaktweg:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="https://wa.me/+491743086657?text=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
+                    <i class="ph ph-whatsapp-logo"></i> Per WhatsApp teilen
+                </a>
+                <a href="mailto:stefan.hoerz@ejhdh.de?subject=Gebetsanliegen%20f%C3%BCr%20die%20MiKi&body=Hey%2C%20k%C3%B6nntest%20du%20f%C3%BCr%20folgendes%20beten%3F%0A%0A" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 8px; font-size: 1rem;">
+                    <i class="ph ph-envelope"></i> Per E-Mail teilen
+                </a>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
@@ -491,21 +415,21 @@
                         89520 Heidenheim an der Brenz
                     </address>
                     <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map" style="margin-top: 16px;">
-                        <i class="ph ph-map-pin" aria-hidden="true"></i> Route in Google Maps &ouml;ffnen
+                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
                     </a>
                 </div>
                 <div class="footer-col">
                     <h3>Kontakt</h3>
                     <p style="margin-bottom: 10px; color: white; font-weight: 600;">Stefan Hörz</p>
                     <ul style="line-height: 2;">
-                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple" aria-hidden="true"></i>Stefan.hoerz@ejhdh.de</a></li>
-                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone" aria-hidden="true"></i>0174 3086657</a></li>
+                        <li><a href="mailto:Stefan.hoerz@ejhdh.de" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-envelope-simple"></i>Stefan.hoerz@ejhdh.de</a></li>
+                        <li><a href="tel:+491743086657" style="display: inline-flex; align-items: center; gap: 8px;"><i class="ph ph-phone"></i>0174 3086657</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h3>Folge uns auf Social Media</h3>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/miki_hdh/" target="_blank" rel="noopener" aria-label="MiKi auf Instagram"><i class="ph ph-instagram-logo"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -519,10 +443,143 @@
                 </div>
             </div>
             <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
-                &copy; <span id="footer-year">2026</span> MiKi – Jugendkirche Heidenheim
+                &copy; <span id="footer-year">2026</span> MiKi Jugendkirche. Built with Vue.
             </div>
         </div>
     </footer>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const { createApp, ref, onMounted, watch } = Vue;
+
+    createApp({
+        setup() {
+            // PROGRESS DATA
+            const progress = ref([
+                {
+                    label: "BarBauProjekt",
+                    percent: 100,
+                    status: "Die Bar ist fertig",
+                    animatedPercent: 0,
+                    photo: '../Assets/W1.webp',
+                    detailedDesc: "Die Bar ist unser erstes abgeschlossenes Großprojekt – und wir sind so stolz darauf! In wochenlanger Eigenregie haben Jugendliche aus Holz und Beton eine vollständige Bar gezimmert. Hier können sich alle mit Getränken versorgen und in lockerer Atmosphäre zusammenkommen. Ein echtes Herzstück der MiKi – zu 100% von Jugendlichen für Jugendliche gebaut. Du willst auch mal anpacken? Komm dienstags ab 17 Uhr vorbei!"
+                },
+                {
+                    label: "Chillout Area",
+                    percent: 55,
+                    status: "Couchtische und Deko steht noch an",
+                    animatedPercent: 0,
+                    photo: '../Assets/W2.webp',
+                    detailedDesc: "Die Chillout Area nimmt Form an! Sofas und Sitzmöbel stehen bereits, aber Couchtische, Teppiche und Wanddekoration fehlen noch. Unser Ziel: Eine gemütliche Lounge-Atmosphäre, in der man einfach abhängen, quatschen oder auch mal die Bibel aufschlagen kann. Wer mitgestalten möchte oder kreative Ideen für die Deko hat – wir freuen uns über jeden, der mitmacht!"
+                },
+                {
+                    label: "Skaterampe",
+                    percent: 10,
+                    status: "Noch in Planung.",
+                    animatedPercent: 0,
+                    photo: '../Assets/W3.webp',
+                    detailedDesc: "Die Skaterampe ist unser nächstes großes Traumprojekt! Wir möchten einen echten Skatepark direkt in der Kirche bauen – ein Ort, an dem Jugendliche Tricks üben, Spaß haben und Gemeinschaft erleben. Aktuell sind wir in der Planungsphase: Wir sammeln Ideen, holen Angebote ein und suchen Sponsoren und freiwillige Helfer. Du hast Ahnung vom Rampenbau oder willst das Projekt unterstützen? Meld dich gerne bei uns!"
+                },
+                {
+                    label: "Gebets-Box",
+                    percent: 50,
+                    status: "Der Innenaufbau fehlt noch",
+                    animatedPercent: 0,
+                    photo: '../Assets/W4.webp',
+                    detailedDesc: "Die Gebets-Telefonzelle ist eine ganz besondere Ecke in der MiKi. Wir bauen eine alte Telefonzelle zu einem privaten Gebetsraum um – ein stiller Ort inmitten des Trubels, an dem man ungestört mit Gott sprechen kann. Die äußere Hülle steht bereits, aber der Innenausbau fehlt noch: Beleuchtung, Kissen und Gebetskarten warten auf ihre Umsetzung. Wenn du dieses Projekt unterstützen möchtest, freuen wir uns sehr über eine Spende!"
+                }
+            ]);
+
+            // UNTERSTUETZER (Logo-Laufband im Spenden-Bereich)
+            // Pfade sind URL-kodiert (ü = %C3%BC, Leerzeichen = %20)
+            const supporters = ref([
+                { name: "Andere Zeiten",                          logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Andere_Zeiten.png' },
+                { name: "BERG",                                   logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Berg.png' },
+                { name: "EKD – Evangelische Kirche in Deutschland", logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_EKD.png' },
+                { name: "Innovationsfonds #gemeindebegeistert",    logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Innovationsfonds.png' },
+                { name: "Berthold Leibinger Stiftung",            logo: '../Assets/Unterst%C3%BCtzer/Unterst%C3%BCtzer_Leibinger%20Stiftung.png' }
+            ]);
+
+            const selectedProgress = ref(null);
+            const showPrayerModal = ref(false);
+            const showPaypalHint = ref(false);
+            const openProgressModal = (item) => { selectedProgress.value = item; };
+            const closeProgressModal = () => { selectedProgress.value = null; };
+
+            // IBAN in die Zwischenablage (ohne Leerzeichen, so akzeptieren es alle Banking-Apps)
+            const ibanCopied = ref(false);
+            const copyIban = async () => {
+                const iban = 'DE51632901100110365003';
+                try {
+                    await navigator.clipboard.writeText(iban);
+                } catch (e) {
+                    const t = document.createElement('textarea');
+                    t.value = iban;
+                    document.body.appendChild(t);
+                    t.select();
+                    document.execCommand('copy');
+                    t.remove();
+                }
+                ibanCopied.value = true;
+                setTimeout(() => { ibanCopied.value = false; }, 2000);
+            };
+            // Solange ein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
+            watch(
+                () => !!(selectedProgress.value || showPrayerModal.value),
+                (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
+            );
+
+            onMounted(() => {
+                // Escape schliesst jedes offene Fenster
+                document.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Escape') return;
+                    closeProgressModal();
+                    showPrayerModal.value = false;
+                });
+
+                // --- PROGRESS BAR ANIMATION ON SCROLL ---
+                const progressObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(document.querySelectorAll('.progress-item')).indexOf(entry.target);
+                            if (index !== -1 && progress.value[index]) {
+                                const target = progress.value[index].percent;
+                                const animateBar = () => {
+                                    let current = 0;
+                                    const step = target / 30; // 30 frames für Animationen
+                                    const interval = setInterval(() => {
+                                        current += step;
+                                        if (current >= target) {
+                                            progress.value[index].animatedPercent = target;
+                                            clearInterval(interval);
+                                        } else {
+                                            progress.value[index].animatedPercent = Math.round(current);
+                                        }
+                                    }, 20);
+                                };
+                                animateBar();
+                                progressObserver.unobserve(entry.target);
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                setTimeout(() => {
+                    document.querySelectorAll('.progress-item').forEach(el => progressObserver.observe(el));
+                }, 100);
+            });
+
+            return {
+                progress, supporters, selectedProgress, showPrayerModal, showPaypalHint,
+                ibanCopied, copyIban, openProgressModal, closeProgressModal
+            };
+        }
+    }).mount('#app');
+
+    // Gemeinsame Funktionen (Einblenden, Navigation, Parallax, Jahr im Footer) - siehe site.js
+    MiKiSite.init();
+    });
+</script>
 </body>
 </html>
