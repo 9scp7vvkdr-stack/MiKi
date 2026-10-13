@@ -19,6 +19,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
+      <image:loc>https://www.miki-hdh.de/Assets/T5.webp</image:loc>
+    </image:image>
+    <image:image>
       <image:loc>https://www.miki-hdh.de/Assets/T1.webp</image:loc>
     </image:image>
     <image:image>

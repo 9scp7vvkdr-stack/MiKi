@@ -1321,23 +1321,22 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .page-back:hover { color: var(--primary); }
 
-/* "Die Michaelskirche": Geschichte + Besichtigen */
+/* "Die Michaelskirche": Steckbrief, Foto, aufklappbare Geschichte */
 .mk-grid { align-items: start; }
-.mk-lead { font-size: 1.08rem; color: #475569; margin-bottom: 8px; }
-.mk-visit {
-    margin-top: 26px;
-    padding: 20px 22px;
-    background: #fff;
-    border-radius: 18px;
-    border-left: 4px solid var(--primary);
-    box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.3);
-}
-.mk-visit h3 { font-size: 1.9rem; margin-bottom: 6px; }
-.mk-visit p { color: #475569; }
-.mk-visit a { color: var(--primary-ink); font-weight: 600; text-decoration: underline; }
-.mk-fun { margin-top: 18px; color: #475569; }
-.mk-timeline { padding: 26px 24px; background: #fff; border-radius: var(--radius); box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.3); }
-.mk-timeline .timeline { margin: 0; color: #334155; }
+.mk-facts-title { font-size: 2rem; margin-bottom: 14px; }
+.mk-facts { display: grid; gap: 0; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.3); overflow: hidden; }
+.mk-facts > div { display: grid; grid-template-columns: 140px 1fr; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #eef2f6; }
+.mk-facts > div:last-child { border-bottom: none; }
+.mk-facts dt { font-weight: 700; color: var(--primary-ink); font-size: 0.9rem; }
+.mk-facts dd { margin: 0; color: #334155; font-size: 0.95rem; line-height: 1.5; }
+.mk-figure { margin: 0; }
+.mk-figure img { width: 100%; height: auto; box-shadow: 0 20px 40px -20px rgba(2, 6, 23, 0.45); }
+.mk-figure figcaption { margin-top: 10px; font-size: 0.85rem; color: #64748b; }
+.mk-history { max-width: none; margin-top: 40px; }
+.mk-history summary { font-size: 1.1rem; }
+.mk-history summary small { display: block; font-size: 0.85rem; font-weight: 500; color: #64748b; }
+.mk-history-body { padding: 4px 22px 24px; }
+.mk-history .timeline { margin: 0; color: #334155; }
 
 /* Impressum / Datenschutz */
 .legal-page { background: #fff; padding: 130px 0 90px; }
@@ -1361,6 +1360,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .teaser-icon { width: 42px; height: 42px; font-size: 1.3rem; }
     .page-hero { min-height: 0; padding: 110px 0 48px; }
     .page-hero p { font-size: 1.02rem; }
-    .mk-timeline { padding: 22px 18px; }
+    .mk-facts > div { grid-template-columns: 1fr; gap: 2px; padding: 12px 16px; }
+    .mk-history { margin-top: 28px; }
+    .mk-history-body { padding: 4px 16px 20px; }
     .legal-page { padding: 104px 0 64px; }
 }
