@@ -559,6 +559,8 @@
             //    Uhrzeit noch unklar? Nur das Datum angeben (start: 'JJJJ-MM-TT') - dann steht
             //    "Uhrzeit folgt" da. Dann bitte "end" setzen, sonst verschwindet es um Mitternacht.
             //    Optional "timeLabel" ersetzt die angezeigte Uhrzeit (z. B. "ab 20:00 Uhr").
+            //    Optional fuer Google: "image" (Foto), "performer" (Personen als Liste ["Name", "Name"]
+            //    oder ein Bandname als Text).
             // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
                 {
@@ -591,6 +593,8 @@
                     type: 'once',
                     title: "Orgel x Deine Mukke",
                     start: "2026-11-08T19:00:00+01:00",
+                    end: "2026-11-08T20:30:00+01:00",
+                    performer: ["Leonard Hölldampf", "Eddy Scheck"],
                     desc: "AC/DC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre",
                     detailedDesc: "Wir planen ein legendäres Orgelkonzert, bei dem DU bestimmst, welche Lieder laufen: AC/DC, Coldplay, Hans Zimmer und mehr. Stimm jetzt ab und komm vorbei!",
                     image: "Assets/T8.webp",
@@ -727,10 +731,29 @@
                             name: 'MiKi (Michaelskirche)',
                             address: { '@type': 'PostalAddress', streetAddress: 'An der Stadtmauer 1', addressLocality: 'Heidenheim an der Brenz', postalCode: '89520', addressCountry: 'DE' }
                         },
-                        organizer: { '@type': 'Organization', name: 'MiKi – Jugendkirche Heidenheim', url: 'https://www.miki-hdh.de/' }
+                        organizer: { '@type': 'Organization', name: 'MiKi – Jugendkirche Heidenheim', url: 'https://www.miki-hdh.de/' },
+                        // Ende: angegebenes Ende, sonst 4 Stunden nach Beginn (wie beim Ausblenden)
+                        endDate: e.end || e.endDate.toISOString(),
+                        // Bild: eigenes Event-Foto, sonst die Vorschaubilder der Seite (16:9, 4:3, 1:1)
+                        image: e.image
+                            ? ['https://www.miki-hdh.de/' + e.image]
+                            : ['vorschau-16x9.jpg', 'vorschau-4x3.jpg', 'vorschau-1x1.jpg'].map(f => 'https://www.miki-hdh.de/Assets/' + f),
+                        // Mitwirkende: optional pro Event – Personen als Liste (performer: ["Name", "Name"]),
+                        // eine Band als Text (performer: "Bandname"), sonst das MiKi-Team
+                        performer: Array.isArray(e.performer)
+                            ? e.performer.map(name => ({ '@type': 'Person', name }))
+                            : { '@type': e.performer ? 'PerformingGroup' : 'Organization', name: e.performer || 'MiKi – Jugendkirche Heidenheim' },
+                        // Alle Angebote sind kostenfrei
+                        offers: {
+                            '@type': 'Offer',
+                            price: 0,
+                            priceCurrency: 'EUR',
+                            availability: 'https://schema.org/InStock',
+                            url: 'https://www.miki-hdh.de/#events',
+                            validFrom: e.announced || '2026-10-01T00:00:00+02:00'
+                        },
+                        isAccessibleForFree: true
                     };
-                    if (e.end) item.endDate = e.end;
-                    if (e.image) item.image = ['https://www.miki-hdh.de/' + e.image];
                     return item;
                 });
                 if (eventData.length) {
