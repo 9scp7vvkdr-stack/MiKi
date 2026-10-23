@@ -1311,6 +1311,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .teaser-text strong { color: var(--dark); font-size: 1.05rem; }
 .teaser-text span { color: #475569; font-size: 0.93rem; line-height: 1.5; }
 .teaser-arrow { flex-shrink: 0; color: var(--primary-ink); font-size: 1.3rem; }
+.teaser-card + .teaser-card { margin-top: 14px; }
+/* Spenden-Karte leicht mint hervorgehoben, damit Unterstuetzer sie schnell finden */
+.teaser-donate { background: rgba(16, 187, 130, 0.08); border-color: rgba(16, 187, 130, 0.35); }
+.teaser-donate .teaser-icon { background: var(--primary); color: var(--dark); }
 
 /* Unterseiten: Kopfbereich mit Foto */
 .page-hero {
