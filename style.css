@@ -294,6 +294,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     font-weight: 600;
 }
 .events-note i { color: var(--primary); font-size: 1.3rem; flex-shrink: 0; }
+#events .events-note + .events-note { margin-top: 12px; }
 .event-start { display: block; margin: -6px 0 10px; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
 
 .highlight-list { display: grid; gap: 16px; }
@@ -551,6 +552,28 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     transition: background 0.2s ease;
 }
 .copy-btn:hover { background: rgba(16, 187, 130, 0.25); }
+
+/* Termin-Pop-up: "In meinen Kalender" / "Google Kalender" (gleicher Stil wie "Kopieren") */
+.cal-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.cal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 100px;
+    background: rgba(16, 187, 130, 0.14);
+    color: var(--primary-ink);
+    font-family: var(--font-main);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.cal-btn:hover { background: rgba(16, 187, 130, 0.25); }
+.cal-btn:active { transform: scale(0.96); }
 
 /* --- UNTERSTUETZER-LOGOS (Endlos-Laufband) --- */
 .supporter-strip { margin-top: 56px; }

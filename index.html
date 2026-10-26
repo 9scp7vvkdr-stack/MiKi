@@ -287,6 +287,7 @@
             </div>
 
             <p class="events-note"><i class="ph ph-heart" aria-hidden="true"></i> Alle Angebote sind kostenfrei und jeder ist herzlich eingeladen.</p>
+            <p class="events-note"><i class="ph ph-calendar-blank" aria-hidden="true"></i> In den Schulferien machen die wöchentlichen Angebote Pause.</p>
         </div>
     </section>
 
@@ -395,7 +396,13 @@
             </div>
             
             <div class="modal-details-grid">
-                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br>{{ selectedEvent.when }}</div>
+                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br>{{ selectedEvent.when }}
+                    <!-- Nur bei Highlights: die woechentlichen Angebote pausieren in den Schulferien -->
+                    <div v-if="selectedEvent.type === 'once'" class="cal-links">
+                        <button type="button" class="cal-btn" @click="saveToCalendar(selectedEvent)"><i class="ph ph-calendar-blank"></i> In meinen Kalender</button>
+                        <a class="cal-btn" :href="googleCalUrl(selectedEvent)" target="_blank" rel="noopener"><i class="ph ph-arrow-square-out"></i> Google Kalender</a>
+                    </div>
+                </div>
                 <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br><a :href="mapsUrl" target="_blank" rel="noopener" class="event-place">MiKi (Michaelskirche)</a></div>
             </div>
 
@@ -451,7 +458,7 @@
                 </details>
                 <details class="faq-item">
                     <summary>Muss ich mich anmelden?</summary>
-                    <p>Zur Open Church kommst du einfach vorbei – allein oder mit deinen Freunden. Für den Jugendkreis (freitags, 19 Uhr) meldest du dich am besten kurz per <a href="https://wa.me/+491743086657?text=Hey%2C%20ich%20h%C3%A4tte%20Lust%20auf%20den%20Jugendkreis!" target="_blank" rel="noopener">WhatsApp</a> an, weil wir regelmäßig Ausflüge und Aktionen machen.</p>
+                    <p>Zur Open Church kommst du einfach vorbei – allein oder mit deinen Freunden. Für den Jugendkreis (freitags, 19–21 Uhr) meldest du dich am besten kurz per <a href="https://wa.me/+491743086657?text=Hey%2C%20ich%20h%C3%A4tte%20Lust%20auf%20den%20Jugendkreis!" target="_blank" rel="noopener">WhatsApp</a> an, weil wir regelmäßig Ausflüge und Aktionen machen.</p>
                 </details>
                 <details class="faq-item">
                     <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
@@ -570,6 +577,8 @@
             //    Optional "timeLabel" ersetzt die angezeigte Uhrzeit (z. B. "ab 20:00 Uhr").
             //    Optional fuer Google: "image" (Foto), "performer" (Personen als Liste ["Name", "Name"]
             //    oder ein Bandname als Text).
+            //    Im Pop-up gibt es automatisch "In meinen Kalender" und "Google Kalender". Mit "end"
+            //    steht dort auch das Ende; nur Datum ergibt einen ganztaegigen Termin mit "Uhrzeit folgt".
             // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
                 {
@@ -585,7 +594,7 @@
                     type: 'regular',
                     title: "Jugendkreis",
                     days: "Freitags",
-                    time: "19:00 Uhr",
+                    time: "19:00–21:00 Uhr",
                     desc: "Glaube, Gemeinschaft & Ausflüge",
                     detailedDesc: "Im Jugendkreis lernst du den christlichen Glauben kennen und erlebst Gemeinschaft mit anderen Jugendlichen. Dabei ist es ganz egal, ob du schon glaubst oder einfach mal reinschnuppern willst. Weil wir regelmäßig Ausflüge und besondere Aktionen machen, meld dich am besten kurz per WhatsApp. So bist du immer auf dem Laufenden und du stehst nicht vor verschlossener Türe.",
                     whatsapp: "Hey, ich hätte Lust auf den Jugendkreis!"
@@ -663,6 +672,71 @@
             const openEventModal = (ev) => { selectedEvent.value = ev; };
             const closeEventModal = () => { selectedEvent.value = null; };
 
+            // KALENDER: Highlight als Termin speichern - als Kalenderdatei (iPhone, Mac, Outlook, viele
+            // Android-Handys) oder ueber Google Kalender. Die Datei entsteht im Browser, ohne fremden Server.
+            const calPlace = 'MiKi (Michaelskirche), An der Stadtmauer 1, 89520 Heidenheim an der Brenz';
+            // Kalenderformat: Zeit in UTC (20261108T180000Z), ganztaegig nur Datum (20261223)
+            const calTime = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+            const calDate = (s) => s.replace(/-/g, '');
+            const calNextDay = (s) => {
+                const d = new Date(s + 'T12:00:00Z');
+                d.setUTCDate(d.getUTCDate() + 1);
+                return d.toISOString().slice(0, 10).replace(/-/g, '');
+            };
+            const calText = (e) => e.detailedDesc + '\n\n' + (e.start.length === 10 ? 'Uhrzeit folgt: ' : 'Alle Infos: ') + 'https://www.miki-hdh.de/';
+            const calSlug = (e) => e.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+            const icsEscape = (s) => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+            // Kalenderdateien erlauben hoechstens 75 Bytes pro Zeile, laengere Zeilen werden umbrochen
+            const icsFold = (line) => {
+                const enc = new TextEncoder();
+                let out = '', cur = '';
+                for (const ch of line) {
+                    if (enc.encode(cur + ch).length > 74) { out += cur + '\r\n '; cur = ''; }
+                    cur += ch;
+                }
+                return out + cur;
+            };
+            const saveToCalendar = (e) => {
+                const dateOnly = e.start.length === 10;
+                const lines = [
+                    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MiKi Jugendkirche//miki-hdh.de//DE', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+                    'BEGIN:VEVENT',
+                    'UID:' + calDate(e.start.slice(0, 10)) + '-' + calSlug(e) + '@miki-hdh.de',
+                    'DTSTAMP:' + calTime(new Date())
+                ];
+                if (dateOnly) {
+                    lines.push('DTSTART;VALUE=DATE:' + calDate(e.start), 'DTEND;VALUE=DATE:' + calNextDay(e.start));
+                } else {
+                    lines.push('DTSTART:' + calTime(e.startDate));
+                    if (e.end) lines.push('DTEND:' + calTime(new Date(e.end)));
+                }
+                lines.push(
+                    'SUMMARY:' + icsEscape(e.title),
+                    'DESCRIPTION:' + icsEscape(calText(e)),
+                    'LOCATION:' + icsEscape(calPlace),
+                    'URL:https://www.miki-hdh.de/',
+                    'END:VEVENT', 'END:VCALENDAR'
+                );
+                const a = document.createElement('a');
+                a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.map(icsFold).join('\r\n') + '\r\n');
+                a.download = 'MiKi-' + calSlug(e) + '.ics';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            };
+            const googleCalUrl = (e) => {
+                const dates = e.start.length === 10
+                    ? calDate(e.start) + '/' + calNextDay(e.start)
+                    : calTime(e.startDate) + '/' + calTime(e.end ? new Date(e.end) : e.startDate);
+                return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                    + '&text=' + encodeURIComponent(e.title)
+                    + '&dates=' + dates
+                    + '&details=' + encodeURIComponent(calText(e))
+                    + '&location=' + encodeURIComponent(calPlace)
+                    + '&ctz=Europe/Berlin';
+            };
+
             // Texte zu den Foto-Kacheln ("Kirche? Anders als du denkst")
             const tiles = {
                 springen: {
@@ -694,7 +768,7 @@
                     title: 'Glaube',
                     img: 'Assets/T8-1200.webp',
                     alt: 'Live-Musik in der Michaelskirche',
-                    text: 'In der MiKi ist jeder willkommen – egal, ob du glaubst, zweifelst oder einfach neugierig bist. Wenn du Lust hast, lernst du im Jugendkreis (freitags, 19 Uhr) den christlichen Glauben kennen: mit Musik, echten Fragen und Gemeinschaft. Musst du aber nicht.',
+                    text: 'In der MiKi ist jeder willkommen – egal, ob du glaubst, zweifelst oder einfach neugierig bist. Wenn du Lust hast, lernst du im Jugendkreis (freitags, 19–21 Uhr) den christlichen Glauben kennen: mit Musik, echten Fragen und Gemeinschaft. Musst du aber nicht.',
                     link: { href: '#fragen', label: 'Fragen zum Glauben? Zur FAQ' }
                 },
                 chillen: {
@@ -782,7 +856,8 @@
 
             return {
                 tickerWords, regularEvents, upcomingEvents, mapsUrl,
-                selectedEvent, openEventModal, closeEventModal, selectedTile, openTile, goToFromTile
+                selectedEvent, openEventModal, closeEventModal, saveToCalendar, googleCalUrl,
+                selectedTile, openTile, goToFromTile
             };
         }
     }).mount('#app');
