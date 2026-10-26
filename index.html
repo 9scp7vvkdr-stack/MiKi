@@ -410,6 +410,16 @@
 
             <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.detailedDesc }}</p>
 
+            <!-- EASTEREGG Dino-Spiel: nur bei Open Church und nur bis 13.11.2026, 16:30 Uhr. Zum Entfernen diesen Block loeschen. -->
+            <button v-if="showDinoGame(selectedEvent)" type="button" class="teaser-card teaser-donate" @click="startDinoGame" style="width: 100%; margin-top: 24px; font: inherit; text-align: left; cursor: pointer;">
+                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-ticket"></i></span>
+                <span class="teaser-text">
+                    <strong>Freigetränk gewinnen?!</strong>
+                    <span>Zum Start der Open Church am 13.11.</span>
+                </span>
+                <i class="ph ph-arrow-right teaser-arrow" aria-hidden="true"></i>
+            </button>
+
             <a v-if="selectedEvent.link" :href="selectedEvent.link.href" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
                 <i :class="'ph ' + (selectedEvent.link.icon || 'ph-arrow-square-out')"></i> {{ selectedEvent.link.label }}
             </a>
@@ -764,6 +774,25 @@
                 }, CONFETTI_CLOSE_DELAY);
             };
 
+            // EASTEREGG Dino-Spiel "Fang mich!" zum Start der Open Church – START
+            // Das Spiel (easteregg/dino-spiel.js) wird erst beim Antippen geladen. Der Button verschwindet
+            // nach der ersten Open Church von selbst. Zum Entfernen: alle Stellen mit "EASTEREGG" in dieser
+            // Datei loeschen, dazu den Ordner easteregg/ (und bei Bedarf Assets/skaterdino-animiert.svg).
+            const dinoGameUntil = new Date('2026-11-13T16:30:00+01:00');
+            const showDinoGame = (e) => e.title === 'Open Church' && new Date() < dinoGameUntil;
+            const startDinoGame = () => {
+                closeEventModal();
+                nextTick(() => {
+                    const go = () => window.MiKiDinoSpiel.start({ confetti });
+                    if (window.MiKiDinoSpiel) return go();
+                    const script = document.createElement('script');
+                    script.src = 'easteregg/dino-spiel.js';
+                    script.onload = go;
+                    document.head.appendChild(script);
+                });
+            };
+            // EASTEREGG – ENDE
+
             // KALENDER: Highlight als Termin speichern - als Kalenderdatei (iPhone, Mac, Outlook, viele
             // Android-Handys) oder ueber Google Kalender. Die Datei entsteht im Browser, ohne fremden Server.
             const calPlace = 'MiKi (Michaelskirche), An der Stadtmauer 1, 89520 Heidenheim an der Brenz';
@@ -949,6 +978,7 @@
             return {
                 tickerWords, regularEvents, upcomingEvents, mapsUrl,
                 selectedEvent, openEventModal, closeEventModal, closeWithConfetti, saveToCalendar, googleCalUrl,
+                showDinoGame, startDinoGame, // EASTEREGG
                 selectedTile, openTile, goToFromTile
             };
         }
