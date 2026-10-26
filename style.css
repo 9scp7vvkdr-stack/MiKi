@@ -627,6 +627,9 @@ footer {
 .social-links { display: flex; gap: 15px; margin-top: 15px; }
 .social-links a { font-size: 1.5rem; color: white; }
 
+/* Konfetti beim "Alles klar!" im Termin-Fenster: liegt ueber allem, faengt keine Klicks ab */
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1100; }
+
 /* --- MODAL --- */
 .modal-overlay {
     position: fixed; inset: 0;

@@ -414,7 +414,7 @@
             <a v-if="selectedEvent.whatsapp" :href="'https://wa.me/+491743086657?text=' + encodeURIComponent(selectedEvent.whatsapp)" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
                 <i class="ph ph-whatsapp-logo"></i> Per WhatsApp anmelden
             </a>
-            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeEventModal">Alles klar!</button>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeWithConfetti">Alles klar!</button>
         </div>
     </div>
 
@@ -672,6 +672,81 @@
             const openEventModal = (ev) => { selectedEvent.value = ev; };
             const closeEventModal = () => { selectedEvent.value = null; };
 
+            // KONFETTI beim "Alles klar!" im Termin-Fenster: eigenes kleines Skript, keine Bibliothek.
+            // Die Zeichenflaeche entsteht nur fuer die Explosion und verschwindet danach wieder.
+            // Wer am Geraet "Bewegung reduzieren" eingestellt hat, bekommt kein Konfetti.
+            const confetti = (x, y) => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const w = window.innerWidth, h = window.innerHeight;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const canvas = document.createElement('canvas');
+                canvas.className = 'confetti';
+                canvas.setAttribute('aria-hidden', 'true');
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                document.body.appendChild(canvas);
+                const ctx = canvas.getContext('2d');
+                ctx.scale(dpr, dpr);
+
+                const colors = ['#10BB82', '#6ee7b7', '#6366f1', '#a5b4fc', '#ffffff'];
+                const parts = [];
+                for (let i = 0, n = w < 600 ? 90 : 140; i < n; i++) {
+                    const angle = (Math.random() - 0.5) * 1.8;                      // gefaechert nach oben
+                    const speed = (h * (0.35 + Math.random() * 0.45) + 80) / 19;  // fliegt 35-80 % der Bildschirmhoehe hoch
+                    parts.push({
+                        x, y,
+                        vx: Math.sin(angle) * speed * 0.6,
+                        vy: -Math.cos(angle) * speed,
+                        size: 6 + Math.random() * 6,
+                        color: colors[i % colors.length],
+                        round: Math.random() < 0.3,
+                        rot: Math.random() * Math.PI, spin: (Math.random() - 0.5) * 0.3,
+                        flip: Math.random() * Math.PI
+                    });
+                }
+
+                const DURATION = 3000, FADE = 700;
+                const start = performance.now();
+                let last = start;
+                const frame = (now) => {
+                    const t = now - start;
+                    const f = Math.min((now - last) / 16.7, 3);  // gleich schnell bei 60 und 120 Hz
+                    last = now;
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.globalAlpha = t > DURATION - FADE ? Math.max(0, (DURATION - t) / FADE) : 1;
+                    parts.forEach(p => {
+                        const drag = Math.pow(0.965, f);
+                        p.vx *= drag;
+                        p.vy = p.vy * drag + 0.22 * f;
+                        p.x += p.vx * f;
+                        p.y += p.vy * f;
+                        p.rot += p.spin * f;
+                        p.flip += 0.12 * f;
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rot);
+                        ctx.scale(1, Math.cos(p.flip));  // flattern
+                        ctx.fillStyle = p.color;
+                        if (p.round) {
+                            ctx.beginPath();
+                            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        } else {
+                            ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+                        }
+                        ctx.restore();
+                    });
+                    if (t < DURATION) requestAnimationFrame(frame);
+                    else canvas.remove();
+                };
+                requestAnimationFrame(frame);
+            };
+            const closeWithConfetti = (ev) => {
+                const r = ev.currentTarget.getBoundingClientRect();
+                confetti(r.left + r.width / 2, r.top + r.height / 2);
+                closeEventModal();
+            };
+
             // KALENDER: Highlight als Termin speichern - als Kalenderdatei (iPhone, Mac, Outlook, viele
             // Android-Handys) oder ueber Google Kalender. Die Datei entsteht im Browser, ohne fremden Server.
             const calPlace = 'MiKi (Michaelskirche), An der Stadtmauer 1, 89520 Heidenheim an der Brenz';
@@ -856,7 +931,7 @@
 
             return {
                 tickerWords, regularEvents, upcomingEvents, mapsUrl,
-                selectedEvent, openEventModal, closeEventModal, saveToCalendar, googleCalUrl,
+                selectedEvent, openEventModal, closeEventModal, closeWithConfetti, saveToCalendar, googleCalUrl,
                 selectedTile, openTile, goToFromTile
             };
         }
