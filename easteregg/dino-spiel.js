@@ -11,7 +11,11 @@
     const DINO_SRC = 'easteregg/skaterdino-spiel.svg';
     const PASSES = 4;               // so oft flitzt der Dino pro Runde ueber den Bildschirm
     const SLOWER_PER_TRY = 1.2;     // jede neue Runde 20 % langsamer, damit es jeder schafft
-    const PHONE_CROSS_MS = 900;     // Handy: Millisekunden fuer einmal ganz quer (kleiner = schneller)
+    const PHONE_CROSS_MS = 700;     // Handy: Millisekunden fuer einmal ganz quer (kleiner = schneller)
+    const BIG_CROSS_MS = 1300;      // Tablet/PC: Millisekunden fuer einmal ganz quer (kleiner = schneller)
+    // Code auf dem Gutschein: Fangzeit in Hundertstel + 3 Zufallsbuchstaben, z. B. 247-KXT.
+    // Gleicher Code zweimal = geteilter Screenshot. Buchstaben ohne Verwechsler wie O/0 oder I/1.
+    const CODE_LETTERS = 'ACDEFHJKMNPRTUVWXY';
 
     const CSS = `
 .dg { position: fixed; inset: 0; z-index: 1050; overflow: hidden; background: rgba(15, 23, 42, 0.9);
@@ -37,7 +41,22 @@
 .dg-say { position: relative; padding: 14px 18px; border-radius: 18px; background: #fff; color: var(--dark);
           font-weight: 700; line-height: 1.45; }
 .dg-card-dino { display: block; width: 150px; height: auto; margin: 12px auto 4px; border-radius: 0; }
-@media (max-height: 820px) { .dg-card-dino { width: 110px; margin-top: 8px; } .dg-outro { margin: 14px 0 12px; } }
+/* Kleine Bildschirme: alles etwas kompakter, damit der ganze Gutschein in einen Screenshot passt */
+@media (max-height: 820px) {
+    .dg-panel { padding-top: 64px; }
+    .dg-card-dino { width: 90px; margin-top: 6px; }
+    .dg-voucher { padding: 14px 14px 12px; }
+    .dg-v-title { font-size: 2.2rem; margin-bottom: 6px; }
+    .dg-v-code { margin-top: 10px; padding: 6px 10px; }
+    .dg-v-code strong { font-size: 1.2rem; }
+    .dg-v-note { margin-top: 8px; padding-top: 8px; }
+    .dg-outro { margin: 14px 0 12px; }
+}
+@media (max-height: 640px) {
+    .dg-card-dino { display: none; }
+    .dg-say { margin-bottom: 14px; padding: 10px 14px; font-size: 0.9rem; }
+    .dg-say::after { display: none; }
+}
 .dg-voucher { position: relative; padding: 18px 18px 16px; border-radius: 20px; background: #fff; color: var(--dark);
               border: 3px dashed var(--primary); box-shadow: 0 0 40px rgba(16, 187, 130, 0.35); }
 .dg-v-kicker { display: inline-flex; align-items: center; gap: 6px; color: var(--primary-ink); font-size: 0.78rem;
@@ -45,6 +64,9 @@
 .dg-v-kicker i { font-size: 1.1rem; }
 .dg-v-title { display: block; margin: 2px 0 8px; font-family: var(--font-head); font-size: 2.6rem; font-weight: 400; line-height: 1; }
 .dg-v-line { display: block; font-size: 0.92rem; line-height: 1.5; }
+.dg-v-code { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px;
+             padding: 8px 12px; border-radius: 12px; background: rgba(16, 187, 130, 0.12); font-size: 0.85rem; }
+.dg-v-code strong { font-size: 1.35rem; letter-spacing: 0.12em; }
 .dg-v-note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; color: var(--muted); font-size: 0.8rem; }
 .dg-outro { margin: 18px 0 16px; color: rgba(255, 255, 255, 0.92); line-height: 1.6; }
 .dg .btn { width: 100%; justify-content: center; }
@@ -52,7 +74,7 @@
 @keyframes dgPop { from { opacity: 0; transform: translateX(-50%) scale(0.6); } to { opacity: 1; transform: translateX(-50%) scale(1); } }
 `;
 
-    const WIN_HTML = `
+    const winHtml = (time, code) => `
 <div class="dg-card">
     <p class="dg-say">Herzlichen Glückwunsch! Screenshotte den Gutschein und zeig ihn am 13. November bei der Open Church.</p>
     <img class="dg-card-dino" src="${DINO_SRC}" width="670" height="430" alt="">
@@ -62,7 +84,8 @@
         <span class="dg-v-line">Open Church · Freitag, 13.11.2026</span>
         <span class="dg-v-line">12:00–16:30 Uhr</span>
         <span class="dg-v-line">MiKi · Michaelskirche Heidenheim</span>
-        <span class="dg-v-note">1 Freigetränk pro Person</span>
+        <span class="dg-v-code"><span>Gefangen in ${time} s · Code</span><strong>${code}</strong></span>
+        <span class="dg-v-note">1 Freigetränk pro Person · Jeder Code gilt nur einmal</span>
     </div>
     <p class="dg-outro">Willst du mehr über die MiKi wissen? Dann schau dich gerne noch hier auf der Seite um. Ansonsten: bis Freitag!</p>
     <button type="button" class="btn btn-glow dg-action">Zurück zur Seite</button>
@@ -80,6 +103,7 @@
     let anim = null;        // laufende Bewegung des Dinos
     let phase = '';         // 'intro' | 'hunt' | 'won' | 'missed'
     let tries = 0;
+    let huntStart = 0;      // Zeitpunkt von "Los geht's!" (fuer die Fangzeit)
     let run = 0;            // zaehlt hoch bei Neustart/Schliessen, damit alte Ablaeufe abbrechen
 
     const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -134,8 +158,8 @@
         phase = 'hunt';
         dino.focus({ preventScroll: true });
         const slow = Math.pow(SLOWER_PER_TRY, tries) * (reducedMotion() ? 2 : 1);
-        // ms fuer einmal ganz quer: Handy siehe PHONE_CROSS_MS, groessere Bildschirme ca. 1,6-1,9 s
-        const crossTime = (w < 600 ? PHONE_CROSS_MS : 1300 + w * 0.45) * slow;
+        const crossTime = (w < 600 ? PHONE_CROSS_MS : BIG_CROSS_MS) * slow;
+        huntStart = performance.now();
         let from = center;
         for (let i = 0; i < PASSES; i++) {
             const toRight = i % 2 === 0;
@@ -156,6 +180,10 @@
     async function caught() {
         if (phase !== 'hunt') return;
         phase = 'won';
+        const centis = Math.max(1, Math.round((performance.now() - huntStart) / 10));
+        let letters = '';
+        for (let i = 0; i < 3; i++) letters += CODE_LETTERS[Math.floor(Math.random() * CODE_LETTERS.length)];
+        const time = (centis / 100).toFixed(2).replace('.', ',');
         // Dino dort anhalten, wo er gerade ist
         const pos = new DOMMatrixReadOnly(getComputedStyle(dino).transform);
         if (anim) anim.cancel();
@@ -165,7 +193,7 @@
         const id = run;
         await wait(700);
         if (id !== run || !root) return;
-        showCard(WIN_HTML, close);
+        showCard(winHtml(time, centis + '-' + letters), close);
     }
 
     function showCard(html, onAction) {
