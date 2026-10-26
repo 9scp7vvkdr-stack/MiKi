@@ -7,9 +7,11 @@
    ueber den Bildschirm. Antippen = gewonnen (Konfetti + Gutschein zum Screenshotten).
    Nicht erwischt = "Knapp daneben! Nochmal?" - jede neue Runde ist etwas langsamer. */
 (() => {
-    const DINO_SRC = 'Assets/skaterdino-animiert.svg';
+    // Kopie von Assets/skaterdino-animiert.svg: doppelt so schnell, Raeder auf dunklem Grund sichtbar
+    const DINO_SRC = 'easteregg/skaterdino-spiel.svg';
     const PASSES = 4;               // so oft flitzt der Dino pro Runde ueber den Bildschirm
     const SLOWER_PER_TRY = 1.2;     // jede neue Runde 20 % langsamer, damit es jeder schafft
+    const PHONE_CROSS_MS = 900;     // Handy: Millisekunden fuer einmal ganz quer (kleiner = schneller)
 
     const CSS = `
 .dg { position: fixed; inset: 0; z-index: 1050; overflow: hidden; background: rgba(15, 23, 42, 0.9);
@@ -132,7 +134,8 @@
         phase = 'hunt';
         dino.focus({ preventScroll: true });
         const slow = Math.pow(SLOWER_PER_TRY, tries) * (reducedMotion() ? 2 : 1);
-        const crossTime = (1300 + w * 0.45) * slow;  // ms fuer einmal ganz quer (Handy ca. 1,5 s, PC ca. 1,9 s)
+        // ms fuer einmal ganz quer: Handy siehe PHONE_CROSS_MS, groessere Bildschirme ca. 1,6-1,9 s
+        const crossTime = (w < 600 ? PHONE_CROSS_MS : 1300 + w * 0.45) * slow;
         let from = center;
         for (let i = 0; i < PASSES; i++) {
             const toRight = i % 2 === 0;

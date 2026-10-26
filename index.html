@@ -777,7 +777,7 @@
             // EASTEREGG Dino-Spiel "Fang mich!" zum Start der Open Church – START
             // Das Spiel (easteregg/dino-spiel.js) wird erst beim Antippen geladen. Der Button verschwindet
             // nach der ersten Open Church von selbst. Zum Entfernen: alle Stellen mit "EASTEREGG" in dieser
-            // Datei loeschen, dazu den Ordner easteregg/ (und bei Bedarf Assets/skaterdino-animiert.svg).
+            // Datei loeschen und den Ordner easteregg/. Die Original-Grafik Assets/skaterdino-animiert.svg kann bleiben.
             const dinoGameUntil = new Date('2026-11-13T16:30:00+01:00');
             const showDinoGame = (e) => e.title === 'Open Church' && new Date() < dinoGameUntil;
             const startDinoGame = () => {
