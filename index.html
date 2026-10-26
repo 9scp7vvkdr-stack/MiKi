@@ -676,7 +676,7 @@
             // Die Zeichenflaeche entsteht nur fuer die Explosion und verschwindet danach wieder.
             // Wer am Geraet "Bewegung reduzieren" eingestellt hat, bekommt kein Konfetti.
             const confetti = (x, y) => {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
                 const w = window.innerWidth, h = window.innerHeight;
                 const dpr = Math.min(window.devicePixelRatio || 1, 2);
                 const canvas = document.createElement('canvas');
@@ -740,11 +740,22 @@
                     else canvas.remove();
                 };
                 requestAnimationFrame(frame);
+                return true;
             };
+            // Das Fenster schliesst erst kurz nach Beginn der Explosion (Wartezeit in Millisekunden).
+            // Ohne Konfetti ("Bewegung reduzieren") schliesst es sofort.
+            const CONFETTI_CLOSE_DELAY = 450;
+            let closeTimer = null;
             const closeWithConfetti = (ev) => {
+                if (closeTimer) return;  // doppeltes Antippen loest keine zweite Explosion aus
                 const r = ev.currentTarget.getBoundingClientRect();
-                confetti(r.left + r.width / 2, r.top + r.height / 2);
-                closeEventModal();
+                if (!confetti(r.left + r.width / 2, r.top + r.height / 2)) { closeEventModal(); return; }
+                const shownEvent = selectedEvent.value;
+                closeTimer = setTimeout(() => {
+                    closeTimer = null;
+                    // nur schliessen, wenn inzwischen nicht schon ein anderes Fenster offen ist
+                    if (selectedEvent.value === shownEvent) closeEventModal();
+                }, CONFETTI_CLOSE_DELAY);
             };
 
             // KALENDER: Highlight als Termin speichern - als Kalenderdatei (iPhone, Mac, Outlook, viele
