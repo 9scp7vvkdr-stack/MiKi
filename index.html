@@ -386,6 +386,8 @@
         </div>
     </section>
 
+    <!-- transition: Fenster blendet beim Schliessen weich aus (.modal-fade in style.css) -->
+    <transition name="modal-fade">
     <div v-if="selectedEvent" v-cloak class="modal-overlay" @click="closeEventModal">
         <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
             <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
@@ -417,8 +419,10 @@
             <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeWithConfetti">Alles klar!</button>
         </div>
     </div>
+    </transition>
 
-    <!-- "Kirche? Anders als du denkst": Infos zur angeklickten Kachel -->
+    <!-- "Kirche? Anders als du denkst": Infos zur angeklickten Kachel (blendet weich aus wie das Termin-Fenster) -->
+    <transition name="modal-fade">
     <div v-if="selectedTile" v-cloak class="modal-overlay" @click="selectedTile = null">
         <div class="modal-content tile-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 640px; padding: 32px;">
             <button type="button" aria-label="Schließen" @click="selectedTile = null" class="tile-close">✕</button>
@@ -431,6 +435,7 @@
             <button class="btn btn-primary" :style="{ width: '100%', marginTop: selectedTile.link ? '12px' : '24px', justifyContent: 'center' }" @click="selectedTile = null">Alles klar!</button>
         </div>
     </div>
+    </transition>
 
     <!-- Haeufige Fragen: nimmt kirchenfernen Jugendlichen die Hemmschwelle (und hilft bei Google) -->
     <section class="section-padding" id="fragen" style="background: #f8fafc;">
@@ -743,8 +748,9 @@
                 return true;
             };
             // Das Fenster schliesst erst kurz nach Beginn der Explosion (Wartezeit in Millisekunden).
+            // Danach blendet es 0,25 s lang aus (.modal-fade in style.css): 150 + 250 = nach 0,4 s ganz weg.
             // Ohne Konfetti ("Bewegung reduzieren") schliesst es sofort.
-            const CONFETTI_CLOSE_DELAY = 450;
+            const CONFETTI_CLOSE_DELAY = 150;
             let closeTimer = null;
             const closeWithConfetti = (ev) => {
                 if (closeTimer) return;  // doppeltes Antippen loest keine zweite Explosion aus

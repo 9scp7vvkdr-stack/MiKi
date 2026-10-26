@@ -664,6 +664,13 @@ footer {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
+/* Termin- und Kachel-Fenster: beim Schliessen 0,25 s weich ausblenden (Vue <transition name="modal-fade">).
+   animation: none, damit Vue nur das Ausblenden abwartet; keine Klicks waehrend des Ausblendens. */
+.modal-fade-leave-active { transition: opacity 0.25s ease; animation: none; pointer-events: none; }
+.modal-fade-leave-active .modal-content { transition: transform 0.25s ease; }
+.modal-fade-leave-to { opacity: 0; }
+.modal-fade-leave-to .modal-content { transform: scale(0.97); }
+
 /* --- TASTATUR-FOKUS: sichtbar, aber nur bei Tastaturbedienung --- */
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible {
     outline: 3px solid var(--primary);
