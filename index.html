@@ -257,15 +257,15 @@
             <template v-if="upcomingEvents.length">
                 <div class="events-sub">Highlights</div>
                 <div class="highlight-list">
-                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
+                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card hidden-el" :class="{ 'is-postponed': event.postponed }" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
                         <div class="hl-date" aria-hidden="true">
                             <span class="hl-day">{{ event.dayNum }}</span>
                             <span class="hl-month">{{ event.monthShort }}</span>
                         </div>
                         <div class="hl-body">
-                            <span class="hl-meta">{{ event.badge }}</span>
+                            <span class="hl-meta"><template v-if="event.postponed"><span class="tag-postponed">Verschoben</span> <s>{{ event.badge }}</s></template><template v-else>{{ event.badge }}</template></span>
                             <h3>{{ event.title }}</h3>
-                            <p>{{ event.desc }}</p>
+                            <p>{{ event.postponed ? 'Leider verschoben – mehr dazu in den Details.' : event.desc }}</p>
                         </div>
                         <span class="hl-cta">Details checken <i class="ph ph-arrow-right"></i></span>
                     </div>
@@ -393,14 +393,14 @@
             <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
-                <span style="color: var(--primary-ink); font-weight: 700; text-transform: uppercase;">{{ selectedEvent.badge }}</span>
+                <span style="color: var(--primary-ink); font-weight: 700; text-transform: uppercase;"><template v-if="selectedEvent.postponed"><span class="tag-postponed">Verschoben</span> <s>{{ selectedEvent.badge }}</s></template><template v-else>{{ selectedEvent.badge }}</template></span>
                 <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
             </div>
             
             <div class="modal-details-grid">
-                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br>{{ selectedEvent.when }}
+                <div><i class="ph ph-clock"></i> <strong>Wann:</strong><br><template v-if="selectedEvent.postponed"><s>{{ selectedEvent.when }}</s><br>Verschoben</template><template v-else>{{ selectedEvent.when }}</template>
                     <!-- Nur bei Highlights: die woechentlichen Angebote pausieren in den Schulferien -->
-                    <div v-if="selectedEvent.type === 'once'" class="cal-links">
+                    <div v-if="selectedEvent.type === 'once' && !selectedEvent.postponed" class="cal-links">
                         <button type="button" class="cal-btn" @click="saveToCalendar(selectedEvent)"><i class="ph ph-calendar-blank"></i> In meinen Kalender</button>
                         <a class="cal-btn" :href="googleCalUrl(selectedEvent)" target="_blank" rel="noopener"><i class="ph ph-arrow-square-out"></i> Google Kalender</a>
                     </div>
@@ -408,7 +408,7 @@
                 <div><i class="ph ph-map-pin"></i> <strong>Ort:</strong><br><a :href="mapsUrl" target="_blank" rel="noopener" class="event-place">MiKi (Michaelskirche)</a></div>
             </div>
 
-            <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.detailedDesc }}</p>
+            <p style="line-height: 1.7; color: #334155;">{{ selectedEvent.postponed || selectedEvent.detailedDesc }}</p>
 
             <!-- EASTEREGG Dino-Spiel: nur bei Open Church und nur bis 13.11.2026, 16:30 Uhr. Zum Entfernen diesen Block loeschen. -->
             <button v-if="showDinoGame(selectedEvent)" type="button" class="teaser-card teaser-donate" @click="startDinoGame" style="width: 100%; margin-top: 24px; font: inherit; text-align: left; cursor: pointer;">
@@ -420,13 +420,13 @@
                 <i class="ph ph-arrow-right teaser-arrow" aria-hidden="true"></i>
             </button>
 
-            <a v-if="selectedEvent.link" :href="selectedEvent.link.href" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
+            <a v-if="selectedEvent.link && !selectedEvent.postponed" :href="selectedEvent.link.href" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
                 <i :class="'ph ' + (selectedEvent.link.icon || 'ph-arrow-square-out')"></i> {{ selectedEvent.link.label }}
             </a>
             <a v-if="selectedEvent.whatsapp" :href="'https://wa.me/+491743086657?text=' + encodeURIComponent(selectedEvent.whatsapp)" target="_blank" rel="noopener" class="btn btn-glow" style="width: 100%; margin-top: 30px; justify-content: center;">
                 <i class="ph ph-whatsapp-logo"></i> Per WhatsApp anmelden
             </a>
-            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || selectedEvent.link) ? '12px' : '30px', justifyContent: 'center' }" @click="closeWithConfetti">Alles klar!</button>
+            <button class="btn btn-primary" :style="{ width: '100%', marginTop: (selectedEvent.whatsapp || (selectedEvent.link && !selectedEvent.postponed)) ? '12px' : '30px', justifyContent: 'center' }" @click="closeWithConfetti">Alles klar!</button>
         </div>
     </div>
     </transition>
@@ -594,6 +594,10 @@
             //    oder ein Bandname als Text).
             //    Im Pop-up gibt es automatisch "In meinen Kalender" und "Google Kalender". Mit "end"
             //    steht dort auch das Ende; nur Datum ergibt einen ganztaegigen Termin mit "Uhrzeit folgt".
+            //    Verschoben? "postponed" mit einem Erklaertext ergaenzen: Dann steht "Verschoben" dran,
+            //    das Datum ist durchgestrichen, der Text ersetzt die Beschreibung, Link/Kalender/Konfetti
+            //    entfallen und Google bekommt das Event nicht mehr gemeldet. Neuer Termin: Datum aendern
+            //    und die "postponed"-Zeile loeschen.
             // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
                 {
@@ -631,6 +635,7 @@
                     desc: "AC/DC, Coldplay, Hans Zimmer auf der Orgel, gemischt mit Schlagzeug und E-Gitarre",
                     detailedDesc: "Wir planen ein legendäres Orgelkonzert, bei dem DU bestimmst, welche Lieder laufen: AC/DC, Coldplay, Hans Zimmer und mehr. Stimm jetzt ab und komm vorbei!",
                     image: "Assets/T8.webp",
+                    postponed: "Leider haben zwei Musiker abgesagt. Dadurch bekommen wir das Konzert nicht so cool hin, wie wir es dir bieten möchten. Deshalb verschieben wir es. Sobald es einen neuen Termin gibt, findest du ihn hier.",
                     link: { href: "https://docs.google.com/forms/d/e/1FAIpQLSeJqC5-ABZrbHGsmg7KoG2Hit-q5J-5Kvhzd-fBn-j_c1M2RQ/viewform?usp=header", label: "Jetzt Songs abstimmen", icon: "ph-music-notes" }
                 },
                 {
@@ -764,6 +769,7 @@
             let closeTimer = null;
             const closeWithConfetti = (ev) => {
                 if (closeTimer) return;  // doppeltes Antippen loest keine zweite Explosion aus
+                if (selectedEvent.value && selectedEvent.value.postponed) { closeEventModal(); return; }  // verschoben: kein Konfetti
                 const r = ev.currentTarget.getBoundingClientRect();
                 if (!confetti(r.left + r.width / 2, r.top + r.height / 2)) { closeEventModal(); return; }
                 const shownEvent = selectedEvent.value;
@@ -920,8 +926,9 @@
             );
 
             onMounted(() => {
-                // Fuer Google: kommende einmalige Events als "Event" auszeichnen (erscheinen ggf. in der Event-Suche)
-                const eventData = upcomingEvents.value.map(e => {
+                // Fuer Google: kommende einmalige Events als "Event" auszeichnen (erscheinen ggf. in der Event-Suche).
+                // Verschobene Events werden Google nicht mehr gemeldet.
+                const eventData = upcomingEvents.value.filter(e => !e.postponed).map(e => {
                     const item = {
                         '@context': 'https://schema.org',
                         '@type': 'Event',
