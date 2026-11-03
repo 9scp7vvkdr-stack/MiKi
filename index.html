@@ -306,11 +306,11 @@
             <!-- Slider: wischen oder Pfeile, blaettert automatisch weiter (Skript unten: "Slider Was dich erwartet") -->
             <div class="exp-slider hidden-el" role="region" aria-roledescription="Karussell" aria-label="Was dich erwartet">
             <div class="exp-track">
-                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Trampolin springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
                     <div class="exp-caption">
-                        <h3>Springen</h3>
+                        <h3>Trampolin springen</h3>
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
@@ -874,7 +874,7 @@
             // Texte zu den Foto-Kacheln ("Kirche? Anders als du denkst")
             const tiles = {
                 springen: {
-                    title: 'Springen',
+                    title: 'Trampolin springen',
                     img: 'Assets/T3-1200.webp', pos: '70% 30%',
                     alt: 'Das Trampolin in der MiKi, davor die Lounge mit Couches',
                     text: 'Ja, wirklich: In der MiKi steht ein Trampolin – mitten in der Kirche, direkt neben der Lounge. Ob ein paar entspannte Sprünge oder neue Tricks: Hier kannst du dich richtig auspowern. Am besten kommst du zur Open Church am Freitag vorbei und probierst es selbst aus.'
