@@ -303,8 +303,10 @@
                 <p class="exp-hint"><i class="ph ph-hand-tap" aria-hidden="true"></i><span><span class="hint-touch">Tipp</span><span class="hint-mouse">Klick</span> auf ein Bild für mehr Infos</span></p>
             </div>
 
-            <div class="exp-grid">
-                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
+            <!-- Slider: wischen oder Pfeile, blaettert automatisch weiter (Skript unten: "Slider Was dich erwartet") -->
+            <div class="exp-slider hidden-el" role="region" aria-roledescription="Karussell" aria-label="Was dich erwartet">
+            <div class="exp-track">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Springen" @click="openTile('springen')" @keydown.enter="openTile('springen')" @keydown.space.prevent="openTile('springen')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T3.webp" srcset="Assets/T3-1200.webp 1200w, Assets/T3.webp 1600w" sizes="(max-width: 768px) 400px, 800px" alt="Das Trampolin in der MiKi, davor die Lounge mit Couches" style="object-position: 70% 30%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-arrow-fat-lines-up"></i></span>
                     <div class="exp-caption">
@@ -312,7 +314,7 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card tall hidden-el" role="button" tabindex="0" aria-label="Mehr über DIY-Kirche" @click="openTile('diy')" @keydown.enter="openTile('diy')" @keydown.space.prevent="openTile('diy')" style="transition-delay: 100ms;">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über DIY-Kirche" @click="openTile('diy')" @keydown.enter="openTile('diy')" @keydown.space.prevent="openTile('diy')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/barbauprojekt.webp" srcset="Assets/barbauprojekt-800.webp 800w, Assets/barbauprojekt.webp 1200w" sizes="(max-width: 768px) 260px, 480px" alt="Jugendliche montieren ein Neon-Kreuz an der selbstgebauten Bar" style="object-position: 50% 35%;" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                     <div class="exp-caption">
@@ -320,7 +322,7 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Zocken" @click="openTile('zocken')" @keydown.enter="openTile('zocken')" @keydown.space.prevent="openTile('zocken')">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Zocken" @click="openTile('zocken')" @keydown.enter="openTile('zocken')" @keydown.space.prevent="openTile('zocken')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T10.webp" srcset="Assets/T10-1200.webp 1200w, Assets/T10.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche zocken zusammen auf einer großen Leinwand" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-game-controller"></i></span>
                     <div class="exp-caption">
@@ -328,7 +330,7 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Darts &amp; Games" @click="openTile('darts')" @keydown.enter="openTile('darts')" @keydown.space.prevent="openTile('darts')" style="transition-delay: 100ms;">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Darts &amp; Games" @click="openTile('darts')" @keydown.enter="openTile('darts')" @keydown.space.prevent="openTile('darts')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T7.webp" srcset="Assets/T7-1200.webp 1200w, Assets/T7.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Zwei Jugendliche spielen Darts" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-target"></i></span>
                     <div class="exp-caption">
@@ -336,7 +338,7 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card hidden-el" role="button" tabindex="0" aria-label="Mehr über Glaube" @click="openTile('glaube')" @keydown.enter="openTile('glaube')" @keydown.space.prevent="openTile('glaube')">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Glaube" @click="openTile('glaube')" @keydown.enter="openTile('glaube')" @keydown.space.prevent="openTile('glaube')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T8.webp" srcset="Assets/T8-1200.webp 1200w, Assets/T8.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Live-Musik in der Michaelskirche" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-hands-praying"></i></span>
                     <div class="exp-caption">
@@ -344,7 +346,7 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
-                <article class="exp-card wide hidden-el" role="button" tabindex="0" aria-label="Mehr über Chillen" @click="openTile('chillen')" @keydown.enter="openTile('chillen')" @keydown.space.prevent="openTile('chillen')" style="transition-delay: 100ms;">
+                <article class="exp-card" role="button" tabindex="0" aria-label="Mehr über Chillen" @click="openTile('chillen')" @keydown.enter="openTile('chillen')" @keydown.space.prevent="openTile('chillen')">
                     <div class="exp-media" data-parallax="10"><img src="Assets/T6.webp" srcset="Assets/T6-1200.webp 1200w, Assets/T6.webp 1920w" sizes="(max-width: 768px) 400px, 800px" alt="Jugendliche sitzen zusammen auf den Couches in der MiKi" loading="lazy" decoding="async"></div>
                     <span class="exp-icon" aria-hidden="true"><i class="ph ph-couch"></i></span>
                     <div class="exp-caption">
@@ -352,6 +354,12 @@
                     </div>
                     <span class="exp-more" aria-hidden="true"><i class="ph ph-plus"></i></span>
                 </article>
+            </div>
+                <div class="exp-controls">
+                    <button type="button" class="exp-arrow" data-dir="-1" aria-label="Vorheriges Bild"><i class="ph ph-arrow-left"></i></button>
+                    <div class="exp-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    <button type="button" class="exp-arrow" data-dir="1" aria-label="Nächstes Bild"><i class="ph ph-arrow-right"></i></button>
+                </div>
             </div>
         </div>
     </section>
@@ -1066,6 +1074,60 @@
         grid.addEventListener('scroll', update, { passive: true });
         window.addEventListener('resize', update);
         update();
+    })();
+
+    // Slider "Was dich erwartet": Pfeile, Wischen, Punkte und automatisches Weiterblaettern.
+    // Pause, solange die Maus drueber ist, etwas darin den Fokus hat, ein Fenster offen ist
+    // oder der Slider nicht im Bild ist. Bei "Bewegung reduzieren" kein automatisches Blaettern.
+    (function() {
+        const AUTO_MS = 5000;  // so lange bleibt ein Bild stehen (Millisekunden)
+        const slider = document.querySelector('.exp-slider');
+        if (!slider) return;
+        const track = slider.querySelector('.exp-track');
+        const cards = [...track.querySelectorAll('.exp-card')];
+        const dots = [...slider.querySelectorAll('.exp-dots span')];
+        const step = () => cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+        // Anzahl Positionen: am PC sind 3 Kacheln gleichzeitig sichtbar -> weniger Positionen als Kacheln
+        const positions = () => Math.max(1, cards.length - Math.round(track.clientWidth / step()) + 1);
+        const current = () => Math.min(Math.round(track.scrollLeft / step()), positions() - 1);
+        const go = (i) => {
+            const n = positions();
+            track.scrollTo({ left: ((i + n) % n) * step(), behavior: MiKiSite.reduceMotion ? 'auto' : 'smooth' });
+        };
+        const update = () => {
+            const n = positions(), cur = current();
+            dots.forEach((d, i) => { d.hidden = i >= n; d.classList.toggle('active', i === cur); });
+        };
+
+        let visible = false, hover = false, focus = false, timer = null;
+        const restart = () => {
+            clearInterval(timer);
+            if (MiKiSite.reduceMotion) return;
+            timer = setInterval(() => {
+                if (visible && !hover && !focus && !document.hidden && !document.querySelector('.modal-overlay')) go(current() + 1);
+            }, AUTO_MS);
+        };
+
+        slider.querySelector('.exp-controls').addEventListener('click', (e) => {
+            const btn = e.target.closest('.exp-arrow');
+            if (!btn) return;
+            go(current() + Number(btn.dataset.dir));
+            restart();  // nach Antippen wieder die volle Zeit warten
+        });
+        // Wischen oder Scrollen mit dem Touchpad: Zeit neu starten
+        ['pointerdown', 'wheel', 'touchstart'].forEach(ev => track.addEventListener(ev, restart, { passive: true }));
+        // nur echte Maus (am Handy wuerde ein Antippen sonst dauerhaft als "drueber" gelten)
+        slider.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+        slider.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hover = false; });
+        // nur Tastatur-Fokus (nach einem Klick auf eine Kachel bleibt der Fokus sonst dort haengen)
+        slider.addEventListener('focusin', (e) => { focus = e.target.matches(':focus-visible'); });
+        slider.addEventListener('focusout', () => { focus = false; });
+        new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }, { threshold: 0.5 }).observe(slider);
+
+        track.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+        update();
+        restart();
     })();
 
     // Wechselwort im Hero ("Deine Kirche zum ...")
