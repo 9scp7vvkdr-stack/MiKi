@@ -1169,6 +1169,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     border: 1px solid rgba(255, 255, 255, 0.15);
     text-shadow: -1.5px -1.5px 0 #25f4ee, 1.5px 1.5px 0 #fe2c55;
 }
+.youtube-icon { background: #ff0000; }
 
 /* Event-Karten etwas lebendiger */
 .event-card:hover { box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.45); }
@@ -1550,3 +1551,4 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .ph-users-three:before { content: "\e68e"; }
 .ph-whatsapp-logo:before { content: "\e5d0"; }
 .ph-wrench:before { content: "\e5d4"; }
+.ph-youtube-logo:before { content: "\e4fc"; }
