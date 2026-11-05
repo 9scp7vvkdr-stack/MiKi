@@ -1133,37 +1133,38 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .cta-stefan a { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 .cta-stefan a:hover { color: #fff; }
-/* Instagram: dezente Zeile unter den Buttons */
-.insta-card {
+/* Socials: eine dezente Karte unter den Buttons, die Logos sind die Links */
+.social-card {
     display: flex;
     align-items: center;
-    gap: 14px;
+    justify-content: space-between;
+    gap: 16px;
     max-width: 520px;
     margin: 36px auto 0;
-    padding: 12px 18px;
+    padding: 14px 18px;
     text-align: left;
     border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.05);
-    transition: border-color 0.3s ease, background 0.3s ease;
 }
-.insta-card:hover { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
-.insta-icon {
-    flex-shrink: 0;
-    width: 42px; height: 42px;
-    border-radius: 12px;
+.social-card-text { display: flex; flex-direction: column; gap: 2px; }
+.social-card-text strong { font-size: 0.98rem; color: #fff; }
+.social-card-text span { font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.4; }
+.social-card-icons { display: flex; gap: 10px; flex-shrink: 0; }
+.social-icon {
+    width: 48px; height: 48px;
+    border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #fff;
-    background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
-.insta-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.insta-text strong { font-size: 0.98rem; color: #fff; }
-.insta-handle { color: var(--primary); }
-.insta-text > span { font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.4; }
-.insta-arrow { flex-shrink: 0; color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; }
-/* zweite Karte (TikTok) direkt unter Instagram */
-.insta-card + .insta-card { margin-top: 12px; }
+.social-icon:active { transform: scale(0.92); }
+@media (hover: hover) and (pointer: fine) {
+    .social-icon:hover { transform: translateY(-3px); box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.7); }
+}
+.insta-icon { background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%); }
 .tiktok-icon {
     background: #010101;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1194,11 +1195,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 
 /* Touch: kurzes Feedback beim Antippen statt Hover */
-.event-card, .progress-item, .btn, .faq-item summary, .insta-card, .copy-btn {
+.event-card, .progress-item, .btn, .faq-item summary, .copy-btn {
     -webkit-tap-highlight-color: transparent;
 }
 .event-card:active, .progress-item:active { transform: scale(0.98); }
-.btn:active, .insta-card:active, .copy-btn:active { transform: scale(0.96); }
+.btn:active, .copy-btn:active { transform: scale(0.96); }
 
 /* --- BEWEGUNG ZURUECKHALTEN: prefers-reduced-motion respektieren --- */
 @media (prefers-reduced-motion: reduce) {
@@ -1262,8 +1263,9 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .contact-card img { width: 120px; height: 120px; }
     .contact-actions { flex-direction: column; }
 
-    /* Instagram-Karte: untereinander statt nebeneinander */
-    .insta-card { margin-top: 28px; padding: 12px 14px; }
+    /* Social-Karte: Text oben, Logos darunter */
+    .social-card { flex-direction: column; text-align: center; gap: 12px; margin-top: 28px; padding: 16px 14px; }
+    .social-card-text { align-items: center; }
 
     /* Navbar */
     .navbar {
