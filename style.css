@@ -1162,6 +1162,13 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .insta-handle { color: var(--primary); }
 .insta-text > span { font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.4; }
 .insta-arrow { flex-shrink: 0; color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; }
+/* zweite Karte (TikTok) direkt unter Instagram */
+.insta-card + .insta-card { margin-top: 12px; }
+.tiktok-icon {
+    background: #010101;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-shadow: -1.5px -1.5px 0 #25f4ee, 1.5px 1.5px 0 #fe2c55;
+}
 
 /* Event-Karten etwas lebendiger */
 .event-card:hover { box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.45); }
@@ -1539,6 +1546,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .ph-sparkle:before { content: "\e6a2"; }
 .ph-target:before { content: "\e47c"; }
 .ph-ticket:before { content: "\e490"; }
+.ph-tiktok-logo:before { content: "\eaf2"; }
 .ph-users-three:before { content: "\e68e"; }
 .ph-whatsapp-logo:before { content: "\e5d0"; }
 .ph-wrench:before { content: "\e5d4"; }
