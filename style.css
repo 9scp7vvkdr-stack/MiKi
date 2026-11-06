@@ -1171,6 +1171,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     text-shadow: -1.5px -1.5px 0 #25f4ee, 1.5px 1.5px 0 #fe2c55;
 }
 .youtube-icon { background: #ff0000; }
+/* Karte: gefuelltes Play-Dreieck (das Font-Symbol hat einen eigenen Rahmen -> doppelt) */
+.social-icon.youtube-icon svg { width: 24px; height: 24px; }
 
 /* Event-Karten etwas lebendiger */
 .event-card:hover { box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.45); }
@@ -1496,10 +1498,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
    ICONS (Phosphor) – nur die auf der Seite genutzten: 5 KB statt 219 KB.
    Neues Icon gebraucht? Dann muss extern/phosphor/miki-icons.woff2 neu erzeugt
    werden (Quelle: extern/phosphor/Phosphor.woff2 + style.css im selben Ordner).
+   Danach die Versionsnummer ?v= hier und in den 4 Preload-Links der HTML-Seiten
+   hochzaehlen - sonst zeigen Browser noch die alte, gespeicherte Schrift.
    ===================================================================== */
 @font-face {
     font-family: 'MiKi Icons';
-    src: url('extern/phosphor/miki-icons.woff2') format('woff2');
+    src: url('extern/phosphor/miki-icons.woff2?v=3') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: block;
