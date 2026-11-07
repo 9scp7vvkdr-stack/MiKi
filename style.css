@@ -851,7 +851,22 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 @media (max-width: 1024px) {
     .exp-track { grid-auto-columns: calc((100% - 20px) / 2); }
 }
-.exp-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 22px; }
+/* Pfeile links und rechts neben den Kacheln (mittig auf Bildhoehe), Punkte darunter.
+   Handy: Pfeile und Punkte unter den Kacheln (siehe MOBILE). */
+.exp-slider {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "prev track next" ". dots .";
+    column-gap: 20px;
+    align-items: center;
+    /* breite Bildschirme: Pfeile stehen im freien Rand, die Bilder bleiben so gross wie die Ueberschrift breit ist */
+    margin-inline: calc(-1 * clamp(0px, (100vw - 1152px) / 2 - 24px, 68px));
+}
+.exp-track { grid-area: track; }
+.exp-controls { display: contents; }
+.exp-arrow[data-dir="-1"] { grid-area: prev; }
+.exp-arrow[data-dir="1"] { grid-area: next; }
+.exp-dots { grid-area: dots; justify-self: center; margin-top: 22px; }
 .exp-arrow {
     width: 48px; height: 48px;
     border-radius: 50%;
@@ -1242,6 +1257,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     #events { padding-top: 96px; }
     .section-head { margin-bottom: 32px; }
     .exp-track { grid-auto-columns: 82%; gap: 12px; }
+    .exp-slider { grid-template-columns: 1fr auto 1fr; grid-template-areas: "track track track" "prev dots next"; column-gap: 18px; margin-inline: 0; }
+    .exp-arrow { margin-top: 22px; }
+    .exp-arrow[data-dir="-1"] { justify-self: end; }
+    .exp-arrow[data-dir="1"] { justify-self: start; }
     .exp-card { border-radius: 18px; }
     .exp-icon { width: 38px; height: 38px; font-size: 1.2rem; top: 12px; left: 12px; border-radius: 11px; }
     .exp-more { width: 30px; height: 30px; right: 10px; top: 14px; font-size: 0.9rem; }
