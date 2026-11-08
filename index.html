@@ -178,7 +178,7 @@
     <script defer src="site.js"></script>
 
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="Assets/T1.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="Assets/T6.webp" as="image" fetchpriority="high">
     <link rel="stylesheet" href="extern/fonts/fonts.css">
 
     <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
@@ -215,11 +215,12 @@
 
     <header class="hero">
         <div class="hero-bg">
-            <div class="hero-bg-image active" style="background-image: url('Assets/T1.webp');"></div>
+            <!-- Erstes Bild (sofort geladen): hell, mit Gesichtern - wirkt einladender als ein dunkles Raumfoto -->
+            <div class="hero-bg-image active" style="background-image: url('Assets/T6.webp');"></div>
+            <div class="hero-bg-image" data-bg="Assets/T1.webp"></div>
             <div class="hero-bg-image" data-bg="Assets/T2.jpg"></div>
             <div class="hero-bg-image" data-bg="Assets/T3.webp"></div>
             <div class="hero-bg-image" data-bg="Assets/T5.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T6.webp"></div>
             <div class="hero-bg-image" data-bg="Assets/T7.webp"></div>
             <div class="hero-bg-image" data-bg="Assets/T8.webp"></div>
             <div class="hero-bg-image" data-bg="Assets/T10.webp"></div>
@@ -374,6 +375,18 @@
             </div>
 
             <!-- Stimmen von Jugendlichen: echte O-Toene, woertlich (nur "freitags" beim zweiten weggelassen) -->
+            <!-- Was als Naechstes gebaut wird: macht neugierig und oeffnet die Infos zum Baujugendkreis.
+                 Tag und Uhrzeit kommen automatisch aus den Termin-Daten. -->
+            <div v-if="buildEvent" v-cloak class="build-teaser hidden-el" role="button" tabindex="0" @click="openEventModal(buildEvent)" @keydown.enter="openEventModal(buildEvent)" @keydown.space.prevent="openEventModal(buildEvent)">
+                <span class="build-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
+                <span class="build-text">
+                    <span class="build-tag">In Planung</span>
+                    <strong>Skaterampe &amp; Boulderwand</strong>
+                    <span class="build-sub">Bau mit! Baujugendkreis {{ buildEvent.days.toLowerCase() }}, {{ buildEvent.time }}</span>
+                </span>
+                <i class="ph ph-arrow-right build-arrow" aria-hidden="true"></i>
+            </div>
+
             <div class="quotes hidden-el">
                 <p class="quotes-label">Das sagen Jugendliche</p>
                 <figure class="quote-card"><blockquote>„Ich hab zwar nichts mit dem Glaube zu tun, aber hier würde ich wieder in die Kirche gehen.“</blockquote></figure>
@@ -504,7 +517,7 @@
                 <img src="Assets/stefan-hoerz.webp" alt="Stefan Hörz, Jugendreferent und Ansprechpartner der MiKi" width="480" height="480" loading="lazy" decoding="async">
                 <div class="contact-text">
                     <h3>Hi, ich bin Stefan!</h3>
-                    <p>Ich bin Jugendreferent beim Evangelischen Jugendwerk Heidenheim und dein Ansprechpartner für die MiKi. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
+                    <p>Ich bin bei der MiKi für dich da. Du hast noch eine Frage oder willst einfach mal vorbeischauen? Schreib mir!</p>
                     <div class="contact-actions">
                         <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener" class="btn btn-glow">
                             <i class="ph ph-whatsapp-logo"></i> Schreib Stefan
@@ -732,6 +745,9 @@
                         startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : ''
                     });
                 }));
+
+            // Fuer den Streifen "In Planung": die Termin-Daten des Baujugendkreises
+            const buildEvent = computed(() => regularEvents.value.find(e => e.title === 'Baujugendkreis'));
 
             const upcomingEvents = computed(() => events.value
                 .filter(e => e.type === 'once')
@@ -1048,7 +1064,7 @@
             });
 
             return {
-                tickerWords, regularEvents, upcomingEvents, mapsUrl,
+                tickerWords, regularEvents, upcomingEvents, mapsUrl, buildEvent,
                 selectedEvent, openEventModal, closeEventModal, closeWithConfetti, saveToCalendar, googleCalUrl,
                 showDinoGame, startDinoGame, // EASTEREGG
                 selectedTile, openTile, goToFromTile
