@@ -11,7 +11,7 @@
         })();
     </script>
     <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="Jugendkirche in der Michaelskirche Heidenheim: Trampolin, Zocken, Chillen, Bar &amp; Events – von Jugendlichen für Jugendliche. Egal ob gläubig oder nicht, komm vorbei!">
+    <meta name="description" content="Jugendtreff &amp; Jugendkirche in der Michaelskirche Heidenheim: kostenlos Trampolin springen, zocken, chillen. Open Church freitags 12–16:30 Uhr.">
     <meta name="author" content="Evangelisches Jugendwerk Heidenheim">
     <meta name="theme-color" content="#10BB82">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -223,7 +223,7 @@
                 <span class="sr-only">Deine Kirche zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
                 <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
-            <p class="hero-facts"><span>Jugendkirche in Heidenheim</span><span class="hero-facts-sep" aria-hidden="true"> · </span><span>ab der 5. Klasse · kostenlos</span></p>
+            <p class="hero-facts"><span>Jugendtreff &amp; Jugendkirche in Heidenheim</span><span class="hero-facts-sep" aria-hidden="true"> · </span><span>ab der 5. Klasse · kostenlos</span></p>
             <a href="#events" class="btn btn-glow hero-cta"><i class="ph ph-calendar-blank" aria-hidden="true"></i> Open Church: freitags 12–16:30 Uhr</a>
         </div>
     </header>
@@ -303,7 +303,7 @@
             <div class="section-head hidden-el">
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
-                <p>In der MiKi kannst du Trampolin springen, zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben kennenlernen.</p>
+                <p>In der MiKi, mitten in Heidenheim, kannst du kostenlos Trampolin springen und zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben kennenlernen.</p>
                 <p class="exp-hint"><i class="ph ph-hand-tap" aria-hidden="true"></i><span><span class="hint-touch">Tipp</span><span class="hint-mouse">Klick</span> auf ein Bild für mehr Infos</span></p>
             </div>
 
@@ -455,6 +455,10 @@
                 <details class="faq-item">
                     <summary>Was kostet das?</summary>
                     <p>Nichts. Der Eintritt ist frei.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Was kann ich in Heidenheim mit Freunden machen, ohne Geld auszugeben?</summary>
+                    <p>Komm in die MiKi! Trampolin springen, kickern, zocken oder auf der Couch chillen kostet hier nichts. Freitags von 12 bis 16:30 Uhr ist Open Church, da kannst du einfach vorbeikommen.</p>
                 </details>
                 <details class="faq-item">
                     <summary>Ab welchem Alter kann ich kommen?</summary>
@@ -634,6 +638,8 @@
             //    das Datum ist durchgestrichen, der Text ersetzt die Beschreibung, Link/Kalender/Konfetti
             //    entfallen und Google bekommt das Event nicht mehr gemeldet. Neuer Termin: Datum aendern
             //    und die "postponed"-Zeile loeschen.
+            // Tipp fuer Google: Im Titel sagen, was es ist (z. B. "Orgelkonzert: ..."), und im Text
+            //    "in der Michaelskirche" erwaehnen - danach suchen Leute ("konzert michaelskirche heidenheim").
             // Reihenfolge der regelmaessigen Termine = Reihenfolge hier (niedrigste Hemmschwelle zuerst).
             const events = ref([
                 {
@@ -680,7 +686,7 @@
                     end: "2026-11-13T16:30:00+01:00",
                     timeLabel: "12:00–16:30 Uhr",
                     desc: "Ab dem 13.11. ist die MiKi jeden Freitag offen. Sei beim Start dabei!",
-                    detailedDesc: "Ab dem 13. November ist die MiKi jeden Freitag von 12 bis 16:30 Uhr für dich offen. Ob Kickern, Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen – sei beim Start dabei und bring deine Freunde mit!"
+                    detailedDesc: "Ab dem 13. November ist die MiKi in der Michaelskirche jeden Freitag von 12 bis 16:30 Uhr für dich offen. Ob Kickern, Trampolin springen, Hausis machen oder einfach nur mit Freunden chillen – sei beim Start dabei und bring deine Freunde mit!"
                 },
                 {
                     type: 'once',
@@ -691,7 +697,7 @@
                     start: "2026-12-23",
                     end: "2026-12-24T03:00:00+01:00",        // nach dem Reinfeiern ausblenden
                     desc: "Die MiKi hat offen – wir feiern zusammen in den Geburtstag von Jesus rein",
-                    detailedDesc: "Am 23. Dezember hat die MiKi für dich offen. Wir warten gemeinsam aufs Christkind und feiern zusammen in den Geburtstag von Jesus rein. Bring deine Freunde mit und komm vorbei!"
+                    detailedDesc: "Am 23. Dezember hat die MiKi in der Michaelskirche für dich offen. Wir warten gemeinsam aufs Christkind und feiern zusammen in den Geburtstag von Jesus rein. Bring deine Freunde mit und komm vorbei!"
                 }
             ]);
 
@@ -983,7 +989,7 @@
                         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
                         location: {
                             '@type': 'Place',
-                            name: 'MiKi (Michaelskirche)',
+                            name: 'MiKi in der Michaelskirche Heidenheim',
                             address: { '@type': 'PostalAddress', streetAddress: 'An der Stadtmauer 1', addressLocality: 'Heidenheim an der Brenz', postalCode: '89520', addressCountry: 'DE' }
                         },
                         organizer: { '@type': 'Organization', name: 'MiKi – Jugendkirche Heidenheim', url: 'https://www.miki-hdh.de/' },
