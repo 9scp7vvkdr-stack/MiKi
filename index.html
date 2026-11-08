@@ -192,13 +192,23 @@
 
 <div id="app">
 
-    <nav class="navbar">
+    <!-- Am Handy zeigt die Leiste oben nur Logo und "Über uns" (nav-compact); den Rest uebernimmt die Leiste unten -->
+    <nav class="navbar nav-compact">
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Termine</a>
         <a href="#erleben">Was geht</a>
         <a href="#fragen">FAQ</a>
         <a href="#kontakt">Kontakt</a>
         <a href="ueber-uns/" class="nav-about"><span class="nav-long">Über die MiKi</span><span class="nav-short">Über uns</span></a>
+    </nav>
+
+    <!-- Handy: Leiste unten mit den wichtigsten Wegen. Erscheint erst, wenn das Titelbild
+         weggescrollt ist (Skript "Leiste unten"). Am PC unsichtbar. -->
+    <nav class="bottom-bar" aria-label="Schnellzugriff">
+        <a href="#events"><i class="ph ph-calendar-blank" aria-hidden="true"></i>Termine</a>
+        <a href="#erleben"><i class="ph ph-sparkle" aria-hidden="true"></i>Was geht</a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener"><i class="ph ph-map-pin" aria-hidden="true"></i>Hinkommen</a>
+        <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i>Schreib uns</a>
     </nav>
 
     <header class="hero">
@@ -214,6 +224,9 @@
             <div class="hero-bg-image" data-bg="Assets/T11.webp"></div>
         </div>
         <div class="container hero-content">
+            <!-- Hinweis, solange ein woechentliches Angebot noch nicht gestartet ist (Feld "from" bei den Terminen).
+                 Verschwindet nach dem Starttag von selbst. -->
+            <a v-if="startPill" v-cloak href="#events" class="start-pill">{{ startPill }}</a>
             <h1>
                 <span class="text-gradient">MiKi</span>
                 <!-- unsichtbar, aber fuer Google und Screenreader Teil der Hauptueberschrift -->
@@ -223,7 +236,7 @@
                 <span class="sr-only">Deine Kirche zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
                 <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
-            <p class="hero-facts"><span>Jugendtreff &amp; Jugendkirche in Heidenheim</span><span class="hero-facts-sep" aria-hidden="true"> · </span><span>ab der 5. Klasse · kostenlos</span></p>
+            <p class="hero-facts"><span>Jugendtreff &amp; Jugendkirche in Heidenheim</span><span class="hero-facts-sep" aria-hidden="true"> · </span><span>kostenlos</span></p>
             <a href="#events" class="btn btn-glow hero-cta"><i class="ph ph-calendar-blank" aria-hidden="true"></i> <span>Open Church: <span class="nowrap">freitags 12–16:30 Uhr</span></span></a>
         </div>
     </header>
@@ -249,18 +262,14 @@
                     <h2 style="color:white;">Wann ist was los?</h2>
                     <p>Hier siehst du, wann die MiKi offen hat und was als Nächstes ansteht.</p>
                 </div>
-                <!-- Pfeile erscheinen nur, wenn mehr Termine da sind, als in eine Reihe passen -->
-                <div class="events-nav" aria-label="Termine blättern">
-                    <button type="button" class="events-arrow" data-dir="-1" aria-label="Vorherige Termine"><i class="ph ph-arrow-left"></i></button>
-                    <button type="button" class="events-arrow" data-dir="1" aria-label="Weitere Termine"><i class="ph ph-arrow-right"></i></button>
-                </div>
             </div>
 
             <!-- Einmalige Events: erscheinen oben und verschwinden nach dem Termin automatisch -->
             <template v-if="upcomingEvents.length">
                 <div class="events-sub">Highlights</div>
-                <div class="highlight-list">
-                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card hidden-el" :class="{ 'is-postponed': event.postponed }" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
+                <!-- Am Handy seitlich zum Wischen, am PC nebeneinander -->
+                <div class="highlight-list hidden-el">
+                    <div v-for="event in upcomingEvents" :key="event.title + event.start" class="highlight-card" :class="{ 'is-postponed': event.postponed }" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
                         <div class="hl-date" aria-hidden="true">
                             <span class="hl-day">{{ event.dayNum }}</span>
                             <span class="hl-month">{{ event.monthShort }}</span>
@@ -270,27 +279,29 @@
                             <h3>{{ event.title }}</h3>
                             <p>{{ event.postponed ? 'Leider verschoben – mehr dazu in den Details.' : event.desc }}</p>
                         </div>
-                        <span class="hl-cta">Details checken <i class="ph ph-arrow-right"></i></span>
+                        <span class="hl-cta" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
                     </div>
                 </div>
             </template>
 
-            <!-- Regelmaessige Angebote -->
+            <!-- Regelmaessige Angebote als Wochenplan: eine Zeile pro Angebot, antippen = Details -->
             <div class="events-sub">Jede Woche</div>
-            <div class="events-grid">
-                <div v-for="(event, index) in regularEvents" :key="event.title" v-cloak class="event-card hidden-el" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)" :style="`transition-delay: ${index * 100}ms`">
-                    <span class="event-date-badge">{{ event.badge }}</span>
-                    <span v-if="event.startNote" class="event-start">{{ event.startNote }}</span>
-                    <h3>{{ event.title }}</h3>
-                    <p style="color: rgba(255,255,255,0.7);">{{ event.desc }}</p>
-                    <div style="margin-top: 20px; display: flex; align-items: center; gap: 5px; color: var(--primary); font-weight: 600;">
-                        Details checken <i class="ph ph-arrow-right"></i>
-                    </div>
+            <div class="week-plan hidden-el">
+                <div v-for="event in regularEvents" :key="event.title" v-cloak class="week-row" role="button" tabindex="0" @click="openEventModal(event)" @keydown.enter="openEventModal(event)" @keydown.space.prevent="openEventModal(event)">
+                    <span class="week-day" aria-hidden="true">{{ event.dayShort }}</span>
+                    <span class="week-main">
+                        <strong>{{ event.title }}<span v-if="event.startNote" class="week-start">{{ event.startNote }}</span></strong>
+                        <span class="week-meta"><span class="sr-only">{{ event.days }}, </span>{{ event.time }}<template v-if="event.age"> · {{ event.age }}</template></span>
+                        <span class="week-desc">{{ event.desc }}</span>
+                    </span>
+                    <i class="ph ph-arrow-right week-arrow" aria-hidden="true"></i>
                 </div>
             </div>
 
-            <p class="events-note"><i class="ph ph-heart" aria-hidden="true"></i> Alle Angebote sind kostenlos. Komm einfach vorbei, allein oder mit Freunden!</p>
-            <p class="events-note"><i class="ph ph-calendar-blank" aria-hidden="true"></i> In den Schulferien machen die wöchentlichen Angebote Pause.</p>
+            <ul class="event-chips">
+                <li><i class="ph ph-heart" aria-hidden="true"></i> Alle Angebote kostenlos</li>
+                <li><i class="ph ph-calendar-blank" aria-hidden="true"></i> In den Schulferien Pause</li>
+            </ul>
         </div>
     </section>
 
@@ -454,14 +465,6 @@
                     <p>Nichts. Der Eintritt ist frei.</p>
                 </details>
                 <details class="faq-item">
-                    <summary>Was kann ich in Heidenheim mit Freunden machen, ohne Geld auszugeben?</summary>
-                    <p>Komm in die MiKi! Trampolin springen, kickern, zocken oder auf der Couch chillen kostet hier nichts. Freitags von 12 bis 16:30 Uhr ist Open Church, da kannst du einfach vorbeikommen.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Ab welchem Alter kann ich kommen?</summary>
-                    <p>Die MiKi ist für alle ab 12 Jahren. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
-                </details>
-                <details class="faq-item">
                     <summary>Muss ich mich anmelden?</summary>
                     <p>Zur Open Church kommst du einfach vorbei – allein oder mit deinen Freunden. Für den Jugendkreis (freitags, 19–21 Uhr) meldest du dich am besten kurz per <a href="https://wa.me/+491743086657?text=Hey%2C%20ich%20h%C3%A4tte%20Lust%20auf%20den%20Jugendkreis!" target="_blank" rel="noopener">WhatsApp</a> an, weil wir regelmäßig Ausflüge und Aktionen machen.</p>
                 </details>
@@ -469,17 +472,31 @@
                     <summary>Ich kenn da niemanden – ist das komisch?</summary>
                     <p>Gar nicht. Beim Kickern, Zocken oder auf dem Trampolin kommst du schnell mit anderen ins Gespräch. Außerdem ist immer jemand vom Team da, an den du dich wenden kannst. Und wenn du magst, bring einfach jemanden mit.</p>
                 </details>
-                <details class="faq-item">
-                    <summary>Was passiert, wenn ich das erste Mal komme?</summary>
-                    <p>Zur Open Church kommst du einfach rein, ohne Anmeldung. Jemand vom Team ist immer da und hilft dir gerne weiter. Schau dich in Ruhe um, hol dir was an der Bar oder probier gleich das Trampolin aus. Du bleibst, so lange du willst.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
-                    <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Wo genau ist die MiKi?</summary>
-                    <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                <!-- Weitere Fragen zum Aufklappen (Google liest sie trotzdem) -->
+                <details class="faq-more">
+                    <summary><span class="more">Mehr Fragen (5)</span><span class="less">Weniger Fragen</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+                    <div class="faq-more-list">
+                        <details class="faq-item">
+                            <summary>Was passiert, wenn ich das erste Mal komme?</summary>
+                            <p>Zur Open Church kommst du einfach rein, ohne Anmeldung. Jemand vom Team ist immer da und hilft dir gerne weiter. Schau dich in Ruhe um, hol dir was an der Bar oder probier gleich das Trampolin aus. Du bleibst, so lange du willst.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Was kann ich in Heidenheim mit Freunden machen, ohne Geld auszugeben?</summary>
+                            <p>Komm in die MiKi! Trampolin springen, kickern, zocken oder auf der Couch chillen kostet hier nichts. Freitags von 12 bis 16:30 Uhr ist Open Church, da kannst du einfach vorbeikommen.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Ab welchem Alter kann ich kommen?</summary>
+                            <p>Open Church, Jugendkreis und Baujugendkreis sind für alle ab 12 Jahren. Ab und zu gibt es auch Angebote für Jüngere – die findest du dann oben bei den Terminen.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
+                            <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Wo genau ist die MiKi?</summary>
+                            <p>In der Michaelskirche, An der Stadtmauer 1, 89520 Heidenheim. <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener">Route in Google Maps öffnen</a></p>
+                        </details>
+                    </div>
                 </details>
             </div>
 
@@ -601,7 +618,7 @@
                     </ul>
                 </div>
             </div>
-            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
+            <div class="footer-bottom" style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; opacity: 0.75;">
                 &copy; <span id="footer-year">2026</span> MiKi Jugendkirche
             </div>
         </div>
@@ -620,7 +637,9 @@
             // TERMINE
             // So traegst du Termine ein:
             //  - Regelmaessig: type 'regular', days (z. B. 'Freitags'), time. Optional "from" (Startdatum,
-            //    JJJJ-MM-TT) - der Hinweis "Start am ..." verschwindet nach dem Datum von selbst.
+            //    JJJJ-MM-TT) - der Hinweis "Start am ..." und der Hinweis im Titelbild ("Neu: ... ab ...")
+            //    verschwinden nach dem Datum von selbst. Optional "age" (z. B. "ab 12"): steht im Wochenplan
+            //    und im Pop-up.
             //  - Einmalig: type 'once', start im Format 'JJJJ-MM-TTTHH:MM:00+01:00' (Winterzeit +01:00,
             //    Sommerzeit +02:00). Das Event steht oben bei "Highlights" und verschwindet 4 Stunden
             //    nach Beginn automatisch - niemand muss es loeschen. Optional "end" fuer ein anderes Ende.
@@ -642,6 +661,7 @@
                 {
                     type: 'regular',
                     title: "Open Church",
+                    age: "ab 12",
                     days: "Freitags",
                     time: "12:00–16:30 Uhr",
                     from: "2026-11-13",
@@ -651,6 +671,7 @@
                 {
                     type: 'regular',
                     title: "Jugendkreis",
+                    age: "ab 12",
                     days: "Freitags",
                     time: "19:00–21:00 Uhr",
                     desc: "Glaube, Gemeinschaft & Ausflüge",
@@ -660,6 +681,7 @@
                 {
                     type: 'regular',
                     title: "Baujugendkreis",
+                    age: "ab 12",
                     days: "Dienstags",
                     time: "17:00–19:00 Uhr",
                     desc: "Bauen, chillen, Gemeinschaft",
@@ -709,11 +731,21 @@
                     const from = e.from ? new Date(e.from + 'T00:00:00+01:00') : null;
                     const startsLater = from && now < from;
                     return Object.assign({}, e, {
-                        badge: e.days + ' · ' + e.time,
+                        badge: e.days + ' · ' + e.time + (e.age ? ' · ' + e.age : ''),
+                        dayShort: e.days.slice(0, 2),   // "Freitags" -> "Fr"
                         when: e.days + ', ' + e.time + (startsLater ? ' (ab ' + fmt(from, { day: '2-digit', month: '2-digit', year: 'numeric' }) + ')' : ''),
                         startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : ''
                     });
                 }));
+
+            // Hinweis im Titelbild, solange ein woechentliches Angebot noch nicht gestartet ist,
+            // z. B. "Neu: Open Church ab Fr, 13.11." - verschwindet nach dem Starttag von selbst
+            const startPill = computed(() => {
+                const e = events.value.find(e => e.type === 'regular' && e.from && now < new Date(e.from + 'T23:59:59+01:00'));
+                if (!e) return '';
+                const d = new Date(e.from + 'T12:00:00+01:00');
+                return 'Neu: ' + e.title + ' ab ' + fmt(d, { weekday: 'short' }).replace('.', '') + ', ' + fmt(d, { day: '2-digit', month: '2-digit' });
+            });
 
             const upcomingEvents = computed(() => events.value
                 .filter(e => e.type === 'once')
@@ -1030,7 +1062,7 @@
             });
 
             return {
-                tickerWords, regularEvents, upcomingEvents, mapsUrl,
+                tickerWords, regularEvents, upcomingEvents, mapsUrl, startPill,
                 selectedEvent, openEventModal, closeEventModal, closeWithConfetti, saveToCalendar, googleCalUrl,
                 showDinoGame, startDinoGame, // EASTEREGG
                 selectedTile, openTile, goToFromTile
@@ -1092,28 +1124,14 @@
         }, 4500);
     })();
 
-    // Termine: Pfeile zum Blaettern, sobald nicht alle Termine in eine Reihe passen
+    // Leiste unten (nur Handy): erscheint, sobald vom Titelbild weniger als 40 % zu sehen sind
     (function() {
-        const grid = document.querySelector('.events-grid');
-        const nav = document.querySelector('.events-nav');
-        if (!grid || !nav) return;
-        const [prev, next] = nav.querySelectorAll('.events-arrow');
-        const update = () => {
-            const max = grid.scrollWidth - grid.clientWidth;
-            nav.classList.toggle('show', max > 4);
-            prev.disabled = grid.scrollLeft <= 4;
-            next.disabled = grid.scrollLeft >= max - 4;
-        };
-        nav.addEventListener('click', (e) => {
-            const btn = e.target.closest('.events-arrow');
-            if (!btn) return;
-            const card = grid.querySelector('.event-card');
-            const step = card ? card.offsetWidth + 20 : grid.clientWidth;
-            grid.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
-        });
-        grid.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-        update();
+        const bar = document.querySelector('.bottom-bar');
+        const hero = document.querySelector('.hero');
+        if (!bar || !hero || !('IntersectionObserver' in window)) return;
+        new IntersectionObserver((entries) => {
+            bar.classList.toggle('show', entries[0].intersectionRatio < 0.4);
+        }, { threshold: [0, 0.4] }).observe(hero);
     })();
 
     // Slider "Was dich erwartet": Pfeile, Wischen, Punkte und automatisches Weiterblaettern.

@@ -25,10 +25,10 @@
         els.forEach(function (el) { observer.observe(el); });
     }
 
-    // Navigation: markiert den Punkt, dessen Abschnitt gerade zu sehen ist.
+    // Navigation: markiert den Punkt, dessen Abschnitt gerade zu sehen ist (oben und in der Leiste unten).
     // Die Abschnitte ergeben sich automatisch aus den Links (href="#...").
     function navHighlight() {
-        var links = Array.prototype.slice.call(document.querySelectorAll('.navbar a[href^="#"]'))
+        var links = Array.prototype.slice.call(document.querySelectorAll('.navbar a[href^="#"], .bottom-bar a[href^="#"]'))
             .filter(function (a) { return a.getAttribute('href').length > 1; });
         var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
         if (!links.length) return;
@@ -36,13 +36,14 @@
         function update() {
             ticking = false;
             var pos = window.scrollY + 130;
-            var current = -1, bestTop = -Infinity;
-            targets.forEach(function (t, i) {
+            var current = null, bestTop = -Infinity;
+            targets.forEach(function (t) {
                 if (!t) return;
                 var top = t.getBoundingClientRect().top + window.scrollY;
-                if (top <= pos && top > bestTop) { bestTop = top; current = i; }
+                if (top <= pos && top > bestTop) { bestTop = top; current = t; }
             });
-            links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+            // mehrere Links koennen auf denselben Abschnitt zeigen (oben + unten): alle markieren
+            links.forEach(function (a, i) { a.classList.toggle('active', current !== null && targets[i] === current); });
         }
         window.addEventListener('scroll', function () {
             if (!ticking) { ticking = true; requestAnimationFrame(update); }
