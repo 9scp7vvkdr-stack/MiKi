@@ -18,7 +18,7 @@
     const CODE_LETTERS = 'ACDEFHJKMNPRTUVWXY';
 
     const CSS = `
-.dg { position: fixed; inset: 0; z-index: 1050; overflow: hidden; background: rgba(15, 23, 42, 0.9);
+.dg { position: fixed; inset: 0; z-index: 1050; overflow: hidden; background: rgba(26, 26, 26, 0.9);
       backdrop-filter: blur(4px); -webkit-user-select: none; user-select: none; touch-action: manipulation;
       animation: dgFade 0.25s ease; }
 .dg [hidden] { display: none !important; }
@@ -67,7 +67,7 @@
 .dg-v-code { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 10px; margin-top: 12px;
              padding: 8px 12px; border-radius: 12px; background: rgba(16, 187, 130, 0.12); font-size: 0.85rem; }
 .dg-v-code strong { font-size: 1.35rem; letter-spacing: 0.12em; }
-.dg-v-note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; color: var(--muted); font-size: 0.8rem; }
+.dg-v-note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.8rem; }
 .dg-outro { margin: 18px 0 16px; color: rgba(255, 255, 255, 0.92); line-height: 1.6; }
 .dg .btn { width: 100%; justify-content: center; }
 @keyframes dgFade { from { opacity: 0; } to { opacity: 1; } }

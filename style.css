@@ -5,13 +5,17 @@
     --primary: #10BB82;        /* Fresh Mint */
     --primary-dark: #059669;
     --primary-ink: #047857;    /* dunkleres Mint fuer kleine Schrift auf Hell (Kontrast) */
-    --accent: #6366f1;         /* Indigo/Purple für Kontrast */
-    --dark: #0f172a;           /* Deep Navy */
-    --darker: #020617;
-    --light: #f8fafc;
+    --accent: #059669;         /* frueher Lila; jetzt nur noch Gruentoene (Branding) */
+    --dark: #1A1A1A;           /* Fast-Schwarz (Branding) */
+    --darker: #111111;
+    --light: #FFFFF7;          /* Creme (Branding), Grundfarbe der hellen Abschnitte */
+    --cream-2: #F4F1E6;        /* etwas dunkleres Creme fuer abwechselnde Abschnitte und Infokaesten */
     --white: #ffffff;
-    --gray: #94a3b8;           /* nur auf dunklem Grund verwenden */
-    --muted: #64748b;          /* graue Schrift auf hellem Grund (gut lesbar) */
+    --gray: #a6a69e;           /* graue Schrift, nur auf dunklem Grund */
+    --muted: #67675f;          /* graue Schrift auf hellem Grund (Kontrast >= 5:1) */
+    --text: #3a3a35;           /* Fliesstext auf hellem Grund */
+    --text-soft: #4d4d47;      /* etwas hellerer Fliesstext */
+    --line: #e7e4d9;           /* Rahmen und Trennlinien */
 
     --glass: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(255, 255, 255, 0.5);
@@ -92,9 +96,8 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     border: none;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-family: var(--font-head);
+    letter-spacing: 0.01em;
+    font-family: var(--font-main);
 }
 
 .btn-primary {
@@ -129,22 +132,22 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(26, 26, 26, 0.92);
     backdrop-filter: blur(12px);
     padding: 12px 30px;
     border-radius: 100px;
     z-index: 100;
     display: flex;
     gap: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     width: max-content;
     max-width: 90%;
 }
 .navbar a {
     font-weight: 600;
     font-size: 0.9rem;
-    color: var(--dark);
+    color: var(--light);
     position: relative;
 }
 .navbar a:hover { color: var(--primary); }
@@ -199,23 +202,6 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 
 .hero-bg-image.active {
     opacity: 0.85;
-}
-
-/* Animated Gradient Blob */
-.hero::before {
-    content: '';
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-    opacity: 0.3;
-    z-index: 2;
-    animation: pulseBlob 10s infinite alternate;
-}
-
-@keyframes pulseBlob {
-    0% { transform: scale(1) translate(-20%, -20%); }
-    100% { transform: scale(1.2) translate(20%, 20%); }
 }
 
 .hero-content {
@@ -304,7 +290,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     gap: 26px;
     padding: 24px 28px;
     border-radius: var(--radius);
-    background: linear-gradient(135deg, rgba(16, 187, 130, 0.22) 0%, rgba(99, 102, 241, 0.22) 100%);
+    background: linear-gradient(135deg, rgba(16, 187, 130, 0.2) 0%, rgba(255, 255, 255, 0.03) 100%);
     border: 1px solid rgba(16, 187, 130, 0.5);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
@@ -457,7 +443,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 }
 .progress-bar-bg {
     height: 12px;
-    background: #e2e8f0;
+    background: var(--line);
     border-radius: 10px;
     width: 100%;
     margin-top: 10px;
@@ -465,7 +451,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 }
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary));
     border-radius: 10px;
     width: 0;
     transition: width 1.5s cubic-bezier(0.2, 1, 0.3, 1);
@@ -507,7 +493,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     color: var(--dark);
     border-radius: var(--radius);
     padding: 26px;
-    box-shadow: 0 24px 50px -24px rgba(2, 6, 23, 0.45);
+    box-shadow: 0 24px 50px -24px rgba(17, 17, 17, 0.45);
 }
 .donate-box .btn {
     width: 100%;
@@ -515,7 +501,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     background: var(--dark);
     color: #fff;
 }
-.donate-box .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(2, 6, 23, 0.5); }
+.donate-box .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(17, 17, 17, 0.5); }
 .donate-section .paypal-hint {
     display: flex;
     gap: 10px;
@@ -540,13 +526,13 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #64748b;
+    color: var(--muted);
 }
 .donate-divider::before,
-.donate-divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+.donate-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
 .bank-rows { display: grid; gap: 12px; }
 .bank-row { display: flex; flex-direction: column; gap: 2px; }
-.bank-label { font-size: 0.75rem; font-weight: 600; color: #64748b; }
+.bank-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); }
 .bank-value { font-size: 0.95rem; font-weight: 700; }
 .bank-iban { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
 .bank-iban .bank-value { letter-spacing: 0.03em; }
@@ -630,7 +616,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 /* --- FOOTER --- */
 footer {
     background: var(--darker);
-    color: #94a3b8;
+    color: var(--gray);
     padding: 80px 0 40px;
     font-size: 0.9rem;
 }
@@ -647,7 +633,7 @@ footer {
 /* --- MODAL --- */
 .modal-overlay {
     position: fixed; inset: 0;
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(26, 26, 26, 0.8);
     backdrop-filter: blur(5px);
     z-index: 1000;
     display: flex; justify-content: center; align-items: center;
@@ -661,10 +647,10 @@ footer {
     position: relative;
     animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.modal-header { margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; }
+.modal-header { margin-bottom: 20px; border-bottom: 2px solid var(--line); padding-bottom: 20px; }
 .modal-details-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-    background: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 20px;
+    background: var(--cream-2); padding: 20px; border-radius: 16px; margin-bottom: 20px;
 }
 
 /* Vue-Teile verstecken, bis Vue geladen ist (sonst blitzen bei langsamem Netz
@@ -696,7 +682,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     position: fixed;
     top: 0; left: 0; right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
+    background: var(--primary);
     transform-origin: 0 50%;
     transform: scaleX(0);
     z-index: 200;
@@ -722,7 +708,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     position: absolute;
     inset: 0;
     z-index: 2;
-    background: linear-gradient(180deg, rgba(2, 6, 23, 0.35) 0%, rgba(2, 6, 23, 0.1) 40%, rgba(2, 6, 23, 0.85) 100%);
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.35) 0%, rgba(17, 17, 17, 0.1) 40%, rgba(17, 17, 17, 0.85) 100%);
     pointer-events: none;
 }
 .hero h1 .text-gradient { text-shadow: 0 0 50px rgba(16, 187, 130, 0.45); }
@@ -745,7 +731,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .rot-word.rot-in { animation: rotIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 /* Titelbild: dezente Info-Zeile und Knopf zu den Terminen */
-.hero-rotator, .hero-facts { text-shadow: 0 2px 14px rgba(2, 6, 23, 0.7); }
+.hero-rotator, .hero-facts { text-shadow: 0 2px 14px rgba(17, 17, 17, 0.7); }
 .hero-facts {
     margin: -16px auto 28px;
     font-size: 0.95rem;
@@ -753,7 +739,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.85);
 }
-.hero-cta { box-shadow: 0 0 30px rgba(16, 187, 130, 0.45); }
+.hero-cta { box-shadow: 0 0 30px rgba(16, 187, 130, 0.45); line-height: 1.3; }
+.hero-cta .nowrap { white-space: nowrap; }  /* schmale Handys: Umbruch nur nach "Open Church:" */
 @keyframes rotIn {
     from { opacity: 0; transform: translateY(50%) rotate(-8deg); }
     to   { opacity: 1; transform: translateY(0) rotate(-2deg); }
@@ -778,7 +765,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     color: var(--dark);
     padding: 12px 0;
     transform: rotate(-1.5deg);
-    box-shadow: 0 14px 30px -12px rgba(2, 6, 23, 0.45);
+    box-shadow: 0 14px 30px -12px rgba(17, 17, 17, 0.45);
 }
 .ticker-track {
     display: flex;
@@ -801,7 +788,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 
 /* --- ABSCHNITTS-KOEPFE --- */
 .section-head { max-width: 700px; margin-bottom: 48px; }
-.section-head p { font-size: 1.1rem; color: #475569; }
+.section-head p { font-size: 1.1rem; color: var(--text-soft); }
 .kicker {
     display: inline-flex;
     align-items: center;
@@ -811,16 +798,18 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--primary-ink);
-    background: rgba(16, 187, 130, 0.12);
+    color: var(--dark);
+    background: var(--primary);
     padding: 6px 14px;
-    border-radius: 100px;
+    border-radius: 8px;
     margin-bottom: 16px;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 var(--dark);
 }
-.kicker-dark { color: var(--primary); background: rgba(16, 187, 130, 0.15); }
+.kicker-dark { box-shadow: 3px 3px 0 var(--light); }
 
 /* --- WAS DICH ERWARTET: Foto-Kacheln mit Parallax im Bild --- */
-#erleben { background: #ffffff; }
+#erleben { background: var(--light); }
 #events { padding-top: 140px; }
 /* Hinweis: Bilder sind anklickbar ("Tipp" am Handy, "Klick" mit Maus) */
 .section-head p.exp-hint {
@@ -857,7 +846,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     scroll-padding-inline: 8px;
 }
 .exp-track::-webkit-scrollbar { display: none; }
-.exp-track .exp-card { aspect-ratio: 4 / 5; scroll-snap-align: start; box-shadow: 0 14px 24px -16px rgba(2, 6, 23, 0.5); }
+.exp-track .exp-card { aspect-ratio: 4 / 5; scroll-snap-align: start; box-shadow: 0 14px 24px -16px rgba(17, 17, 17, 0.5); }
 @media (max-width: 1024px) {
     .exp-track { grid-auto-columns: calc((100% - 20px) / 2); }
 }
@@ -889,16 +878,21 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .quote-card {
     margin: 0;
-    padding: 26px 28px;
-    border-radius: var(--radius);
-    background: rgba(16, 187, 130, 0.08);
-    border: 1px solid rgba(16, 187, 130, 0.3);
+    align-self: start;
+    max-width: 92%;
+    padding: 16px 20px;
+    border-radius: 22px 22px 22px 6px;
+    background: #fff;
+    box-shadow: 0 10px 26px -16px rgba(17, 17, 17, 0.45);
 }
+/* zweite Nachricht rechts und gruen, wie eine Antwort im Chat */
+.quote-card + .quote-card { justify-self: end; border-radius: 22px 22px 6px 22px; background: var(--primary); }
+@media (min-width: 769px) { .quote-card + .quote-card { margin-top: 48px; } }
 .quote-card blockquote { font-size: 1.15rem; font-weight: 600; line-height: 1.5; color: var(--dark); }
 .exp-arrow {
     width: 48px; height: 48px;
     border-radius: 50%;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--line);
     background: #fff;
     color: var(--dark);
     font-size: 1.2rem;
@@ -910,7 +904,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .exp-arrow:hover { border-color: var(--primary); color: var(--primary-ink); }
 .exp-arrow:active { transform: scale(0.94); }
 .exp-dots { display: flex; gap: 8px; }
-.exp-dots span { width: 8px; height: 8px; border-radius: 100px; background: #cbd5e1; transition: width 0.3s ease, background 0.3s ease; }
+.exp-dots span { width: 8px; height: 8px; border-radius: 100px; background: #d6d3c6; transition: width 0.3s ease, background 0.3s ease; }
 .exp-dots span.active { width: 24px; background: var(--primary); }
 .exp-dots span[hidden] { display: none; }
 .exp-card {
@@ -919,7 +913,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     border-radius: var(--radius);
     background: var(--dark);
     isolation: isolate;
-    box-shadow: 0 20px 40px -20px rgba(2, 6, 23, 0.45);
+    box-shadow: 0 20px 40px -20px rgba(17, 17, 17, 0.45);
 }
 /* Bild ist hoeher als die Kachel, damit es beim Scrollen gleiten kann */
 .exp-media {
@@ -940,7 +934,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     inset: 0;
     z-index: 1;
     /* nur unten abdunkeln - dort steht die Ueberschrift */
-    background: linear-gradient(180deg, rgba(2, 6, 23, 0) 50%, rgba(2, 6, 23, 0.7) 100%);
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0) 50%, rgba(17, 17, 17, 0.7) 100%);
 }
 .exp-card { cursor: pointer; }
 /* kleines "+" oben rechts: zeigt, dass man fuer mehr Infos tippen kann */
@@ -954,7 +948,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     background: rgba(255, 255, 255, 0.92);
     color: var(--dark);
     font-size: 1rem;
-    box-shadow: 0 6px 16px -6px rgba(2, 6, 23, 0.6);
+    box-shadow: 0 6px 16px -6px rgba(17, 17, 17, 0.6);
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
 }
 .exp-card:active { transform: scale(0.98); }
@@ -966,7 +960,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     margin-bottom: 20px;
 }
 .tile-modal h2 { font-size: 2.4rem; margin-bottom: 10px; }
-.tile-modal p { line-height: 1.75; color: #334155; }
+.tile-modal p { line-height: 1.75; color: var(--text); }
 .tile-close {
     position: absolute;
     right: 44px; top: 44px;
@@ -977,7 +971,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     background: rgba(255, 255, 255, 0.92);
     font-size: 1.1rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px -4px rgba(2, 6, 23, 0.4);
+    box-shadow: 0 4px 12px -4px rgba(17, 17, 17, 0.4);
 }
 .exp-icon {
     position: absolute;
@@ -998,7 +992,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     z-index: 2;
     padding: 22px 24px;
     color: #fff;
-    text-shadow: 0 1px 12px rgba(2, 6, 23, 0.6);
+    text-shadow: 0 1px 12px rgba(17, 17, 17, 0.6);
 }
 .exp-caption h3 { font-size: clamp(2rem, 3vw, 2.5rem); color: #fff; margin-bottom: 2px; }
 
@@ -1024,26 +1018,17 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     transform: translateY(-3px);
 }
 
-/* --- DOODLES: handgezeichnete Deko, die beim Scrollen mitschwebt --- */
+/* Abschnitte mit mitgleitenden Fotos: Inhalt bleibt darueber, nichts ragt seitlich heraus */
 .has-doodles { position: relative; overflow: hidden; }
 .has-doodles > .container { position: relative; z-index: 1; }
-.doodle {
-    position: absolute;
-    z-index: 0;
-    pointer-events: none;
-    color: var(--primary);
-    opacity: 0.55;
-    will-change: transform;
-}
-.doodle.indigo { color: var(--accent); opacity: 0.4; }
 
 /* --- HAEUFIGE FRAGEN (Aufklapp-Liste, ohne JavaScript) --- */
 .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
 .faq-item {
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 6px 20px -12px rgba(2, 6, 23, 0.25);
-    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 20px -12px rgba(17, 17, 17, 0.25);
+    border: 1px solid var(--line);
     transition: border-color 0.2s ease;
 }
 .faq-item[open] { border-color: rgba(16, 187, 130, 0.6); }
@@ -1072,7 +1057,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     transition: transform 0.25s ease;
 }
 .faq-item[open] summary::after { transform: rotate(45deg); }
-.faq-item p { padding: 0 22px 20px; color: #475569; }
+.faq-item p { padding: 0 22px 20px; color: var(--text-soft); }
 .faq-item a { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
 /* Zeitstrahl (Geschichte der Michaelskirche) */
 .timeline { list-style: none; margin: 4px 0 16px; border-left: 2px solid rgba(16, 187, 130, 0.35); }
@@ -1106,7 +1091,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     background: var(--dark);
     color: #fff;
     border-radius: var(--radius);
-    box-shadow: 0 24px 50px -24px rgba(2, 6, 23, 0.5);
+    box-shadow: 0 24px 50px -24px rgba(17, 17, 17, 0.5);
 }
 .contact-card img {
     flex-shrink: 0;
@@ -1146,7 +1131,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.9) 100%);
+    background: radial-gradient(ellipse at center, rgba(26, 26, 26, 0.72) 0%, rgba(26, 26, 26, 0.9) 100%);
 }
 .cta-final {
     background: var(--dark);
@@ -1288,7 +1273,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .exp-arrow[data-dir="-1"] { justify-self: end; }
     .exp-arrow[data-dir="1"] { justify-self: start; }
     .quotes { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
-    .quote-card { padding: 20px 22px; }
+    .quote-card { padding: 14px 18px; }
     .quote-card blockquote { font-size: 1.05rem; }
     .exp-card { border-radius: 18px; }
     .exp-icon { width: 38px; height: 38px; font-size: 1.2rem; top: 12px; left: 12px; border-radius: 11px; }
@@ -1300,13 +1285,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .exp-caption { padding: 14px 14px; }
     /* Schmale Kacheln: Text reicht hoeher ins Bild -> Abdunklung frueher starten */
     .exp-card::after {
-        background: linear-gradient(180deg, rgba(2, 6, 23, 0) 45%, rgba(2, 6, 23, 0.75) 100%);
+        background: linear-gradient(180deg, rgba(17, 17, 17, 0) 45%, rgba(17, 17, 17, 0.75) 100%);
     }
     .exp-caption h3 { font-size: 1.7rem; }
 
-
-    /* Deko auf dem Handy weglassen - Lesbarkeit geht vor */
-    .doodle { display: none; }
 
     /* Ansprechpartner-Karte: Foto oben, Text darunter */
     .contact-card { flex-direction: column; text-align: center; gap: 18px; padding: 26px 20px; }
@@ -1401,7 +1383,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 
 /* Navigation: Link zur Seite "Über die MiKi" leicht abgesetzt */
 .navbar a.nav-about {
-    color: var(--primary-ink);
+    color: var(--primary);
     font-weight: 700;
 }
 .nav-short { display: none; }
@@ -1412,15 +1394,15 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     gap: 4px;
     padding: 4px 12px;
     border-radius: 100px;
-    background: rgba(16, 187, 130, 0.14);
-    color: var(--primary-ink);
+    background: rgba(16, 187, 130, 0.18);
+    color: var(--primary);
     font-weight: 700;
     white-space: nowrap;
 }
 .navbar a.nav-home:hover { background: var(--primary); color: var(--dark); transform: none; }
 
 /* Startseite: Hinweis fuer Erwachsene ganz unten */
-.parents-teaser { background: #f8fafc; padding: 0 0 90px; }
+.parents-teaser { background: var(--cream-2); padding: 0 0 90px; }
 .teaser-card {
     display: flex;
     align-items: center;
@@ -1430,8 +1412,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     padding: 20px 24px;
     border-radius: var(--radius);
     background: #fff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.35);
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px -18px rgba(17, 17, 17, 0.35);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .teaser-card:hover { border-color: var(--primary); box-shadow: 0 16px 34px -18px rgba(16, 187, 130, 0.45); }
@@ -1446,7 +1428,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 }
 .teaser-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .teaser-text strong { color: var(--dark); font-size: 1.05rem; }
-.teaser-text span { color: #475569; font-size: 0.93rem; line-height: 1.5; }
+.teaser-text span { color: var(--text-soft); font-size: 0.93rem; line-height: 1.5; }
 .teaser-arrow { flex-shrink: 0; color: var(--primary-ink); font-size: 1.3rem; }
 .teaser-card + .teaser-card { margin-top: 14px; }
 /* Spenden-Karte leicht mint hervorgehoben, damit Unterstuetzer sie schnell finden */
@@ -1477,7 +1459,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(2, 6, 23, 0.45) 0%, rgba(2, 6, 23, 0.25) 40%, rgba(2, 6, 23, 0.9) 100%);
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.45) 0%, rgba(17, 17, 17, 0.25) 40%, rgba(17, 17, 17, 0.9) 100%);
 }
 .page-hero-content { position: relative; z-index: 2; }
 .page-hero h1 { font-size: clamp(3.2rem, 9vw, 6rem); color: #fff; margin: 6px 0 14px; }
@@ -1497,18 +1479,18 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 
 /* "Die Michaelskirche": eine Textspalte in Lesebreite + aufklappbare Geschichte */
 .mk-wrap { max-width: 760px; margin: 0 auto; }
-.mk-intro p { font-size: 1.08rem; line-height: 1.75; color: #334155; margin-top: 14px; }
+.mk-intro p { font-size: 1.08rem; line-height: 1.75; color: var(--text); margin-top: 14px; }
 .mk-intro h2 { margin-bottom: 4px; }
 .mk-link { color: var(--primary-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .mk-history { margin-top: 36px; }
 .mk-history summary { font-size: 1.1rem; }
-.mk-history summary small { display: block; margin-top: 2px; font-size: 0.85rem; font-weight: 500; color: #64748b; }
+.mk-history summary small { display: block; margin-top: 2px; font-size: 0.85rem; font-weight: 500; color: var(--muted); }
 .mk-history-body { padding: 6px 24px 26px; }
-.mk-history .timeline { margin: 0; color: #334155; line-height: 1.65; }
+.mk-history .timeline { margin: 0; color: var(--text); line-height: 1.65; }
 .mk-history .timeline li { padding-bottom: 18px; }
 
 /* Impressum / Datenschutz */
-.legal-page { background: #fff; padding: 130px 0 90px; }
+.legal-page { background: var(--light); padding: 130px 0 90px; }
 .legal-wrap { max-width: 800px; }
 .legal-back {
     display: inline-flex;
