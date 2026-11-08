@@ -112,19 +112,6 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     box-shadow: 0 0 30px rgba(16, 187, 130, 0.4);
 }
 
-/* Kleiner Outline-Button, z. B. fuer den Maps-Link im dunklen Footer */
-.btn-map {
-    padding: 11px 22px;
-    font-size: 0.85rem;
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-}
-.btn-map:hover {
-    background: var(--primary);
-    color: var(--darker);
-    transform: translateY(-3px);
-}
 
 /* --- NAVIGATION --- */
 .navbar {
@@ -699,27 +686,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     transform: rotate(-2deg);
 }
 .rot-word.rot-in { animation: rotIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-/* Titelbild: Hinweis auf ein neues Angebot (verschwindet nach dem Start von selbst) */
-.start-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 18px;
-    padding: 6px 14px;
-    border-radius: 100px;
-    background: rgba(17, 17, 17, 0.75);
-    border: 1px solid rgba(16, 187, 130, 0.6);
-    color: var(--light);
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-.start-pill::before {
-    content: '';
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--primary);
-    box-shadow: 0 0 0 4px rgba(16, 187, 130, 0.25);
-}
 /* Titelbild: dezente Info-Zeile und Knopf zu den Terminen */
 .hero-rotator, .hero-facts { text-shadow: 0 2px 14px rgba(17, 17, 17, 0.7); }
 .hero-facts {
@@ -1255,28 +1221,38 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .ticker-track { animation: none !important; }
 }
 
-/* Leiste unten: nur auf der Startseite und nur am Handy (siehe MOBILE) */
-.bottom-bar { display: none; }
+/* Leiste unten und "Unterstützen" oben: nur auf der Startseite und nur am Handy (siehe MOBILE) */
+.bottom-bar, .nav-support { display: none; }
 
 /* --- MOBILE --- */
 @media(max-width: 768px) {
 
-    /* Startseite: oben nur Logo und "Über uns", so schmal wie der Inhalt */
-    .navbar.nav-compact { width: max-content; gap: 22px; padding: 4px 18px; justify-content: center; align-items: center; }
-    .navbar.nav-compact a:not(.nav-logo):not(.nav-about) { display: none; }
-    .navbar.nav-compact .nav-logo { font-size: 1.35rem; line-height: 1; padding: 10px 0; }
+    /* Startseite: oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg, belegt danach
+       keinen Platz). Das grosse Logo steht ohnehin im Titelbild. */
+    .navbar.nav-compact {
+        position: absolute;
+        width: max-content;
+        gap: 22px;
+        padding: 2px 18px;
+        justify-content: center;
+        align-items: center;
+        background: rgba(26, 26, 26, 0.7);
+    }
+    .navbar.nav-compact a:not(.nav-about):not(.nav-support) { display: none; }
     .navbar.nav-compact a.nav-about { font-size: 0.85rem; padding: 12px 0; }
+    .navbar.nav-compact a.nav-support { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; padding: 12px 0; color: var(--light); }
+    .navbar.nav-compact a.nav-support i { color: var(--primary); }
 
     /* Leiste unten: erscheint nach dem Titelbild (Skript "Leiste unten" in index.html) */
     .bottom-bar {
         display: flex;
         position: fixed;
-        left: 12px; right: 12px;
-        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        left: 10px; right: 10px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
         z-index: 150;
         justify-content: space-around;
-        padding: 4px;
-        border-radius: 20px;
+        padding: 2px;
+        border-radius: 18px;
         background: rgba(26, 26, 26, 0.95);
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1286,19 +1262,21 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
         transition: transform 0.3s ease, visibility 0s linear 0.3s;
     }
     .bottom-bar.show { transform: none; visibility: visible; transition: transform 0.3s ease; }
+    /* beim Runterscrollen weg, beim Hochscrollen wieder da (Skript "Leiste unten") */
+    .bottom-bar.show.tucked { transform: translateY(calc(100% + 30px)); visibility: hidden; transition: transform 0.3s ease, visibility 0s linear 0.3s; }
     .bottom-bar a {
         flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
-        padding: 7px 2px;
+        gap: 1px;
+        padding: 6px 2px 5px;
         color: var(--light);
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         font-weight: 600;
         -webkit-tap-highlight-color: transparent;
     }
-    .bottom-bar i { font-size: 1.4rem; color: var(--primary); }
+    .bottom-bar i { font-size: 1.25rem; color: var(--primary); }
     .bottom-bar a.active { color: var(--primary); }
     .bottom-bar ~ footer { padding-bottom: 110px; }
 
@@ -1314,9 +1292,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .hero h1 { font-size: 5rem; }
     .hero-rotator { margin-bottom: 26px; }
     .hero-facts { margin: -12px auto 22px; font-size: 0.88rem; }
-    /* Handy: zwei saubere Zeilen, kein Punkt am Zeilenende */
-    .hero-facts span { display: block; }
-    .hero-facts .hero-facts-sep { display: none; }
     .hero-cta { padding: 13px 20px; font-size: 0.95rem; }
     .cta-info { font-size: 0.95rem; }
 

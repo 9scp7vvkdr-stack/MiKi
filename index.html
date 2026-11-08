@@ -192,7 +192,8 @@
 
 <div id="app">
 
-    <!-- Am Handy zeigt die Leiste oben nur Logo und "Über uns" (nav-compact); den Rest uebernimmt die Leiste unten -->
+    <!-- Am Handy (nav-compact): oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg).
+         Danach uebernimmt die Leiste unten. "Unterstützen" ist nur am Handy sichtbar. -->
     <nav class="navbar nav-compact">
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Termine</a>
@@ -200,6 +201,7 @@
         <a href="#fragen">FAQ</a>
         <a href="#kontakt">Kontakt</a>
         <a href="ueber-uns/" class="nav-about"><span class="nav-long">Über die MiKi</span><span class="nav-short">Über uns</span></a>
+        <a href="ueber-uns/#spenden" class="nav-support"><i class="ph ph-heart" aria-hidden="true"></i> Unterstützen</a>
     </nav>
 
     <!-- Handy: Leiste unten mit den wichtigsten Wegen. Erscheint erst, wenn das Titelbild
@@ -224,9 +226,6 @@
             <div class="hero-bg-image" data-bg="Assets/T11.webp"></div>
         </div>
         <div class="container hero-content">
-            <!-- Hinweis, solange ein woechentliches Angebot noch nicht gestartet ist (Feld "from" bei den Terminen).
-                 Verschwindet nach dem Starttag von selbst. -->
-            <a v-if="startPill" v-cloak href="#events" class="start-pill">{{ startPill }}</a>
             <h1>
                 <span class="text-gradient">MiKi</span>
                 <!-- unsichtbar, aber fuer Google und Screenreader Teil der Hauptueberschrift -->
@@ -236,7 +235,7 @@
                 <span class="sr-only">Deine Kirche zum Chillen, Zocken, Springen, Mitbauen und Glauben.</span>
                 <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
-            <p class="hero-facts"><span>Jugendtreff &amp; Jugendkirche in Heidenheim</span><span class="hero-facts-sep" aria-hidden="true"> · </span><span>kostenlos</span></p>
+            <p class="hero-facts">Jugendtreff &amp; Jugendkirche in Heidenheim</p>
             <a href="#events" class="btn btn-glow hero-cta"><i class="ph ph-calendar-blank" aria-hidden="true"></i> <span>Open Church: <span class="nowrap">freitags 12–16:30 Uhr</span></span></a>
         </div>
     </header>
@@ -588,9 +587,6 @@
                         An der Stadtmauer 1<br>
                         89520 Heidenheim an der Brenz
                     </address>
-                    <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener" class="btn btn-map" style="margin-top: 16px;">
-                        <i class="ph ph-map-pin"></i> Route in Google Maps &ouml;ffnen
-                    </a>
                 </div>
                 <div class="footer-col">
                     <h3>Kontakt</h3>
@@ -637,8 +633,7 @@
             // TERMINE
             // So traegst du Termine ein:
             //  - Regelmaessig: type 'regular', days (z. B. 'Freitags'), time. Optional "from" (Startdatum,
-            //    JJJJ-MM-TT) - der Hinweis "Start am ..." und der Hinweis im Titelbild ("Neu: ... ab ...")
-            //    verschwinden nach dem Datum von selbst. Optional "age" (z. B. "ab 12"): steht im Wochenplan
+            //    JJJJ-MM-TT) - der Hinweis "Start am ..." verschwindet nach dem Datum von selbst. Optional "age" (z. B. "ab 12"): steht im Wochenplan
             //    und im Pop-up.
             //  - Einmalig: type 'once', start im Format 'JJJJ-MM-TTTHH:MM:00+01:00' (Winterzeit +01:00,
             //    Sommerzeit +02:00). Das Event steht oben bei "Highlights" und verschwindet 4 Stunden
@@ -737,15 +732,6 @@
                         startNote: startsLater ? 'Start am ' + fmt(from, { day: '2-digit', month: '2-digit' }) : ''
                     });
                 }));
-
-            // Hinweis im Titelbild, solange ein woechentliches Angebot noch nicht gestartet ist,
-            // z. B. "Neu: Open Church ab Fr, 13.11." - verschwindet nach dem Starttag von selbst
-            const startPill = computed(() => {
-                const e = events.value.find(e => e.type === 'regular' && e.from && now < new Date(e.from + 'T23:59:59+01:00'));
-                if (!e) return '';
-                const d = new Date(e.from + 'T12:00:00+01:00');
-                return 'Neu: ' + e.title + ' ab ' + fmt(d, { weekday: 'short' }).replace('.', '') + ', ' + fmt(d, { day: '2-digit', month: '2-digit' });
-            });
 
             const upcomingEvents = computed(() => events.value
                 .filter(e => e.type === 'once')
@@ -1062,7 +1048,7 @@
             });
 
             return {
-                tickerWords, regularEvents, upcomingEvents, mapsUrl, startPill,
+                tickerWords, regularEvents, upcomingEvents, mapsUrl,
                 selectedEvent, openEventModal, closeEventModal, closeWithConfetti, saveToCalendar, googleCalUrl,
                 showDinoGame, startDinoGame, // EASTEREGG
                 selectedTile, openTile, goToFromTile
@@ -1124,7 +1110,9 @@
         }, 4500);
     })();
 
-    // Leiste unten (nur Handy): erscheint, sobald vom Titelbild weniger als 40 % zu sehen sind
+    // Leiste unten (nur Handy): erscheint, sobald vom Titelbild weniger als 40 % zu sehen sind.
+    // Beim Runterscrollen rutscht sie weg (mehr Platz zum Lesen), beim Hochscrollen und ganz unten ist sie da.
+    // Ohne Wegrutschen: den Block "Wegrutschen" loeschen.
     (function() {
         const bar = document.querySelector('.bottom-bar');
         const hero = document.querySelector('.hero');
@@ -1132,6 +1120,15 @@
         new IntersectionObserver((entries) => {
             bar.classList.toggle('show', entries[0].intersectionRatio < 0.4);
         }, { threshold: [0, 0.4] }).observe(hero);
+        // Wegrutschen
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY, dy = y - lastY;
+            if (Math.abs(dy) < 10) return;   // kleine Wackler ignorieren
+            const atEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 60;
+            bar.classList.toggle('tucked', dy > 0 && !atEnd);
+            lastY = y;
+        }, { passive: true });
     })();
 
     // Slider "Was dich erwartet": Pfeile, Wischen, Punkte und automatisches Weiterblaettern.
