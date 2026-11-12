@@ -151,7 +151,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-end;     /* Text im unteren Teil: Gesichter auf den Fotos bleiben frei */
+    align-items: center;       /* Text in der Mitte des Titelbilds */
     justify-content: center;
     text-align: center;
     position: relative;
@@ -159,7 +159,6 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     overflow: hidden;
     color: white;
     padding-top: 80px; /* Space for Nav */
-    padding-bottom: 120px;     /* Platz fuer das Laufband */
 }
 
 /* Hero Background Image with Overlay */
@@ -1297,65 +1296,8 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .ticker-track { animation: none !important; }
 }
 
-/* Leiste unten und "Unterstützen" oben: nur auf der Startseite und nur am Handy (siehe MOBILE) */
-.bottom-bar, .nav-support { display: none; }
-
 /* --- MOBILE --- */
 @media(max-width: 768px) {
-
-    /* Startseite: oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg, belegt danach
-       keinen Platz). Das grosse Logo steht ohnehin im Titelbild. */
-    .navbar.nav-compact {
-        position: absolute;
-        width: max-content;
-        gap: 22px;
-        padding: 2px 18px;
-        justify-content: center;
-        align-items: center;
-        background: rgba(26, 26, 26, 0.7);
-    }
-    .navbar.nav-compact a:not(.nav-about):not(.nav-support) { display: none; }
-    .navbar.nav-compact a.nav-about { font-size: 0.85rem; padding: 12px 0; }
-    .navbar.nav-compact a.nav-support { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; padding: 12px 0; color: var(--light); }
-    .navbar.nav-compact a.nav-support i { color: var(--primary); }
-
-    /* Leiste unten: erscheint nach dem Titelbild (Skript "Leiste unten" in index.html) */
-    .bottom-bar {
-        display: flex;
-        position: fixed;
-        left: 10px; right: 10px;
-        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-        z-index: 150;
-        justify-content: space-around;
-        padding: 2px;
-        border-radius: 18px;
-        background: rgba(26, 26, 26, 0.95);
-        -webkit-backdrop-filter: blur(12px);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-        transform: translateY(calc(100% + 30px));
-        visibility: hidden;
-        transition: transform 0.3s ease, visibility 0s linear 0.3s;
-    }
-    .bottom-bar.show { transform: none; visibility: visible; transition: transform 0.3s ease; }
-    /* beim Runterscrollen weg, beim Hochscrollen wieder da (Skript "Leiste unten") */
-    .bottom-bar.show.tucked { transform: translateY(calc(100% + 30px)); visibility: hidden; transition: transform 0.3s ease, visibility 0s linear 0.3s; }
-    .bottom-bar a {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1px;
-        padding: 6px 2px 5px;
-        color: var(--light);
-        font-size: 0.68rem;
-        font-weight: 600;
-        -webkit-tap-highlight-color: transparent;
-    }
-    .bottom-bar i { font-size: 1.25rem; color: var(--primary); }
-    .bottom-bar a.active { color: var(--primary); }
-    .bottom-bar ~ footer { padding-bottom: 110px; }
 
     /* Footer kompakter: Kontakt volle Breite, Social und "Mehr" nebeneinander */
     footer { padding-top: 52px; padding-bottom: 28px; }
@@ -1365,7 +1307,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .footer-bottom { margin-top: 32px !important; }
 
     /* Hero */
-    .hero { padding-top: 100px; padding-bottom: 90px; min-height: 100svh; }
+    .hero { padding-top: 100px; padding-bottom: 50px; min-height: 100svh; }
     .hero h1 { font-size: 5rem; }
     .hero-rotator { margin-bottom: 26px; }
     .hero-facts { margin: -12px auto 22px; font-size: 0.88rem; }

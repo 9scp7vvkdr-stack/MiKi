@@ -206,25 +206,15 @@
 
 <div id="app">
 
-    <!-- Am Handy (nav-compact): oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg).
-         Danach uebernimmt die Leiste unten. "Unterstützen" ist nur am Handy sichtbar. -->
-    <nav class="navbar nav-compact" aria-label="Hauptnavigation">
+    <!-- Navigation oben: auf allen Geraeten dieselbe Leiste, bleibt beim Scrollen stehen
+         (am Handy steht "Über uns" statt "Über die MiKi") -->
+    <nav class="navbar" aria-label="Hauptnavigation">
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Termine</a>
         <a href="#erleben">Was geht</a>
         <a href="#fragen">FAQ</a>
         <a href="#kontakt">Kontakt</a>
         <a href="ueber-uns/" class="nav-about"><span class="nav-long">Über die MiKi</span><span class="nav-short">Über uns</span></a>
-        <a href="ueber-uns/#spenden" class="nav-support"><i class="ph ph-heart" aria-hidden="true"></i> Unterstützen</a>
-    </nav>
-
-    <!-- Handy: Leiste unten mit den wichtigsten Wegen. Erscheint erst, wenn das Titelbild
-         weggescrollt ist (Skript "Leiste unten"). Am PC unsichtbar. -->
-    <nav class="bottom-bar" aria-label="Schnellzugriff">
-        <a href="#events"><i class="ph ph-calendar-blank" aria-hidden="true"></i>Termine</a>
-        <a href="#erleben"><i class="ph ph-sparkle" aria-hidden="true"></i>Was geht</a>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim" target="_blank" rel="noopener"><i class="ph ph-map-pin" aria-hidden="true"></i>Hinkommen</a>
-        <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i>Schreib uns</a>
     </nav>
 
     <!-- Hauptbereich der Seite (Ziel von "Zum Inhalt springen"); endet vor dem Footer -->
@@ -1154,27 +1144,6 @@
             currentIndex = nextIndex;
             preloadNext();
         }, 4500);
-    })();
-
-    // Leiste unten (nur Handy): erscheint, sobald vom Titelbild weniger als 40 % zu sehen sind.
-    // Beim Runterscrollen rutscht sie weg (mehr Platz zum Lesen), beim Hochscrollen und ganz unten ist sie da.
-    // Ohne Wegrutschen: den Block "Wegrutschen" loeschen.
-    (function() {
-        const bar = document.querySelector('.bottom-bar');
-        const hero = document.querySelector('.hero');
-        if (!bar || !hero || !('IntersectionObserver' in window)) return;
-        new IntersectionObserver((entries) => {
-            bar.classList.toggle('show', entries[0].intersectionRatio < 0.4);
-        }, { threshold: [0, 0.4] }).observe(hero);
-        // Wegrutschen
-        let lastY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const y = window.scrollY, dy = y - lastY;
-            if (Math.abs(dy) < 10) return;   // kleine Wackler ignorieren
-            const atEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 60;
-            bar.classList.toggle('tucked', dy > 0 && !atEnd);
-            lastY = y;
-        }, { passive: true });
     })();
 
     // Slider "Was dich erwartet": Pfeile, Wischen, Punkte und automatisches Weiterblaettern.
