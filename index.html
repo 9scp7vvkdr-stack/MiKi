@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
+        // Inhalte werden nur versteckt und beim Scrollen eingeblendet, wenn JavaScript laeuft
+        // (Klasse "js", siehe ".hidden-el" in style.css). Sicherheitsnetz: Startet das Einblenden nicht
+        // innerhalb von 4 Sekunden (z. B. weil im Funkloch eine Datei nicht geladen hat), wird alles
+        // sofort sichtbar. site.js schaltet das Sicherheitsnetz beim Start ab.
+        document.documentElement.classList.add('js');
+        window.__mikiRevealFallback = setTimeout(function () { document.documentElement.classList.remove('js'); }, 4000);
+    </script>
+    <script>
         // Alte Links (z. B. miki-hdh.de/#spenden) fuehren jetzt auf die Seite "Über die MiKi"
         (function () {
             var h = location.hash;
@@ -44,9 +52,6 @@
     <link rel="icon" type="image/png" sizes="192x192" href="Assets/favicon-192.png?v=2">
     <link rel="icon" type="image/png" sizes="512x512" href="Assets/favicon-512.png?v=2">
     <link rel="apple-touch-icon" sizes="180x180" href="Assets/apple-touch-icon.png?v=2">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- JSON-LD Structured Data für Google Rich Results -->
     <script type="application/ld+json">
@@ -95,6 +100,7 @@
             "postalCode": "89520",
             "addressCountry": "DE"
         },
+        "geo": { "@type": "GeoCoordinates", "latitude": 48.677673, "longitude": 10.151309 },
         "hasMap": "https://www.google.com/maps/search/?api=1&query=Michaelskirche%2C+An+der+Stadtmauer+1%2C+89520+Heidenheim",
         "containedInPlace": {
             "@type": "PlaceOfWorship",
@@ -178,7 +184,14 @@
     <script defer src="site.js"></script>
 
     <link rel="preload" href="extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="Assets/T6.webp" as="image" fetchpriority="high">
+    <!-- Textschrift frueh laden, damit der Text nicht erst in einer Ersatzschrift erscheint -->
+    <link rel="preload" href="extern/fonts/poppins/poppins-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="extern/fonts/poppins/poppins-v24-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="extern/fonts/poppins/poppins-v24-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Erstes Titelfoto: Handy hochkant laedt den Hochkant-Zuschnitt, alle anderen das breite Foto
+         (gleiche Bedingung wie ".hero-bg-first" in style.css) -->
+    <link rel="preload" href="Assets/T6-handy.webp" as="image" fetchpriority="high" media="(max-width: 600px) and (orientation: portrait)">
+    <link rel="preload" href="Assets/T6.webp" as="image" fetchpriority="high" media="(min-width: 601px), (orientation: landscape)">
     <link rel="stylesheet" href="extern/fonts/fonts.css">
 
     <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
@@ -188,13 +201,14 @@
 </head>
 <body>
 
+<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
 <div id="app">
 
     <!-- Am Handy (nav-compact): oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg).
          Danach uebernimmt die Leiste unten. "Unterstützen" ist nur am Handy sichtbar. -->
-    <nav class="navbar nav-compact">
+    <nav class="navbar nav-compact" aria-label="Hauptnavigation">
         <a href="#" class="nav-logo">MiKi</a>
         <a href="#events">Termine</a>
         <a href="#erleben">Was geht</a>
@@ -213,18 +227,23 @@
         <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20hab%20eine%20Frage%20zur%20MiKi" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i>Schreib uns</a>
     </nav>
 
+    <!-- Hauptbereich der Seite (Ziel von "Zum Inhalt springen"); endet vor dem Footer -->
+    <main id="inhalt" tabindex="-1">
     <header class="hero">
         <div class="hero-bg">
-            <!-- Erstes Bild (sofort geladen): hell, mit Gesichtern - wirkt einladender als ein dunkles Raumfoto -->
-            <div class="hero-bg-image active" style="background-image: url('Assets/T6.webp');"></div>
-            <div class="hero-bg-image" data-bg="Assets/T1.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T2.jpg"></div>
-            <div class="hero-bg-image" data-bg="Assets/T3.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T5.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T7.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T8.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T10.webp"></div>
-            <div class="hero-bg-image" data-bg="Assets/T11.webp"></div>
+            <!-- Erstes Bild (sofort geladen): hell, mit Gesichtern - wirkt einladender als ein dunkles Raumfoto.
+                 Die Datei steht in style.css (".hero-bg-first"): breit fuer PC/Tablet, "-handy" fuer Handy hochkant. -->
+            <div class="hero-bg-image hero-bg-first active"></div>
+            <!-- Weitere Fotos: data-bg = breites Foto, data-bg-handy = Hochkant-Zuschnitt fuers Handy
+                 (fehlt data-bg-handy, nimmt auch das Handy das breite Foto) -->
+            <div class="hero-bg-image" data-bg="Assets/T1.webp" data-bg-handy="Assets/T1-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T2.webp" data-bg-handy="Assets/T2-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T3.webp" data-bg-handy="Assets/T3-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T5.webp" data-bg-handy="Assets/T5-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T7.webp" data-bg-handy="Assets/T7-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T8.webp" data-bg-handy="Assets/T8-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T10.webp" data-bg-handy="Assets/T10-handy.webp"></div>
+            <div class="hero-bg-image" data-bg="Assets/T11.webp" data-bg-handy="Assets/T11-handy.webp"></div>
         </div>
         <div class="container hero-content">
             <h1>
@@ -398,12 +417,12 @@
     <!-- transition: Fenster blendet beim Schliessen weich aus (.modal-fade in style.css) -->
     <transition name="modal-fade">
     <div v-if="selectedEvent" v-cloak class="modal-overlay" @click="closeEventModal">
-        <div class="modal-content" role="dialog" aria-modal="true" @click.stop>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="event-modal-title" @click.stop>
             <button type="button" aria-label="Schließen" @click="closeEventModal" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
             
             <div class="modal-header">
                 <span style="color: var(--primary-ink); font-weight: 700; text-transform: uppercase;"><template v-if="selectedEvent.postponed"><span class="tag-postponed">Verschoben</span> <s>{{ selectedEvent.badge }}</s></template><template v-else>{{ selectedEvent.badge }}</template></span>
-                <h2 style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
+                <h2 id="event-modal-title" style="margin-top: 5px; font-size: 1.8rem;">{{ selectedEvent.title }}</h2>
             </div>
             
             <div class="modal-details-grid">
@@ -443,10 +462,10 @@
     <!-- "Kirche? Anders als du denkst": Infos zur angeklickten Kachel (blendet weich aus wie das Termin-Fenster) -->
     <transition name="modal-fade">
     <div v-if="selectedTile" v-cloak class="modal-overlay" @click="selectedTile = null">
-        <div class="modal-content tile-modal" role="dialog" aria-modal="true" @click.stop style="max-width: 640px; padding: 32px;">
+        <div class="modal-content tile-modal" role="dialog" aria-modal="true" aria-labelledby="tile-modal-title" @click.stop style="max-width: 640px; padding: 32px;">
             <button type="button" aria-label="Schließen" @click="selectedTile = null" class="tile-close">✕</button>
             <img :src="selectedTile.img" :alt="selectedTile.alt" :style="{ objectPosition: selectedTile.pos || 'center' }">
-            <h2>{{ selectedTile.title }}</h2>
+            <h2 id="tile-modal-title">{{ selectedTile.title }}</h2>
             <p>{{ selectedTile.text }}</p>
             <a v-if="selectedTile.link" :href="selectedTile.link.href" class="btn btn-glow" style="width: 100%; margin-top: 24px; justify-content: center;" @click.prevent="goToFromTile(selectedTile.link.href)">
                 {{ selectedTile.link.label }} <i class="ph ph-arrow-right"></i>
@@ -590,6 +609,8 @@
         </div>
     </section>
 
+    </main>
+
     <footer>
         <div class="container">
             <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
@@ -637,9 +658,12 @@
 <script>
     // defer + DOMContentLoaded: laeuft erst, nachdem Vue und site.js geladen sind
     document.addEventListener('DOMContentLoaded', function () {
-    const { createApp, ref, onMounted, watch, nextTick, computed } = Vue;
+    // Sicherheitsnetz: Hat Vue oder site.js nicht geladen (z. B. Funkloch), laeuft der Rest trotzdem weiter
+    // und die Seite bleibt lesbar. Nur Termine und Pop-ups fehlen dann.
+    const MiKiSite = window.MiKiSite || { reduceMotion: false, init() {}, dialog() {} };
+    const { createApp, ref, onMounted, watch, nextTick, computed } = window.Vue || {};
 
-    createApp({
+    try { if (createApp) createApp({
         setup() {
             const tickerWords = ['Chillen', 'Zocken', 'Trampolin', 'Musik', 'Bar', 'Mitbauen', 'Freunde', 'Glaube'];
 
@@ -1000,10 +1024,11 @@
                 });
             };
 
-            // Solange ein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy)
+            // Solange ein Fenster offen ist, scrollt die Seite dahinter nicht mit (wichtig am Handy).
+            // MiKiSite.dialog: Fokus ins Fenster setzen und beim Schliessen zurueckgeben (site.js)
             watch(
                 () => !!(selectedEvent.value || selectedTile.value),
-                (open) => { document.body.style.overflow = open ? 'hidden' : ''; }
+                (open) => { document.body.style.overflow = open ? 'hidden' : ''; nextTick(() => MiKiSite.dialog(open)); }
             );
 
             onMounted(() => {
@@ -1070,7 +1095,7 @@
                 selectedTile, openTile, goToFromTile
             };
         }
-    }).mount('#app');
+    }).mount('#app'); } catch (e) { console.error(e); }
 
     // Gemeinsame Funktionen (Einblenden, Navigation, Parallax, Jahr im Footer) - siehe site.js
     MiKiSite.init();
@@ -1083,10 +1108,12 @@
         const images = Array.from(document.querySelectorAll('.hero-bg-image'));
         if (!images.length) return;
 
-        // Foto laden (nur einmal): setzt das Hintergrundbild aus data-bg
+        // Foto laden (nur einmal): setzt das Hintergrundbild aus data-bg.
+        // Handy hochkant nimmt den Hochkant-Zuschnitt aus data-bg-handy (halbe Dateigroesse, gleiche Schaerfe).
+        const handy = window.matchMedia('(max-width: 600px) and (orientation: portrait)').matches;
         const load = (img) => {
             if (img && img.dataset.bg) {
-                img.style.backgroundImage = "url('" + img.dataset.bg + "')";
+                img.style.backgroundImage = "url('" + ((handy && img.dataset.bgHandy) || img.dataset.bg) + "')";
                 delete img.dataset.bg;
             }
         };
@@ -1107,6 +1134,9 @@
 
         let currentIndex = 0;
         order.forEach((img, i) => img.classList.toggle('active', i === 0));
+
+        // "Bewegung reduzieren" am Geraet eingestellt: beim ersten Foto bleiben
+        if (MiKiSite.reduceMotion) return;
 
         // Spart mobiles Datenvolumen: Es wird immer nur das NAECHSTE Foto vorgeladen,
         // nicht alle auf einmal - und zwar erst, wenn die Seite fertig geladen ist.

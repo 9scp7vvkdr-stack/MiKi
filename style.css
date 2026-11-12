@@ -5,7 +5,6 @@
     --primary: #10BB82;        /* Fresh Mint */
     --primary-dark: #059669;
     --primary-ink: #047857;    /* dunkleres Mint fuer kleine Schrift auf Hell (Kontrast) */
-    --accent: #059669;         /* frueher Lila; jetzt nur noch Gruentoene (Branding) */
     --dark: #1A1A1A;           /* Fast-Schwarz (Branding) */
     --darker: #111111;
     --light: #FFFFF7;          /* Creme (Branding), Grundfarbe der hellen Abschnitte */
@@ -16,11 +15,6 @@
     --text: #3a3a35;           /* Fliesstext auf hellem Grund */
     --text-soft: #4d4d47;      /* etwas hellerer Fliesstext */
     --line: #e7e4d9;           /* Rahmen und Trennlinien */
-
-    --glass: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
-    --shadow-hover: 0 20px 50px -10px rgba(16, 187, 130, 0.3);
 
     --radius: 24px;
     --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -120,6 +114,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     left: 50%;
     transform: translateX(-50%);
     background: rgba(26, 26, 26, 0.92);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     padding: 12px 30px;
     border-radius: 100px;
@@ -182,6 +177,14 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     opacity: 0.85;
     filter: grayscale(10%);
     transition: opacity 1s ease-in-out;
+}
+
+/* Erstes Titelfoto (sofort sichtbar). Handy hochkant bekommt den Hochkant-Zuschnitt "-handy":
+   gleicher Bildausschnitt und gleiche Schaerfe, etwa halbe Dateigroesse. Die Bedingung steht
+   genauso im Preload-Link (index.html) und im Skript "Hero Image Carousel". */
+.hero-bg-first { background-image: url('Assets/T6.webp'); }
+@media (max-width: 600px) and (orientation: portrait) {
+    .hero-bg-first { background-image: url('Assets/T6-handy.webp'); }
 }
 
 .hero-bg-image:not(.active) {
@@ -521,7 +524,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     padding: 8px 14px;
     border-radius: 100px;
     background: rgba(16, 187, 130, 0.14);
-    color: var(--primary-ink);
+    color: var(--dark);
     font-family: var(--font-main);
     font-size: 0.82rem;
     font-weight: 700;
@@ -529,6 +532,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     transition: background 0.2s ease;
     -webkit-tap-highlight-color: transparent;
 }
+.cal-btn i { color: var(--primary-ink); }
 .cal-btn:hover { background: rgba(16, 187, 130, 0.25); }
 .cal-btn:active { transform: scale(0.96); }
 
@@ -591,6 +595,7 @@ footer {
 .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(26, 26, 26, 0.8);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 1000;
     display: flex; justify-content: center; align-items: center;
@@ -615,7 +620,11 @@ footer {
 [v-cloak] { display: none !important; }
 
 /* --- ANIMATION CLASSES --- */
-.hidden-el { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+/* Inhalte blenden beim Scrollen ein (site.js setzt "show-el"). Versteckt wird nur, wenn JavaScript
+   wirklich laeuft: Die Klasse "js" setzt ein kleines Skript im Seitenkopf. Ohne JavaScript, oder wenn
+   das Einblenden nicht startet (Sicherheitsnetz im Seitenkopf), bleibt alles sichtbar. */
+.hidden-el { transition: all 0.8s ease-out; }
+.js .hidden-el:not(.show-el) { opacity: 0; transform: translateY(30px); }
 .show-el { opacity: 1; transform: translateY(0); }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -629,10 +638,23 @@ footer {
 .modal-fade-leave-to .modal-content { transform: scale(0.97); }
 
 /* --- TASTATUR-FOKUS: sichtbar, aber nur bei Tastaturbedienung --- */
+/* Zweifarbig (innen dunkel, aussen gruen): auf hellen und auf dunklen Flaechen gut zu erkennen */
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-visible {
     outline: 3px solid var(--primary);
     outline-offset: 3px;
+    box-shadow: 0 0 0 3px var(--dark);
 }
+/* Offenes Fenster: der Fokus liegt zuerst auf dem Fenster selbst (site.js), dafuer kein Rahmen */
+.modal-content:focus, .modal-content:focus-visible { outline: none; box-shadow: none; }
+/* "Zum Inhalt springen": erscheint nur beim Tabben mit der Tastatur */
+.skip-link {
+    position: absolute; left: 12px; top: -80px; z-index: 300;
+    padding: 12px 18px; border-radius: 12px;
+    background: var(--dark); color: var(--light); font-weight: 700;
+}
+.skip-link:focus { top: 12px; }
+/* Hauptbereich ist nur das Sprungziel, kein Rahmen */
+main:focus, main:focus-visible { outline: none; box-shadow: none; }
 
 /* --- SCROLL-FORTSCHRITT (duenner Balken ganz oben) --- */
 .scroll-progress {
@@ -668,7 +690,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     background: linear-gradient(180deg, rgba(17, 17, 17, 0.35) 0%, rgba(17, 17, 17, 0.1) 40%, rgba(17, 17, 17, 0.85) 100%);
     pointer-events: none;
 }
-.hero h1 .text-gradient { text-shadow: 0 0 50px rgba(16, 187, 130, 0.45); }
+/* dunkler Schatten: der gruene Schriftzug bleibt auch auf hellen Fotos lesbar */
+.hero h1 .text-gradient { text-shadow: 0 2px 4px rgba(17, 17, 17, 0.55), 0 4px 28px rgba(17, 17, 17, 0.75); }
 
 .hero-rotator {
     font-family: var(--font-main);
@@ -914,7 +937,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
 .exp-arrow:active { transform: scale(0.94); }
 .exp-dots { display: flex; gap: 8px; }
 .exp-dots span { width: 8px; height: 8px; border-radius: 100px; background: #d6d3c6; transition: width 0.3s ease, background 0.3s ease; }
-.exp-dots span.active { width: 24px; background: var(--primary); }
+.exp-dots span.active { width: 24px; background: var(--primary-dark); }
 .exp-dots span[hidden] { display: none; }
 .exp-card {
     position: relative;
@@ -1307,6 +1330,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
         padding: 2px;
         border-radius: 18px;
         background: rgba(26, 26, 26, 0.95);
+        -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -1395,7 +1419,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
         padding: 4px 6px; gap: 0;
     }
     .nav-logo { display: block; margin-right: 0; }
-    .navbar a { font-size: 0.72rem; padding: 12px 4px; white-space: nowrap; }
+    .navbar a { font-size: 0.72rem; padding: 14px 4px; white-space: nowrap; }
 
     /* Tap-Ziele >= 44px auf dem Handy */
     .social-links a {
@@ -1472,7 +1496,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     /* Spende/Gebet-Karten: mehr Platz fuer den Text */
     .prayer-card, .donation-card { padding: 24px 20px !important; }
     .prayer-card > p:last-of-type { padding: 14px !important; }
-    .copy-btn { min-height: 36px; padding: 8px 14px; }
+    .copy-btn { min-height: 44px; padding: 8px 14px; }
     [style*="grid-template-columns: repeat(auto-fit"] {
         grid-template-columns: 1fr !important;
     }
@@ -1500,7 +1524,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     padding: 4px 12px;
     border-radius: 100px;
     background: rgba(16, 187, 130, 0.18);
-    color: var(--primary);
+    color: var(--light);
     font-weight: 700;
     white-space: nowrap;
 }
@@ -1607,6 +1631,16 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     font-weight: 600;
 }
 .legal-page h1 { font-size: clamp(2.8rem, 7vw, 4.2rem); margin-bottom: 18px; }
+.legal-h {
+    margin: 20px 0 10px;
+    color: var(--dark);
+    font-family: var(--font-main);
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.8;
+    letter-spacing: normal;
+}
+.legal-h-sub { margin-top: 15px; font-size: 1.05rem; }
 .legal-page a { color: var(--primary-ink); text-decoration: underline; word-break: break-word; }
 .legal-page a.btn { text-decoration: none; }               /* Knoepfe (z. B. auf der Fehlerseite) */
 .legal-page a.btn-glow { color: var(--dark); }
@@ -1618,7 +1652,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, summary:focus-v
     .navbar a.nav-home { padding: 6px 9px; margin-right: 2px; }
     /* sehr schmale Handys: Navigation mit Zurueck-Button etwas kompakter */
     @media (max-width: 380px) {
-        .navbar a { font-size: 0.68rem; padding: 12px 3px; }
+        .navbar a { font-size: 0.68rem; padding: 14px 3px; }
         .navbar a.nav-home { padding: 6px 8px; }
     }
     .parents-teaser { padding-bottom: 64px; }

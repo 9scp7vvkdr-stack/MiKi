@@ -59,8 +59,6 @@
         var heroContent = document.querySelector('.hero-content');
         // data-parallax="10": Element gleitet innerhalb seines Rahmens um bis zu +/-10 % seiner Hoehe
         var media = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-        // data-parallax-px="-60": Deko schwebt um bis zu +/-60 px gegen die Scrollrichtung
-        var floaters = Array.prototype.slice.call(document.querySelectorAll('[data-parallax-px]'));
         var ticking = false;
 
         function progressOf(rect, vh) {
@@ -87,13 +85,6 @@
                 if (rect.bottom < 0 || rect.top > vh) return;
                 var p = Math.max(-1, Math.min(1, progressOf(rect, vh)));
                 el.style.transform = 'translate3d(0,' + (p * parseFloat(el.dataset.parallax)) + '%,0)';
-            });
-
-            floaters.forEach(function (el) {
-                var rect = el.parentElement.getBoundingClientRect();
-                if (rect.bottom < 0 || rect.top > vh) return;
-                var p = Math.max(-1, Math.min(1, progressOf(rect, vh)));
-                el.style.transform = 'translate3d(0,' + (p * parseFloat(el.dataset.parallaxPx)) + 'px,0)';
             });
         }
 
@@ -122,6 +113,39 @@
         els.forEach(function (el) { observer.observe(el); });
     }
 
+    // Fenster (Pop-ups): Die Seiten melden mit MiKiSite.dialog(true/false), dass ein Fenster auf- oder zugeht.
+    // Beim Oeffnen wandert der Fokus ins Fenster, die Tab-Taste bleibt darin, und beim Schliessen
+    // geht der Fokus dorthin zurueck, wo er vorher war (wichtig fuer Tastatur und Screenreader).
+    var dialogEl = null, dialogReturn = null;
+    function dialogFocusables() {
+        return Array.prototype.slice.call(dialogEl.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+            .filter(function (el) { return el.offsetParent !== null; });
+    }
+    function dialog(open) {
+        if (open) {
+            // das sichtbare Fenster (ein gerade ausblendendes zaehlt nicht)
+            var el = document.querySelector('.modal-overlay:not(.modal-fade-leave-active) [role="dialog"]');
+            if (!el) return;
+            if (!dialogEl) dialogReturn = document.activeElement;
+            dialogEl = el;
+            el.setAttribute('tabindex', '-1');
+            el.focus({ preventScroll: true });
+        } else {
+            dialogEl = null;
+            if (dialogReturn && document.contains(dialogReturn) && dialogReturn.focus) dialogReturn.focus({ preventScroll: true });
+            dialogReturn = null;
+        }
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab' || !dialogEl || !document.contains(dialogEl)) return;
+        var items = dialogFocusables();
+        if (!items.length) { e.preventDefault(); return; }
+        var first = items[0], last = items[items.length - 1], active = document.activeElement;
+        if (!dialogEl.contains(active) || active === dialogEl) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
+        else if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+    });
+
     function footerYear() {
         var el = document.getElementById('footer-year');
         if (el) el.textContent = new Date().getFullYear();
@@ -129,7 +153,10 @@
 
     window.MiKiSite = {
         reduceMotion: reduceMotion,
+        dialog: dialog,
         init: function () {
+            // Das Einblenden startet jetzt: Sicherheitsnetz aus dem Seitenkopf abschalten
+            clearTimeout(window.__mikiRevealFallback);
             reveal();
             navHighlight();
             parallax();

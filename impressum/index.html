@@ -14,6 +14,7 @@
     <meta property="og:image" content="https://www.miki-hdh.de/Assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Jugendliche chillen zusammen auf den Couches in der MiKi">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_DE">
     <meta property="og:url" content="https://www.miki-hdh.de/impressum/">
@@ -29,6 +30,8 @@
     <script defer src="../site.js"></script>
 
     <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../extern/fonts/poppins/poppins-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../extern/fonts/poppins/poppins-v24-latin-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../extern/fonts/fonts.css">
     <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
     <link rel="preload" href="../extern/phosphor/miki-icons.woff2?v=3" as="font" type="font/woff2" crossorigin>
@@ -36,19 +39,20 @@
 </head>
 <body>
 
+<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Hauptnavigation">
         <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left"></i> MiKi</a>
         <a href="../ueber-uns/">Über die MiKi</a>
     </nav>
 
-    <main class="legal-page">
+    <main class="legal-page" id="inhalt" tabindex="-1">
         <div class="container legal-wrap">
             <a href="../" class="legal-back"><i class="ph ph-arrow-left"></i> Zur Startseite</a>
             <h1>Impressum</h1>
         <div style="line-height: 1.8; color: var(--text); font-size: 0.95rem;">
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Kontakt</div>
+                <h2 class="legal-h">Kontakt</h2>
                 <p style="margin: 0;">
                     <strong>Evangelisches Jugendwerk Heidenheim</strong><br>
                     Bahnhofstr. 33<br>
@@ -58,46 +62,46 @@
                     E-Mail: bezirk@ejhdh.de
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Verantwortlicher Träger</div>
+                <h2 class="legal-h">Verantwortlicher Träger</h2>
                 <p style="margin: 0;">
                     Evangelisches Jugendwerk Heidenheim, vertreten durch:<br>
                     <strong>1. Vorsitzender Axel Kolb</strong>
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Träger</div>
+                <h2 class="legal-h">Träger</h2>
                 <p style="margin: 0;">
                     Evangelisches Jugendwerk Heidenheim gehört der Evangelischen Landeskirche in Württemberg an.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</div>
+                <h2 class="legal-h">Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</h2>
                 <p style="margin: 0;">
                     <strong>Stefan Hörz</strong>, Jugendreferent
                 </p>
 
 
-                <div style="color: var(--dark); margin-top: 30px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">Haftungsausschluss</div>
+                <h2 class="legal-h" style="margin-top: 30px;">Haftungsausschluss</h2>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">1. Inhalt des Onlineangebotes</div>
+                <h3 class="legal-h legal-h-sub">1. Inhalt des Onlineangebotes</h3>
                 <p style="margin: 0;">
                     Unsere Inhalte sind sorgfältig recherchiert und erstellt. Dennoch können wir keinerlei Gewähr für die Aktualität, Korrektheit oder Vollständigkeit der bereitgestellten Informationen übernehmen. Haftungsansprüche gegen die oben aufgeführte Stelle, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden sind grundsätzlich ausgeschlossen, sofern seitens der Stelle kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">2. Verweise und Links</div>
+                <h3 class="legal-h legal-h-sub">2. Verweise und Links</h3>
                 <p style="margin: 0;">
                     Die oben aufgeführte Stelle ist nur für die „eigenen Inhalte" dieser Internetseite nach den einschlägigen Gesetzen verantwortlich. Von diesen eigenen Inhalten sind Verweise („Links") zu anderen Internetauftritten zu unterscheiden. Durch Links halten wir „fremde Inhalte" zur Nutzung bereit. Zum Zeitpunkt der Verlinkung haben wir den fremden Inhalt der verlinkten Internetseiten daraufhin überprüft, dass durch ihn keine mögliche zivilrechtliche oder strafrechtliche Verantwortlichkeit ausgelöst wird. Wir können jedoch nicht ständig die Links auf unserer Internetseite auf Veränderungen, die eine Verantwortlichkeit neu begründen könnten, kontrollieren. Wenn Sie den Eindruck haben, dass ein Link in unserem Internetauftritt zu fremden Internetseiten mit rechtswidrigem oder strafrechtlichem Inhalt führt, geben Sie uns bitte Bescheid, damit wir diesen Link prüfen und gegebenenfalls entfernen können.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">3. Urheber- und Kennzeichenrecht</div>
+                <h3 class="legal-h legal-h-sub">3. Urheber- und Kennzeichenrecht</h3>
                 <p style="margin: 0;">
                     Die oben aufgeführte Stelle ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind. Das ‚Copyright' für veröffentlichte, von der Stelle selbst erstellte Objekte bleibt allein bei den Autoren der Seiten. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Stelle nicht gestattet.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">4. Rechtswirksamkeit dieses Haftungsausschlusses</div>
+                <h3 class="legal-h legal-h-sub">4. Rechtswirksamkeit dieses Haftungsausschlusses</h3>
                 <p style="margin: 0;">
                     Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Internetseite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile in ihrem Inhalt und ihrer Gültigkeit davon unberührt.
                 </p>
 
-                <p style="margin-top: 30px; color: var(--gray); font-size: 0.9rem;">
+                <p style="margin-top: 30px; color: var(--muted); font-size: 0.9rem;">
                     <strong>Datum:</strong> 13.10.2026
                 </p>
             </div>

@@ -14,6 +14,7 @@
     <meta property="og:image" content="https://www.miki-hdh.de/Assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Jugendliche chillen zusammen auf den Couches in der MiKi">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="de_DE">
     <meta property="og:url" content="https://www.miki-hdh.de/datenschutz/">
@@ -29,6 +30,8 @@
     <script defer src="../site.js"></script>
 
     <link rel="preload" href="../extern/fonts/JustMeAgainDownHere-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../extern/fonts/poppins/poppins-v24-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../extern/fonts/poppins/poppins-v24-latin-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../extern/fonts/fonts.css">
     <!-- Icons: kleine Schrift mit nur den genutzten Icons (Regeln in style.css) -->
     <link rel="preload" href="../extern/phosphor/miki-icons.woff2?v=3" as="font" type="font/woff2" crossorigin>
@@ -36,26 +39,27 @@
 </head>
 <body>
 
+<a href="#inhalt" class="skip-link">Zum Inhalt springen</a>
 <div class="scroll-progress" aria-hidden="true"></div>
 
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Hauptnavigation">
         <a href="../" class="nav-home" aria-label="Zur Startseite"><i class="ph ph-arrow-left"></i> MiKi</a>
         <a href="../ueber-uns/">Über die MiKi</a>
     </nav>
 
-    <main class="legal-page">
+    <main class="legal-page" id="inhalt" tabindex="-1">
         <div class="container legal-wrap">
             <a href="../" class="legal-back"><i class="ph ph-arrow-left"></i> Zur Startseite</a>
             <h1>Datenschutzerklärung</h1>
         <div style="line-height: 1.8; color: var(--text); font-size: 0.95rem;">
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">1. Allgemeine Hinweise</div>
+                <h2 class="legal-h">1. Allgemeine Hinweise</h2>
                 <p style="margin: 0 0 15px 0;">
                     Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen.<br><br>
                     Die Verarbeitung personenbezogener Daten erfolgt nach den Bestimmungen des Datenschutzgesetzes der Evangelischen Kirche in Deutschland (DSG-EKD) sowie den einschlägigen kirchlichen Datenschutzvorschriften.<br><br>
                     Diese Website dient ausschließlich der Information über die MiKi – Jugendkirche Heidenheim, ein Projekt des Evangelischen Jugendwerks Bezirk Heidenheim und der Evangelischen Kirchengemeinde Heidenheim.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">2. Verantwortliche Stelle</div>
+                <h2 class="legal-h">2. Verantwortliche Stelle</h2>
                 <p style="margin: 0;">
                     <strong>Evangelisches Jugendwerk Bezirk Heidenheim</strong><br>
                     Bahnhofstraße 33<br>
@@ -65,7 +69,7 @@
                     Vertreten durch: 1. Vorsitzender Axel Kolb
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">3. Hosting über GitHub Pages</div>
+                <h2 class="legal-h">3. Hosting über GitHub Pages</h2>
                 <p style="margin: 0 0 15px 0;">
                     Diese Website wird über GitHub Pages, einen Dienst der GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA, bereitgestellt.<br><br>
                     Beim Aufruf der Website werden durch GitHub automatisch technische Zugriffsdaten verarbeitet, insbesondere:
@@ -83,17 +87,17 @@
                     Weitere Informationen finden Sie in der Datenschutzerklärung von GitHub: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">4. Protokolldaten (Server-Logfiles)</div>
+                <h2 class="legal-h">4. Protokolldaten (Server-Logfiles)</h2>
                 <p style="margin: 0 0 15px 0;">
                     Beim Besuch dieser Website werden automatisch Informationen erfasst, die Ihr Browser an den Server übermittelt. Diese Daten werden ausschließlich zur technischen Überwachung und Sicherstellung des Betriebs verwendet. Eine Zusammenführung mit anderen Daten erfolgt nicht.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">5. Cookies und Tracking</div>
+                <h2 class="legal-h">5. Cookies und Tracking</h2>
                 <p style="margin: 0 0 15px 0;">
                     Diese Website verwendet keine Cookies, keine Analyse-Tools und keine Tracking-Technologien.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">6. Zahlungsabwicklung über PayPal</div>
+                <h2 class="legal-h">6. Zahlungsabwicklung über PayPal</h2>
                 <p style="margin: 0 0 15px 0;">
                     Auf dieser Website besteht die Möglichkeit, Spenden über den Zahlungsdienstleister PayPal zu leisten. Anbieter ist die PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxemburg.<br><br>
                     Wenn Sie den PayPal-Button nutzen, werden Sie auf die Website von PayPal weitergeleitet. Dort werden personenbezogene Daten (z. B. Name, Adresse, E-Mail-Adresse, Zahlungsdaten) direkt durch PayPal erhoben und verarbeitet. Auf diese Datenverarbeitung haben wir keinen Einfluss.<br><br>
@@ -101,7 +105,7 @@
                     Rechtsgrundlage für die Weiterleitung an PayPal ist § 6 Nr. 2 DSG-EKD (Vertragserfüllung bzw. vorvertragliche Maßnahmen) in Verbindung mit Ihrer aktiven Entscheidung zur Nutzung des Spendenbuttons.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">7. Externe Links (Instagram, TikTok, YouTube, WhatsApp, Google Maps, Google Forms und Google Kalender)</div>
+                <h2 class="legal-h">7. Externe Links (Instagram, TikTok, YouTube, WhatsApp, Google Maps, Google Forms und Google Kalender)</h2>
                 <p style="margin: 0 0 15px 0;">
                     Auf unserer Website befinden sich Links zu externen Diensten wie:
                 </p>
@@ -117,7 +121,7 @@
                     Wir haben keinen Einfluss auf Art und Umfang der Datenverarbeitung durch diese Anbieter. Es gelten die Datenschutzbestimmungen der jeweiligen Dienste.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">Aktive Kontaktaufnahme über WhatsApp</div>
+                <h3 class="legal-h legal-h-sub">Aktive Kontaktaufnahme über WhatsApp</h3>
                 <p style="margin: 0 0 15px 0;">
                     Auf dieser Website befinden sich direkte WhatsApp-Links, über die Sie aktiv Kontakt mit uns aufnehmen können (z. B. für Gebetsanliegen oder allgemeine Anfragen). Wenn Sie einen solchen Link anklicken, wird die WhatsApp-Anwendung auf Ihrem Gerät geöffnet und eine vorbereitete Nachricht an unsere Mobilnummer übermittelt.<br><br>
                     Dabei werden personenbezogene Daten – insbesondere Ihre Mobilfunknummer sowie der Inhalt Ihrer Nachricht – an WhatsApp Ireland Limited, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, und die Muttergesellschaft Meta Platforms Inc. (USA) übertragen. Eine Datenübermittlung in die USA kann dabei nicht ausgeschlossen werden.<br><br>
@@ -125,7 +129,7 @@
                     Rechtsgrundlage ist § 6 Nr. 2 DSG-EKD (Vertragserfüllung bzw. vorvertragliche Maßnahmen) sowie § 6 Nr. 1 DSG-EKD (Einwilligung durch aktive Kontaktaufnahme).
                 </p>
 
-                <div style="color: var(--dark); margin-top: 15px; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; font-family: var(--font-main);">Aktive Nutzung von Google Maps</div>
+                <h3 class="legal-h legal-h-sub">Aktive Nutzung von Google Maps</h3>
                 <p style="margin: 0 0 15px 0;">
                     Auf dieser Website befindet sich ein Link, über den Sie unsere Adresse in Google Maps öffnen können. Wenn Sie diesen Link anklicken, verlassen Sie unsere Website und werden zu Google Maps weitergeleitet.<br><br>
                     Dabei können personenbezogene Daten – insbesondere Ihre IP-Adresse – an die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, sowie an die Google LLC (USA) übertragen werden. Eine Datenübermittlung in die USA kann dabei nicht ausgeschlossen werden.<br><br>
@@ -133,12 +137,12 @@
                     Rechtsgrundlage ist § 6 Nr. 1 DSG-EKD (Einwilligung durch aktive Nutzung des Links).
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">8. Keine Einbindung externer Inhalte</div>
+                <h2 class="legal-h">8. Keine Einbindung externer Inhalte</h2>
                 <p style="margin: 0 0 15px 0;">
                     Auf dieser Website werden keine externen Inhalte wie Social-Media-Feeds, Karten, externe Schriftarten oder Videos eingebunden. Alle verwendeten Inhalte werden lokal bereitgestellt.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">9. Ihre Rechte nach dem DSG-EKD</div>
+                <h2 class="legal-h">9. Ihre Rechte nach dem DSG-EKD</h2>
                 <p style="margin: 0 0 15px 0;">
                     Sie haben nach dem Datenschutzgesetz der EKD insbesondere das Recht auf:
                 </p>
@@ -153,7 +157,7 @@
                     Zur Wahrnehmung Ihrer Rechte können Sie sich jederzeit an die verantwortliche Stelle wenden.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">10. Kirchliche Datenschutzaufsicht</div>
+                <h2 class="legal-h">10. Kirchliche Datenschutzaufsicht</h2>
                 <p style="margin: 0 0 15px 0;">
                     Zuständige Aufsichtsbehörde ist:<br><br>
                     <strong>Der Beauftragte für den Datenschutz der Evangelischen Kirche in Deutschland</strong><br>
@@ -165,7 +169,7 @@
                     Sie haben das Recht, sich bei der zuständigen kirchlichen Datenschutzaufsicht zu beschweren.
                 </p>
 
-                <div style="color: var(--dark); margin-top: 20px; margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; font-family: var(--font-main);">11. Änderungen dieser Datenschutzerklärung</div>
+                <h2 class="legal-h">11. Änderungen dieser Datenschutzerklärung</h2>
                 <p style="margin: 0;">
                     Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen, um sie an geänderte rechtliche Rahmenbedingungen oder technische Änderungen anzupassen.
                 </p>
