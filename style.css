@@ -16,7 +16,7 @@
     --text-soft: #4d4d47;      /* etwas hellerer Fliesstext */
     --line: #e7e4d9;           /* Rahmen und Trennlinien */
 
-    --radius: 12px;            /* Ecken bewusst klein und kantig (Sticker-Look) */
+    --radius: 24px;
     --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --font-head: 'Just Me Again Down Here', sans-serif; /* Handschrift-Stil */
 }
@@ -32,21 +32,17 @@ body {
     overflow-x: hidden;
 }
 
-/* Ueberschriften in Poppins (Branding: Poppins fuer Text und Headlines).
-   Die Handschrift (--font-head) ist nur noch Akzent: Logo und Notizen auf Klebeband (.tape). */
 h1, h2, h3, h4 {
-    font-family: var(--font-main);
-    font-weight: 700;
+    font-family: var(--font-head);
+    font-weight: 800;
     line-height: 1.1;
-    letter-spacing: -0.03em;
-    overflow-wrap: break-word;
-    text-wrap: balance;        /* Zeilen ausgewogen umbrechen: kein einzelnes Wort in der letzten Zeile */
+    letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(2.3rem, 7vw, 4.6rem); }
-h2 { font-size: clamp(1.9rem, 5vw, 3.1rem); margin-bottom: 0.3em; }
-h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
-h4 { font-size: clamp(1.1rem, 2.2vw, 1.35rem); }
+h1 { font-size: clamp(3.5rem, 10vw, 7rem); }
+h2 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+h3 { font-size: clamp(1.8rem, 5vw, 3rem); }
+h4 { font-size: clamp(1.3rem, 3vw, 2rem); }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
 ul { list-style: none; }
@@ -60,6 +56,9 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 }
 .section-padding { padding: 100px 0; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.text-gradient {
+    color: var(--primary);
+}
 
 /* --- TEXT-AKZENTE: handgemalter Textmarker (bewusst sparsam einsetzen) --- */
 .mark {
@@ -79,37 +78,33 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     border-radius: 0.35em 0.6em 0.4em 0.55em;
 }
 
-/* --- BUTTONS ---
-   Sticker-Look: kantig, mit hartem, versetztem Schatten. Beim Antippen "rastet" der Knopf ein.
-   Die Schattenfarbe kommt aus --btn-shadow: dunkel auf hellem Grund, hell auf dunklem Grund. */
+/* --- BUTTONS --- */
 .btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 24px;
-    border-radius: 10px;
+    padding: 16px 32px;
+    border-radius: 100px;
     font-weight: 700;
     font-size: 1rem;
-    border: 2px solid var(--dark);
+    border: none;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 0.01em;
     font-family: var(--font-main);
-    box-shadow: 4px 4px 0 var(--btn-shadow, var(--dark));
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-/* Anheben nur mit Maus - auf Touch-Geraeten wuerde es nach dem Tippen haengen bleiben */
-@media (hover: hover) and (pointer: fine) {
-    .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--btn-shadow, var(--dark)); }
-}
-.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--btn-shadow, var(--dark)); }
 
 .btn-primary {
     background: var(--dark);
     color: var(--primary);
-    --btn-shadow: var(--primary);
+    border: 2px solid var(--dark);
 }
-/* Knoepfe auf dunklem Grund: heller Schatten */
-.hero, #events, .contact-card, .cta-final, .page-hero, footer { --btn-shadow: var(--light); }
+.btn-primary:hover {
+    background: var(--primary);
+    color: var(--dark);
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(16, 187, 130, 0.4);
+}
 
 
 /* --- NAVIGATION --- */
@@ -118,15 +113,16 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--dark);
-    padding: 10px 26px;
-    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.92);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    padding: 12px 30px;
+    border-radius: 100px;
     z-index: 100;
     display: flex;
-    align-items: center;
     gap: 30px;
-    box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     width: max-content;
     max-width: 90%;
 }
@@ -149,216 +145,66 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     opacity: 0.8;
     transition: all 0.2s;
 }
-.navbar a.nav-logo { font-family: var(--font-head); font-size: 1.7rem; line-height: 1; color: var(--primary); margin-right: 6px; }
-/* Instagram: am PC nur das Symbol, am Handy als Sticker mit Namen (siehe MOBILE) */
-.nav-insta { display: inline-flex; align-items: center; gap: 6px; }
-.nav-insta i { font-size: 1.3rem; }
-.nav-insta-name { display: none; }
+.nav-logo { font-family: var(--font-head); font-weight: 900; color: var(--primary) !important; margin-right: 10px; }
 
-/* --- TITELBILD (Startseite) ---
-   Foto (Slideshow) und Text sind getrennt: am PC Text links und Foto rechts, am Handy Foto oben und
-   Text darunter (siehe "Titelbild schmal" direkt hier drunter). Das Foto wird nicht abgedunkelt,
-   weil kein Fliesstext mehr darauf steht. */
+/* --- HERO SECTION --- */
 .hero {
-    position: relative;
     min-height: 100vh;
-    display: grid;
-    /* Textspalte: mindestens 460px, sonst 45 %; auf sehr breiten Bildschirmen waechst sie mit dem Seitenrand */
-    grid-template-columns: max(460px, 45%, calc((100vw - 1200px) / 2 + 600px)) 1fr;
-    background: var(--dark);
-    color: var(--light);
+    display: flex;
+    align-items: flex-end;     /* Text im unteren Teil: Gesichter auf den Fotos bleiben frei */
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background-color: var(--darker);
     overflow: hidden;
+    color: white;
+    padding-top: 80px; /* Space for Nav */
+    padding-bottom: 120px;     /* Platz fuer das Laufband */
 }
 
-.hero-photo {
-    position: relative;
-    grid-column: 2;
-    grid-row: 1;
-    overflow: hidden;
-    background: var(--darker);
-}
+/* Hero Background Image with Overlay */
 .hero-bg {
     position: absolute;
     inset: 0;
-    will-change: transform;
+    z-index: 1;
 }
-/* Pro Foto einstellbar (style="..." am Foto in index.html):
-   --zoom  = naeher ran (1 = ganzes Foto), --focus = Punkt, auf den gezoomt wird,
-   --pos   = welcher Teil des Fotos zu sehen ist, wenn es beschnitten wird */
+
 .hero-bg-image {
     position: absolute;
     inset: 0;
     background-size: cover;
-    background-position: var(--pos, center);
-    transform: scale(var(--zoom, 1));
-    transform-origin: var(--focus, 50% 50%);
+    background-position: center;
+    opacity: 0.85;
+    filter: grayscale(10%);
     transition: opacity 1s ease-in-out;
 }
 
 /* Erstes Titelfoto (sofort sichtbar). Handy hochkant bekommt den Hochkant-Zuschnitt "-handy":
    gleicher Bildausschnitt und gleiche Schaerfe, etwa halbe Dateigroesse. Die Bedingung steht
    genauso im Preload-Link (index.html) und im Skript "Hero Image Carousel". */
-.hero-bg-first { background-image: url('Assets/T6.webp'); --zoom: 1.3; --focus: 50% 78%; }
+.hero-bg-first { background-image: url('Assets/T6.webp'); }
 @media (max-width: 600px) and (orientation: portrait) {
     .hero-bg-first { background-image: url('Assets/T6-handy.webp'); }
 }
 
-.hero-bg-image:not(.active) { opacity: 0; }
-.hero-bg-image.active { opacity: 1; }
+.hero-bg-image:not(.active) {
+    opacity: 0;
+}
 
-/* Textblock */
-.hero-text {
+.hero-bg-image.active {
+    opacity: 0.85;
+}
+
+.hero-content {
     position: relative;
-    z-index: 2;
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 150px 60px 150px max(40px, calc((100vw - 1200px) / 2 + 24px));
-    background: var(--dark);
+    z-index: 10;
+    max-width: 900px;
 }
-/* schraege Kante zum Foto - als eigenes Element, damit der runde Sticker ueber die Kante ragen darf */
-.hero-text::before {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    left: calc(100% - 1px);
-    width: 70px;
-    background: var(--dark);
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-.hero-logo {
-    position: absolute;
-    top: 20px;
-    left: max(40px, calc((100vw - 1200px) / 2 + 24px));
-    font-family: var(--font-head);
-    font-size: 3.4rem;
-    line-height: 1;
-    color: var(--primary);
-    transform: rotate(-3deg);
-}
-.hero-content { position: relative; will-change: transform, opacity; }
+
 .hero h1 {
-    font-size: clamp(2.8rem, 4.4vw, 4.2rem);   /* so gewaehlt, dass das laengste Wechselwort ("Mitbauen") in die Textspalte passt */
-    line-height: 1.06;
-    letter-spacing: -0.035em;
-    color: var(--light);
-    margin-bottom: 30px;
-}
-.hero h1 .line { display: block; white-space: nowrap; }
-/* Wechselwort ("Deine Kirche zum ...") */
-.rot-word {
-    display: inline-block;
-    color: var(--dark);
-    background: var(--primary);
-    padding: 0 0.2em;
-    border-radius: 0.1em 0.18em 0.12em 0.16em;
-    transform: rotate(-2deg);
-}
-.rot-word.rot-in { animation: rotIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-@keyframes rotIn {
-    from { opacity: 0; transform: translateY(50%) rotate(-8deg); }
-    to   { opacity: 1; transform: translateY(0) rotate(-2deg); }
-}
-/* Wo? Adresse mit Link zu Google Maps */
-.hero-where {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    max-width: 100%;
-    min-height: 44px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--light);
-}
-.hero-where i { color: var(--primary); font-size: 1.3rem; }
-.hero-where span { border-bottom: 2px solid rgba(255, 255, 247, 0.35); transition: border-color 0.2s ease; }
-.hero-where:hover span { border-color: var(--primary); }
-/* dezente Zeile mit den Suchwoertern fuer Google */
-.hero-facts { margin-top: 6px; font-size: 0.88rem; color: var(--gray); }
-
-/* Notiz auf Klebeband (Handschrift) - auch fuer die Foto-Kacheln "Was geht" */
-.tape {
-    display: inline-block;
-    font-family: var(--font-head);
-    font-weight: 400;
-    font-size: 2.3rem;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    margin-bottom: 22px;
     line-height: 1;
-    letter-spacing: 0;
-    white-space: nowrap;
-    color: var(--dark);
-    background: rgba(255, 255, 247, 0.95);
-    padding: 7px 18px 4px;
-    /* gezackte Enden wie abgerissenes Klebeband */
-    clip-path: polygon(0 0, 100% 0, 97% 25%, 100% 50%, 97% 75%, 100% 100%, 0 100%, 3% 75%, 0 50%, 3% 25%);
-}
-.hero-note {
-    position: absolute;
-    z-index: 3;
-    left: 34%;
-    bottom: 13%;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    transform: rotate(-4deg);
-    pointer-events: none;
-}
-.hero-note svg {
-    width: 70px; height: 70px;
-    margin: 0 0 2px 150px;
-    color: var(--light);
-    filter: drop-shadow(0 1px 2px rgba(17, 17, 17, 0.7));
-}
-
-/* Runder Sticker "FR 12-16:30": die Zeit steht still in der Mitte, nur der Ring dreht sich langsam.
-   Fuehrt zu den Terminen. Liegt im Textblock, damit er ueber die schraege Kante ins Foto ragt. */
-.hero-badge {
-    position: absolute;
-    z-index: 3;
-    left: calc(100% - 30px);
-    bottom: 170px;
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    background: var(--dark);
-    box-shadow: inset 0 0 0 2px var(--light);
-    transform: rotate(8deg);
-    transition: transform 0.2s ease;
-    -webkit-tap-highlight-color: transparent;
-}
-.hero-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-badge-ring { animation: badgeSpin 26s linear infinite; }
-.hero-badge-ring text { font-family: var(--font-main); font-size: 9.4px; font-weight: 700; letter-spacing: 0.08em; fill: var(--light); }
-.hero-badge .badge-day { font-family: var(--font-main); font-size: 30px; font-weight: 700; letter-spacing: -0.03em; fill: var(--primary); text-anchor: middle; }
-.hero-badge .badge-time { font-family: var(--font-main); font-size: 12.5px; font-weight: 700; fill: var(--light); text-anchor: middle; }
-.hero-badge:active { transform: rotate(8deg) scale(0.94); }
-@media (hover: hover) and (pointer: fine) { .hero-badge:hover { transform: rotate(8deg) scale(1.06); } }
-@keyframes badgeSpin { to { transform: rotate(360deg); } }
-
-/* Titelbild schmal (Handy und Tablet hochkant): Foto oben, Text darunter */
-@media (max-width: 899px) {
-    .hero {
-        min-height: 100svh;
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: minmax(280px, 1fr) auto;
-    }
-    .hero-photo { grid-column: 1; grid-row: 1; }
-    .hero-text { grid-column: 1; grid-row: 2; display: block; padding: 22px 24px 92px; }
-    .hero-text::before {
-        top: -29px; bottom: auto;
-        left: 0; right: 0;
-        width: auto; height: 30px;
-        clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%);
-    }
-    .hero-logo { display: none; }
-    .hero h1 { font-size: clamp(2.2rem, 10.5vw, 4.4rem); margin-bottom: 18px; }
-    .hero-where { font-size: 0.92rem; }
-    /* naeher an die Gesichter, die Wand mit den Plakaten faellt weg */
-    .hero-bg-first { --zoom: 1.45; --focus: 42% 58%; --pos: 50% 36%; }
-    .hero-note { left: 22px; bottom: 50px; }
-    .hero-note .tape { font-size: 1.75rem; }
-    .hero-note svg { width: 54px; height: 54px; margin-left: 118px; }
-    .hero-badge { left: auto; right: 16px; top: -92px; bottom: auto; width: 116px; height: 116px; }
 }
 
 
@@ -416,23 +262,24 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     gap: 18px;
     padding: 18px 20px;
     border-radius: var(--radius);
-    background: #212121;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(135deg, rgba(16, 187, 130, 0.2) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border: 1px solid rgba(16, 187, 130, 0.5);
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
-.highlight-card:hover { border-color: var(--light); }
+.highlight-card:hover { border-color: var(--primary); box-shadow: 0 24px 50px -20px rgba(16, 187, 130, 0.5); }
 .highlight-card:active { transform: scale(0.98); }
 .hl-date {
     flex-shrink: 0;
     width: 66px; height: 66px;
-    border-radius: 10px;
-    background: var(--light);
+    border-radius: 16px;
+    background: var(--primary);
     color: var(--dark);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     line-height: 1;
     transform: rotate(-4deg);
+    box-shadow: 0 12px 24px -10px rgba(16, 187, 130, 0.7);
 }
 .hl-day { font-size: 1.75rem; font-weight: 700; }
 .hl-month { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
@@ -454,7 +301,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .highlight-card.is-postponed .hl-date { opacity: 0.45; filter: grayscale(1); }
 .hl-body h3 { color: #fff; font-family: var(--font-main); font-weight: 700; font-size: 1.3rem; margin: 2px 0 4px; }
 .hl-body p { color: rgba(255, 255, 255, 0.75); font-size: 0.92rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }  /* ganzer Text im Pop-up */
-.hl-cta { flex-shrink: 0; align-self: center; color: rgba(255, 255, 247, 0.55); font-size: 1.2rem; }
+.hl-cta { flex-shrink: 0; align-self: center; color: var(--primary); font-size: 1.2rem; }
 
 /* Wochenplan: eine Zeile pro woechentlichem Angebot. Die 1px-Luecken zwischen den Zeilen ergeben die Trennlinien. */
 .week-plan {
@@ -485,11 +332,11 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .week-day {
     flex-shrink: 0;
     width: 48px; height: 48px;
-    border-radius: 8px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    background: var(--light);
+    background: var(--primary);
     color: var(--dark);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.05rem;
     transform: rotate(-3deg);
 }
@@ -500,7 +347,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     width: max-content;
     margin: 3px 0 2px;
     padding: 1px 8px;
-    border-radius: 6px;
+    border-radius: 100px;
     background: var(--light);
     color: var(--dark);
     font-size: 0.72rem;
@@ -509,7 +356,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 }
 .week-meta { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
 .week-desc { color: var(--gray); font-size: 0.88rem; }
-.week-arrow { flex-shrink: 0; color: rgba(255, 255, 247, 0.55); font-size: 1.2rem; }
+.week-arrow { flex-shrink: 0; color: var(--primary); font-size: 1.2rem; }
 
 /* Hinweise unter den Terminen als kleine Chips */
 .event-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
@@ -518,13 +365,13 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 100px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--light);
     font-size: 0.85rem;
     font-weight: 600;
 }
-.event-chips i { color: var(--light); opacity: 0.7; }
+.event-chips i { color: var(--primary); }
 .event-place { color: var(--primary-ink); text-decoration: underline; font-weight: 600; }
 
 .events-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
@@ -533,7 +380,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 .progress-item {
     background: white;
     padding: 25px;
-    border-radius: var(--radius);
+    border-radius: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     display: flex;
@@ -589,7 +436,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     overflow: hidden;
 }
 .donate-section { padding: 72px 0 56px; }
-.donate-section h2 { color: var(--dark); font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 14px; }
+.donate-section h2 { color: var(--dark); font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 14px; }
 .donate-section p { font-size: 1.05rem; color: var(--dark); font-weight: 500; }
 
 /* Kompakt: links Text, rechts weisse Spendenbox */
@@ -613,8 +460,8 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     justify-content: center;
     background: var(--dark);
     color: #fff;
-    --btn-shadow: var(--primary);
 }
+.donate-box .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px rgba(17, 17, 17, 0.5); }
 .donate-section .paypal-hint {
     display: flex;
     gap: 10px;
@@ -656,7 +503,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     border: none;
     cursor: pointer;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 100px;
     background: rgba(16, 187, 130, 0.14);
     color: var(--primary-ink);
     font-family: var(--font-main);
@@ -675,7 +522,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     border: none;
     cursor: pointer;
     padding: 8px 14px;
-    border-radius: 8px;
+    border-radius: 100px;
     background: rgba(16, 187, 130, 0.14);
     color: var(--dark);
     font-family: var(--font-main);
@@ -691,7 +538,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 
 /* --- UNTERSTUETZER-LOGOS (Endlos-Laufband) --- */
 .supporter-strip { margin-top: 56px; }
-.supporter-title { color: var(--dark); font-size: 1.15rem; margin-bottom: 18px; }
+.supporter-title { color: var(--dark); font-size: 1.6rem; font-weight: 400; margin-bottom: 18px; }
 .logo-marquee {
     /* Volle Breite, auch wenn der Container auf 1200px begrenzt ist */
     width: 100vw;
@@ -734,7 +581,7 @@ footer {
     padding: 80px 0 40px;
     font-size: 0.9rem;
 }
-.footer-col h3 { color: white; margin-bottom: 16px; font-size: 1rem; letter-spacing: 0; }
+.footer-col h3 { color: white; margin-bottom: 20px; font-size: 1.2rem; }
 .footer-col a:hover { color: var(--primary); }
 /* Links im Fliesstext des Footers (Traeger) - gilt auf allen Seiten */
 .footer-col p a { color: var(--primary); text-decoration: underline; }
@@ -765,7 +612,7 @@ footer {
 .modal-header { margin-bottom: 20px; border-bottom: 2px solid var(--line); padding-bottom: 20px; }
 .modal-details-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-    background: var(--cream-2); padding: 20px; border-radius: 10px; margin-bottom: 20px;
+    background: var(--cream-2); padding: 20px; border-radius: 16px; margin-bottom: 20px;
 }
 
 /* Vue-Teile verstecken, bis Vue geladen ist (sonst blitzen bei langsamem Netz
@@ -831,52 +678,89 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     border: 0;
 }
 
-/* --- BAUSTELLEN-BAND: schraeges Laufband zwischen Titelbild und Inhalt ---
-   Zeigt, was Jugendliche schon gebaut haben und was als Naechstes kommt.
-   Die Texte stehen in index.html ("bandItems"). */
+/* --- HERO-EXTRAS: Parallax, Wechselwort, Scroll-Hinweis --- */
+.hero-bg { will-change: transform; }
+.hero-content { will-change: transform, opacity; }
+/* Verlauf nach unten, damit Text und Ticker auf jedem Foto lesbar bleiben */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.35) 0%, rgba(17, 17, 17, 0.1) 40%, rgba(17, 17, 17, 0.85) 100%);
+    pointer-events: none;
+}
+/* dunkler Schatten: der gruene Schriftzug bleibt auch auf hellen Fotos lesbar */
+.hero h1 .text-gradient { text-shadow: 0 2px 4px rgba(17, 17, 17, 0.55), 0 4px 28px rgba(17, 17, 17, 0.75); }
+
+.hero-rotator {
+    font-family: var(--font-main);
+    font-size: clamp(1.15rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 36px;
+    line-height: 1.5;
+}
+.rot-word {
+    display: inline-block;
+    color: var(--dark);
+    background: var(--primary);
+    padding: 0 0.4em;
+    border-radius: 0.3em 0.5em 0.35em 0.45em;
+    transform: rotate(-2deg);
+}
+.rot-word.rot-in { animation: rotIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+/* Titelbild: dezente Info-Zeile und Knopf zu den Terminen */
+.hero-rotator, .hero-facts { text-shadow: 0 2px 14px rgba(17, 17, 17, 0.7); }
+.hero-facts {
+    margin: -16px auto 28px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.85);
+}
+.hero-cta { box-shadow: 0 0 30px rgba(16, 187, 130, 0.45); line-height: 1.3; }
+.hero-cta .nowrap { white-space: nowrap; }  /* schmale Handys: Umbruch nur nach "Open Church:" */
+@keyframes rotIn {
+    from { opacity: 0; transform: translateY(50%) rotate(-8deg); }
+    to   { opacity: 1; transform: translateY(0) rotate(-2deg); }
+}
+
+/* --- TICKER: schraeges Laufband mit Schlagworten zwischen Hero und Inhalt --- */
 .ticker-wrap {
-    --half: 54px;              /* Abstand Oberkante bis Bandmitte: so weit ragt das Band ins Titelbild */
     position: relative;
     z-index: 20;
-    margin: calc(-1 * var(--half)) 0;
+    margin: -46px 0 -46px;
     padding: 24px 0;
     overflow: hidden;
     pointer-events: none;
-    /* Luecke unter dem schraegen Band mit der Farbe des naechsten Abschnitts fuellen */
-    background: linear-gradient(180deg, transparent var(--half), var(--light) var(--half));
+    /* Luecke zwischen Titelbild und Terminen dunkel fuellen, damit an den Raendern
+       neben dem schraegen Band nie der helle Seitenhintergrund durchblitzt */
+    background: linear-gradient(180deg, transparent 46px, var(--dark) 46px);
 }
 .ticker {
     width: 110vw;
     margin-left: -5vw;
-    background: var(--dark);
-    color: var(--light);
+    background: var(--primary);
+    color: var(--dark);
+    padding: 12px 0;
     transform: rotate(-1.5deg);
-}
-/* Baustellen-Streifen oben und unten */
-.ticker::before, .ticker::after {
-    content: '';
-    display: block;
-    height: 8px;
-    background: repeating-linear-gradient(-45deg, var(--primary) 0 12px, var(--dark) 12px 24px);
+    box-shadow: 0 14px 30px -12px rgba(17, 17, 17, 0.45);
 }
 .ticker-track {
     display: flex;
     width: max-content;
-    padding: 14px 0;
-    animation: tickerScroll 46s linear infinite;
+    animation: tickerScroll 40s linear infinite;
 }
 .ticker-group { display: flex; align-items: center; }
 .ticker-group span {
-    padding: 0 18px;
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-family: var(--font-head);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
     line-height: 1;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
     white-space: nowrap;
+    padding: 0 22px;
 }
-.ticker-group b { margin-left: 0.5em; color: var(--primary); font-weight: 700; }
-.ticker-group i { font-size: 1rem; color: var(--primary); }
+.ticker-group i { font-size: 1.2rem; opacity: 0.7; }
 @keyframes tickerScroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -884,7 +768,6 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 
 /* --- ABSCHNITTS-KOEPFE --- */
 .section-head { max-width: 700px; margin-bottom: 48px; }
-.section-head h2 { margin-bottom: 14px; }
 .section-head p { font-size: 1.1rem; color: var(--text-soft); }
 .kicker {
     display: inline-flex;
@@ -906,7 +789,8 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 .kicker-dark { box-shadow: 3px 3px 0 var(--light); }
 
 /* --- WAS DICH ERWARTET: Foto-Kacheln mit Parallax im Bild --- */
-#erleben { background: var(--light); padding-top: 140px; }   /* oben Platz fuer das Baustellen-Band */
+#erleben { background: var(--light); }
+#events { padding-top: 140px; }
 /* Hinweis: Bilder sind anklickbar ("Tipp" am Handy, "Klick" mit Maus) */
 .section-head p.exp-hint {
     display: inline-flex;
@@ -914,9 +798,9 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     gap: 6px;
     margin-top: 14px;
     padding: 6px 14px;
-    border-radius: 8px;
-    background: var(--cream-2);
-    color: var(--dark);
+    border-radius: 100px;
+    background: rgba(16, 187, 130, 0.1);
+    color: var(--primary-ink);
     font-size: 0.9rem;
     font-weight: 600;
 }
@@ -936,13 +820,13 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    /* Platz, damit Klebeband, Schatten und die schiefen Ecken der Abzuege nicht abgeschnitten werden */
-    padding: 24px 16px 30px;
-    margin: -24px -16px -30px;
-    scroll-padding-inline: 16px;
+    /* Platz, damit der Schatten der Kacheln nicht abgeschnitten wird */
+    padding: 6px 8px 30px;
+    margin: -6px -8px -30px;
+    scroll-padding-inline: 8px;
 }
 .exp-track::-webkit-scrollbar { display: none; }
-.exp-track .exp-card { aspect-ratio: 4 / 5; scroll-snap-align: start; }
+.exp-track .exp-card { aspect-ratio: 4 / 5; scroll-snap-align: start; box-shadow: 0 14px 24px -16px rgba(17, 17, 17, 0.5); }
 @media (max-width: 1024px) {
     .exp-track { grid-auto-columns: calc((100% - 20px) / 2); }
 }
@@ -981,9 +865,9 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 .build-icon {
     flex-shrink: 0;
     width: 52px; height: 52px;
-    border-radius: 8px;
+    border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    background: var(--light);
+    background: var(--primary);
     color: var(--dark);
     font-size: 1.6rem;
     transform: rotate(-4deg);
@@ -1049,39 +933,21 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     transition: border-color 0.2s ease, color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
 }
-.exp-arrow:hover { border-color: var(--dark); }
+.exp-arrow:hover { border-color: var(--primary); color: var(--primary-ink); }
 .exp-arrow:active { transform: scale(0.94); }
 .exp-dots { display: flex; gap: 8px; }
 .exp-dots span { width: 8px; height: 8px; border-radius: 100px; background: #d6d3c6; transition: width 0.3s ease, background 0.3s ease; }
-.exp-dots span.active { width: 24px; background: var(--dark); }
+.exp-dots span.active { width: 24px; background: var(--primary-dark); }
 .exp-dots span[hidden] { display: none; }
-/* Foto-Kacheln als aufgeklebte Abzuege: kantig, leicht schief, harter Schatten, Klebestreifen oben,
-   Titel als Notiz auf Klebeband */
 .exp-card {
     position: relative;
-    border: 2px solid var(--dark);
+    overflow: hidden;
+    border-radius: var(--radius);
     background: var(--dark);
-    box-shadow: 6px 6px 0 var(--dark);
-    transform: rotate(-1.2deg);
-    transition: box-shadow 0.12s ease;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    isolation: isolate;
+    box-shadow: 0 20px 40px -20px rgba(17, 17, 17, 0.45);
 }
-.exp-card:nth-child(even) { transform: rotate(1.2deg); }
-.exp-card:active { box-shadow: 2px 2px 0 var(--dark); }
-/* Klebestreifen */
-.exp-card::before {
-    content: '';
-    position: absolute;
-    z-index: 3;
-    top: -13px; left: 50%;
-    width: 86px; height: 26px;
-    background: rgba(16, 187, 130, 0.85);
-    transform: translateX(-50%) rotate(-5deg);
-}
-.exp-card:nth-child(even)::before { transform: translateX(-50%) rotate(5deg); }
-/* Rahmen, der das Foto beschneidet (das Foto ist hoeher, damit es beim Scrollen gleiten kann) */
-.exp-photo { position: absolute; inset: 0; overflow: hidden; }
+/* Bild ist hoeher als die Kachel, damit es beim Scrollen gleiten kann */
 .exp-media {
     position: absolute;
     left: 0; right: 0;
@@ -1094,24 +960,38 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     filter: brightness(1.18) saturate(1.08); /* Fotos sind teils abends entstanden -> aufhellen */
     transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.exp-caption {
+.exp-card::after {
+    content: '';
     position: absolute;
-    z-index: 2;
-    left: -12px;
-    bottom: 18px;
-    transform: rotate(-3deg);
+    inset: 0;
+    z-index: 1;
+    /* nur unten abdunkeln - dort steht die Ueberschrift */
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0) 50%, rgba(17, 17, 17, 0.7) 100%);
 }
-.exp-card:nth-child(even) .exp-caption { transform: rotate(2deg); }
-.exp-caption h3 { font-size: 1.9rem; }   /* Aussehen kommt von .tape */
-
+.exp-card { cursor: pointer; }
+/* kleines "+" oben rechts: zeigt, dass man fuer mehr Infos tippen kann */
+.exp-more {
+    position: absolute;
+    right: 14px; top: 16px;
+    z-index: 2;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--dark);
+    font-size: 1rem;
+    box-shadow: 0 6px 16px -6px rgba(17, 17, 17, 0.6);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease;
+}
+.exp-card:active { transform: scale(0.98); }
 .tile-modal img {
     width: 100%;
     height: 280px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 16px;
     margin-bottom: 20px;
 }
-.tile-modal h2 { font-size: 1.8rem; margin-bottom: 10px; }
+.tile-modal h2 { font-size: 2.4rem; margin-bottom: 10px; }
 .tile-modal p { line-height: 1.75; color: var(--text); }
 .tile-close {
     position: absolute;
@@ -1125,19 +1005,50 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     cursor: pointer;
     box-shadow: 0 4px 12px -4px rgba(17, 17, 17, 0.4);
 }
+.exp-icon {
+    position: absolute;
+    top: 16px; left: 16px;
+    z-index: 2;
+    width: 46px; height: 46px;
+    border-radius: 14px;
+    background: var(--primary);
+    color: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.45rem;
+    transform: rotate(-6deg);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.exp-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: 22px 24px;
+    color: #fff;
+    text-shadow: 0 1px 12px rgba(17, 17, 17, 0.6);
+}
+.exp-caption h3 { font-size: clamp(2rem, 3vw, 2.5rem); color: #fff; margin-bottom: 2px; }
 
-/* gruener Knopf (der Klassenname "btn-glow" ist geblieben, das Leuchten nicht) */
 .btn-glow {
     background: var(--primary);
     color: var(--dark);
+    border: 2px solid var(--primary);
+}
+.btn-glow:hover {
+    background: #fff;
+    border-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 34px rgba(16, 187, 130, 0.55);
 }
 .btn-ghost-light {
     background: transparent;
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.45);
 }
-.btn-ghost-light, .btn-ghost-light:hover, .btn-ghost-light:active { box-shadow: none; }
-.btn-ghost-light:hover { border-color: var(--primary); color: var(--primary); }
+.btn-ghost-light:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-3px);
+}
 
 /* Abschnitte mit mitgleitenden Fotos: Inhalt bleibt darueber, nichts ragt seitlich heraus */
 .has-doodles { position: relative; overflow: hidden; }
@@ -1147,12 +1058,12 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
 .faq-item {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 18px;
     box-shadow: 0 6px 20px -12px rgba(17, 17, 17, 0.25);
     border: 1px solid var(--line);
     transition: border-color 0.2s ease;
 }
-.faq-item[open] { border-color: var(--dark); }
+.faq-item[open] { border-color: rgba(16, 187, 130, 0.6); }
 .faq-item summary {
     list-style: none;
     cursor: pointer;
@@ -1171,8 +1082,8 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     width: 32px; height: 32px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: var(--cream-2);
-    color: var(--dark);
+    background: rgba(16, 187, 130, 0.12);
+    color: var(--primary-ink);
     font-size: 1.3rem;
     font-weight: 700;
     transition: transform 0.25s ease;
@@ -1190,7 +1101,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     width: max-content;
     margin: 6px auto 0;
     padding: 12px 22px;
-    border-radius: 10px;
+    border-radius: 100px;
     background: var(--dark);
     color: var(--light);
     font-weight: 700;
@@ -1242,10 +1153,10 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     width: 140px; height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--light);
+    border: 4px solid var(--primary);
     transform: rotate(-3deg);
 }
-.contact-text h3 { color: #fff; font-size: 1.5rem; margin-bottom: 8px; }
+.contact-text h3 { color: #fff; font-size: 2.2rem; margin-bottom: 6px; }
 .contact-text p { color: rgba(255, 255, 255, 0.85); font-size: 0.98rem; margin-bottom: 18px; }
 .contact-card { scroll-margin-top: 100px; } /* beim Sprung aus der Navigation nicht unter der Leiste verstecken */
 .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
@@ -1282,7 +1193,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     color: #fff;
     text-align: center;
 }
-.cta-final h2 { color: #fff; font-size: clamp(2.4rem, 7vw, 4.2rem); margin-bottom: 14px; }
+.cta-final h2 { color: #fff; font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 14px; }
 .cta-final .cta-lead { font-size: 1.15rem; color: rgba(255, 255, 255, 0.85); max-width: 560px; margin: 0 auto; }
 .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 28px; }
 .cta-info {
@@ -1307,9 +1218,9 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     margin: 36px auto 0;
     padding: 14px 18px;
     text-align: left;
-    border-radius: var(--radius);
+    border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    background: #242424;
+    background: rgba(255, 255, 255, 0.05);
 }
 .social-card-text { display: flex; flex-direction: column; gap: 2px; }
 .social-card-text strong { font-size: 0.98rem; color: #fff; }
@@ -1317,7 +1228,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 .social-card-icons { display: flex; gap: 10px; flex-shrink: 0; }
 .social-icon {
     width: 48px; height: 48px;
-    border-radius: 10px;
+    border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
     font-size: 1.6rem;
     color: #fff;
@@ -1350,7 +1261,10 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     /* Laufband anhalten, solange die Maus drueberliegt */
     .logo-marquee:hover .logo-track { animation-play-state: paused; }
     .exp-card:hover .exp-media img { transform: scale(1.07); }
+    .exp-card:hover .exp-icon { transform: rotate(8deg) scale(1.1); }
+    .exp-card:hover .exp-more { transform: rotate(90deg) scale(1.1); background: var(--primary); }
     /* Anheben nur mit Maus - auf Touch-Geraeten wuerde es nach dem Tippen haengen bleiben */
+    .btn-primary:hover { transform: translateY(-3px); }
     .progress-item:hover { transform: translateY(-4px); }
 }
 
@@ -1359,7 +1273,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     -webkit-tap-highlight-color: transparent;
 }
 .progress-item:active { transform: scale(0.98); }
-.copy-btn:active { transform: scale(0.96); }
+.btn:active, .copy-btn:active { transform: scale(0.96); }
 
 /* --- BEWEGUNG ZURUECKHALTEN: prefers-reduced-motion respektieren --- */
 @media (prefers-reduced-motion: reduce) {
@@ -1383,50 +1297,27 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .ticker-track { animation: none !important; }
 }
 
-/* Leiste unten: nur auf der Startseite und nur am Handy (siehe MOBILE) */
-.bottom-bar { display: none; }
+/* Leiste unten und "Unterstützen" oben: nur auf der Startseite und nur am Handy (siehe MOBILE) */
+.bottom-bar, .nav-support { display: none; }
 
 /* --- MOBILE --- */
 @media(max-width: 768px) {
 
-    /* Startseite: oben nur Logo, Instagram und "Für Eltern" als Sticker, fest im Titelbild
-       (scrollt mit weg, belegt danach keinen Platz). Danach uebernimmt die Leiste unten. */
+    /* Startseite: oben nur "Über uns" und "Unterstützen", fest im Titelbild (scrollt mit weg, belegt danach
+       keinen Platz). Das grosse Logo steht ohnehin im Titelbild. */
     .navbar.nav-compact {
         position: absolute;
-        top: 14px; left: 16px; right: 16px;
-        transform: none;
-        width: auto; max-width: none;
-        gap: 8px;
-        padding: 0;
-        justify-content: flex-start;
-        background: none;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-    }
-    .navbar.nav-compact a:not(.nav-logo):not(.nav-insta):not(.nav-about) { display: none; }
-    .navbar.nav-compact a.nav-logo {
-        display: block;
-        margin-right: auto;
-        font-size: 2.2rem;
-        padding: 5px 14px 3px;
-        border-radius: 10px;
-        background: var(--dark);
-        transform: rotate(-3deg);
-    }
-    .navbar.nav-compact a.nav-insta, .navbar.nav-compact a.nav-about {
-        display: inline-flex;
+        width: max-content;
+        gap: 22px;
+        padding: 2px 18px;
+        justify-content: center;
         align-items: center;
-        min-height: 44px;
-        padding: 0 12px;
-        border-radius: 8px;
-        font-size: 0.82rem;
-        font-weight: 700;
+        background: rgba(26, 26, 26, 0.7);
     }
-    .navbar.nav-compact a.nav-insta { background: var(--light); color: var(--dark); box-shadow: 3px 3px 0 var(--dark); transform: rotate(2deg); }
-    .navbar.nav-compact a.nav-insta i { font-size: 1.2rem; }
-    .navbar.nav-compact .nav-insta-name { display: inline; }
-    .navbar.nav-compact a.nav-about { background: var(--dark); color: var(--light); font-weight: 600; }
+    .navbar.nav-compact a:not(.nav-about):not(.nav-support) { display: none; }
+    .navbar.nav-compact a.nav-about { font-size: 0.85rem; padding: 12px 0; }
+    .navbar.nav-compact a.nav-support { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; padding: 12px 0; color: var(--light); }
+    .navbar.nav-compact a.nav-support i { color: var(--primary); }
 
     /* Leiste unten: erscheint nach dem Titelbild (Skript "Leiste unten" in index.html) */
     .bottom-bar {
@@ -1437,10 +1328,12 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
         z-index: 150;
         justify-content: space-around;
         padding: 2px;
-        border-radius: 12px;
-        background: var(--dark);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.3);
+        border-radius: 18px;
+        background: rgba(26, 26, 26, 0.95);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
         transform: translateY(calc(100% + 30px));
         visibility: hidden;
         transition: transform 0.3s ease, visibility 0s linear 0.3s;
@@ -1471,18 +1364,23 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .footer-col h3 { margin-bottom: 10px; }
     .footer-bottom { margin-top: 32px !important; }
 
+    /* Hero */
+    .hero { padding-top: 100px; padding-bottom: 90px; min-height: 100svh; }
+    .hero h1 { font-size: 5rem; }
+    .hero-rotator { margin-bottom: 26px; }
+    .hero-facts { margin: -12px auto 22px; font-size: 0.88rem; }
+    .hero-cta { padding: 13px 20px; font-size: 0.95rem; }
     .cta-info { font-size: 0.95rem; }
 
-    /* Baustellen-Band */
-    .ticker-wrap { --half: 42px; padding: 18px 0; }
-    .ticker-track { padding: 10px 0; }
-    .ticker-group span { padding: 0 12px; font-size: 0.8rem; }
-    .ticker-group i { font-size: 0.9rem; }
+    /* Ticker */
+    .ticker-wrap { margin: -36px 0; padding: 18px 0; background: linear-gradient(180deg, transparent 36px, var(--dark) 36px); }
+    .ticker { padding: 9px 0; }
+    .ticker-group span { padding: 0 14px; }
 
     /* Was dich erwartet: Slider mit einer Kachel, die naechste schaut am Rand hervor */
-    #erleben { padding-top: 96px; }
+    #events { padding-top: 96px; }
     .section-head { margin-bottom: 32px; }
-    .exp-track { grid-auto-columns: 80%; gap: 20px; }
+    .exp-track { grid-auto-columns: 82%; gap: 12px; }
     .exp-slider { grid-template-columns: 1fr auto 1fr; grid-template-areas: "track track track" "prev dots next"; column-gap: 18px; margin-inline: 0; }
     .exp-arrow { margin-top: 22px; }
     .exp-arrow[data-dir="-1"] { justify-self: end; }
@@ -1490,10 +1388,18 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .quotes { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
     .quote-card { padding: 14px 18px; }
     .quote-card blockquote { font-size: 1.05rem; }
+    .exp-card { border-radius: 18px; }
+    .exp-icon { width: 38px; height: 38px; font-size: 1.2rem; top: 12px; left: 12px; border-radius: 11px; }
+    .exp-more { width: 30px; height: 30px; right: 10px; top: 14px; font-size: 0.9rem; }
     .tile-modal { padding: 22px 20px 28px !important; }
     .tile-modal img { height: 220px; }
-    .tile-modal h2 { font-size: 1.5rem; }
+    .tile-modal h2 { font-size: 2rem; }
     .tile-close { right: 30px; top: 30px; }
+    .exp-caption { padding: 14px 14px; }
+    /* Schmale Kacheln: Text reicht hoeher ins Bild -> Abdunklung frueher starten */
+    .exp-card::after {
+        background: linear-gradient(180deg, rgba(17, 17, 17, 0) 45%, rgba(17, 17, 17, 0.75) 100%);
+    }
     .exp-caption h3 { font-size: 1.7rem; }
 
 
@@ -1542,7 +1448,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     }
     .highlight-list::-webkit-scrollbar { display: none; }
     .highlight-card { scroll-snap-align: start; gap: 14px; padding: 16px; }
-    .hl-date { width: 58px; height: 58px; }
+    .hl-date { width: 58px; height: 58px; border-radius: 14px; }
     .hl-day { font-size: 1.55rem; }
     .hl-body h3 { font-size: 1.2rem; }
     .hl-meta { font-size: 0.82rem; }
@@ -1566,7 +1472,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
         max-width: 100%;
         max-height: 88vh;
         overflow-y: auto;
-        border-radius: 14px 14px 0 0;
+        border-radius: 24px 24px 0 0;
         padding: 28px 20px 32px;
         -webkit-overflow-scrolling: touch;
     }
@@ -1595,9 +1501,9 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
         grid-template-columns: 1fr !important;
     }
 
-    /* Ueberschriften am Handy */
-    h2 { font-size: clamp(1.7rem, 7.4vw, 2.5rem); }
-    h3 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    /* h2 etwas kompakter */
+    h2 { font-size: clamp(2rem, 9vw, 3.5rem); }
+    h3 { font-size: clamp(1.5rem, 6vw, 2.5rem); }
 }
 
 /* =====================================================================
@@ -1616,7 +1522,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     align-items: center;
     gap: 4px;
     padding: 4px 12px;
-    border-radius: 8px;
+    border-radius: 100px;
     background: rgba(16, 187, 130, 0.18);
     color: var(--light);
     font-weight: 700;
@@ -1624,8 +1530,8 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 }
 .navbar a.nav-home:hover { background: var(--primary); color: var(--dark); transform: none; }
 
-/* Startseite: Hinweis fuer Erwachsene, ganz unten zwischen "Klingt gut?" und dem Footer */
-.parents-teaser { background: var(--cream-2); padding: 64px 0 72px; }
+/* Startseite: Hinweis fuer Erwachsene ganz unten */
+.parents-teaser { background: var(--cream-2); padding: 0 0 90px; }
 .teaser-card {
     display: flex;
     align-items: center;
@@ -1637,16 +1543,16 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     background: #fff;
     border: 1px solid var(--line);
     box-shadow: 0 10px 30px -18px rgba(17, 17, 17, 0.35);
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.teaser-card:hover { border-color: var(--dark); }
+.teaser-card:hover { border-color: var(--primary); box-shadow: 0 16px 34px -18px rgba(16, 187, 130, 0.45); }
 .teaser-icon {
     flex-shrink: 0;
     width: 48px; height: 48px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: var(--cream-2);
-    color: var(--dark);
+    background: rgba(16, 187, 130, 0.12);
+    color: var(--primary-ink);
     font-size: 1.5rem;
 }
 .teaser-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
@@ -1685,7 +1591,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     background: linear-gradient(180deg, rgba(17, 17, 17, 0.45) 0%, rgba(17, 17, 17, 0.25) 40%, rgba(17, 17, 17, 0.9) 100%);
 }
 .page-hero-content { position: relative; z-index: 2; }
-.page-hero h1 { font-size: clamp(2.4rem, 7vw, 4.4rem); color: #fff; margin: 6px 0 14px; }
+.page-hero h1 { font-size: clamp(3.2rem, 9vw, 6rem); color: #fff; margin: 6px 0 14px; }
 .page-hero p { font-size: 1.15rem; max-width: 640px; color: rgba(255, 255, 255, 0.9); }
 .page-back {
     display: flex;
@@ -1724,7 +1630,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     color: var(--primary-ink);
     font-weight: 600;
 }
-.legal-page h1 { font-size: clamp(1.7rem, 7vw, 3.2rem); margin-bottom: 18px; }
+.legal-page h1 { font-size: clamp(2.8rem, 7vw, 4.2rem); margin-bottom: 18px; }
 .legal-h {
     margin: 20px 0 10px;
     color: var(--dark);
@@ -1749,7 +1655,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
         .navbar a { font-size: 0.68rem; padding: 14px 3px; }
         .navbar a.nav-home { padding: 6px 8px; }
     }
-    .parents-teaser { padding: 44px 0 52px; }
+    .parents-teaser { padding-bottom: 64px; }
     .teaser-card { padding: 18px; gap: 14px; }
     .teaser-icon { width: 42px; height: 42px; font-size: 1.3rem; }
     .page-hero { min-height: 0; padding: 110px 0 48px; }
