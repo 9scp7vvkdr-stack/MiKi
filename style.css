@@ -202,6 +202,7 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
 
 .hero h1 {
     font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 400;          /* die Handschrift gibt es nur normal: bei "fett" malt Safari sie doppelt und verschoben */
     margin-bottom: 22px;
     line-height: 1;
 }
