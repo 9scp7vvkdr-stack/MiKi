@@ -313,9 +313,11 @@ img { max-width: 100%; display: block; border-radius: var(--radius); }
     border-radius: var(--radius);
     overflow: hidden;
 }
-/* breite Bildschirme: alle Angebote in einer Reihe (keine leeren Felder, egal wie viele) */
+/* breite Bildschirme: zwei Angebote nebeneinander (bei vier Angeboten waeren es in einer Reihe zu schmale Spalten).
+   Bei ungerader Anzahl nimmt das letzte die ganze Breite ein - so bleibt kein leeres Feld. */
 @media (min-width: 1000px) {
-    .week-plan { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
+    .week-plan { grid-template-columns: 1fr 1fr; }
+    .week-row:last-child:nth-child(odd) { grid-column: 1 / -1; }
 }
 .week-row {
     display: flex;
