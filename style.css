@@ -723,18 +723,6 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 }
 .hero-cta { box-shadow: 0 0 30px rgba(16, 187, 130, 0.45); line-height: 1.3; }
 .hero-cta .nowrap { white-space: nowrap; }  /* schmale Handys: Umbruch nur nach "Open Church:" */
-/* zwei Knoepfe nebeneinander (am Handy untereinander, siehe MOBILE) */
-.hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-/* Open Church Kids: dunkel mit hellem Rand, damit der gruene Open-Church-Knopf das Hauptangebot bleibt */
-.hero-cta-kids {
-    background: rgba(17, 17, 17, 0.6);
-    color: #fff;
-    border: 2px solid rgba(255, 255, 247, 0.7);
-    box-shadow: none;
-}
-@media (hover: hover) and (pointer: fine) {
-    .hero-cta-kids:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
-}
 @keyframes rotIn {
     from { opacity: 0; transform: translateY(50%) rotate(-8deg); }
     to   { opacity: 1; transform: translateY(0) rotate(-2deg); }
@@ -1327,8 +1315,6 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
     .hero-rotator { margin-bottom: 26px; }
     .hero-facts { margin: -12px auto 22px; font-size: 0.88rem; }
     .hero-cta { padding: 13px 20px; font-size: 0.95rem; }
-    .hero-ctas { flex-direction: column; align-items: center; gap: 10px; }
-    .hero-ctas .hero-cta { width: 100%; max-width: 360px; justify-content: center; }
     .cta-info { font-size: 0.95rem; }
 
     /* Ticker */
@@ -1519,6 +1505,8 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
 .teaser-text span { color: var(--text-soft); font-size: 0.93rem; line-height: 1.5; }
 .teaser-arrow { flex-shrink: 0; color: var(--primary-ink); font-size: 1.3rem; }
 .teaser-card + .teaser-card { margin-top: 14px; }
+/* Karte "Werde Teil vom MiKi-Team" direkt unter Stefans Kontakt-Karte */
+.contact-card + .teaser-card { margin-top: 16px; }
 /* Spenden-Karte leicht mint hervorgehoben, damit Unterstuetzer sie schnell finden */
 .teaser-donate { background: rgba(16, 187, 130, 0.08); border-color: rgba(16, 187, 130, 0.35); }
 .teaser-donate .teaser-icon { background: var(--primary); color: var(--dark); }

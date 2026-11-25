@@ -252,11 +252,7 @@
                 <span aria-hidden="true">Deine Kirche zum <span class="rot-word" id="rot-word">Chillen</span></span>
             </p>
             <p class="hero-facts">Jugendtreff &amp; Jugendkirche in Heidenheim</p>
-            <!-- Zwei Knoepfe zu den Terminen: Open Church (gruen, Hauptangebot) und Open Church Kids (dunkel) -->
-            <div class="hero-ctas">
-                <a href="#events" class="btn btn-glow hero-cta"><i class="ph ph-calendar-blank" aria-hidden="true"></i> <span>Open Church: <span class="nowrap">freitags 12–16:30 Uhr</span></span></a>
-                <a href="#events" class="btn hero-cta hero-cta-kids"><i class="ph ph-calendar-blank" aria-hidden="true"></i> <span>Open Church Kids: <span class="nowrap">dienstags 14:30–17 Uhr</span></span></a>
-            </div>
+            <a href="#events" class="btn btn-glow hero-cta"><i class="ph ph-calendar-blank" aria-hidden="true"></i> <span>Open Church: <span class="nowrap">freitags 12–16:30 Uhr</span></span></a>
         </div>
     </header>
 
@@ -319,7 +315,7 @@
 
             <ul class="event-chips">
                 <li><i class="ph ph-heart" aria-hidden="true"></i> Alle Angebote kostenlos</li>
-                <li><i class="ph ph-calendar-blank" aria-hidden="true"></i> In den Schulferien Pause</li>
+                <li><i class="ph ph-calendar-blank" aria-hidden="true"></i> Die Wochenangebote pausieren in den Schulferien.</li>
             </ul>
         </div>
     </section>
@@ -330,7 +326,7 @@
             <div class="section-head hidden-el">
                 <span class="kicker"><i class="ph ph-sparkle"></i> Was dich erwartet</span>
                 <h2>Kirche? <span class="mark">Anders als du denkst</span></h2>
-                <p>In der MiKi, mitten in Heidenheim, kannst du kostenlos Trampolin springen und zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Wenn du Lust hast, kannst du den christlichen Glauben kennenlernen.</p>
+                <p>In der MiKi, mitten in Heidenheim, kannst du kostenlos Trampolin springen und zocken, an der Bar Getränke &amp; Snacks holen oder einfach auf der Couch chillen. Und das Beste: Was als Nächstes in die MiKi kommt, entscheidest du mit – und baust es selbst. Wenn du Lust hast, kannst du den christlichen Glauben kennenlernen.</p>
                 <p class="exp-hint"><i class="ph ph-hand-tap" aria-hidden="true"></i><span><span class="hint-touch">Tipp</span><span class="hint-mouse">Klick</span> auf ein Bild für mehr Infos</span></p>
             </div>
 
@@ -399,9 +395,9 @@
             <div v-if="buildEvent" v-cloak class="build-teaser hidden-el" role="button" tabindex="0" @click="openEventModal(buildEvent)" @keydown.enter="openEventModal(buildEvent)" @keydown.space.prevent="openEventModal(buildEvent)">
                 <span class="build-icon" aria-hidden="true"><i class="ph ph-hammer"></i></span>
                 <span class="build-text">
-                    <span class="build-tag">In Planung</span>
+                    <span class="build-tag">Du entscheidest mit</span>
                     <strong>Skaterampe &amp; Boulderwand</strong>
-                    <span class="build-sub">Bau mit! Baujugendkreis {{ buildEvent.days.toLowerCase() }}, {{ buildEvent.time }}</span>
+                    <span class="build-sub">In Planung – bau mit! Baujugendkreis {{ buildEvent.days.toLowerCase() }}, {{ buildEvent.time }}</span>
                 </span>
                 <i class="ph ph-arrow-right build-arrow" aria-hidden="true"></i>
             </div>
@@ -488,6 +484,10 @@
                     <p>Nein. In der MiKi ist jeder willkommen – ganz egal, ob du gläubig bist oder nicht. Wenn du Lust hast, kannst du hier den christlichen Glauben kennenlernen. Musst du aber nicht.</p>
                 </details>
                 <details class="faq-item">
+                    <summary>Darf ich als Muslim oder Muslima kommen?</summary>
+                    <p>Klar! In der MiKi ist jeder willkommen, egal welche Religion du hast oder ob du an gar nichts glaubst. Die MiKi ist eine christliche Jugendkirche: Wir erzählen gern von Jesus und beantworten deine Fragen, wenn du welche hast. Mitmachen musst du dabei nie – du kannst auch einfach zum Chillen, Zocken oder Trampolinspringen kommen. Wenn deine Eltern Fragen haben, können sie sich gern bei <a href="#kontakt">Stefan</a> melden.</p>
+                </details>
+                <details class="faq-item">
                     <summary>Was hat es mit diesem Jesus auf sich?</summary>
                     <p>Wir glauben, dass Jesus dein Leben verändern kann, und laden dich ein, das selbst herauszufinden. Komm mit all deinen Fragen, Zweifeln oder Themen gerne auf uns zu.</p>
                 </details>
@@ -503,10 +503,23 @@
                     <summary>Ich kenn da niemanden – ist das komisch?</summary>
                     <p>Gar nicht. Beim Kickern, Zocken oder auf dem Trampolin kommst du schnell mit anderen ins Gespräch. Außerdem ist immer jemand vom Team da, an den du dich wenden kannst. Und wenn du magst, bring einfach jemanden mit.</p>
                 </details>
+                <!-- Hilfe, wenn es jemandem nicht gut geht. Nummern geprueft am 25.11.2026 (bewusst ohne Uhrzeiten, die aendern sich) -->
+                <details class="faq-item">
+                    <summary>Mir geht's gerade nicht gut. Mit wem kann ich reden?</summary>
+                    <p>Sprich jemanden aus dem Team an oder schreib Stefan per <a href="https://wa.me/+491743086657" target="_blank" rel="noopener">WhatsApp</a>. Wenn du lieber anonym mit jemandem reden willst: Die Nummer gegen Kummer erreichst du unter <a href="tel:116111">116 111</a>. Bei <a href="https://krisenchat.de" target="_blank" rel="noopener">krisenchat</a> kannst du rund um die Uhr per WhatsApp oder SMS mit jemandem schreiben, wenn du unter 25 bist. Die TelefonSeelsorge ist Tag und Nacht unter <a href="tel:08001110111">0800 111 0 111</a> für dich da. Alle drei sind kostenlos. Im Notfall ruf sofort die <a href="tel:112">112</a> an.</p>
+                </details>
                 <!-- Weitere Fragen zum Aufklappen (Google liest sie trotzdem) -->
                 <details class="faq-more">
-                    <summary><span class="more">Mehr Fragen (5)</span><span class="less">Weniger Fragen</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+                    <summary><span class="more">Mehr Fragen (8)</span><span class="less">Weniger Fragen</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
                     <div class="faq-more-list">
+                        <details class="faq-item">
+                            <summary>Muss ich beten?</summary>
+                            <p>Nein. Hier musst du nicht beten und bei nichts mitmachen, was du nicht willst. Wenn zum Beispiel im Jugendkreis gebetet wird, kannst du einfach zuhören oder still dabei sein.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Ich spreche noch nicht so gut Deutsch. Kann ich trotzdem kommen?</summary>
+                            <p>Klar! Beim Kickern, Zocken oder auf dem Trampolin braucht man nicht viele Worte. Und wenn du etwas wissen willst, helfen wir dir gern weiter.</p>
+                        </details>
                         <details class="faq-item">
                             <summary>Was passiert, wenn ich das erste Mal komme?</summary>
                             <p>Zur Open Church kommst du einfach rein, ohne Anmeldung. Jemand vom Team ist immer da und hilft dir gerne weiter. Schau dich in Ruhe um, hol dir was an der Bar oder probier gleich das Trampolin aus. Du bleibst, so lange du willst.</p>
@@ -522,6 +535,10 @@
                         <details class="faq-item">
                             <summary>Kann ich mitbauen, auch wenn ich handwerklich nichts drauf habe?</summary>
                             <p>Klar! Beim Baujugendkreis (dienstags, 17–19 Uhr) ist es völlig egal, ob du schon mal was gebaut hast. Du kannst die MiKi mitgestalten und lernst dabei einfach mit.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Kann ich im MiKi-Team mitarbeiten?</summary>
+                            <p>Ja, gern! Ab etwa 15 kannst du als Betreuer oder Betreuerin aktiv mitarbeiten. Dafür brauchst du eine Jugendleiter-Schulung – den Kurs dazu bietet das Evangelische Jugendwerk (EJH) an. Hast du Lust? Dann schreib Stefan per <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20h%C3%A4tte%20Lust%2C%20im%20MiKi-Team%20mitzuarbeiten!" target="_blank" rel="noopener">WhatsApp</a>.</p>
                         </details>
                         <details class="faq-item">
                             <summary>Wo genau ist die MiKi?</summary>
@@ -547,6 +564,16 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Weg ins Team: ab etwa 15 als Betreuer/in, Jugendleiter-Schulung beim EJH (Stefan, 25.11.2026) -->
+            <a href="https://wa.me/+491743086657?text=Hey%20Stefan%2C%20ich%20h%C3%A4tte%20Lust%2C%20im%20MiKi-Team%20mitzuarbeiten!" target="_blank" rel="noopener" class="teaser-card hidden-el">
+                <span class="teaser-icon" aria-hidden="true"><i class="ph ph-hand-heart"></i></span>
+                <span class="teaser-text">
+                    <strong>Werde Teil vom MiKi-Team</strong>
+                    <span>Ab etwa 15 kannst du als Betreuer oder Betreuerin mitarbeiten. Die Jugendleiter-Schulung dafür kannst du beim Evangelischen Jugendwerk machen. Schreib Stefan einfach per WhatsApp!</span>
+                </span>
+                <i class="ph ph-arrow-right teaser-arrow" aria-hidden="true"></i>
+            </a>
         </div>
     </section>
 
@@ -557,7 +584,7 @@
                 <span class="teaser-icon" aria-hidden="true"><i class="ph ph-users-three"></i></span>
                 <span class="teaser-text">
                     <strong>Für Eltern &amp; Gemeinde</strong>
-                    <span>Bei jedem Angebot ist eine pädagogische Fachkraft vor Ort. Vision, Baufortschritt und die Geschichte der Michaelskirche findest du auf „Über die MiKi“.</span>
+                    <span>Bei jedem Angebot ist immer eine geschulte Person aus unserem Team vor Ort. Unsere Ehrenamtlichen haben die Jugendleiter-Card (Juleica). Vision, Baufortschritt und die Geschichte der Michaelskirche findest du auf „Über die MiKi“.</span>
                 </span>
                 <i class="ph ph-arrow-right teaser-arrow" aria-hidden="true"></i>
             </a>
@@ -702,15 +729,6 @@
                 },
                 {
                     type: 'regular',
-                    title: "Open Church Kids",
-                    age: "bis 13",
-                    days: "Dienstags",
-                    time: "14:30–17:00 Uhr",
-                    desc: "Sie ist offen für Familien und Kids",
-                    detailedDesc: "Jeden Dienstagnachmittag ist die MiKi für Familien und Kids bis 13 Jahre geöffnet. Komm vorbei und bring deine Freunde mit!"
-                },
-                {
-                    type: 'regular',
                     title: "Jugendkreis",
                     age: "ab 12",
                     days: "Freitags",
@@ -727,6 +745,15 @@
                     time: "17:00–19:00 Uhr",
                     desc: "Bauen, chillen, Gemeinschaft",
                     detailedDesc: "Du hast Lust, die MiKi zu gestalten, gemeinsam zu werkeln und an kleinen und großen Projekten zu arbeiten? Dabei ist es übrigens ganz egal, ob du handwerklich schon viel gemacht hast oder nicht. Komm vorbei!"
+                },
+                {
+                    type: 'regular',
+                    title: "Open Church Kids",
+                    age: "bis 13",
+                    days: "Dienstags",
+                    time: "14:30–17:00 Uhr",
+                    desc: "Sie ist offen für Familien und Kids",
+                    detailedDesc: "Jeden Dienstagnachmittag ist die MiKi für Familien und Kids bis 13 Jahre geöffnet. Komm vorbei und bring deine Freunde mit!"
                 },
                 {
                     type: 'once',
